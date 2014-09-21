@@ -19,42 +19,86 @@ NICK = "himrock922"
 USER = "him"
 
 OPTS = {}
-		
+
 class IRC
+
 @@hash = {}
-	@@ping_pong = Thread.new do
-		Thread.stop
-		while @@msg = @@irc.read
+@@channel_hash = {}
+
+	# while ping_pong and hash table process
+
+	@@ping_pong = Thread::fork do
+		Thread::stop
+		while msg = @@irc.read
 
 			# server connection confirmation
-			@@irc.pong "#{@@msg.split[1]}" if @@msg.split[0] == 'PING'
+			if msg.split[0] == 'PING'
+				@@irc.pong "#{msg.split[1]}"
+				# list mathod wakeup
+				@@pwn_list.wakeup 
+			end
 			################################
+
+			case msg.split[1]
+			# server flooding channel information store for hash table
+			when '322'
+				@@channel_hash.store("#{msg.split[3]}", "#{msg.split[4]}")
+			####################################################
+
+			# channel hash table output
+			when '323'
+				p "channel hash table"
+				@@channel_hash.each do |key, val|
+					p "#{key}: #{val}"
+				end
+				# hash table clear
+				@@channel_hash.clear
+			######################################
 
 			## my channel join user information store hash table
 			# join command for usrname extraction	
-			if @@msg.split[1] =='JOIN'
-				mc_user = @@msg.split(/\!\~/)
-				mc_user[0].slice!(0)
-				@@irc.whois mc_user[0]
-				
-			end
+			when 'JOIN'
+				mj_user = msg.split(/\!\~/)
+				mj_user[0].slice!(0)
+				@@irc.whois mj_user[0]
 			################################################
 
 			# extraction username for user information store 
 			# hash table
-			if @@msg.split[1] =='338'
-				
-				@@hash.store("#{@@msg.split[3]}", "#{@@msg.split[4]}")
+			when '338'
+				@@hash.store("#{msg.split[3]}", "#{msg.split[4]}")
 				#hash table output
 				p "hash table"
 				@@hash.each do |key, val|
 					p "#{key}: #{val}" 
 				end
-			end
 			################################################
+	
+			# my channel part user delete for hash table
+			when 'PART'
+				mp_user = msg.split(/\!\~/)
+				mp_user[0].slice!(0)
+				@@hash.delete("#{mp_user[0]}")
+				# hash table output
+				p "hash table"
+				@@hash.each do |key, val|
+					p "#{key}: #{val}"
+				end
 			################################################
 
-			p @@msg
+			end
+			# message output
+			p msg
+		end
+	end
+
+	# Pocket Warped Network construct for process
+	@@pwn_list = Thread::fork do
+		Thread::stop
+		while true
+			@@irc.list
+			# until wakeup @@ping_pong sleep 
+			sleep 3600
 		end
 	end
 
@@ -122,6 +166,8 @@ class IRC
 			@@irc.join "#{@channel}"
 		end
 		@@ping_pong.run
+		@@pwn_list.run
+		@@pwn_list.join
 		@@ping_pong.join
 		end
 	end
