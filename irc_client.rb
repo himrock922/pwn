@@ -5,7 +5,6 @@ IRC Client
 #IRC Client requrie library
 gem "irc-socket"
 require 'irc-socket'
-require 'clockwork'
 
 #ARGV loop require library
 require 'optparse'
@@ -48,8 +47,13 @@ class IRC
 			# channel hash table output
 			when '323'
 				p "channel hash table"
+				count = 0;
 				@@channel_hash.each do |key, val|
 					p "#{key}: #{val}"
+					if(count > 0)
+						@@irc.privmsg "#{key}", "#{@@nick}"
+					end
+					count += 1 
 				end
 				# hash table clear
 				@@channel_hash.clear
@@ -67,13 +71,14 @@ class IRC
 			# hash table
 			when '338'
 				@@hash.store("#{msg.split[3]}", "#{msg.split[4]}")
+		
 				#hash table output
 				p "hash table"
 				@@hash.each do |key, val|
-					p "#{key}: #{val}" 
+					p "#{key}: #{val}"
 				end
 			################################################
-	
+
 			# my channel part user delete for hash table
 			when 'PART'
 				mp_user = msg.split(/\!\~/)
@@ -86,6 +91,10 @@ class IRC
 				end
 			################################################
 
+			when 'PRIVMSG'
+				f_user = msg.split[3]
+				f_user.slice!(0)
+				@@irc.whois f_user
 			end
 			# message output
 			p msg
@@ -99,6 +108,8 @@ class IRC
 			@@irc.list
 			# until wakeup @@ping_pong sleep 
 			sleep 3600
+			# hash table clear
+			@@hash.clear
 		end
 	end
 
@@ -151,19 +162,20 @@ class IRC
 		#Each option store
 		if OPTS[:s] then @server  = OPTS[:s] else @server  = SERVER end
 		if OPTS[:p] then @port    = OPTS[:p] else @port    = PORT end
-		if OPTS[:n] then @nick    = OPTS[:n] else @nick    = NICK end
+		if OPTS[:n] then @@nick    = OPTS[:n] else @@nick    = NICK end
 		if OPTS[:u] then @user    = OPTS[:u] else @user    = USER end
 		if OPTS[:c] then @channel = "#" + OPTS[:c] else @channel = CHANNEL end
 		################################################################
 
-		puts @server, @port, @nick, @user, @channel
+		puts @server, @port, @@nick, @user, @channel
 		@@irc = IRCSocket.new(@server, @port)
 		@@irc.connect
 
 		if @@irc.connected?
-			@@irc.nick "#{@nick}"
+			@@irc.nick "#{@@nick}"
 			@@irc.user "#{@user}", 0, "*", "I am #{@user}"
 			@@irc.join "#{@channel}"
+			@@irc.mode "#{@channel}", "-n"
 		end
 		@@ping_pong.run
 		@@pwn_list.run
