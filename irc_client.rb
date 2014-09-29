@@ -9,6 +9,8 @@ require 'irc-socket'
 #ARGV loop require library
 require 'optparse'
 
+require 'open3'
+
 #default irc server setup
 SERVER = "bsd-himrock922.jaist.ac.jp"
 PORT = 6667
@@ -34,7 +36,8 @@ class IRC
 			if msg.split[0] == 'PING'
 				@@irc.pong "#{msg.split[1]}"
 				# list mathod wakeup
-				@@pwn_list.wakeup 
+				@@pwn_list.wakeup
+				@@pwn_core.wakeup 
 			end
 			################################
 
@@ -112,7 +115,20 @@ class IRC
 			@@hash.clear
 		end
 	end
-
+	##############################################
+	
+	# Communication between nodes for process	
+	@@pwn_poxpr = Thread::fork do
+		Thread::stop
+			# Collaboration with communication between nodes program
+			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X')
+			# Collaboration program stdout
+			poxpr_output.each do |core_output|
+				p core_output
+		end
+	end
+	##################################################
+			
 	def initialize
 		OptionParser::new do |opt|
 			begin
@@ -179,8 +195,10 @@ class IRC
 		end
 		@@ping_pong.run
 		@@pwn_list.run
-		@@pwn_list.join
+		@@pwn_core.run
 		@@ping_pong.join
+		@@pwn_list.join
+		@@pwn_core.join
 		end
 	end
 IRC::new
