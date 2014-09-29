@@ -37,7 +37,6 @@ class IRC
 				@@irc.pong "#{msg.split[1]}"
 				# list mathod wakeup
 				@@pwn_list.wakeup
-				@@pwn_core.wakeup 
 			end
 			################################
 
@@ -195,10 +194,10 @@ class IRC
 		end
 		@@ping_pong.run
 		@@pwn_list.run
-		@@pwn_core.run
+		@@pwn_poxpr.run
 		@@ping_pong.join
 		@@pwn_list.join
-		@@pwn_core.join
+		@@pwn_poxpr.join
 		end
 	end
 IRC::new
