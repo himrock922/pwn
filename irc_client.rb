@@ -72,16 +72,9 @@ class IRC
 				p "new channel store complete!"
 				#hash table output
 				p "hash table"
-				if $count > 0
-					$count = 0
-					@@hash.each do |key, val|
-						p "#{key}: #{val}"
-					end
-				else
-					@@hash.each do |key, val|
-						p "#{key}: #{val}"
-						@@irc.privmsg "#{key} UPD-IKAGENT #{@@nick}"
-					end
+				@@hash.each do |key, val|
+					p "#{key}: #{val}"
+					@@irc.privmsg "#{key} UPD-IKAGENT #{key} #{val}"
 				end
 			################################################
 
@@ -106,13 +99,16 @@ class IRC
 			
 			# if new ikagent join server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
+				p "test"
 				@@irc.whois msg.split[5] # new ikagent whois command process
 			end
 			###############################################
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-IKAGENT'
-				$count = 1
-				@@irc.whois msg.split[5]
+				@@hash.store("#{msg.split[5]}", "#{msg.split[6]}")
+				@@hash.each do |key, val|
+					p "#{key}: #{val}"
+				end	
 			end
 			# if disconnect ikagent server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
@@ -233,6 +229,7 @@ class IRC
 			@@irc.join "#{@@channel}"
 			@@irc.mode "#{@@channel}", "-n"
 		end
+		@@count = 0
 		@@irc.list
 		@@ping_pong.run
 		@@writen.run
