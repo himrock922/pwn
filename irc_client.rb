@@ -34,8 +34,7 @@ class IRC
 			# server connection confirmation
 			if msg.split[0] == 'PING'
 				@@irc.pong "#{msg.split[1]}"
-				# list mathod wakeup
-				#@@pwn_list.wakeup
+				
 			end
 			################################
 
@@ -73,8 +72,16 @@ class IRC
 				p "new channel store complete!"
 				#hash table output
 				p "hash table"
-				@@hash.each do |key, val|
-					p "#{key}: #{val}"
+				if $count > 0
+					$count = 0
+					@@hash.each do |key, val|
+						p "#{key}: #{val}"
+					end
+				else
+					@@hash.each do |key, val|
+						p "#{key}: #{val}"
+						@@irc.privmsg "#{key} UPD-IKAGENT #{@@nick}"
+					end
 				end
 			################################################
 
@@ -103,8 +110,11 @@ class IRC
 			end
 			###############################################
 
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-IKAGENT'
+				$count = 1
+				@@irc.whois msg.split[5]
+			end
 			# if disconnect ikagent server session process
-
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
 				@@channel_hash.delete("#{msg.split[5]}") # channel table disconnect ikagent delete
 
@@ -129,21 +139,10 @@ class IRC
 			p msg
 		end
 	end
+	#########################################
+	#########################################
+	#########################################
 
-	# Pocket Warped Network construct for process
-	@@pwn_list = Thread::fork do
-		Thread::stop
-		while true
-			@@irc.list
-			# until wakeup @@ping_pong sleep 
-			sleep 3600
-			# hash table clear
-			@@hash.clear
-			@@irc.whois @@nick
-		end
-	end
-	##############################################
-	
 	# Communication between nodes for process	
 	@@pwn_poxpr = Thread::fork do
 		Thread::stop
