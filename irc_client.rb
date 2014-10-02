@@ -18,7 +18,6 @@ CHANNEL ="#ikachang"
 @eol = "\r\n"
 NICK = "himrock922"
 USER = "him"
-
 OPTS = {}
 
 class IRC
@@ -36,10 +35,13 @@ class IRC
 			if msg.split[0] == 'PING'
 				@@irc.pong "#{msg.split[1]}"
 				# list mathod wakeup
-				@@pwn_list.wakeup
+				#@@pwn_list.wakeup
 			end
 			################################
 
+			# if msg.split[1] only process
+			####################################################
+			####################################################
 			case msg.split[1]
 			# server flooding channel information store for hash table
 			when '322'
@@ -49,16 +51,11 @@ class IRC
 			# channel hash table output
 			when '323'
 				p "channel hash table"
-				count = 0;
 				@@channel_hash.each do |key, val|
 					p "#{key}: #{val}"
-					if(count > 0)
-						@@irc.privmsg "#{key}", "#{@@nick}"
-					end
-					count += 1 
+					@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick}"
 				end
-				# hash table clear
-				@@channel_hash.clear
+
 			######################################
 
 			## my channel join user information store hash table
@@ -73,7 +70,7 @@ class IRC
 			# hash table
 			when '338'
 				@@hash.store("#{msg.split[3]}", "#{msg.split[4]}")
-		
+				p "new channel store complete!"
 				#hash table output
 				p "hash table"
 				@@hash.each do |key, val|
@@ -92,12 +89,42 @@ class IRC
 					p "#{key}: #{val}"
 				end
 			################################################
-
-			when 'PRIVMSG'
-				f_user = msg.split[3]
-				f_user.slice!(0)
-				@@irc.whois f_user
 			end
+			################################################
+			################################################
+
+			# PRIVMSG process
+			################################################
+			################################################
+			
+			# if new ikagent join server session process
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
+				@@irc.whois msg.split[5] # new ikagent whois command process
+			end
+			###############################################
+
+			# if disconnect ikagent server session process
+
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
+				@@channel_hash.delete("#{msg.split[5]}") # channel table disconnect ikagent delete
+
+				@@hash.delete("#{msg.split[6]}") # hash table disconnect ikagent delete
+				# such table output
+				p "delete complete"
+				p "channel table"
+				@@channel_hash.each do |key, val|
+					p "#{key}: #{val}"
+				end
+				p "hash table"
+				@@hash.each do |key, val|
+					p "#{key}: #{val}"
+				end
+			end
+ 			###############################################
+
+			###############################################
+			###############################################
+
 			# message output
 			p msg
 		end
@@ -112,6 +139,7 @@ class IRC
 			sleep 3600
 			# hash table clear
 			@@hash.clear
+			@@irc.whois @@nick
 		end
 	end
 	##############################################
@@ -128,6 +156,20 @@ class IRC
 	end
 	##################################################
 			
+	@@writen = Thread::fork do
+		Thread::stop
+		while input = gets.chomp
+			if /exit/i =~ input
+				@@channel_hash.each do |key, val|
+					@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}"
+				end
+				exit
+			else
+				next
+			end
+		end
+	end
+	
 	def initialize
 		OptionParser::new do |opt|
 			begin
@@ -179,24 +221,25 @@ class IRC
 		if OPTS[:p] then @port    = OPTS[:p] else @port    = PORT end
 		if OPTS[:n] then @@nick    = OPTS[:n] else @@nick    = NICK end
 		if OPTS[:u] then @user    = OPTS[:u] else @user    = USER end
-		if OPTS[:c] then @channel = "#" + OPTS[:c] else @channel = CHANNEL end
+		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = CHANNEL end
 		################################################################
 
-		puts @server, @port, @@nick, @user, @channel
+		puts @server, @port, @@nick, @user, @@channel
 		@@irc = IRCSocket.new(@server, @port)
 		@@irc.connect
 
 		if @@irc.connected?
 			@@irc.nick "#{@@nick}"
 			@@irc.user "#{@user}", 0, "*", "I am #{@user}"
-			@@irc.join "#{@channel}"
-			@@irc.mode "#{@channel}", "-n"
+			@@irc.join "#{@@channel}"
+			@@irc.mode "#{@@channel}", "-n"
 		end
+		@@irc.list
 		@@ping_pong.run
-		@@pwn_list.run
+		@@writen.run
 		@@pwn_poxpr.run
+		@@writen.join
 		@@ping_pong.join
-		@@pwn_list.join
 		@@pwn_poxpr.join
 		end
 	end
