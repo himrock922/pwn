@@ -42,6 +42,11 @@ class IRC
 			####################################################
 			####################################################
 			case msg.split[1]
+			when '319'
+				channel_tmp = msg.split(/\:\@/)
+				channel_hash_tmp = {}
+				channel_hash_tmp.store("#{channel_tmp[1]}", 1)
+				@@channel_hash.update(channel_hash_tmp)
 			# server flooding channel information store for hash table
 			when '322'
 				@@channel_hash.store("#{msg.split[3]}", "#{msg.split[4]}")
@@ -73,8 +78,10 @@ class IRC
 				#hash table output
 				p "hash table"
 				@@hash.each do |key, val|
-					p "#{key}: #{val}"
-					@@irc.privmsg "#{key} UPD-IKAGENT #{key} #{val}"
+					p "#{key} : #{val}"
+					@@channel_hash.each do |c_key, c_val|
+						@@irc.privmsg "#{c_key}", " UPD-IKAGENT #{key} #{val}"
+					end
 				end
 			################################################
 
@@ -86,7 +93,7 @@ class IRC
 				# hash table output
 				p "hash table"
 				@@hash.each do |key, val|
-					p "#{key}: #{val}"
+					p "#{key} : #{val}"
 				end
 			################################################
 			end
@@ -99,15 +106,17 @@ class IRC
 			
 			# if new ikagent join server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
-				p "test"
 				@@irc.whois msg.split[5] # new ikagent whois command process
 			end
 			###############################################
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-IKAGENT'
-				@@hash.store("#{msg.split[5]}", "#{msg.split[6]}")
+				tmp_hash = {}
+				tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
+				@@hash.update(tmp_hash)
+				p "hash table"
 				@@hash.each do |key, val|
-					p "#{key}: #{val}"
+					p "#{key} : #{val}"
 				end	
 			end
 			# if disconnect ikagent server session process
@@ -119,11 +128,11 @@ class IRC
 				p "delete complete"
 				p "channel table"
 				@@channel_hash.each do |key, val|
-					p "#{key}: #{val}"
+					p "#{key} : #{val}"
 				end
 				p "hash table"
 				@@hash.each do |key, val|
-					p "#{key}: #{val}"
+					p "#{key} : #{val}"
 				end
 			end
  			###############################################
