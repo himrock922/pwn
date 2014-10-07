@@ -158,7 +158,8 @@ class IRC
 	#########################################
 	#########################################
 
-	# Communication between nodes for process	
+	# Communication between nodes for process
+	#########################################	
 	@@pwn_poxpr = Thread::fork do
 		Thread::stop
 			# Collaboration with communication between nodes program
@@ -187,27 +188,35 @@ class IRC
 	end
 	##########################################################
 
-	
+	# ikagent list store process
+	##########################################################
 	@@ikagent_stable = Thread::fork do
 		Thread::stop
 		while true
-			sleep 
+			sleep # sleep until wakeup
+				# temporary array define
 				channel_array = Array.new
 				nick_array    = Array.new
 				ip_array       = Array.new
+				##########################
+
 				@@channel_hash.each_key do |key|
-					channel_array.push (key)
+					channel_array.push (key) # channel push to array
 				end
 
 				@@hash.each do |key, val|
-					nick_array.push (key)
-					ip_array.push (val)
+					nick_array.push (key) # nick to array
+					ip_array.push (val) # ip address to array
 				end
-			@@ikagent_list =  channel_array.zip(nick_array, ip_array)
-			p @@ikagent_list
+			@@ikagent_list =  channel_array.zip(nick_array, ip_array) # multiple array zip (channel name, nick name, ip address)
+
+			p @@ikagent_list #ikagent_list output
 		end
 	end
+	##########################################################
 
+	# start
+	##########################################################
 	def initialize
 		OptionParser::new do |opt|
 			begin
@@ -255,23 +264,30 @@ class IRC
 			end
 	
 		#Each option store
-		if OPTS[:s] then @server  = OPTS[:s] else @server  = SERVER end
-		if OPTS[:p] then @port    = OPTS[:p] else @port    = PORT end
-		if OPTS[:n] then @@nick    = OPTS[:n] else @@nick    = NICK end
-		if OPTS[:u] then @user    = OPTS[:u] else @user    = USER end
+		if OPTS[:s] then @server = OPTS[:s] else @server = SERVER end
+		if OPTS[:p] then @port = OPTS[:p] else @port = PORT end
+		if OPTS[:n] then @@nick = OPTS[:n] else @@nick = NICK end
+		if OPTS[:u] then @user = OPTS[:u] else @user = USER end
 		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = CHANNEL end
 		################################################################
 
+		# such paramater output
 		puts @server, @port, @@nick, @user, @@channel
+		
+		# irc socket create
 		@@irc = IRCSocket.new(@server, @port)
+		# irc server connect
 		@@irc.connect
 
+		# connection process
 		if @@irc.connected?
-			@@irc.nick "#{@@nick}"
-			@@irc.user "#{@user}", 0, "*", "I am #{@user}"
-			@@irc.join "#{@@channel}"
-			@@irc.mode "#{@@channel}", "-n"
+			@@irc.nick "#{@@nick}" # nickname decide
+			@@irc.user "#{@user}", 0, "*", "I am #{@user}" # hello message 
+			@@irc.join "#{@@channel}" # channel name decide
+			@@irc.mode "#{@@channel}", "-n" # mode change
 		end
+		###################################################
+
 		# ikagent start
 		#######################
 		######################
