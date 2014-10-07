@@ -238,11 +238,11 @@ class IRC
 				# Specific Options Usage output
 				opt.separator ''
 				opt.separator 'Specific options:'
-				opt.on('-s SERVER', '--server', 'server')                                         {|v| OPTS[:s] = v}
-				opt.on('-p PORT', '--port', 'port')                                               {|v| OPTS[:p] = v}
-				opt.on('-n NICK', '--nick', 'nick')						  {|v| OPTS[:n] = v}
-				opt.on('-u USER', '--user', 'user')						  {|v| OPTS[:u] = v}
-				opt.on('-c CHANNEL', '--channel', 'channel')					  {|v| OPTS[:c] = v}
+				opt.on('-s SERVER', '--server', 'server')    {|v| OPTS[:s] = v}
+				opt.on('-p PORT', '--port', 'port')          {|v| OPTS[:p] = v}
+				opt.on('-n NICK', '--nick', 'nick')          {|v| OPTS[:n] = v}
+				opt.on('-u USER', '--user', 'user')          {|v| OPTS[:u] = v}
+				opt.on('-c CHANNEL', '--channel', 'channel') {|v| OPTS[:c] = v}
 				############################################
 			
 				# Options Usage output
