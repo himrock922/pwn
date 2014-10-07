@@ -24,7 +24,6 @@ class IRC
 
 @@hash = {}
 @@channel_hash = {}
-
 	# while ping_pong and hash table process
 
 	@@ping_pong = Thread::fork do
@@ -42,11 +41,15 @@ class IRC
 			####################################################
 			####################################################
 			case msg.split[1]
+
+			# private message (NEW) for channel name extract
 			when '319'
-				channel_tmp = msg.split(/\:\@/)
-				channel_hash_tmp = {}
+				channel_tmp = msg.split(/\:\@/) # such message to :@ extract 
+				channel_hash_tmp = {} # temporary channel table
 				channel_hash_tmp.store("#{channel_tmp[1]}", 1)
-				@@channel_hash.update(channel_hash_tmp)
+				@@channel_hash.update(channel_hash_tmp) # channel table update
+			##################################################
+
 			# server flooding channel information store for hash table
 			when '322'
 				@@channel_hash.store("#{msg.split[3]}", "#{msg.split[4]}")
@@ -55,9 +58,9 @@ class IRC
 			# channel hash table output
 			when '323'
 				p "channel hash table"
-				@@channel_hash.each do |key, val|
-					p "#{key}: #{val}"
-					@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick}"
+				@@channel_hash.each_key do |key|
+					p "#{key}"
+					@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick}" # other ikagent send private message about own information (NEW)
 				end
 
 			######################################
@@ -79,9 +82,10 @@ class IRC
 				p "hash table"
 				@@hash.each do |key, val|
 					p "#{key} : #{val}"
-					@@channel_hash.each do |c_key, c_val|
-						@@irc.privmsg "#{c_key}", " UPD-IKAGENT #{key} #{val}"
+					@@channel_hash.each_key do |c_key|
+						@@irc.privmsg "#{c_key}", " UPD-IKAGENT #{key} #{val}" # other ikagent private message about own information (UPDATE)
 					end
+				@@ikagent_stable.wakeup # ikagent_stable thread wakeup
 				end
 			################################################
 
@@ -105,20 +109,25 @@ class IRC
 			################################################
 			
 			# if new ikagent join server session process
+			################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
 				@@irc.whois msg.split[5] # new ikagent whois command process
 			end
 			###############################################
 
+			# if update ikagent message process
+			###############################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-IKAGENT'
-				tmp_hash = {}
+				tmp_hash = {} # templary hash table
 				tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
-				@@hash.update(tmp_hash)
+				@@hash.update(tmp_hash) # stable hash table update
 				p "hash table"
 				@@hash.each do |key, val|
 					p "#{key} : #{val}"
-				end	
+				end
 			end
+			###############################################
+
 			# if disconnect ikagent server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
 				@@channel_hash.delete("#{msg.split[5]}") # channel table disconnect ikagent delete
@@ -127,13 +136,14 @@ class IRC
 				# such table output
 				p "delete complete"
 				p "channel table"
-				@@channel_hash.each do |key, val|
-					p "#{key} : #{val}"
+				@@channel_hash.each_key do |key|
+					p "#{key}"
 				end
 				p "hash table"
 				@@hash.each do |key, val|
 					p "#{key} : #{val}"
 				end
+				@@ikagent_stable.wakeup
 			end
  			###############################################
 
@@ -160,20 +170,44 @@ class IRC
 	end
 	##################################################
 			
+	# thread write process
+	#################################################
 	@@writen = Thread::fork do
 		Thread::stop
-		while input = gets.chomp
-			if /exit/i =~ input
-				@@channel_hash.each do |key, val|
-					@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}"
+		while input = gets.chomp # wait stdin
+			if /exit/i =~ input # program exit process
+				@@channel_hash.each_key do |key|
+					@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
 				end
 				exit
 			else
-				next
+				next # other continue
 			end
 		end
 	end
+	##########################################################
+
 	
+	@@ikagent_stable = Thread::fork do
+		Thread::stop
+		while true
+			sleep 
+				channel_array = Array.new
+				nick_array    = Array.new
+				ip_array       = Array.new
+				@@channel_hash.each_key do |key|
+					channel_array.push (key)
+				end
+
+				@@hash.each do |key, val|
+					nick_array.push (key)
+					ip_array.push (val)
+				end
+			@@ikagent_list =  channel_array.zip(nick_array, ip_array)
+			p @@ikagent_list
+		end
+	end
+
 	def initialize
 		OptionParser::new do |opt|
 			begin
@@ -238,14 +272,29 @@ class IRC
 			@@irc.join "#{@@channel}"
 			@@irc.mode "#{@@channel}", "-n"
 		end
-		@@count = 0
-		@@irc.list
-		@@ping_pong.run
-		@@writen.run
-		@@pwn_poxpr.run
+		# ikagent start
+		#######################
+		######################
+
+		# thread run
+		#######################
+		@@irc.list # channel list output
+		@@ping_pong.run # server message read process
+		@@writen.run # ikagent message write process
+		@@pwn_poxpr.run # poxpr process
+		@@ikagent_stable.run # ikagent_stable process
+		#######################
+		
+		# such thread join
+		########################
 		@@writen.join
 		@@ping_pong.join
 		@@pwn_poxpr.join
+		@@ikagent_stable.join
+		########################
+		
+		########################
+		########################
 		end
 	end
 IRC::new
