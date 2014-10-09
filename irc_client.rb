@@ -65,7 +65,7 @@ Signal.trap(:INT) {
 				p "channel hash table"
 				@@channel_hash.each_key do |key|
 					p "#{key}"
-					@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick}" # other ikagent send private message about own information (NEW)
+					@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick} #{@@ip} #{@@channel}" # other ikagent send private message about own information (NEW)
 				end
 
 			######################################
@@ -75,23 +75,14 @@ Signal.trap(:INT) {
 			when 'JOIN'
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
-				@@irc.whois mj_user[0]
+				@@irc.whois "#{mj_user[0]}"
 			################################################
 
 			# extraction username for user information store 
 			# hash table
 			when '338'
 				@@hash.store("#{msg.split[3]}", "#{msg.split[4]}")
-				p "new channel store complete!"
-				#hash table output
-				p "hash table"
-				@@hash.each do |key, val|
-					p "#{key} : #{val}"
-					@@channel_hash.each_key do |c_key|
-						@@irc.privmsg "#{c_key}", " UPD-IKAGENT #{key} #{val}" # other ikagent private message about own information (UPDATE)
-					end
-				@@ikagent_stable.wakeup # ikagent_stable thread wakeup
-				end
+				@@ip = "#{msg.split[4]}"
 			################################################
 
 			# my channel part user delete for hash table
@@ -116,8 +107,11 @@ Signal.trap(:INT) {
 			# if new ikagent join server session process
 			################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
-				@@irc.whois msg.split[5] # new ikagent whois command process
-
+				@@hash.store("#{msg.split[5]}", "#{msg.split[6]}")
+				@@channel_hash.store("#{msg.split[7]}", "1")
+				@@channel_hash.each_key do |c_key|
+					@@irc.privmsg "#{c_key}", " UPD-IKAGENT #{@@nick} #{@@ip}" # other ikagent private message about own information (UPDATE)
+				end
 			end
 			###############################################
 
@@ -127,6 +121,13 @@ Signal.trap(:INT) {
 				tmp_hash = {} # templary hash table
 				tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
 				@@hash.update(tmp_hash) # stable hash table update
+				p ""
+				p "channel table"
+				@@channel_hash.each_key do |key|
+					p "#{key}"
+				end
+
+				p ""
 				p "hash table"
 				@@hash.each do |key, val|
 					p "#{key} : #{val}"
@@ -142,10 +143,12 @@ Signal.trap(:INT) {
 				@@hash.delete("#{msg.split[6]}") # hash table disconnect ikagent delete
 				# such table output
 				p "delete complete"
+				p ""
 				p "channel table"
 				@@channel_hash.each_key do |key|
 					p "#{key}"
 				end
+				p ""
 				p "hash table"
 				@@hash.each do |key, val|
 					p "#{key} : #{val}"
@@ -301,6 +304,7 @@ Signal.trap(:INT) {
 
 		# thread run
 		#######################
+		@@irc.whois @@nick
 		@@irc.list # channel list output
 		@@ping_pong.run # server message read process
 		@@writen.run # ikagent message write process
