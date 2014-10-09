@@ -112,6 +112,7 @@ Signal.trap(:INT) {
 				@@channel_hash.each_key do |c_key|
 					@@irc.privmsg "#{c_key}", " UPD-IKAGENT #{@@nick} #{@@ip}" # other ikagent private message about own information (UPDATE)
 				end
+				@@ikagent_stable.wakeup
 			end
 			###############################################
 
