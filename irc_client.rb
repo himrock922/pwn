@@ -21,7 +21,12 @@ USER = "him"
 OPTS = {}
 
 class IRC
-
+Signal.trap(:INT) {
+	@@channel_hash.each_key do |key|
+		@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
+	end
+	exit
+}
 @@hash = {}
 @@channel_hash = {}
 	# while ping_pong and hash table process
@@ -112,6 +117,7 @@ class IRC
 			################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
 				@@irc.whois msg.split[5] # new ikagent whois command process
+
 			end
 			###############################################
 
@@ -125,6 +131,7 @@ class IRC
 				@@hash.each do |key, val|
 					p "#{key} : #{val}"
 				end
+				@@ikagent_stable.wakeup
 			end
 			###############################################
 
