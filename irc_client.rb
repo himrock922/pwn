@@ -9,26 +9,37 @@ require 'irc-socket'
 #ARGV loop require library
 require 'optparse'
 
+# Popen library
 require 'open3'
+
+# sqlite library
+require 'sqlite3'
+require_relative 'create_table'
 
 #default irc server setup
 SERVER = "bsd-himrock922.jaist.ac.jp"
 PORT = 6667
 CHANNEL ="#ikachang"
-@eol = "\r\n"
+EOF = "\r\n"
 NICK = "himrock922"
 USER = "him"
 OPTS = {}
 
 class IRC
+	include CreateTable
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
 		@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
 	end
+	@@db.close
 	exit
 }
 @@hash = {}
 @@channel_hash = {}
+@@ikagent_id  = ""
+@@ikagent_mac = ""
+@@ikagent_app = ""
+
 	# while ping_pong and hash table process
 
 	@@ping_pong = Thread::fork do
@@ -122,18 +133,19 @@ Signal.trap(:INT) {
 				tmp_hash = {} # templary hash table
 				tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
 				@@hash.update(tmp_hash) # stable hash table update
-				p ""
+				print EOF
 				p "channel table"
 				@@channel_hash.each_key do |key|
 					p "#{key}"
 				end
 
-				p ""
+				print EOF
 				p "hash table"
 				@@hash.each do |key, val|
 					p "#{key} : #{val}"
 				end
-				@@ikagent_stable.wakeup
+				print EOF
+				#@@ikagent_stable.wakeup
 			end
 			###############################################
 
@@ -144,17 +156,17 @@ Signal.trap(:INT) {
 				@@hash.delete("#{msg.split[6]}") # hash table disconnect ikagent delete
 				# such table output
 				p "delete complete"
-				p ""
+				p 
 				p "channel table"
 				@@channel_hash.each_key do |key|
 					p "#{key}"
 				end
-				p ""
+				p 
 				p "hash table"
 				@@hash.each do |key, val|
 					p "#{key} : #{val}"
 				end
-				@@ikagent_stable.wakeup
+				#@@ikagent_stable.wakeup
 			end
  			###############################################
 
@@ -176,8 +188,29 @@ Signal.trap(:INT) {
 			# Collaboration with communication between nodes program
 			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X')
 			# Collaboration program stdout
-			poxpr_output.each do |core_output|
-				p core_output
+			poxpr_output.each do | core_output |
+				poxpr_ex =  core_output.chomp
+				p poxpr_ex
+				if poxpr_ex.split[0] == 'NEW'
+					@@ikagent_id.concat "#{poxpr_ex.split[1]} "
+					p @@ikagent_id
+
+					@@ikagent_mac.concat "#{poxpr_ex.split[2]} "
+					p @@ikagent_mac
+
+					i = 3
+					while poxpr_ex.split[i] != nil
+						@@ikagent_app << "#{poxpr_ex.split[i]} "
+						i += 1
+					end
+					p @@ikagent_app
+					@@channel_hash.each_key do |key|
+						@@irc.privmsg "#{key}", " #{@@ikagent_id}#{@@ikagent_mac}#{@@ikagent_app}"
+					end
+				end
+				@@ikagent_id  = ""
+				@@ikagent_mac = ""
+				@@ikagent_app = ""
 		end
 	end
 	##################################################
@@ -281,6 +314,17 @@ Signal.trap(:INT) {
 		if OPTS[:u] then @user = OPTS[:u] else @user = USER end
 		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = CHANNEL end
 		################################################################
+
+		# SQLite3 process
+		@@db = SQLite3::Database::new("ikagent_list.db") # Database open
+
+		table = @@db.execute("select tbl_name from sqlite_master where type == 'table' ").flatten # Table name read
+
+		# if Nothing Table create Table
+		if table[0] == nil
+			@@db.execute(create_ikable)
+		end
+		##################################
 
 		# such paramater output
 		puts @server, @port, @@nick, @user, @@channel
