@@ -29,6 +29,7 @@ class IRC
 	include CreateTable
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
+		@@irc.privmsg "#{key}", " DEL-IKAGENT #{@@channel}" 
 		@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
 	end
 	@@db.execute(@@sql_delete)
@@ -179,13 +180,43 @@ Signal.trap(:INT) {
 					p row
 				end
 			end
+			
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
+				d_channel = msg.split[5]
+				@@db.execute("#{@@sql_delete} ikagent_cha = ?", d_channel)
+			end
+					
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
 				d_channel = msg.split[5]
 				d_tako_id = msg.split[6]
+				del_id  = ""
+				del_mac = ""
+				del_app = ""
 				@@db.execute("#{@@sql_select} where ikagent_cha = ?", d_channel) do |row|
-					p row
+					del_id_tmp   = row[3].split(/\|\|/)
+					del_mac_tmp  = row[4].split(/\|\|/)
+					del_app_tmp  = row[5].split(/\|\|/)
+					p del_id_tmp
+					p del_mac_tmp
+					p del_app_tmp
+					i = 0
+					while del_id_tmp[i] != nil
+						if del_id_tmp[i] == d_tako_id
+							p "test"
+							i += 1
+							next
+						end
+						del_id  << del_id_tmp[i]  << "||"
+						del_mac << del_mac_tmp[i] << "||"
+						del_app << del_app_tmp[i] << "||"
+						i += 1
+					end
 				end
+				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ?, where ikagent_cha = ?", del_id, del_mac, del_app, d_channel)
+				@@db.execute("#{@@sql_select}") do |row|
+					p row
+				end 
 			end
 				
 
@@ -302,7 +333,6 @@ Signal.trap(:INT) {
 					del_msg = ""
 					del_msg = tako_delete_id.split(/\|\|/)
 					
-					p del_msg[0]
 					# such channel del tako_id send
 					@@channel_hash.each_key do |key|
 						@@irc.privmsg "#{key}", " DEL-TAKO #{@@channel} #{del_msg[0]}"
