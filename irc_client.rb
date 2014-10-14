@@ -141,6 +141,13 @@ Signal.trap(:INT) {
 			###############################################
 
 			if msg.split[1] == 'PRIVMSG' && ( msg.split[4] == 'NEW-TAKO' || msg.split[4] =- 'UPD-TAKO')
+				channel      = ""
+				nick         = ""
+				ip           = ""
+				tako_id_tmp  = ""
+				tako_mac_tmp = ""
+				tako_app_tmp = ""
+				count        = 0
 				if    msg.split[4] == 'NEW-TAKO'
 					msg_tmp  = msg.split(/\|\|/)
 					channel  = msg.split[5]
@@ -149,7 +156,6 @@ Signal.trap(:INT) {
 					tako_id_tmp  = msg_tmp[0].split[8] << "||"
 					tako_mac_tmp = msg_tmp[1] << "||"
 					tako_app_tmp = msg_tmp[2] << "||"
-					count = 0
 
 				elsif msg.split[4] == 'UPD-TAKO'
 					channel      = msg.split[5]
