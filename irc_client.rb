@@ -148,6 +148,7 @@ Signal.trap(:INT) {
 				tako_mac_tmp = ""
 				tako_app_tmp = ""
 				count        = 0
+				msg_tmp = ""
 				if    msg.split[4] == 'NEW-TAKO'
 					msg_tmp  = msg.split(/\|\|/)
 					channel  = msg.split[5]
