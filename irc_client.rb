@@ -277,7 +277,7 @@ Signal.trap(:INT) {
 					@@tako_id  << tako_id_tmp   # tako_id stable << tako_id temporary
 					@@tako_mac << tako_mac_tmp  # tako_mac stable << tako_mac temporary
 					@@tako_app << tako_app_tmp # tako_app stable << tako_app temporary
-					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", @@tako_id, @@tako_mac,@@tako_app, @@channel) # sql database update such tako paramater
+					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", tako_id_tmp, tako_mac_tmp, tako_app_tmp, @@channel) # sql database update such tako paramater
 					
 					# sql database output
 					@@db.execute("#{@@sql_select}") do |row|
