@@ -140,7 +140,7 @@ Signal.trap(:INT) {
 			end
 			###############################################
 
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-TAKO'
+			if msg.split[1] == 'PRIVMSG' && ( msg.split[4] == 'NEW-TAKO' || msg.split[4] == 'UPD-TAKO')
 				msg_tmp  = msg.split(/\|\|/)
 				channel  = msg.split[5]
 				nick     = msg.split[6]
@@ -177,6 +177,13 @@ Signal.trap(:INT) {
 					end
 				end
 				@@ikagent_stable.wakeup
+				if msg.split[4] == 'NEW-TAKO'
+					@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@channel) do |row|
+						@@channel_hash.each_key do |key|
+							@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]}#{row[4]}#{row[5]}"
+						end
+					end
+				end
 			end
 			
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
