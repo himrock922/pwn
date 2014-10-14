@@ -38,11 +38,8 @@ Signal.trap(:INT) {
 @@hash = {}
 @@channel_hash = {}
 @@tako_id  = ""
-@@tako_id_tmp = ""
 @@tako_mac = ""
-@@tako_mac_tmp = ""
 @@tako_app = ""
-@@tako_app_tmp = ""
 
 	# while ping_pong and hash table process
 
@@ -143,25 +140,40 @@ Signal.trap(:INT) {
 			###############################################
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-TAKO'
+				p msg
+				msg_tmp  = msg.split(/\|\|/)
 				channel  = msg.split[5]
 				nick     = msg.split[6]
 				ip       = msg.split[7]
-				tako_id  = msg.split[8]
-				tako_mac = msg.split[9]
-				tako_app = msg.split[10]
-				row      = ""
+				tako_id  = msg_tmp[0].split[8] << "||"
+				tako_mac = msg_tmp[1] << "||"
+				tako_app = msg_tmp[2] << "||"
+				count = 0
 				while true
 					@@db.execute("#{@@sql_select}") do |row|
 						if channel == row[0]
-							@@db.execute("#{@@sql_update} ikaget_cha = ?, ikagent_nick = ?, ikagent_addr = ?, tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha  = ? ", channel, nick, ip, tako_id, tako_mac, tako_app, channel)
+							tako_id_tmp  = ""
+							tako_mac_tmp = ""
+							tako_app_tmp = ""
+							@@db.execute("#{@@sql_select} where ikagent_cha = ?", channel) do |row_tmp|
+								tako_id_tmp  = row_tmp[3] 
+								tako_mac_tmp = row_tmp[4] 
+								tako_app_tmp = row_tmp[5] 
+							end
+							tako_id  << tako_id_tmp
+							tako_mac << tako_mac_tmp
+							tako_app << tako_app_tmp
+
+							@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha  = ? ", tako_id, tako_mac, tako_app, channel)
+							count = 1
 							break
 						end
 					end
-					if row == ""
+					if count == 0
 						@@db.execute("#{@@sql_insert}", channel, nick, ip, tako_id, tako_mac, tako_app)
+					else
+						break
 					end
-
-					break
 				end
 				@@db.execute("#{@@sql_select}") do |row|
 					p row
@@ -204,24 +216,27 @@ Signal.trap(:INT) {
 				case poxpr_ex.split[0]
 				# when poxpr output 'NEW'
 				when 'NEW'
-					@@tako_id_tmp.concat "#{poxpr_ex.split[1]}|" # tako_id store
-					@@tako_mac_tmp.concat "#{poxpr_ex.split[2]}|" # tako_mac store
+					tako_id_tmp  = ""
+					tako_mac_tmp = ""
+					tako_app_tmp = ""
+					tako_id_tmp.concat "#{poxpr_ex.split[1]}|" # tako_id store
+					tako_mac_tmp.concat "#{poxpr_ex.split[2]}|" # tako_mac store
 					i = 3 
 					
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
-						@@tako_app_tmp.concat "#{poxpr_ex.split[i]}|" # tako_app store
+						tako_app_tmp.concat "#{poxpr_ex.split[i]}|" # tako_app store
 						i += 1
 					end
 					###############################
-					@@tako_id_tmp.concat  "|"
-					@@tako_mac_tmp.concat "|"
-					@@tako_app_tmp.concat "|" # such tako_app split '||'
+					tako_id_tmp.concat  "|"
+					tako_mac_tmp.concat "|"
+					tako_app_tmp.concat "|" # such tako_app split '||'
 					
 
-					@@tako_id  << @@tako_id_tmp   # tako_id stable << tako_id temporary
-					@@tako_mac << @@tako_mac_tmp  # tako_mac stable << tako_mac temporary
-					@@tako_app << @@tako_app_tmp # tako_app stable << tako_app temporary
+					@@tako_id  << tako_id_tmp   # tako_id stable << tako_id temporary
+					@@tako_mac << tako_mac_tmp  # tako_mac stable << tako_mac temporary
+					@@tako_app << tako_app_tmp # tako_app stable << tako_app temporary
 					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", @@tako_id, @@tako_mac,@@tako_app, @@channel) # sql database update such tako paramater
 					
 					# sql database output
@@ -232,7 +247,7 @@ Signal.trap(:INT) {
 					
 					# such channel NEW data send
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " NEW-TAKO #{@@channel} #{@@nick} #{@@ip} #{@@tako_id}#{@@tako_mac}#{@@tako_app}"
+						@@irc.privmsg "#{key}", " NEW-TAKO #{@@channel} #{@@nick} #{@@ip} #{tako_id_tmp}#{tako_mac_tmp}#{tako_app_tmp}"
 					end
 					################################
 
@@ -282,9 +297,6 @@ Signal.trap(:INT) {
 					end
 					########################################
 				end
-				@@tako_id_tmp  = "" # tako_id_tmp clear
-				@@tako_mac_tmp = "" # tako_mac_tmp clear
-				@@tako_app_tmp = "" # tako_app_tmp clear
 		end
 		#########################################
 		
