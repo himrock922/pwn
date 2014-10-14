@@ -141,8 +141,9 @@ Signal.trap(:INT) {
 			###############################################
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-TAKO'
-				p msg
 				msg_tmp  = msg.split(/\|\|/)
+				p EOF
+				p msg_tmp
 				channel  = msg.split[5]
 				nick     = msg.split[6]
 				ip       = msg.split[7]
@@ -176,6 +177,7 @@ Signal.trap(:INT) {
 						break
 					end
 				end
+				p EOF
 				@@db.execute("#{@@sql_select}") do |row|
 					p row
 				end
@@ -188,7 +190,6 @@ Signal.trap(:INT) {
 					
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
-				p "test"
 				d_channel = msg.split[5]
 				d_tako_id = msg.split[6]
 				del_id  = ""
@@ -307,15 +308,15 @@ Signal.trap(:INT) {
 					tako_delete_app_tmp = @@tako_app.split(/\|\|/)
 					##############################
 					# while loop until reach delete tako_id
-					while @@tako_id.split[i] != nil
+					while tako_delete_id_tmp[i] != nil
 						# if reach delete tako_id 
-						if @@tako_id.split[i] == delete_poxpr
+						if tako_delete_id_tmp[i] == delete_poxpr
 							i += 1
 							next
 						end
 						################################
 
-						tako_delete_id  << tako_delete_id_tmp[i] << "||" # other tako_id store than tako_id deleted
+						tako_delete_id  << tako_delete_id_tmp[i]  << "||" # other tako_id store than tako_id deleted
 						tako_delete_mac << tako_delete_mac_tmp[i] << "||" # other tako_mac store than tako_id deleted 
 						tako_delete_app << tako_delete_app_tmp[i] << "||" # other tako_app store than tako_id deleted
 						i += 1
@@ -332,11 +333,11 @@ Signal.trap(:INT) {
 					end
 					########################################
 					del_msg = ""
-					del_msg = tako_delete_id.split(/\|\|/)
-					
+					del_msg = delete_poxpr
+					p del_msg
 					# such channel del tako_id send
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " DEL-TAKO #{@@channel} #{del_msg[0]}"
+						@@irc.privmsg "#{key}", " DEL-TAKO #{@@channel} #{del_msg}"
 					end
 					########################################
 				end
