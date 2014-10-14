@@ -186,6 +186,7 @@ Signal.trap(:INT) {
 			
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
 				
+			end
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
 				d_channel = msg.split[5]
