@@ -204,8 +204,8 @@ Signal.trap(:INT) {
 				case poxpr_ex.split[0]
 				# when poxpr output 'NEW'
 				when 'NEW'
-					@@tako_id_tmp.concat "#{poxpr_ex.split[1]}||" # tako_id store
-					@@tako_mac_tmp.concat "#{poxpr_ex.split[2]}||" # tako_mac store
+					@@tako_id_tmp.concat "#{poxpr_ex.split[1]}|" # tako_id store
+					@@tako_mac_tmp.concat "#{poxpr_ex.split[2]}|" # tako_mac store
 					i = 3 
 					
 					# tako_app ptocess
@@ -214,6 +214,8 @@ Signal.trap(:INT) {
 						i += 1
 					end
 					###############################
+					@@tako_id_tmp.concat  "|"
+					@@tako_mac_tmp.concat "|"
 					@@tako_app_tmp.concat "|" # such tako_app split '||'
 					
 
