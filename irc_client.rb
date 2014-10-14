@@ -140,7 +140,7 @@ Signal.trap(:INT) {
 			end
 			###############################################
 
-			if msg.split[1] == 'PRIVMSG' && ( msg.split[4] == 'NEW-TAKO' || msg.split[4] =- 'UPD-TAKO')
+			if msg.split[1] == 'PRIVMSG' &&  msg.split[4] == 'NEW-TAKO' 
 					msg_tmp  = msg.split(/\|\|/)
 					channel  = msg.split[5]
 					nick     = msg.split[6]
