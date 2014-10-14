@@ -142,7 +142,6 @@ Signal.trap(:INT) {
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-TAKO'
 				msg_tmp  = msg.split(/\|\|/)
-				print EOF
 				channel  = msg.split[5]
 				nick     = msg.split[6]
 				ip       = msg.split[7]
@@ -177,10 +176,7 @@ Signal.trap(:INT) {
 						break
 					end
 				end
-				print EOF
-				@@db.execute("#{@@sql_select}") do |row|
-					p row
-				end
+				@@ikagent_stable.wakeup
 			end
 			
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
@@ -190,7 +186,6 @@ Signal.trap(:INT) {
 					
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
-				print EOF
 				d_channel = msg.split[5]
 				d_tako_id = msg.split[6]
 				del_id  = ""
@@ -213,10 +208,7 @@ Signal.trap(:INT) {
 					end
 				end
 				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", del_id, del_mac, del_app, d_channel)
-				print EOF
-				@@db.execute("#{@@sql_select}") do |row|
-					p row
-				end 
+				@@ikagent_stable.wakeup
 			end
 				
 
@@ -383,6 +375,10 @@ Signal.trap(:INT) {
 					p "#{key} #{val}"
 				end
 				print EOF
+				p "sql table"
+				@@db.execute("#{@@sql_select}") do |row|
+					p row
+				end
 			end		
 		end
 	##########################################################
