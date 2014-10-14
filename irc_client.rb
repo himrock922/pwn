@@ -183,11 +183,12 @@ Signal.trap(:INT) {
 			
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
 				d_channel = msg.split[5]
-				@@db.execute("#{@@sql_delete} ikagent_cha = ?", d_channel)
+				@@db.execute("#{@@sql_delete} where ikagent_cha = ?", d_channel)
 			end
 					
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
+				p "test"
 				d_channel = msg.split[5]
 				d_tako_id = msg.split[6]
 				del_id  = ""
