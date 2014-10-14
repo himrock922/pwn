@@ -178,7 +178,7 @@ Signal.trap(:INT) {
 				end
 				@@ikagent_stable.wakeup
 				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@channel) do |row|
-					@@chanel_hash.each_key do |key|
+					@@channel_hash.each_key do |key|
 						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]} #{row[4]} #{row[5]}"
 					end
 				end
