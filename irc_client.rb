@@ -140,7 +140,7 @@ Signal.trap(:INT) {
 			end
 			###############################################
 
-			if msg.split[1] == 'PRIVMSG' && ( msg.split[4] == 'NEW-TAKO' || msg.split[4] == 'UPD-TAKO')
+			if msg.split[1] == 'PRIVMSG' &&  msg.split[4] == 'NEW-TAKO' 
 				msg_tmp  = msg.split(/\|\|/)
 				channel  = msg.split[5]
 				nick     = msg.split[6]
@@ -177,15 +177,23 @@ Signal.trap(:INT) {
 					end
 				end
 				@@ikagent_stable.wakeup
-				if msg.split[4] == 'NEW-TAKO'
-					@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@channel) do |row|
-						@@channel_hash.each_key do |key|
-							@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]}#{row[4]}#{row[5]}"
-						end
+				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@channel) do |row|
+					@@channel_hash.each_key do |key|
+						@@irc.privmsg "#{key}", " REPLAY-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]} #{row[4]} #{row[5]}"
 					end
 				end
 			end
 			
+			if msg.split[1] == 'PRICMSG' && msg.split[4] == 'REPLAY-TAKO'
+				u_channel  = msg.split[5]
+				u_nick     = msg.split[6]
+				u_ip       = msg.split[7]
+				u_tako_id  = msg.split[8]
+				u_tako_mac = msg.split[9]
+				u_tako_app = msg.split[10]
+				@@db.execute("#{@@sql_insert}", u_channel, u_nick, u_ip, u_tako_id, u_tako_mac, u_tako_app)
+				@@ikagent_stable.wakeup
+			end
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
 				d_channel = msg.split[5]
 				@@db.execute("#{@@sql_delete} where ikagent_cha = ?", d_channel)
