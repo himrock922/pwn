@@ -142,25 +142,24 @@ Signal.trap(:INT) {
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-TAKO'
 				msg_tmp  = msg.split(/\|\|/)
-				p EOF
-				p msg_tmp
+				print EOF
 				channel  = msg.split[5]
 				nick     = msg.split[6]
 				ip       = msg.split[7]
-				tako_id  = msg_tmp[0].split[8] << "||"
-				tako_mac = msg_tmp[1] << "||"
-				tako_app = msg_tmp[2] << "||"
+				tako_id_tmp  = msg_tmp[0].split[8] << "||"
+				tako_mac_tmp = msg_tmp[1] << "||"
+				tako_app_tmp = msg_tmp[2] << "||"
 				count = 0
 				while true
 					@@db.execute("#{@@sql_select}") do |row|
 						if channel == row[0]
-							tako_id_tmp  = ""
-							tako_mac_tmp = ""
-							tako_app_tmp = ""
+							tako_id  = ""
+							tako_mac = ""
+							tako_app = ""
 							@@db.execute("#{@@sql_select} where ikagent_cha = ?", channel) do |row_tmp|
-								tako_id_tmp  = row_tmp[3] 
-								tako_mac_tmp = row_tmp[4] 
-								tako_app_tmp = row_tmp[5] 
+								tako_id  = row_tmp[3] 
+								tako_mac = row_tmp[4] 
+								tako_app = row_tmp[5] 
 							end
 							tako_id  << tako_id_tmp
 							tako_mac << tako_mac_tmp
@@ -172,12 +171,13 @@ Signal.trap(:INT) {
 						end
 					end
 					if count == 0
-						@@db.execute("#{@@sql_insert}", channel, nick, ip, tako_id, tako_mac, tako_app)
+						@@db.execute("#{@@sql_insert}", channel, nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp)
+						break
 					else
 						break
 					end
 				end
-				p EOF
+				print EOF
 				@@db.execute("#{@@sql_select}") do |row|
 					p row
 				end
@@ -190,6 +190,7 @@ Signal.trap(:INT) {
 					
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
+				print EOF
 				d_channel = msg.split[5]
 				d_tako_id = msg.split[6]
 				del_id  = ""
@@ -199,13 +200,9 @@ Signal.trap(:INT) {
 					del_id_tmp   = row[3].split(/\|\|/)
 					del_mac_tmp  = row[4].split(/\|\|/)
 					del_app_tmp  = row[5].split(/\|\|/)
-					p del_id_tmp
-					p del_mac_tmp
-					p del_app_tmp
 					i = 0
 					while del_id_tmp[i] != nil
 						if del_id_tmp[i] == d_tako_id
-							p "test"
 							i += 1
 							next
 						end
@@ -215,7 +212,8 @@ Signal.trap(:INT) {
 						i += 1
 					end
 				end
-				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ?, where ikagent_cha = ?", del_id, del_mac, del_app, d_channel)
+				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", del_id, del_mac, del_app, d_channel)
+				print EOF
 				@@db.execute("#{@@sql_select}") do |row|
 					p row
 				end 
