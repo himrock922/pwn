@@ -180,6 +180,15 @@ Signal.trap(:INT) {
 				end
 			end
 
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
+				d_channel = msg.split[5]
+				d_tako_id = msg.split[6]
+				@@db.execute("#{@@sql_select} where ikagent_cha = ?", d_channel) do |row|
+					p row
+				end
+			end
+				
+
 			# if disconnect ikagent server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
 				@@channel_hash.delete("#{msg.split[5]}") # channel table disconnect ikagent delete
@@ -290,10 +299,13 @@ Signal.trap(:INT) {
 						p row
 					end
 					########################################
-
+					del_msg = ""
+					del_msg = tako_delete_id.split(/\|\|/)
+					
+					p del_msg[0]
 					# such channel del tako_id send
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " #{@@tako_id}#{@@tako_mac}#{@@tako_app}"
+						@@irc.privmsg "#{key}", " DEL-TAKO #{@@channel} #{del_msg[0]}"
 					end
 					########################################
 				end
