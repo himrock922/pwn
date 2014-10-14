@@ -177,7 +177,15 @@ Signal.trap(:INT) {
 					end
 				end
 				@@ikagent_stable.wakeup
+				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@channel) do |row|
+					@@chanel_hash.each do |key|
+						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]} #{row[4]} #{row[5]}"
+					end
+				end
 			end
+			
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
+				
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
 				d_channel = msg.split[5]
