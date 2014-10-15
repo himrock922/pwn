@@ -199,11 +199,12 @@ Signal.trap(:INT) {
 							count = 1
 							break
 						end
-					if count == 0
-						@@db.execute("#{@@sql_insert}", channel, nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp)
+						if count == 0
+							@@db.execute("#{@@sql_insert}", channel, nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp)
+							break
+						end
 						break
 					end
-				break
 				end	
 			end
 
