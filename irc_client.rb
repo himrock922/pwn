@@ -15,7 +15,7 @@ require 'open3'
 # sqlite library
 require 'sqlite3'
 require_relative 'create_table'
-require_relative 'randomchoose'
+require_relative 'random_choose'
 
 #default irc server setup
 SERVER = "bsd-himrock922.jaist.ac.jp"
@@ -206,7 +206,7 @@ Signal.trap(:INT) {
 						break
 					end
 				end
-				IRC::test(@@channel, @@db, @@channel_hash)
+				IRC::random_choose(@@channel, @@db, @@channel_hash)
 			end
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
