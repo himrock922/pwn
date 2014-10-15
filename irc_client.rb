@@ -15,6 +15,7 @@ require 'open3'
 # sqlite library
 require 'sqlite3'
 require_relative 'create_table'
+require_relative 'randomchoose'
 
 #default irc server setup
 SERVER = "bsd-himrock922.jaist.ac.jp"
@@ -27,6 +28,7 @@ OPTS = {}
 
 class IRC
 	include CreateTable
+	extend  RandomChoose
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
 		@@irc.privmsg "#{key}", " DEL-IKAGENT #{@@channel}" 
@@ -125,7 +127,6 @@ Signal.trap(:INT) {
 					@@irc.privmsg "#{c_key}", " UPD-IKAGENT #{@@nick} #{@@ip}" # other ikagent private message about own information (UPDATE)
 				end
 				p "new paramater store!"
-				@@ikagent_stable.wakeup
 			end
 			###############################################
 
@@ -136,7 +137,6 @@ Signal.trap(:INT) {
 				tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
 				@@hash.update(tmp_hash) # stable hash table update
 				p "update paramater!"
-				@@ikagent_stable.wakeup
 			end
 			###############################################
 
@@ -176,7 +176,6 @@ Signal.trap(:INT) {
 						break
 					end
 				end
-				@@ikagent_stable.wakeup
 				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@channel) do |row|
 					@@channel_hash.each_key do |key|
 						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]} #{row[4]} #{row[5]}"
@@ -207,7 +206,7 @@ Signal.trap(:INT) {
 						break
 					end
 				end
-				@@ikagent_stable.wakeup	
+				IRC::test(@@channel, @@db, @@channel_hash)
 			end
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
@@ -239,7 +238,6 @@ Signal.trap(:INT) {
 					end
 				end
 				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", del_id, del_mac, del_app, d_channel)
-				@@ikagent_stable.wakeup
 			end
 				
 
@@ -250,21 +248,18 @@ Signal.trap(:INT) {
 				@@hash.delete("#{msg.split[6]}") # hash table disconnect ikagent delete
 				# such table output
 				p "delete complete"
-				@@ikagent_stable.wakeup
 			end
  			###############################################
 
 			###############################################
 			###############################################
 
-			# message output
-			p msg
 		end
 	end
 	#########################################
 	#########################################
 	#########################################
-
+	
 	# Communication between nodes for process
 	#########################################	
 	@@pwn_poxpr = Thread::fork do
@@ -274,7 +269,6 @@ Signal.trap(:INT) {
 			# Collaboration program stdout
 			poxpr_output.each do | core_output |
 				poxpr_ex =  core_output.chomp
-				p poxpr_ex
 				## NEW or DEL or UPD process
 				case poxpr_ex.split[0]
 				# when poxpr output 'NEW'
@@ -302,11 +296,6 @@ Signal.trap(:INT) {
 					@@tako_app << tako_app_tmp # tako_app stable << tako_app temporary
 					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", @@tako_id, @@tako_mac, @@tako_app, @@channel) # sql database update such tako paramater
 					
-					# sql database output
-					@@db.execute("#{@@sql_select}") do |row|
-							p row
-					end
-					######################
 					
 					# such channel NEW data send
 					@@channel_hash.each_key do |key|
@@ -317,6 +306,57 @@ Signal.trap(:INT) {
 				########################################
 		
 				# when poxpr output 'DEL'
+				when 'UPD'
+					s_tako_id    = ""
+					tako_id_tmp  = ""
+					tako_mac_tmp = ""
+					tako_app_tmp = ""
+					upd_id       = ""
+					upd_mac      = ""
+					upd_app      = ""
+
+					s_tako_id.concat  "#{poxpr_ex.split[1]}"   # update subject tako_id store
+					tako_id_tmp.concat  "#{poxpr_ex.split[1]}||" # tako_id store
+					tako_mac_tmp.concat "#{poxpr_ex.split[2]}||" # tako_mac store
+					i = 3 
+					# tako_app ptocess
+					while poxpr_ex.split[i] != nil
+						tako_app_tmp.concat "#{poxpr_ex.split[i]}|" # tako_app store
+						i += 1
+					end
+					###############################
+					tako_app_tmp.concat "|" # such tako_app split '||'
+					@@db.execute("#{@@sql_select} where ikagent_cha =?", @@channel) do |row|
+						upd_id_tmp   = row[3].split(/\|\|/)
+						upd_mac_tmp  = row[4].split(/\|\|/)
+						upd_app_tmp  = row[5].split(/\|\|/)
+						i = 0
+
+							while upd_id_tmp[i] != nil
+								if upd_id_tmp[i] == s_tako_id
+									upd_id  << tako_id_tmp
+									upd_mac << tako_mac_tmp
+									upd_app << tako_app_tmp
+									i += 1
+								next
+								end
+							upd_id  << upd_id_tmp[i]  << "||"
+							upd_mac << upd_mac_tmp[i] << "||"
+							upd_app << upd_app_tmp[i] << "||"
+							i += 1
+							end
+						end
+					@@tako_id  = upd_id   # tako_id stable << tako_id temporary
+					@@tako_mac = upd_mac  # tako_mac stable << tako_mac temporary
+					@@tako_app = upd_app # tako_app stable << tako_app temporary
+					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", @@tako_id, @@tako_mac, @@tako_app, @@channel) # sql database update such tako paramater
+					
+				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@channel) do |row|
+					@@channel_hash.each_key do |key|
+						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]} #{row[4]} #{row[5]}"
+					end
+				end
+					######################	
 				when 'DEL'
 					delete_poxpr = poxpr_ex.split[1] # delete tako_id store
 					# setting
@@ -348,14 +388,9 @@ Signal.trap(:INT) {
 					@@tako_app = tako_delete_app # update tako_pp store
 					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", @@tako_id, @@tako_mac, @@tako_app, @@channel) # sql data update
 						
-					# sql output
-					@@db.execute("#{@@sql_select}") do |row|
-						p row
-					end
 					########################################
 					del_msg = ""
 					del_msg = delete_poxpr
-					p del_msg
 					# such channel del tako_id send
 					@@channel_hash.each_key do |key|
 						@@irc.privmsg "#{key}", " DEL-TAKO #{@@channel} #{del_msg}"
@@ -377,6 +412,7 @@ Signal.trap(:INT) {
 		while input = gets.chomp # wait stdin
 			if /exit/i =~ input # program exit process
 				@@channel_hash.each_key do |key|
+					@@irc.privmsg "#{key}", " DEL-IKAGENT #{@@channel}" 
 					@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
 					@@db.execute(@@sql_delete)
 					@@db.close
@@ -503,7 +539,6 @@ Signal.trap(:INT) {
 		# ikagent start
 		#######################
 		######################
-
 		# thread run
 		#######################
 		@@irc.whois @@nick
@@ -527,12 +562,14 @@ Signal.trap(:INT) {
 		end
 
 		# sql_command summary store process
+		private
 		def sql_command
 			@@sql_insert = insert_ikable
 			@@sql_delete = delete_ikable
 			@@sql_update = update_ikable
 			@@sql_select = select_ikable
 		end
+
 		####################################
 	end
 IRC::new
