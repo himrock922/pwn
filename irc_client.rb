@@ -205,7 +205,8 @@ Signal.trap(:INT) {
 						end
 						break
 					end
-				end	
+				end
+				@@ikagent_stable.wakeup	
 			end
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
