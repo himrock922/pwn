@@ -185,7 +185,26 @@ Signal.trap(:INT) {
 			end
 			
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
-				p msg	
+				channel  = msg.split[5]
+				nick     = msg.split[6]
+				ip       = msg.split[7]
+				tako_id  = msg.split[8]
+				tako_mac = msg.split[9]
+				tako_app = msg.split[10]
+				count    = 0
+				while true
+					@@db.execute("#{@@sql_select}") do |row|
+						if channel == row[0]
+							@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha  = ? ", tako_id, tako_mac, tako_app, channel)
+							count = 1
+							break
+						end
+					if count == 0
+						@@db.execute("#{@@sql_insert}", channel, nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp)
+						break
+					end
+				break
+				end	
 			end
 
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
