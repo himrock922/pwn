@@ -168,12 +168,9 @@ Signal.trap(:INT) {
 							tako_app = ""
 							############
 							
-							# channel paramater search
-							@@db.execute("#{@@sql_select} where ikagent_cha = ?", channel) do |row_tmp|
-								tako_id  = row_tmp[3] 
-								tako_mac = row_tmp[4] 
-								tako_app = row_tmp[5] 
-							end
+							tako_id  = row_tmp[3] 
+							tako_mac = row_tmp[4] 
+							tako_app = row_tmp[5] 
 							######################
 							
 							# tako information store
@@ -199,7 +196,7 @@ Signal.trap(:INT) {
 					#######################################
 
 					# else break
-					else
+					elsif count == 1
 						break
 					end
 					#######################################
