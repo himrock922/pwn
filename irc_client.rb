@@ -282,7 +282,7 @@ Signal.trap(:INT) {
 			# other tako_app delete process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
 				# setting
-				d_channel = msg.split[5]
+				d_nick = msg.split[5]
 				d_tako_id = msg.split[6]
 				del_id  = ""
 				del_mac = ""
@@ -291,9 +291,9 @@ Signal.trap(:INT) {
 
 				# delete decide tako information store
 				@@db.execute("#{@@sql_select} where ikagent_cha = ?", d_channel) do |row|
-					del_id_tmp   = row[3].split(/\|\|/)
-					del_mac_tmp  = row[4].split(/\|\|/)
-					del_app_tmp  = row[5].split(/\|\|/)
+					del_id_tmp   = row[2].split(/\|\|/)
+					del_mac_tmp  = row[3].split(/\|\|/)
+					del_app_tmp  = row[4].split(/\|\|/)
 					i = 0
 				################################################
 
@@ -317,7 +317,7 @@ Signal.trap(:INT) {
 				end
 				###############################################
 				# update
-				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha = ?", del_id, del_mac, del_app, d_channel)
+				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", del_id, del_mac, del_app, d_nick)
 				end
 				###############################################
 			########################################################
@@ -476,7 +476,7 @@ Signal.trap(:INT) {
 					del_msg = delete_poxpr
 					# such channel del tako_id send
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " DEL-TAKO #{@@channel} #{del_msg}"
+						@@irc.privmsg "#{key}", " DEL-TAKO #{@@nick} #{del_msg}"
 					end
 					########################################
 				end
