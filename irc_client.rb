@@ -146,7 +146,7 @@ Signal.trap(:INT) {
 			###############################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
 				tmp_hash = {} # tempolalry hash table
-				tmp_hash.store("#{msg.split[5}", "#{msg.split[6]}")
+				tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
 				@@hash.update(tmp_hash) # stable hash table store
 				p "new ikagent store!"
 			end
