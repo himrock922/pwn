@@ -142,6 +142,14 @@ Signal.trap(:INT) {
 			end
 			###############################################
 
+			# if new ikagent mesage process
+			###############################################
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
+				tmp_hash = {} # tempolalry hash table
+				tmp_hash.store("#{msg.split[5}", "#{msg.split[6]}")
+				@@hash.update(tmp_hash) # stable hash table store
+				p "new ikagent store!"
+			end
 			# if update ikagent message process
 			###############################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-IKAGENT'
@@ -156,7 +164,6 @@ Signal.trap(:INT) {
 			if msg.split[1] == 'PRIVMSG' &&  msg.split[4] == 'NEW-TAKO' 
 				#setting 
 				msg_tmp  = msg.split(/\|\|/)
-				channel  = msg.split[5]
 				nick     = msg.split[5]
 				ip       = msg.split[6]
 				tako_id_tmp  = msg_tmp[0].split[7] << "||"
