@@ -4,14 +4,14 @@ SQL Table Create Module
 module CreateTable
 	# table create process
 	def create_ikable
-		sql = "create table Ikagent_List (ikagent_cha text, ikagent_nick text, ikagent_addr text, tako_id text, tako_mac text, tako_app text)"
+		sql = "create table Ikagent_List (ikagent_nick text, ikagent_addr text, tako_id text, tako_mac text, tako_app text)"
 		return sql
 	end
 	######################
 
 	# table data insert process
 	def insert_ikable
-		sql = "insert into Ikagent_List values (?, ?, ?, ?, ?, ?)"
+		sql = "insert into Ikagent_List values (?, ?, ?, ?, ?)"
 		return sql
 	end
 	######################
