@@ -189,7 +189,7 @@ Signal.trap(:INT) {
 							######################
 
 							# database update
-							@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha  = ? ", tako_id, tako_mac, tako_app, channel)
+							@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick  = ? ", tako_id, tako_mac, tako_app, nick)
 							count = 1
 							break
 							#######################
@@ -200,7 +200,7 @@ Signal.trap(:INT) {
 
 					# when nothing database in data
 					if count == 0
-						@@db.execute("#{@@sql_insert}", channel, nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp) # insert
+						@@db.execute("#{@@sql_insert}", nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp) # insert
 						break
 					#######################################
 
@@ -509,12 +509,16 @@ Signal.trap(:INT) {
 			elsif /topic/i =~ input && @@channel != nil
 				str = input.split
 				@@irc.topic "#{@@channel}", "#{str[1]}"
+			elsif /mode/i =~ input && @@channel != nil
+				str = input.split
+				@@irc.mode "#{@@channel}", "#{str[1]}"
 			else
 				p "help message"
 				p "exit : ikagent exit command"
 				p "join [channel name] : channel name join command"
 				p "part [channel name] : channel name part command"
-				p "topic [channel name] : channel name changes topic (but operator can use only)"
+				p "topic [channel name] : channel topic changes (but operator can use only)"
+				p "mode [channel name] : channel mode changes (but operator can use only)"
 				next # other continue
 			end
 		end
@@ -648,8 +652,8 @@ Signal.trap(:INT) {
 		######################
 		# thread run
 		#######################
-		@@irc.list
 		@@irc.whois @@nick
+		@@irc.list
 		@@ping_pong.run # server message read process
 		@@writen.run # ikagent message write process
 		@@pwn_poxpr.run # poxpr process
