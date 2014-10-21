@@ -52,7 +52,7 @@ Signal.trap(:INT) {
 	@@ping_pong = Thread::fork do
 		Thread::stop
 		while msg = @@irc.read
-
+			p msg
 			# server connection confirmation
 			if msg.split[0] == 'PING'
 				@@irc.pong "#{msg.split[1]}"
@@ -482,7 +482,20 @@ Signal.trap(:INT) {
 					@@db.close
 				end
 				exit
+			elsif /join/i =~ input
+				str = input.split
+				@@irc.join "#{str[1]}"
+			elsif /part/i =~ input
+				str = input.split
+				@@irc.part "#{str[1]}"
+			elsif /topics/i =~ input
+				str = input.split
+				@@irc.topic "#{@@channel}", "#{str[1]}"
 			else
+				p "help message"
+				p "exit : ikagent exit command"
+				p "join [channel name] : channel name join command"
+				p "part [channel name] : channel name part command"
 				next # other continue
 			end
 		end
@@ -541,7 +554,7 @@ Signal.trap(:INT) {
 				opt.on('-p PORT', '--port', 'port')          {|v| OPTS[:p] = v}
 				opt.on('-n NICK', '--nick', 'nick')          {|v| OPTS[:n] = v}
 				opt.on('-u USER', '--user', 'user')          {|v| OPTS[:u] = v}
-				opt.on('-c CHANNEL', '--channel', 'channel') {|v| OPTS[:c] = v}
+				opt.on('-c [CHANNEL]', '--channel', 'channel') {|v| OPTS[:c] = v}
 				opt.on('-d DECIDE', '--decide', 'decide')    {|v| OPTS[:d] = v}
 				############################################
 			
@@ -568,7 +581,7 @@ Signal.trap(:INT) {
 		if OPTS[:p] then @port = OPTS[:p] else @port = PORT end
 		if OPTS[:n] then @@nick = OPTS[:n] else @@nick = NICK end
 		if OPTS[:u] then @user = OPTS[:u] else @user = USER end
-		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = CHANNEL end
+		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = nil end
 		if OPTS[:d] then @@algo = OPTS[:d] else @@algo = ALGO end
 		################################################################
 
@@ -597,8 +610,10 @@ Signal.trap(:INT) {
 		if @@irc.connected?
 			@@irc.nick "#{@@nick}" # nickname decide
 			@@irc.user "#{@user}", 0, "*", "I am #{@user}" # hello message 
-			@@irc.join "#{@@channel}" # channel name decide
-			@@irc.mode "#{@@channel}", "-n" # mode change
+			if @@channel != nil
+				@@irc.join "#{@@channel}" # channel name decide
+				@@irc.mode "#{@@channel}", "-n" # mode change
+			end
 		end
 		###################################################
 
