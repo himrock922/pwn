@@ -162,6 +162,7 @@ Signal.trap(:INT) {
 
 			# if NEW-TAKO-APP information send
 			if msg.split[1] == 'PRIVMSG' &&  msg.split[4] == 'NEW-TAKO' 
+				p msg
 				#setting 
 				msg_tmp  = msg.split(/\|\|/)
 				nick     = msg.split[5]
