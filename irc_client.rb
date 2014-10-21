@@ -79,17 +79,20 @@ Signal.trap(:INT) {
 
 			# server flooding channel information store for hash table
 			when '322'
-				next if "#{msg.split[3]}" == ""
+				next if msg.split[3] == ""
 				@@channel_hash.store("#{msg.split[3]}", "#{msg.split[4]}")
 			####################################################
 
 			# channel hash table output
 			when '323'
 				if @@channel == nil
-					next
-				end
-				@@channel_hash.each_key do |key|
-					@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick} #{@@ip} #{@@channel}" # other ikagent send private message about own information (NEW)
+					@@channel_hash.each_key do |key|
+						@@irc.privmsg "#{key}", " NEW-IKAGENT #{@@nick} #{@@ip}"
+					end
+				elsif @@channel != nil
+					@@channel_hash.each_key do |key|
+						@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick} #{@@ip} #{@@channel}" # other ikagent send private message about own information (NEW)
+					end
 				end
 
 			######################################
