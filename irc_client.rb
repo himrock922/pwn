@@ -633,7 +633,7 @@ Signal.trap(:INT) {
 			if @@channel != nil
 				@@irc.join "#{@@channel}" # channel name decide
 				@@irc.mode "#{@@channel}", "-n" # mode change
-				if @@topic != nil
+				if @topic != nil
 					@@irc.topic "#{@@channel}", "#{@topic}"
 				end
 			end
