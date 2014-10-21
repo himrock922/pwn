@@ -162,7 +162,8 @@ Signal.trap(:INT) {
 
 			# if NEW-TAKO-APP information send
 			if msg.split[1] == 'PRIVMSG' &&  msg.split[4] == 'NEW-TAKO' 
-				p msg
+				@@irc.list "#{msg.split[7]}" if msg.split[7] != nil
+
 				#setting 
 				msg_tmp  = msg.split(/\|\|/)
 				nick     = msg.split[5]
@@ -221,9 +222,10 @@ Signal.trap(:INT) {
 				##############################################
 
 				# complete data privmsg other ikagent
-				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@nick) do |row|
+				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
+						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}" if @@channel != nil
+						@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]} #{@@channel}" if @@channel == nil
 					end
 				end
 				################################################
@@ -281,17 +283,19 @@ Signal.trap(:INT) {
 			########################################################
 					
 			# other tako_app delete process
+			#########################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
+
 				# setting
 				d_nick = msg.split[5]
 				d_tako_id = msg.split[6]
 				del_id  = ""
 				del_mac = ""
 				del_app = ""
-				########################
+				################################################
 
 				# delete decide tako information store
-				@@db.execute("#{@@sql_select} where ikagent_cha = ?", d_channel) do |row|
+				@@db.execute("#{@@sql_select} where ikagent_nick = ?", d_nick) do |row|
 					del_id_tmp   = row[2].split(/\|\|/)
 					del_mac_tmp  = row[3].split(/\|\|/)
 					del_app_tmp  = row[4].split(/\|\|/)
@@ -305,7 +309,7 @@ Signal.trap(:INT) {
 							i += 1 # no store
 							next
 						end
-						###############################
+						################################
 
 						# other tako information store
 						del_id  << del_id_tmp[i]  << "||"
@@ -314,13 +318,13 @@ Signal.trap(:INT) {
 						i += 1
 						################################
 					end
-					#######################################
+					########################################
 				end
-				###############################################
+				################################################
 				# update
 				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", del_id, del_mac, del_app, d_nick)
-				end
-				###############################################
+			end
+			########################################################
 			########################################################
 	
 			# if disconnect ikagent server session process
