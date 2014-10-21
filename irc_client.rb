@@ -157,9 +157,9 @@ Signal.trap(:INT) {
 				#setting 
 				msg_tmp  = msg.split(/\|\|/)
 				channel  = msg.split[5]
-				nick     = msg.split[6]
-				ip       = msg.split[7]
-				tako_id_tmp  = msg_tmp[0].split[8] << "||"
+				nick     = msg.split[5]
+				ip       = msg.split[6]
+				tako_id_tmp  = msg_tmp[0].split[7] << "||"
 				tako_mac_tmp = msg_tmp[1] << "||"
 				tako_app_tmp = msg_tmp[2] << "||"
 				count = 0
@@ -170,16 +170,16 @@ Signal.trap(:INT) {
 					@@db.execute("#{@@sql_select}") do |row|
 						# if present in the database already
 						# updating process
-						if channel == row[0]
+						if nick == row[0]
 							# setting
 							tako_id  = ""
 							tako_mac = ""
 							tako_app = ""
 							############
 							
-							tako_id  = row_tmp[3] 
-							tako_mac = row_tmp[4] 
-							tako_app = row_tmp[5] 
+							tako_id  = row_tmp[2] 
+							tako_mac = row_tmp[3] 
+							tako_app = row_tmp[4] 
 							######################
 							
 							# tako information store
@@ -213,9 +213,9 @@ Signal.trap(:INT) {
 				##############################################
 
 				# complete data privmsg other ikagent
-				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@channel) do |row|
+				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@nick) do |row|
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]} #{row[4]} #{row[5]}"
+						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
 					end
 				end
 				################################################
@@ -343,6 +343,7 @@ Signal.trap(:INT) {
 			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X')
 			# Collaboration program stdout
 			poxpr_output.each do | core_output |
+				p core_output
 				poxpr_ex =  core_output.chomp
 				## NEW or DEL or UPD process
 				case poxpr_ex.split[0]
@@ -374,7 +375,7 @@ Signal.trap(:INT) {
 					
 					# such channel NEW data send
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " NEW-TAKO #{@@channel} #{@@nick} #{@@ip} #{tako_id_tmp}#{tako_mac_tmp}#{tako_app_tmp}"
+						@@irc.privmsg "#{key}", " NEW-TAKO #{@@nick} #{@@ip} #{tako_id_tmp}#{tako_mac_tmp}#{tako_app_tmp}"
 					end
 					################################
 
@@ -402,9 +403,9 @@ Signal.trap(:INT) {
 					###############################
 					tako_app_tmp.concat "|" # such tako_app split '||'
 					@@db.execute("#{@@sql_select} where ikagent_nick =?", @@nick) do |row|
-						upd_id_tmp   = row[3].split(/\|\|/)
-						upd_mac_tmp  = row[4].split(/\|\|/)
-						upd_app_tmp  = row[5].split(/\|\|/)
+						upd_id_tmp   = row[2].split(/\|\|/)
+						upd_mac_tmp  = row[3].split(/\|\|/)
+						upd_app_tmp  = row[4].split(/\|\|/)
 						i = 0
 
 							while upd_id_tmp[i] != nil
@@ -426,9 +427,9 @@ Signal.trap(:INT) {
 					@@tako_app = upd_app # tako_app stable << tako_app temporary
 					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", @@tako_id, @@tako_mac, @@tako_app, @@nick) # sql database update such tako paramater
 					
-				@@db.execute("#{@@sql_select} where ikagent_cha = ?", @@nick) do |row|
+				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[3]} #{row[4]} #{row[5]}"
+						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
 					end
 				end
 					######################	
@@ -567,7 +568,7 @@ Signal.trap(:INT) {
 				# Examples output
 				opt.separator ''
 				opt.separator 'Examples:'
-				opt.separator "    % #{opt.program_name} -s example.jp -p 6667 -n himrock922 -u himrock -c ikachang -d 1 ( 1 or 2)"
+				opt.separator "    % #{opt.program_name} -s example.jp -p 6667 -n himrock922 -c ikachang -d 1 ( 1 or 2)"
 				#####################
 			
 				# Specific Options Usage output
@@ -575,7 +576,6 @@ Signal.trap(:INT) {
 				opt.separator 'Specific options:'
 				opt.on('-s SERVER', '--server', 'server')    {|v| OPTS[:s] = v}
 				opt.on('-p PORT', '--port', 'port')          {|v| OPTS[:p] = v}
-				opt.on('-u USER', '--user', 'user')	     {|v| OPTS[:u] = v}
 				opt.on('-n NICK', '--nick', 'nick')          {|v| OPTS[:n] = v}
 				opt.on('-c CHANNEL', '--channel', 'channel') {|v| OPTS[:c] = v}
 				opt.on('-d DECIDE', '--decide', 'decide')    {|v| OPTS[:d] = v}
@@ -604,7 +604,6 @@ Signal.trap(:INT) {
 		if OPTS[:s] then @server = OPTS[:s] else @server = SERVER end
 		if OPTS[:p] then @port = OPTS[:p] else @port = PORT end
 		if OPTS[:n] then @@nick = OPTS[:n] else @@nick = NICK end
-		if OPTS[:u] then @user = OPTS[:u] else @user = USER end
 		if OPTS[:t] then @topic = OPTS[:u] else @topic = nil end
 		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = nil end
 		if OPTS[:d] then @@algo = OPTS[:d] else @@algo = ALGO end
