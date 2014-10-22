@@ -27,7 +27,7 @@ module RandomChoose
 				@p_tako = p_nick.sample # party tako choose for random
 				next if @p_tako == nick # if @p_tako = own_channel next
 				next if pcha_declist.index("#{@p_tako}") != nil # if get the channel scan has finished already, exit
-				if pcha_declist == p_channel
+				if pcha_declist == p_nick
 					count = 1
 					break
 				end
