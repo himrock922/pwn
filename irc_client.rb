@@ -100,6 +100,8 @@ Signal.trap(:INT) {
 			## my channel join user information store hash table
 			# join command for usrname extraction	
 			when 'JOIN'
+				mj_cha  = msg.split[2]
+				mj_cha.slice!(0)
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
 				@@irc.whois "#{mj_user[0]}"
@@ -224,8 +226,7 @@ Signal.trap(:INT) {
 				# complete data privmsg other ikagent
 				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}" if @@channel != nil
-						@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]} #{@@channel}" if @@channel == nil
+						@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
 					end
 				end
 				################################################
