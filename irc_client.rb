@@ -240,7 +240,6 @@ Signal.trap(:INT) {
 			# other tako information update process
 			#######################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
-				p msg
 				# setting
 				nick     = msg.split[5]
 				ip       = msg.split[6]
@@ -282,8 +281,9 @@ Signal.trap(:INT) {
 			# other ikagent dell process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
 				d_nick = msg.split[5]
-				
+				@@hash.delete("#{d_nick}")
 				@@db.execute("#{@@sql_delete} where ikagent_nick = ?", d_nick)
+				p "delete ikagent complete!"
 			end
 			########################################################
 					
@@ -334,10 +334,13 @@ Signal.trap(:INT) {
 	
 			# if disconnect ikagent server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
-				
-				@@channel_hash.delete("#{msg.split[5]}") # channel table disconnect ikagent delete
+				d_cha  = msg.split[5]
+				d_nick = msg.split[6] 
 
-				@@hash.delete("#{msg.split[6]}") # hash table disconnect ikagent delete
+				@@channel_hash.delete("#{d_cha}") # channel table disconnect ikagent delete
+
+				@@hash.delete("#{d_nick}") # hash table disconnect ikagent delete
+				@@db.execute("#{@@sql_delete} where ikagent_nick = ?", d_nick)
 				# such table output
 				p "delete complete"
 			end
