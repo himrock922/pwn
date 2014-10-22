@@ -119,6 +119,7 @@ Signal.trap(:INT) {
 			when 'PART'
 				mp_user = msg.split(/\!\~/)
 				mp_user[0].slice!(0)
+				next if @@nick == mp_user[0]
 				@@hash.delete("#{mp_user[0]}")
 				@@ikagent_stable.wakeup
 			################################################
@@ -235,12 +236,11 @@ Signal.trap(:INT) {
 			#######################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
 				# setting
-				channel  = msg.split[5]
-				nick     = msg.split[6]
-				ip       = msg.split[7]
-				tako_id  = msg.split[8]
-				tako_mac = msg.split[9]
-				tako_app = msg.split[10]
+				nick     = msg.split[5]
+				ip       = msg.split[6]
+				tako_id  = msg.split[7]
+				tako_mac = msg.split[8]
+				tako_app = msg.split[9]
 				count    = 0
 				#######################
 
@@ -248,8 +248,8 @@ Signal.trap(:INT) {
 				while true
 					@@db.execute("#{@@sql_select}") do |row|
 						# if present in the database already
-						if channel == row[0]
-							@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_cha  = ? ", tako_id, tako_mac, tako_app, channel)
+						if nick == row[0]
+							@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick  = ? ", tako_id, tako_mac, tako_app, nick)
 						# data update
 							count = 1
 							break
@@ -258,7 +258,7 @@ Signal.trap(:INT) {
 					end
 					# if nothing data in database
 					if count == 0
-						@@db.execute("#{@@sql_insert}", channel, nick, ip, tako_id, tako_mac, tako_app)
+						@@db.execute("#{@@sql_insert}", nick, ip, tako_id, tako_mac, tako_app)
 						# insert
 						break
 					########################################
@@ -440,7 +440,7 @@ Signal.trap(:INT) {
 					
 				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
 					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " UPD-TAKO #{@@channel} #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
+						@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
 					end
 				end
 					######################	
