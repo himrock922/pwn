@@ -192,9 +192,9 @@ Signal.trap(:INT) {
 							tako_app = ""
 							############
 							
-							tako_id  = row_tmp[2] 
-							tako_mac = row_tmp[3] 
-							tako_app = row_tmp[4] 
+							tako_id  = row[2] 
+							tako_mac = row[3] 
+							tako_app = row[4] 
 							######################
 							
 							# tako information store
@@ -204,7 +204,7 @@ Signal.trap(:INT) {
 							######################
 
 							# database update
-							@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick  = ? ", tako_id, tako_mac, tako_app, nick)
+							@@db.execute("#{@@sql_update} set ikagent_addr = ?, tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick  = ? ", ip, tako_id, tako_mac, tako_app, nick)
 							count = 1
 							break
 							#######################
