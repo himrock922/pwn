@@ -83,17 +83,17 @@ Signal.trap(:INT) {
 			####################################################
 
 			# channel hash table output
-			when '323'
-				if    @@channel == nil
-					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", " NEW-IKAGENT #{@@nick} #{@@ip}"
-					end
-				elsif @@channel != nil
-					@@channel_hash.each_key do |key|
-						next if key == @@channel
-						@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick} #{@@ip} #{@@channel}" # other ikagent send private message about own information (NEW)
-					end
-				end
+			#when '323'
+			#	if    @@channel == nil
+			#		@@channel_hash.each_key do |key|
+			#			@@irc.privmsg "#{key}", " NEW-IKAGENT #{@@nick} #{@@ip}"
+			#		end
+			#	elsif @@channel != nil
+			#		@@channel_hash.each_key do |key|
+			#			next if key == @@channel
+			#			@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@nick} #{@@ip} #{@@channel}" # other ikagent send private message about own information (NEW)
+			#		end
+			#	end
 
 			######################################
 
@@ -104,7 +104,7 @@ Signal.trap(:INT) {
 				mj_cha.slice!(0)
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
-				@@irc.whois "#{mj_user[0]}"
+				@@irc.privmsg "#{mj_cha}", "NEW-IKAGENT #{mj_user[0]}"
 			################################################
 
 			# extraction username for user information store 
@@ -148,9 +148,10 @@ Signal.trap(:INT) {
 			# if new ikagent mesage process
 			###############################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
-				tmp_hash = {} # tempolalry hash table
-				tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
-				@@hash.update(tmp_hash) # stable hash table store
+				@@irc.whois "#{msg.split[5]}"
+				#tmp_hash = {} # tempolalry hash table
+				#tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
+				#@@hash.update(tmp_hash) # stable hash table store
 				p "new ikagent store!"
 			end
 			# if update ikagent message process
