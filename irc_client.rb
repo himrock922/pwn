@@ -240,7 +240,6 @@ Signal.trap(:INT) {
 			# other tako information update process
 			#######################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
-				p msg
 				# setting
 				nick     = msg.split[5]
 				ip       = msg.split[6]
