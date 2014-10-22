@@ -236,6 +236,7 @@ Signal.trap(:INT) {
 			# other tako information update process
 			#######################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
+				p msg
 				# setting
 				nick     = msg.split[5]
 				ip       = msg.split[6]
@@ -269,8 +270,8 @@ Signal.trap(:INT) {
 					########################################
 				end
 				################################################
-				IRC::random_choose(@@nick, @@db, @@channel_hash) if @@algo == "1"
-				IRC::quality_choose(@@nick, @@db, @@channel_hash) if @@algo == "2"
+				IRC::random_choose(@@nick, @@db, @@hash) if @@algo == "1"
+				IRC::quality_choose(@@nick, @@db, @@hash) if @@algo == "2"
 			end
 			########################################################
 
