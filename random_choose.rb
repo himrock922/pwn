@@ -2,7 +2,7 @@
 RandomChoose Module
 =end
 module RandomChoose 
-	def random_choose(channel ,db, channel_hash)
+	def random_choose(nick ,db, channel_hash)
 		# setting
 		c_size = channel_hash.size # channel hash table size acquisitoon
 		p_channel  = channel_hash.keys	# only keys acquisition
@@ -13,7 +13,7 @@ module RandomChoose
 		####################################
 
 		# own channel information acquisition
-		db.execute("select * from Ikagent_List where ikagent_cha = ?", channel) do |row|
+		db.execute("select * from Ikagent_List where ikagent_nick = ?", nick) do |row|
 			own_app_tmp_tmp = row[5]
 			own_app_tmp = own_app_tmp_tmp.split(/\|\|/)
 		end
@@ -25,7 +25,7 @@ module RandomChoose
 			break if @own_app == nil
 			while true			
 				@p_tako = p_channel.sample # party tako choose for random
-				next if @p_tako == channel # if @p_tako = own_channel next
+				next if @p_tako == nick # if @p_tako = own_channel next
 				next if pcha_declist.index("#{@p_tako}") != nil # if get the channel scan has finished already, exit
 				if pcha_declist == p_channel
 					count = 1
@@ -36,7 +36,7 @@ module RandomChoose
 				####################################
 
 				# channel inforamtion store of acquired at random
-				db.execute("select * from Ikagent_List where ikagent_cha = ?", @p_tako) do |p_row|	
+				db.execute("select * from Ikagent_List where ikagent_nick = ?", @p_tako) do |p_row|	
 					p_app_tmp_tmp  = p_row[5]
 					p_app_tmp  = p_app_tmp_tmp.split(/\|\|/)
 					@tako_info = p_row

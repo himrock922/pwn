@@ -3,7 +3,7 @@ Quality choose module
 =end
 
 module QualityChoose
-	def quality_choose(channel ,db, channel_hash)
+	def quality_choose(nick ,db, channel_hash)
 		# setting
 		c_size = channel_hash.size
 		p_channel  = channel_hash.keys	
@@ -15,7 +15,7 @@ module QualityChoose
 		##############################
 
 		# own information store
-		db.execute("select * from Ikagent_List where ikagent_cha = ?", channel) do |row|
+		db.execute("select * from Ikagent_List where ikagent_nick = ?", nick) do |row|
 			own_app_tmp_tmp = row[5]
 			own_app_tmp = own_app_tmp_tmp.split(/\|\|/)
 		end
@@ -38,7 +38,7 @@ module QualityChoose
 
 		# other channel store
 		p_channel.each do | p_tako |
-			next if p_tako == channel # if own_channel store next
+			next if p_tako == nick # if own_channel store next
 		
 		# party tako decide process
 		db.execute("select * from Ikagent_List where ikagent_cha = ?", p_tako) do |p_row|
