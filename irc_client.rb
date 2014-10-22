@@ -152,6 +152,8 @@ Signal.trap(:INT) {
 				#tmp_hash = {} # tempolalry hash table
 				#tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
 				#@@hash.update(tmp_hash) # stable hash table store
+				@@channel_hash.each_key do |key|
+				@@irc.privmsg "#{key}", "#{@@nick} #{@@ip}"
 				p "new ikagent store!"
 			end
 			# if update ikagent message process
