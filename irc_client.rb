@@ -104,7 +104,7 @@ Signal.trap(:INT) {
 				mj_cha.slice!(0)
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
-				@@irc.privmsg "#{mj_cha}", "NEW-IKAGENT #{mj_user[0]}"
+				@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
 			################################################
 
 			# extraction username for user information store 
