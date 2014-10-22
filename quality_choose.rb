@@ -3,10 +3,10 @@ Quality choose module
 =end
 
 module QualityChoose
-	def quality_choose(nick ,db, channel_hash)
+	def quality_choose(nick ,db, hash)
 		# setting
-		c_size = channel_hash.size
-		p_channel  = channel_hash.keys	
+		h_size  = hash.size
+		p_nick  = hash.keys	
 		own_app_tmp  = Array.new
 		p_app_tmp = Array.new
 		pcha_declist = Array.new
@@ -16,7 +16,7 @@ module QualityChoose
 
 		# own information store
 		db.execute("select * from Ikagent_List where ikagent_nick = ?", nick) do |row|
-			own_app_tmp_tmp = row[5]
+			own_app_tmp_tmp = row[4]
 			own_app_tmp = own_app_tmp_tmp.split(/\|\|/)
 		end
 		####################################################
@@ -37,12 +37,12 @@ module QualityChoose
 		@own_app_com = @own_app.uniq # delete duplicate
 
 		# other channel store
-		p_channel.each do | p_tako |
+		p_hash.each do | p_tako |
 			next if p_tako == nick # if own_channel store next
 		
 		# party tako decide process
-		db.execute("select * from Ikagent_List where ikagent_cha = ?", p_tako) do |p_row|
-			p_app_tmp_tmp  = p_row[5]
+		db.execute("select * from Ikagent_List where ikagent_hash = ?", p_tako) do |p_row|
+			p_app_tmp_tmp  = p_row[4]
 			p_app_tmp  = p_app_tmp_tmp.split(/\|\|/)
 
 			next if p_app_tmp == nil # if nil next
