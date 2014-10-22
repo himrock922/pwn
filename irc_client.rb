@@ -162,7 +162,6 @@ Signal.trap(:INT) {
 
 			# if NEW-TAKO-APP information send
 			if msg.split[1] == 'PRIVMSG' &&  msg.split[4] == 'NEW-TAKO' 
-				@@irc.list "#{msg.split[7]}" if msg.split[7] != nil
 
 				#setting 
 				msg_tmp  = msg.split(/\|\|/)
