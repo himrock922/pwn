@@ -108,7 +108,8 @@ Signal.trap(:INT) {
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
 				if mj_cha == @@channel
-					@@channel_join += 1	
+					@@channel_join += 1
+					p @@channel_join	
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 				end
 				@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
