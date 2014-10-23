@@ -80,7 +80,6 @@ Signal.trap(:INT) {
 
 			# server flooding channel information store for hash table
 			when '322'
-				@@channel_join = msg.split[4].to_i if @@channel == msg.split[3]
 				@@channel_hash.store("#{msg.split[3]}", "#{msg.split[4]}")
 			
 			####################################################
@@ -109,7 +108,6 @@ Signal.trap(:INT) {
 				mj_user[0].slice!(0)
 				if mj_cha == @@channel
 					@@channel_join += 1
-					p @@channel_join	
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 				end
 				@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
