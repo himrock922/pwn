@@ -44,6 +44,7 @@ Signal.trap(:INT) {
 	@@db.close
 	exit
 }
+@@channel_stable = Array.new
 @@hash = {}
 @@channel_hash = {}
 @@tako_id  = ""
@@ -62,7 +63,7 @@ Signal.trap(:INT) {
 				@@irc.pong "#{msg.split[1]}"
 				@@ikagent_stable.wakeup
 				if @@channel != nil
-					@@irc.mode "#{@@channel}", "-m"
+					@@irc.mode "#{@@channel}", "-n"
 						@@channel_hash.each_key do |key|
 							@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@channel} #{@@channel_join}"
 						end
@@ -110,6 +111,7 @@ Signal.trap(:INT) {
 			when 'JOIN'
 				mj_cha  = msg.split[2]
 				mj_cha.slice!(0)
+				@@channel_stable.push("#{mj_cha}")
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
 				if mj_cha == @@channel
@@ -133,7 +135,9 @@ Signal.trap(:INT) {
 			when 'PART'
 				mp_user = msg.split(/\!\~/)
 				mp_user[0].slice!(0)
-				if @@channel == msg.split[2]
+				mp_cha = msg.split[2]
+				@@channel_stable.delete("#{mp_cha}")
+				if @@channel == mp_cha
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 					@@channel_join -= 1
 				end
@@ -153,7 +157,7 @@ Signal.trap(:INT) {
 			# if new channel send  process
 			################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
-				@@irc.mode "#{@@channel}", "-m"
+				@@irc.mode "#{@@channel}", "-n"
 				@@channel_hash.store("#{msg.split[5]}", "#{msg.split[6]}") # own channel hash table store other ikagent of information 
 				@@channel_hash.each_key do |key|
 					@@irc.privmsg "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}" # other ikagent private message about own information (UPDATE)
@@ -167,7 +171,7 @@ Signal.trap(:INT) {
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-CHANNEL'
 				@@channel_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
 				p "upd channel store!"
-				@@irc.mode "#{@@channel}", "+m"
+				@@irc.mode "#{@@channel}", "+n"
 			end
 			########################################################
 
@@ -417,7 +421,7 @@ Signal.trap(:INT) {
 					
 					
 					# such channel NEW data send
-					@@channel_hash.each_key do |key|
+					for key in @@channel_stable do
 						@@irc.privmsg "#{key}", " NEW-TAKO #{@@nick} #{@@ip} #{tako_id_tmp}#{tako_mac_tmp}#{tako_app_tmp}"
 					end
 					################################
@@ -471,7 +475,7 @@ Signal.trap(:INT) {
 					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", @@tako_id, @@tako_mac, @@tako_app, @@nick) # sql database update such tako paramater
 					
 				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
-					@@channel_hash.each_key do |key|
+					for key in @@channel_stable do
 						@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
 					end
 				end
@@ -511,7 +515,7 @@ Signal.trap(:INT) {
 					del_msg = ""
 					del_msg = delete_poxpr
 					# such channel del tako_id send
-					@@channel_hash.each_key do |key|
+					for key in @@channel_stable do
 						@@irc.privmsg "#{key}", " DEL-TAKO #{@@nick} #{del_msg}"
 					end
 					########################################
@@ -567,6 +571,7 @@ Signal.trap(:INT) {
 				p "part [channel name] : channel name part command"
 				p "topic [channel name] : channel topic changes (but operator can use only)"
 				p "mode [channel name] : channel mode changes (but operator can use only)"
+				p "list [channel name] : channel list output ( when no channel paramater all channel name output)"
 				next # other continue
 			end
 		end

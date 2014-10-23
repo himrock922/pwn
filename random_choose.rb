@@ -23,15 +23,16 @@ module RandomChoose
 		while true
 			@own_app = own_app_tmp.sample.split(/\|/)
 			break if @own_app == nil
-			while true			
+			while true
 				@p_tako = p_nick.sample # party tako choose for random
-				next if @p_tako == nick # if @p_tako = own_channel next
 				next if pcha_declist.index("#{@p_tako}") != nil # if get the channel scan has finished already, exit
 				if pcha_declist == p_nick
 					count = 1
 					break
 				end
 				pcha_declist.push ("#{@p_tako}") # scan channel store
+
+				next if @p_tako == nick # if @p_tako = own_channel next
 
 				####################################
 
@@ -53,7 +54,6 @@ module RandomChoose
 					break if papp_declist == p_app_tmp
 	
 					papp_declist.push ("#{p_com_tmp}") # scan channel store
-	
 					for own in @own_app do
 						for par in @p_app do
 							# if a match if found, the resulting output information of the other
