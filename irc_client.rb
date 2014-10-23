@@ -115,7 +115,6 @@ Signal.trap(:INT) {
 				mj_user[0].slice!(0)
 				if mj_cha == @@channel
 					@@channel_join += 1
-					@@channel_stable.push("#{mj_cha}")
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 					@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
 					next
@@ -550,9 +549,9 @@ Signal.trap(:INT) {
 				exit
 			elsif /join/i =~ input
 				str = input.split
-				if @@channel_hash.include?(str[1]) == false
-					@@channel = str[1]
-					p @@channel
+				if @@channel_hash.include?(str[1]) == false && @@channel != nil
+					@@channel_stable.push("#{mj_cha}")
+					@@channel = str[1] 
 				end
 				@@irc.join "#{str[1]}"
 			elsif /part/i =~ input
@@ -694,6 +693,7 @@ Signal.trap(:INT) {
 			@@irc.user "#{@@nick}", 0, "*", "I am #{@@nick}"
 			if @@channel != nil
 				@@irc.join "#{@@channel}" # channel name decide
+				@@channel_stable.push("#{mj_cha}")
 				if @topic != nil
 					@@irc.topic "#{@@channel}", "#{@topic}"
 				end
