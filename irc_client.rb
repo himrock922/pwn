@@ -111,13 +111,16 @@ Signal.trap(:INT) {
 			when 'JOIN'
 				mj_cha  = msg.split[2]
 				mj_cha.slice!(0)
-				@@channel_stable.push("#{mj_cha}")
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
 				if mj_cha == @@channel
 					@@channel_join += 1
+					@@channel_stable.push("#{mj_cha}")
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+					@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
+					next
 				end
+				@@channel_stable.push("#{mj_cha}")
 				@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
 			################################################
 
@@ -136,11 +139,12 @@ Signal.trap(:INT) {
 				mp_user = msg.split(/\!\~/)
 				mp_user[0].slice!(0)
 				mp_cha = msg.split[2]
-				@@channel_stable.delete("#{mp_cha}")
 				if @@channel == mp_cha
-					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 					@@channel_join -= 1
+					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+					@@channel_stable.delete("#{mp_cha}")
 				end
+				@@channel_stable.delete("#{mp_cha}")
 
 				next if @@nick == mp_user[0]
 				@@hash.delete("#{mp_user[0]}")
