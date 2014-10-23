@@ -49,6 +49,7 @@ Signal.trap(:INT) {
 @@tako_id  = ""
 @@tako_mac = ""
 @@tako_app = ""
+@@channel_join = 0
 
 	# while ping_pong and hash table process
 
@@ -79,7 +80,9 @@ Signal.trap(:INT) {
 
 			# server flooding channel information store for hash table
 			when '322'
+				@@channel_join = msg.split[4].to_i if @@channel == msg.split[3]
 				@@channel_hash.store("#{msg.split[3]}", "#{msg.split[4]}")
+			
 			####################################################
 
 			# channel hash table output
@@ -104,6 +107,10 @@ Signal.trap(:INT) {
 				mj_cha.slice!(0)
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
+				if mj_cha == @@channel
+					@@channel_join += 1	
+					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+				end
 				@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
 			################################################
 
@@ -121,6 +128,11 @@ Signal.trap(:INT) {
 			when 'PART'
 				mp_user = msg.split(/\!\~/)
 				mp_user[0].slice!(0)
+				if @@channel == msg.split[2]
+					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+					@@channel_join -= 1
+				end
+
 				next if @@nick == mp_user[0]
 				@@hash.delete("#{mp_user[0]}")
 				@@ikagent_stable.wakeup
@@ -533,6 +545,10 @@ Signal.trap(:INT) {
 			elsif /mode/i =~ input && @@channel != nil
 				str = input.split
 				@@irc.mode "#{@@channel}", "#{str[1]}"
+			elsif /list/i =~ input
+				str = input.split
+				@@irc.list if str[1] == nil
+				@@irc.list str[1] elsif str[1] != nil
 			else
 				p "help message"
 				p "exit : ikagent exit command"
@@ -658,7 +674,6 @@ Signal.trap(:INT) {
 			@@irc.user "#{@@nick}", 0, "*", "I am #{@@nick}"
 			if @@channel != nil
 				@@irc.join "#{@@channel}" # channel name decide
-				@@irc.mode "#{@@channel}", "-n" # mode change
 				if @topic != nil
 					@@irc.topic "#{@@channel}", "#{@topic}"
 				end
@@ -673,6 +688,7 @@ Signal.trap(:INT) {
 		#######################
 		@@irc.whois @@nick
 		@@irc.list
+		@@irc.names
 		@@ping_pong.run # server message read process
 		@@writen.run # ikagent message write process
 		@@pwn_poxpr.run # poxpr process
