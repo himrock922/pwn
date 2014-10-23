@@ -61,7 +61,13 @@ Signal.trap(:INT) {
 			if msg.split[0] == 'PING'
 				@@irc.pong "#{msg.split[1]}"
 				@@ikagent_stable.wakeup
-				
+				if @@channel != nil
+					@@irc.mode "#{@@channel}", "-m"
+						@@channel_hash.each_key do |key|
+							@@irc.privmsg "#{key}", " NEW-CHANNEL #{@@channel} #{@@channel_join}"
+						end
+				end
+
 			end
 			################################
 
@@ -144,25 +150,31 @@ Signal.trap(:INT) {
 			################################################
 			################################################
 			
-			# if new ikagent join server session process
+			# if new channel send  process
 			################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
-				@@hash.store("#{msg.split[5]}", "#{msg.split[6]}")
-				@@channel_hash.store("#{msg.split[7]}", "1")
-				@@channel_hash.each_key do |c_key|
-					@@irc.privmsg "#{c_key}", " UPD-IKAGENT #{@@nick} #{@@ip}" # other ikagent private message about own information (UPDATE)
+				@@irc.mode "#{@@channel}", "-m"
+				@@channel_hash.store("#{msg.split[5]}", "#{msg.split[6]}") # own channel hash table store other ikagent of information 
+				@@channel_hash.each_key do |key|
+					@@irc.privmsg "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}" # other ikagent private message about own information (UPDATE)
 				end
-				p "new paramater store!"
+				p "new channel store!"
 			end
 			###############################################
+
+			# if upd channel send process
+			########################################################
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-CHANNEL'
+				@@channel_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
+				p "upd channel store!"
+				@@irc.mode "#{@@channel}", "+m"
+			end
+			########################################################
 
 			# if new ikagent mesage process
 			###############################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
 				@@irc.whois "#{msg.split[5]}"
-				#tmp_hash = {} # tempolalry hash table
-				#tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
-				#@@hash.update(tmp_hash) # stable hash table store
 				@@channel_hash.each_key do |key|
 					@@irc.privmsg "#{key}", " UPD-IKAGENT #{@@nick} #{@@ip}"
 				end
