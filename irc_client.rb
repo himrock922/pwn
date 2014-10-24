@@ -179,23 +179,19 @@ Signal.trap(:INT) {
 			# if new channel send  process
 			################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
-				@@irc.mode "#{@@channel}", "-n"
 				@@channel_hash.store("#{msg.split[5]}", "#{msg.split[6]}") # own channel hash table store other ikagent of information 
 				@@channel_hash.each_key do |key|
 					@@irc.privmsg "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}" # other ikagent private message about own information (UPDATE)
 				end
 				p "new channel store!"
-				@@irc.mode "#{@@channel}", "+n"
 			end
 			###############################################
 
 			# if upd channel send process
 			########################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-CHANNEL'
-				@@irc.mode "#{@@channel}", "-n"
 				@@channel_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
 				p "upd channel store!"
-				@@irc.mode "#{@@channel}", "+n"
 			end
 			########################################################
 
@@ -385,7 +381,6 @@ Signal.trap(:INT) {
 	
 			# if disconnect ikagent server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
-				@@irc.mode "#{@@channel}", "-n" 
 				d_cha  = msg.split[5]
 				d_nick = msg.split[6] 
 
@@ -395,7 +390,6 @@ Signal.trap(:INT) {
 				@@db.execute("#{@@sql_delete} where ikagent_nick = ?", d_nick)
 				# such table output
 				p "delete complete"
-				@@irc.mode "#{@@channel}", "+n"
 			end
  			###############################################
 
@@ -719,6 +713,7 @@ Signal.trap(:INT) {
 			@@irc.user "#{@@nick}", 0, "*", "I am #{@@nick}"
 			@@irc.list
 			if @@channel != nil
+				@@irc.mode "#{@@channel}", "-n"
 				@@irc.join "#{@@channel}" # channel name decide
 				if @topic != nil
 					@@irc.topic "#{@@channel}", "#{@topic}"
