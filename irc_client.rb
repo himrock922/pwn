@@ -152,6 +152,7 @@ Signal.trap(:INT) {
 						@@channel_hash.each_key do |key|
 							@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)	
 						end
+						@@channel_stable.delete("#{@@channel}")
 						@@channel = nil
 					else
 						@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
