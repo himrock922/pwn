@@ -116,8 +116,6 @@ Signal.trap(:INT) {
 				if mj_cha == @@channel
 					@@channel_join += 1
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
-					@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
-					next
 				end
 				@@channel_stable.push("#{mj_cha}")
 				@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
