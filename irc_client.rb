@@ -564,8 +564,11 @@ Signal.trap(:INT) {
 				@@irc.mode "#{@@channel}", "#{str[1]}"
 			elsif /list/i =~ input
 				str = input.split
-				@@irc.list if str[1] == nil
-				@@irc.list str[1] elsif str[1] != nil
+				if str[1] == nil
+					@@irc.list 
+				elsif str[1] != nil
+					@@irc.list "#{str[1]}" 
+				end
 			else
 				p "help message"
 				p "exit : ikagent exit command"
@@ -574,7 +577,7 @@ Signal.trap(:INT) {
 				p "topic [channel name] : channel topic changes (but operator can use only)"
 				p "mode [channel name] : channel mode changes (but operator can use only)"
 				p "list [channel name] : channel list output ( when no channel paramater all channel name output)"
-				next # other continue
+				#next # other continue
 			end
 		end
 	end
