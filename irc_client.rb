@@ -382,7 +382,7 @@ Signal.trap(:INT) {
 	
 			# if disconnect ikagent server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
-				@@irc.mode "#{@@channel}", "mode -n" if @@channel != nil
+				@@irc.mode "#{@@channel}", "-n" if @@channel != nil
 				d_cha  = msg.split[5]
 				d_nick = msg.split[6] 
 
