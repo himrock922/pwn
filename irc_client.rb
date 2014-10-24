@@ -713,8 +713,8 @@ Signal.trap(:INT) {
 			@@irc.user "#{@@nick}", 0, "*", "I am #{@@nick}"
 			@@irc.list
 			if @@channel != nil
-				@@irc.mode "#{@@channel}", "-n"
 				@@irc.join "#{@@channel}" # channel name decide
+				@@irc.mode "#{@@channel}", "-n"
 				if @topic != nil
 					@@irc.topic "#{@@channel}", "#{@topic}"
 				end
