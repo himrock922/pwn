@@ -113,9 +113,18 @@ Signal.trap(:INT) {
 				mj_cha.slice!(0)
 				mj_user = msg.split(/\!\~/)
 				mj_user[0].slice!(0)
-				if mj_cha == @@channel
+
+				if mj_cha == @@channel && mj_user[0] == @@nick
 					@@channel_join += 1
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+					@@channel_stable.push("#{@@channel}")
+					@@irc.privmsg "#{@@channel}", " NEW-IKAGENT #{@@nick}"
+					next
+
+				elsif mj_cha == @@channel
+					@@channel_join += 1
+					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+					next
 				end
 				@@channel_stable.push("#{mj_cha}")
 				@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
@@ -138,8 +147,18 @@ Signal.trap(:INT) {
 				mp_cha = msg.split[2]
 				if @@channel == mp_cha
 					@@channel_join -= 1
-					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
-					@@channel_stable.delete("#{mp_cha}")
+					if @@channel_join == 0
+						@@channel_hash.delete("#{@@channel}")
+						@@channel_hash.each_key do |key|
+							@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)	
+						end
+
+					else
+						@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+						@@hash.delete("#{mp_user[0]}")
+					end
+					@@ikagent_stable.wakeup
+					next
 				end
 				@@channel_stable.delete("#{mp_cha}")
 
@@ -362,6 +381,7 @@ Signal.trap(:INT) {
 	
 			# if disconnect ikagent server session process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
+				@@irc.mode "#{@@channel}", "mode -n" if @@channel != nil
 				d_cha  = msg.split[5]
 				d_nick = msg.split[6] 
 
