@@ -35,9 +35,8 @@ module QualityChoose
 		####################################
 
 		@own_app_com = @own_app.uniq # delete duplicate
-
 		# other channel store
-		p_hash.each do | p_tako |
+		p_nick.each do | p_tako |
 			next if p_tako == nick # if own_channel store next
 		
 		# party tako decide process
@@ -49,6 +48,7 @@ module QualityChoose
 
 			j = 0			
 			@p_app = Array.new
+			p "test"
 
 			# party ikagent app settle
 			while p_app_tmp[j] != nil
