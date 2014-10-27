@@ -41,7 +41,7 @@ module QualityChoose
 			next if p_tako == nick # if own_channel store next
 		
 		# party tako decide process
-		db.execute("select * from Ikagent_List where ikagent_hash = ?", p_tako) do |p_row|
+		db.execute("select * from Ikagent_List where ikagent_nick = ?", p_tako) do |p_row|
 			p_app_tmp_tmp  = p_row[4]
 			p_app_tmp  = p_app_tmp_tmp.split(/\|\|/)
 
