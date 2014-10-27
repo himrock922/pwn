@@ -1,9 +1,9 @@
 =begin
-Quality choose module
+module CommonAppIkagent module
 =end
 
-module QualityChoose
-	def quality_choose(nick ,db, hash)
+module CommonAppIkagent
+	def common_app_ikagent(nick ,db, hash)
 		# setting
 		h_size  = hash.size
 		p_nick  = hash.keys	

@@ -15,8 +15,8 @@ require 'open3'
 # sqlite library
 require 'sqlite3'
 require_relative 'create_table'
-require_relative 'random_choose'
-require_relative 'quality_choose'
+require_relative 'random_tako'
+require_relative 'common_app_ikagent'
 
 #default irc server setup
 SERVER = "bsd-himrock922.jaist.ac.jp"
@@ -30,8 +30,8 @@ OPTS = {}
 
 class IRC
 	include CreateTable
-	extend  RandomChoose
-	extend  QualityChoose
+	extend  RandomTako
+	extend  CommonAppIkagent
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
 		if @@channel == nil
@@ -321,8 +321,8 @@ Signal.trap(:INT) {
 					########################################
 				end
 				################################################
-				IRC::random_choose(@@nick, @@db, @@hash) if @@algo == "1"
-				IRC::quality_choose(@@nick, @@db, @@hash) if @@algo == "2"
+				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
+				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
 			end
 			########################################################
 

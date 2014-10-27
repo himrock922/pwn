@@ -1,8 +1,8 @@
 =begin
-RandomChoose Module
+RandomTako module
 =end
-module RandomChoose 
-	def random_choose(nick ,db, hash)
+module RandomTako 
+	def random_tako(nick ,db, hash)
 		# setting
 		h_size  = hash.size # channel hash table size acquisitoon
 		p_nick  = hash.keys	# only keys acquisition
