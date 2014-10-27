@@ -13,6 +13,9 @@ module QualityChoose
 		evalue = 0
 		@tako_info = Array.new
 		##############################
+		db.execute("select * from Ikagent_List") do |row|
+			p row
+		end
 
 		# own information store
 		db.execute("select * from Ikagent_List where ikagent_nick = ?", nick) do |row|
@@ -36,9 +39,8 @@ module QualityChoose
 
 		@own_app_com = @own_app.uniq # delete duplicate
 		# other channel store
-		p_nick.each do | p_tako |
+		p_nick.each do |p_tako|
 			next if p_tako == nick # if own_channel store next
-		
 		# party tako decide process
 		db.execute("select * from Ikagent_List where ikagent_nick = ?", p_tako) do |p_row|
 			p_app_tmp_tmp  = p_row[4]
@@ -48,7 +50,6 @@ module QualityChoose
 
 			j = 0			
 			@p_app = Array.new
-			p "test"
 
 			# party ikagent app settle
 			while p_app_tmp[j] != nil
@@ -69,11 +70,11 @@ module QualityChoose
 						evalue_tmp += 1 if own == par # if matching evalue_tmp increase
 					end
 				end
-				# if evalue_tmp > evalue
-				if evalue_tmp > evalue
-					evalue = evalue_tmp
-					@tako_info = p_row # tako information store
-				end
+				db.execute("update Ikagent_List set ikalue = ? where ikagent_nick = ?", evalue_tmp, p_tako)
+				#if evalue_tmp > evalue
+				#	evalue = evalue_tmp
+				#	@tako_info = p_row # tako information store
+				#end
 				###########################
 			end
 		end
@@ -83,7 +84,9 @@ module QualityChoose
 		p "party tako fixed!"
 		p "*****************"
 		p "****************************"
-		p @tako_info
+		db.execute("select * from Ikagent_List order by ikalue desc") do |row|
+			p row
+		end
 		p "****************************"
 		#################################				
 	end	

@@ -91,8 +91,10 @@ Signal.trap(:INT) {
 			####################################################
 
 			# channel hash table output
-			#when '323'
-			#	if    @@channel == nil
+			when '323'
+				if @@channel_hash.include?("#{@@channel}") == true
+					@@channel = nil
+				end
 			#		@@channel_hash.each_key do |key|
 			#			@@irc.privmsg "#{key}", " NEW-IKAGENT #{@@nick} #{@@ip}"
 			#		end
@@ -262,7 +264,7 @@ Signal.trap(:INT) {
 
 					# when nothing database in data
 					if count == 0
-						@@db.execute("#{@@sql_insert}", nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp) # insert
+						@@db.execute("#{@@sql_insert}", nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp, 0) # insert
 						break
 					#######################################
 
@@ -310,8 +312,7 @@ Signal.trap(:INT) {
 					end
 					# if nothing data in database
 					if count == 0
-						@@db.execute("#{@@sql_insert}", nick, ip, tako_id, tako_mac, tako_app)
-						# insert
+						@@db.execute("#{@@sql_insert}", nick, ip, tako_id, tako_mac, tako_app, 0) 
 						break
 					########################################
 					else
@@ -695,7 +696,7 @@ Signal.trap(:INT) {
 		end
 
 		sql_command # sql_coomand summary method
-		@@db.execute(@@sql_insert, @@nick, "", "", "", "")
+		@@db.execute(@@sql_insert, @@nick, "", "", "", "", 0)
 		##################################
 
 		# such paramater output
