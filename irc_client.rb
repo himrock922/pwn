@@ -94,7 +94,14 @@ Signal.trap(:INT) {
 			when '323'
 				if @@channel_hash.include?("#{@@channel}") == true
 					@@channel = nil
+				end				
+
+				if @@channel == nil
+					@@channel_hash.each_key do |key|
+						@@irc.join "#{key}"
+					end
 				end
+
 			#		@@channel_hash.each_key do |key|
 			#			@@irc.privmsg "#{key}", " NEW-IKAGENT #{@@nick} #{@@ip}"
 			#		end
@@ -283,6 +290,8 @@ Signal.trap(:INT) {
 					end
 				end
 				################################################
+				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
+				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
 			end
 			########################################################
 
