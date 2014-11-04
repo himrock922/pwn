@@ -400,6 +400,10 @@ Signal.trap(:INT) {
 						next
 					elsif d_nick == row[0]
 						del_id_tmp   = row[2].split(/\|\|/)
+						if del_id_tmp == d_tako_id
+							p "test"
+							break
+						end	
 						del_mac_tmp  = row[3].split(/\|\|/)
 						del_app_tmp  = row[4].split(/\|\|/)
 						i = 0
