@@ -65,6 +65,7 @@ Signal.trap(:INT) {
 				@@ikagent_stable.wakeup
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
+						next if @@channel == key
 						@@irc.privmsg "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}"
 					end
 				end
