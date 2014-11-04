@@ -257,6 +257,7 @@ Signal.trap(:INT) {
 
 			# if NEW-TAKO-APP information send
 			if msg.split[1] == 'PRIVMSG' &&  msg.split[4] == 'NEW-TAKO' 
+				@@mutex.lock
 
 				#setting 
 				msg_tmp  = msg.split(/\|\|/)
@@ -317,6 +318,7 @@ Signal.trap(:INT) {
 
 				# complete data privmsg other ikagent
 				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
+					next if row[2].empty? == true
 					@@channel_hash.each_key do |key|
 						@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
 					end
@@ -324,6 +326,7 @@ Signal.trap(:INT) {
 				################################################
 				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
 				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
+				@@mutex.unlock
 			end
 			########################################################
 
