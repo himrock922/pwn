@@ -15,14 +15,15 @@ module RandomTako
 		# own channel information acquisition
 		db.execute("select * from Ikagent_List where ikagent_nick = ?", nick) do |row|
 			own_app_tmp_tmp = row[4]
+			next if own_app_tmp.empty? == true
 			own_app_tmp = own_app_tmp_tmp.split(/\|\|/)
 		end
 		##################################################
 
+		next if own_app_tmp.empty? == true
 		# random loop
 		while true
 			@own_app = own_app_tmp.sample.split(/\|/)
-			break if @own_app == nil
 			while true
 				@p_tako = p_nick.sample # party tako choose for random
 				next if pcha_declist.index("#{@p_tako}") != nil # if get the channel scan has finished already, exit
@@ -39,10 +40,11 @@ module RandomTako
 				# channel inforamtion store of acquired at random
 				db.execute("select * from Ikagent_List where ikagent_nick = ?", @p_tako) do |p_row|	
 					p_app_tmp_tmp  = p_row[4]
+					next if p_app_tmp_tmp.empty? == true
 					p_app_tmp  = p_app_tmp_tmp.split(/\|\|/)
 					@tako_info = p_row
 				end
-				next if @tako_info[2] == nil # if party_tako_app = nil break
+				next if @tako_info[2].empty? == true # if party_tako_app = ""  break
 				################################################
 				papp_declist = Array.new
 				# the scanning of the own_tako and party_tako
