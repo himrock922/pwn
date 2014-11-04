@@ -447,8 +447,8 @@ Signal.trap(:INT) {
 	@@pwn_poxpr = Thread::fork do
 		Thread::stop
 			# Collaboration with communication between nodes program
-			poxpr_input, poxpr_output = Open3.popen3('./dummytako.sh') if @@dummy == true
-			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X') if @@dummy == false
+			poxpr_input, poxpr_output = Open3.popen3('./dummytako.sh') if @@dummy == 1 
+			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X') if @@dummy == 0
 			# Collaboration program stdout
 			poxpr_output.each do | core_output |
 				p core_output
@@ -749,7 +749,7 @@ Signal.trap(:INT) {
 		if OPTS[:t] then @topic = OPTS[:u] else @topic = nil end
 		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = nil end
 		if OPTS[:a] then @@algo = OPTS[:a] else @@algo = ALGO end
-		if OPTS[:d] then @@dummy = true else @@dummy = false end
+		if OPTS[:d] then @@dummy = 1 else @@dummy = 0 end
 		################################################################
 
 		# SQLite3 process
