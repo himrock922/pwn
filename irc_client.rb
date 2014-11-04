@@ -387,8 +387,11 @@ Signal.trap(:INT) {
 				d_nick = msg.split[5]
 				d_tako_id = msg.split[6]
 				del_id  = ""
+				del_id_tmp = ""
 				del_mac = ""
+				del_mac_tmp = ""
 				del_app = ""
+				del_app_tmp = ""
 				################################################
 
 				# delete decide tako information store
