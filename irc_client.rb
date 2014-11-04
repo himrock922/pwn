@@ -130,20 +130,22 @@ Signal.trap(:INT) {
 						@@irc.privmsg "#{key}", "NEW-CHANNEL #{@@channel} #{@@channel_join}"
 					end
 					next
-				################################################
 
-				# when no operator process
-				elsif mj_cha == @@channel
+				elsif mj_cha == @@channel && mj_user[0] != @@nick
 					@@channel_join += 1
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 					next
+				################################################
+
+				# when no operator process
+				elsif mj_user[0] == @@nick
+					@@channel_stable.push("#{mj_cha}")
+					@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
+					next
+				elsif mj_user[0] != @@nick
+					next
 				end
 				#############################################
-
-				# when new join ikagent process
-				@@channel_stable.push("#{mj_cha}")
-				@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
-				################################################
 
 			################################################
 
