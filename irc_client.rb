@@ -401,7 +401,6 @@ Signal.trap(:INT) {
 					elsif d_nick == row[0]
 						del_id_tmp   = row[2].split(/\|\|/)
 						if del_id_tmp == d_tako_id
-							p "test"
 							break
 						end	
 						del_mac_tmp  = row[3].split(/\|\|/)
@@ -431,8 +430,8 @@ Signal.trap(:INT) {
 				end
 				################################################
 				# update
-				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", del_id, del_mac, del_app, d_nick)
 				@@mutex.unlock
+				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", del_id, del_mac, del_app, d_nick)
 			end
 			########################################################
 			########################################################
