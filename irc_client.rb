@@ -51,6 +51,7 @@ Signal.trap(:INT) {
 @@tako_mac = ""
 @@tako_app = ""
 @@channel_join = 0
+@@mutex = Mutex::new
 
 	# while ping_pong and hash table process
 
@@ -326,6 +327,7 @@ Signal.trap(:INT) {
 			# other tako information update process
 			#######################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
+				@@mutex.lock
 				# setting
 				nick     = msg.split[5]
 				ip       = msg.split[6]
@@ -360,6 +362,7 @@ Signal.trap(:INT) {
 				################################################
 				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
 				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
+				@@mutex.unlock
 			end
 			########################################################
 
@@ -375,7 +378,7 @@ Signal.trap(:INT) {
 			# other tako_app delete process
 			#########################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
-
+				@@mutex.lock
 				# setting
 				d_nick = msg.split[5]
 				d_tako_id = msg.split[6]
@@ -413,6 +416,7 @@ Signal.trap(:INT) {
 				################################################
 				# update
 				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", del_id, del_mac, del_app, d_nick)
+				@@mutex.unlock
 			end
 			########################################################
 			########################################################
@@ -446,6 +450,7 @@ Signal.trap(:INT) {
 	#########################################	
 	@@pwn_poxpr = Thread::fork do
 		Thread::stop
+			@@mutex.lock
 			# Collaboration with communication between nodes program
 			poxpr_input, poxpr_output = Open3.popen3('./dummytako.sh') if @@dummy == 1 
 			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X') if @@dummy == 0
@@ -486,7 +491,6 @@ Signal.trap(:INT) {
 						@@irc.privmsg "#{key}", " NEW-TAKO #{@@nick} #{@@ip} #{tako_id_tmp}#{tako_mac_tmp}#{tako_app_tmp}"
 					end
 					################################
-
 				########################################
 		
 				# when poxpr output 'DEL'
@@ -540,7 +544,8 @@ Signal.trap(:INT) {
 						@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
 					end
 				end
-					######################	
+				##########################################################################################
+	
 				when 'DEL'
 					delete_poxpr = poxpr_ex.split[1] # delete tako_id store
 					# setting
@@ -581,6 +586,7 @@ Signal.trap(:INT) {
 					end
 					########################################
 				end
+			@@mutex.unlock
 		end
 		#########################################
 		
