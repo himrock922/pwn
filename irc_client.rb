@@ -324,9 +324,9 @@ Signal.trap(:INT) {
 					end
 				end
 				################################################
+				@@mutex.unlock
 				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
 				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
-				@@mutex.unlock
 			end
 			########################################################
 
@@ -366,9 +366,9 @@ Signal.trap(:INT) {
 					########################################
 				end
 				################################################
+				@@mutex.unlock
 				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
 				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
-				@@mutex.unlock
 			end
 			########################################################
 
