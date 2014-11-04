@@ -15,12 +15,12 @@ module RandomTako
 		# own channel information acquisition
 		db.execute("select * from Ikagent_List where ikagent_nick = ?", nick) do |row|
 			own_app_tmp_tmp = row[4]
-			next if own_app_tmp.empty? == true
+			next if own_app_tmp_tmp.empty? == true
 			own_app_tmp = own_app_tmp_tmp.split(/\|\|/)
 		end
 		##################################################
 
-		next if own_app_tmp.empty? == true
+		return if own_app_tmp.empty? == true
 		# random loop
 		while true
 			@own_app = own_app_tmp.sample.split(/\|/)
