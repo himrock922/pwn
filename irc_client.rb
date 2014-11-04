@@ -447,7 +447,8 @@ Signal.trap(:INT) {
 	@@pwn_poxpr = Thread::fork do
 		Thread::stop
 			# Collaboration with communication between nodes program
-			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X')
+			poxpr_input, poxpr_output = Open3.popen3('./dummytako.sh') if @@dummy == true
+			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X') if @@dummy == false
 			# Collaboration program stdout
 			poxpr_output.each do | core_output |
 				p core_output
@@ -635,6 +636,19 @@ Signal.trap(:INT) {
 				elsif str[1] != nil
 					@@irc.list "#{str[1]}" 
 				end
+
+			elsif /algo/i =~ input
+				str = input.split
+				if str[1] == nil
+					@@algo = 1
+				elsif str[1] != nil
+					num = str[1].to_i
+					if num == 0
+						p "Please enter a numeric value in the argument!"
+						next
+					end
+					@@algo = num
+				end
 			########################################################
 
 			# help message stdout
@@ -646,6 +660,7 @@ Signal.trap(:INT) {
 				p "topic [channel name] : channel topic changes (but operator can use only)"
 				p "mode [channel name] : channel mode changes (but operator can use only)"
 				p "list [channel name] : channel list output ( when no channel paramater all channel name output)"
+				p "algo [number value] : Ikagent choose algorithm changes"
 			########################################################
 			end
 		end
@@ -694,7 +709,7 @@ Signal.trap(:INT) {
 				# Examples output
 				opt.separator ''
 				opt.separator 'Examples:'
-				opt.separator "    % #{opt.program_name} -s example.jp -p 6667 -n himrock922 -c ikachang -d 1 ( 1 or 2)"
+				opt.separator "    % #{opt.program_name} -s example.jp -p 6667 -n himrock922 -c ikachang -a 1 ( 1 or 2)"
 				#####################
 			
 				# Specific Options Usage output
@@ -704,8 +719,9 @@ Signal.trap(:INT) {
 				opt.on('-p PORT', '--port', 'port')          {|v| OPTS[:p] = v}
 				opt.on('-n NICK', '--nick', 'nick')          {|v| OPTS[:n] = v}
 				opt.on('-c CHANNEL', '--channel', 'channel') {|v| OPTS[:c] = v}
-				opt.on('-d DECIDE', '--decide', 'decide')    {|v| OPTS[:d] = v}
+				opt.on('-a ALGO', '--algo', 'algo')          {|v| OPTS[:a] = v}
 				opt.on('-t TOPIC', '--topic', 'topic')	     {|v| OPTS[:t] = v}
+				opt.on('-d', '--dummy', 'dummy')	     {|v| OPTS[:d] = v}
 				############################################
 			
 				# Options Usage output
@@ -732,7 +748,8 @@ Signal.trap(:INT) {
 		if OPTS[:n] then @@nick = OPTS[:n] else @@nick = NICK end
 		if OPTS[:t] then @topic = OPTS[:u] else @topic = nil end
 		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = nil end
-		if OPTS[:d] then @@algo = OPTS[:d] else @@algo = ALGO end
+		if OPTS[:a] then @@algo = OPTS[:a] else @@algo = ALGO end
+		if OPTS[:d] then @@dummy = true else @@dummy = false end
 		################################################################
 
 		# SQLite3 process
