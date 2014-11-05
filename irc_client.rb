@@ -318,6 +318,7 @@ Signal.trap(:INT) {
 
 				# complete data privmsg other ikagent
 				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
+					next if row[2].empty? == true
 					@@irc.privmsg "#{nick}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
 				end
 				################################################
