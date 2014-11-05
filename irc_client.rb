@@ -63,6 +63,8 @@ Signal.trap(:INT) {
 			if msg.split[0] == 'PING'
 				@@irc.pong "#{msg.split[1]}"
 				@@ikagent_stable.wakeup
+				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
+				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
 						next if @@channel == key
