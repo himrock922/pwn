@@ -663,10 +663,10 @@ Signal.trap(:INT) {
 			elsif /algo/i =~ input
 				str = input.split
 				if str[1] == nil
-					@@algo = 1
+					@@algo = "1"
 				elsif str[1] != nil
-					num = str[1].to_i
-					if num == 0
+					num = str[1].to_s
+					if num == "0"
 						p "Please enter a numeric value in the argument!"
 						next
 					end
