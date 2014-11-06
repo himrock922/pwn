@@ -473,7 +473,6 @@ Signal.trap(:INT) {
 			# Collaboration program stdout
 			poxpr_output.each do | core_output |
 				p core_output
-				@@mutex.lock
 				poxpr_ex =  core_output.chomp
 				## NEW or DEL or UPD process
 				case poxpr_ex.split[0]
@@ -603,7 +602,6 @@ Signal.trap(:INT) {
 					end
 					########################################
 			end
-			@@mutex.unlock
 		end
 		#########################################
 		
