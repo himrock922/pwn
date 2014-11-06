@@ -432,8 +432,8 @@ Signal.trap(:INT) {
 				end
 				################################################
 				# update
-				@@mutex.unlock
 				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", del_id, del_mac, del_app, d_nick)
+				@@mutex.unlock
 			end
 			########################################################
 			########################################################
@@ -473,6 +473,7 @@ Signal.trap(:INT) {
 			# Collaboration program stdout
 			poxpr_output.each do | core_output |
 				p core_output
+				@@mutex.lock
 				poxpr_ex =  core_output.chomp
 				## NEW or DEL or UPD process
 				case poxpr_ex.split[0]
@@ -602,6 +603,7 @@ Signal.trap(:INT) {
 					end
 					########################################
 			end
+			@@mutex.unlock
 		end
 		#########################################
 		
