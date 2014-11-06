@@ -239,10 +239,9 @@ Signal.trap(:INT) {
 			# if new ikagent mesage process
 			###############################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
-				@@irc.whois "#{msg.split[5]}"
-				@@channel_hash.each_key do |key|
-					@@irc.privmsg "#{key}", " UPD-IKAGENT #{@@nick} #{@@ip}"
-				end
+				n_ikagent = msg.split[5]
+				@@irc.whois "#{n_ikagent}"
+				@@irc.privmsg "#{n_ikagent}", " UPD-IKAGENT #{@@nick} #{@@ip}"
 				p "new ikagent store!"
 			end
 			########################################################
