@@ -14,7 +14,9 @@ require 'open3'
 
 # sqlite library
 require 'sqlite3'
-require_relative 'create_table'
+require_relative 'create_takoble'
+require_relative 'create_appble'
+require_relative 'join_table'
 require_relative 'random_tako'
 require_relative 'common_app_ikagent'
 
@@ -29,7 +31,9 @@ ALGO = "1"
 OPTS = {}
 
 class IRC
-	include CreateTable
+	include CreateTakoble
+	include CreateAppble
+	include JoinTable
 	extend  RandomTako
 	extend  CommonAppIkagent
 Signal.trap(:INT) {
@@ -40,7 +44,8 @@ Signal.trap(:INT) {
 			@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
 		end
 	end
-	@@db.execute(@@sql_delete)
+	@@db.execute(@@tako_delete)
+	@@db.execute(@@app_delete)
 	@@db.close
 	exit
 }
@@ -477,128 +482,85 @@ Signal.trap(:INT) {
 				case poxpr_ex.split[0]
 				# when poxpr output 'NEW'
 				when 'NEW'
-					tako_id_tmp  = ""
-					tako_mac_tmp = ""
-					tako_app_tmp = ""
-					tako_id_tmp.concat "#{poxpr_ex.split[1]}|" # tako_id store
-					tako_mac_tmp.concat "#{poxpr_ex.split[2]}|" # tako_mac store
+					tako_id  = ""
+					tako_mac = ""
+					tako_app = ""
+
+					tako_id  =  "#{poxpr_ex.split[1]}" # tako_id store
+					tako_mac =  "#{poxpr_ex.split[2]}" # tako_mac store
 					i = 3 
 					
+					@@db.execute(@@tako_insert, tako_id, tako_mac) # tako_list database insert
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
-						tako_app_tmp.concat "#{poxpr_ex.split[i]}|" # tako_app store
+						tako_app = "#{poxpr_ex.split[i]}" # tako_app store
+						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
 					end
 					###############################
-					tako_id_tmp.concat  "|"
-					tako_mac_tmp.concat "|"
-					tako_app_tmp.concat "|" # such tako_app split '||'
-					
-
-					@@tako_id  << tako_id_tmp   # tako_id stable << tako_id temporary
-					@@tako_mac << tako_mac_tmp  # tako_mac stable << tako_mac temporary
-					@@tako_app << tako_app_tmp # tako_app stable << tako_app temporary
-					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", @@tako_id, @@tako_mac, @@tako_app, @@nick) # sql database update such tako paramater
-					
-					
+					p "#{@@sql_column}"
+					p "#{@@sql_output}"
 					# such channel NEW data send
-					for key in @@channel_stable do
-						@@irc.privmsg "#{key}", " NEW-TAKO #{@@nick} #{@@ip} #{tako_id_tmp}#{tako_mac_tmp}#{tako_app_tmp}"
+					@@db.execute(@@sql_join) do |row|
+						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
+					#for key in @@channel_stable do
+					#	@@irc.privmsg "#{key}", " NEW-TAKO #{@@nick} #{@@ip} #{tako_id_tmp}#{tako_mac_tmp}#{tako_app_tmp}"
+					#end
 					################################
 				########################################
 		
 				# when poxpr output 'DEL'
 				when 'UPD'
-					s_tako_id    = ""
-					tako_id_tmp  = ""
-					tako_mac_tmp = ""
-					tako_app_tmp = ""
-					upd_id       = ""
-					upd_mac      = ""
-					upd_app      = ""
+					tako_id  = ""
+					tako_mac = ""
+					tako_app = ""
 
-					s_tako_id.concat  "#{poxpr_ex.split[1]}"   # update subject tako_id store
-					tako_id_tmp.concat  "#{poxpr_ex.split[1]}||" # tako_id store
-					tako_mac_tmp.concat "#{poxpr_ex.split[2]}||" # tako_mac store
+					tako_id  =  "#{poxpr_ex.split[1]}"   # update subject tako_id store
+					tako_mac = "#{poxpr_ex.split[2]}" # tako_mac store
 					i = 3 
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
-						tako_app_tmp.concat "#{poxpr_ex.split[i]}|" # tako_app store
+						tako_app_tmp = "#{poxpr_ex.split[i]}" # tako_app store
+						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
 					end
 					###############################
-					tako_app_tmp.concat "|" # such tako_app split '||'
-					@@db.execute("#{@@sql_select} where ikagent_nick =?", @@nick) do |row|
-						upd_id_tmp   = row[2].split(/\|\|/)
-						upd_mac_tmp  = row[3].split(/\|\|/)
-						upd_app_tmp  = row[4].split(/\|\|/)
-						i = 0
-
-							while upd_id_tmp[i] != nil
-								if upd_id_tmp[i] == s_tako_id
-									upd_id  << tako_id_tmp
-									upd_mac << tako_mac_tmp
-									upd_app << tako_app_tmp
-									i += 1
-								next
-								end
-							upd_id  << upd_id_tmp[i]  << "||"
-							upd_mac << upd_mac_tmp[i] << "||"
-							upd_app << upd_app_tmp[i] << "||"
-							i += 1
-							end
-						end
-					@@tako_id  = upd_id   # tako_id stable << tako_id temporary
-					@@tako_mac = upd_mac  # tako_mac stable << tako_mac temporary
-					@@tako_app = upd_app # tako_app stable << tako_app temporary
-					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", @@tako_id, @@tako_mac, @@tako_app, @@nick) # sql database update such tako paramater
-					
-				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
-					for key in @@channel_stable do
-						@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
+					p "#{@@sql_column}"
+					p "#{@@sql_output}"
+					# such channel NEW data send
+					@@db.execute(@@sql_join) do |row|
+						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
-				end
+					
+				#@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
+				#	for key in @@channel_stable do
+				#		@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
+				#	end
+				#end
 				##########################################################################################
 	
 				when 'DEL'
-					delete_poxpr = poxpr_ex.split[1] # delete tako_id store
 					# setting
-					i = 0
-					tako_delete_id  = ""
-					tako_delete_id_tmp = @@tako_id.split(/\|\|/)
-					tako_delete_mac = ""
-					tako_delete_mac_tmp = @@tako_mac.split(/\|\|/)
-					tako_delete_app = ""
-					tako_delete_app_tmp = @@tako_app.split(/\|\|/)
-					##############################
-					# while loop until reach delete tako_id
-					while tako_delete_id_tmp[i] != nil
-						# if reach delete tako_id 
-						if tako_delete_id_tmp[i] == delete_poxpr
-							i += 1
-							next
-						end
-						################################
+					tako_id = ""
+					tako_id = poxpr_ex.split[1] # delete tako_id store
+					####################################
+					@@db.execute("#{@@tako_delete} where tako_id = ?", tako_id)
+					@@db.execute("#{@@app_delete}  where tako_id  = ?", tako_id)
 
-						tako_delete_id  << tako_delete_id_tmp[i]  << "||" # other tako_id store than tako_id deleted
-						tako_delete_mac << tako_delete_mac_tmp[i] << "||" # other tako_mac store than tako_id deleted 
-						tako_delete_app << tako_delete_app_tmp[i] << "||" # other tako_app store than tako_id deleted
-						i += 1
+					p "#{@@sql_column}"
+					p "#{@@sql_output}"
+					# such channel NEW data send
+					@@db.execute(@@sql_join) do |row|
+						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
-					######################################
-					@@tako_id  = tako_delete_id  # update tako_id store
-					@@tako_mac = tako_delete_mac # update tako_mac store
-					@@tako_app = tako_delete_app # update tako_pp store
-					@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", @@tako_id, @@tako_mac, @@tako_app, @@nick) # sql data update
-						
-					########################################
-					del_msg = ""
-					del_msg = delete_poxpr
+					
+					#del_msg = ""
+					#del_msg = delete_poxpr
 					# such channel del tako_id send
-					for key in @@channel_stable do
-						@@irc.privmsg "#{key}", " DEL-TAKO #{@@nick} #{del_msg}"
-					end
+					#for key in @@channel_stable do
+					#	@@irc.privmsg "#{key}", " DEL-TAKO #{@@nick} #{del_msg}"
+					#end
 					########################################
 			end
 		end
@@ -621,7 +583,8 @@ Signal.trap(:INT) {
 					elsif @@channel != nil
 						@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
 					end
-					@@db.execute(@@sql_delete) # data base delete 
+					@@db.execute(@@tako_delete) # data base delete 
+					@@db.execute(@@app_delete) # data base delete 
 					@@db.close # database close
 				end
 				exit
@@ -704,9 +667,11 @@ Signal.trap(:INT) {
 					p "#{key} #{val}"
 				end
 				print EOF
-				p "sql table"
-				@@db.execute("#{@@sql_select}") do |row|
-					p row
+				p "#{@@sql_column}"
+				p "#{@@sql_output}"
+				# such channel NEW data send
+				@@db.execute(@@sql_join) do |row|
+					print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 				end
 			end		
 		end
@@ -779,11 +744,11 @@ Signal.trap(:INT) {
 
 		# if Nothing Table create Table
 		if table[0] == nil
-			@@db.execute(create_ikable)
+			@@db.execute(create_takoble)
+			@@db.execute(create_appble)
 		end
 
 		sql_command # sql_coomand summary method
-		@@db.execute(@@sql_insert, @@nick, "", "", "", "", 0)
 		##################################
 
 		# such paramater output
@@ -836,10 +801,20 @@ Signal.trap(:INT) {
 		# sql_command summary store process
 		private
 		def sql_command
-			@@sql_insert = insert_ikable
-			@@sql_delete = delete_ikable
-			@@sql_update = update_ikable
-			@@sql_select = select_ikable
+			@@tako_insert = insert_takoble
+			@@tako_delete = delete_takoble
+			@@tako_update = update_takoble
+			@@tako_select = select_takoble
+
+			@@app_insert  = insert_appble
+			@@app_delete  = delete_appble
+			@@app_update  = update_appble
+			@@app_select  = select_appble
+
+			@@sql_join    = join_table
+
+			@@sql_column  = "tako_id             tako_mac           tako_app"
+			@@sql_output  = "-------------------------------------------------"
 		end
 
 		####################################
