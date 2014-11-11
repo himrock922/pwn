@@ -305,6 +305,15 @@ Signal.trap(:INT) {
 				p "delete ikagent complete!"
 			end
 			########################################################
+			
+			# query of choose algorithm process
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'QUERY'
+				algo = msg.split[5]
+				case algo
+				when 'RANDOM_TAKO'
+					
+				end
+			end
 					
 			########################################################
 			########################################################
@@ -337,6 +346,9 @@ Signal.trap(:INT) {
 					tako_id  = ""
 					tako_mac = ""
 					tako_app = ""
+					
+					select_tako = ""
+					select_app  = ""
 
 					tako_id  =  "#{poxpr_ex.split[1]}" # tako_id store
 					tako_mac =  "#{poxpr_ex.split[2]}" # tako_mac store
@@ -358,9 +370,16 @@ Signal.trap(:INT) {
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
 					
+					@@db.execute("#{@@tako_select} order by random()") do |row|
+						select_tako = row[0]
+					end
+
+					@@db.execute("#{@@app_select} where tako_id = ? order by random()", select_tako) do |row|
+						select_app =  row[1]
+					end
 					# such channel send of infomation using of ikagent choose algorithm 
 					for key in @@channel_stable do
-						@@irc.privmsg "#{key}", " QUERY RANDOM_TAKO #{@@nick}" if @@algo == "1"
+						@@irc.privmsg "#{key}", " QUERY RANDOM_TAKO #{@@nick} #{select_app}" if @@algo == "1"
 					end
 					################################
 				########################################
