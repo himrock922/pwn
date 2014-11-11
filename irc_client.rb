@@ -345,22 +345,23 @@ Signal.trap(:INT) {
 				case poxpr_ex.split[0]
 				# when poxpr output 'NEW'
 				when 'NEW'
-					tako_id  = ""
-					tako_mac = ""
-					tako_app = ""
+					tako_id  = ''
+					tako_mac = ''
+					tako_app = ''
 					
-					select_tako = ""
-					select_app  = ""
-
-					tako_id  =  "#{poxpr_ex.split[1]}" # tako_id store
-					tako_mac =  "#{poxpr_ex.split[2]}" # tako_mac store
+					select_tako = ''
+					select_app  = ''
+					
+					tako_id  = "\'#{poxpr_ex.split[1]}\'" # tako_id store
+					p tako_id
+					tako_mac = "\'#{poxpr_ex.split[2]}\'" # tako_mac store
 					i = 3 
 					
-					@@db.execute(@@tako_insert, "#{tako_id}", "#{tako_mac}") # tako_list database insert
+					@@db.execute(@@tako_insert, tako_id, tako_mac) # tako_list database insert
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
-						tako_app = "#{poxpr_ex.split[i]}" # tako_app store
-						@@db.execute(@@app_insert, "#{tako_id}", "#{tako_app}")
+						tako_app = "\'#{poxpr_ex.split[i]}'" # tako_app store
+						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
 					end
 					###############################
@@ -377,7 +378,6 @@ Signal.trap(:INT) {
 					end
 
 					@@db.execute("#{@@app_select} where tako_id = ? order by random()", select_tako) do |row|
-						p row
 						select_app =  row[1]
 					end
 					# such channel send of infomation using of ikagent choose algorithm 
