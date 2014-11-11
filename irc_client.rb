@@ -291,7 +291,7 @@ Signal.trap(:INT) {
 				# setting
 				tmp_hash  = {} # templary hash table
 				u_ikagent = msg.split[5]
-				u_ip      = msg,split[6]
+				u_ip      = msg.split[6]
 				tmp_hash.store("#{u_ikagent}", "#{u_ip}")
 				@@hash.update(tmp_hash) # stable hash table update
 				p "update paramater!"
@@ -627,6 +627,7 @@ Signal.trap(:INT) {
 				end
 			end
 		end
+		@@irc.whois @@nick # store of own information
 		###################################################
 
 		# ikagent start
@@ -634,7 +635,6 @@ Signal.trap(:INT) {
 		######################
 		# thread run
 		#######################
-		@@irc.whois @@nick # store of own information
 		@@ping_pong.run # server message read process
 		@@writen.run # ikagent message write process
 		@@pwn_poxpr.run # poxpr process
