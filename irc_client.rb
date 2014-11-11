@@ -419,8 +419,8 @@ Signal.trap(:INT) {
 	
 				when 'DEL'
 					# setting
-					tako_id = ""
-					tako_id = poxpr_ex.split[1] # delete tako_id store
+					tako_id = ''
+					tako_id = "\"#{poxpr_ex.split[1]}\'" # delete tako_id store
 					####################################
 					@@db.execute("#{@@tako_delete} where tako_id = ?", tako_id)
 					@@db.execute("#{@@app_delete}  where tako_id  = ?", tako_id)
