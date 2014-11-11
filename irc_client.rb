@@ -66,8 +66,10 @@ Signal.trap(:INT) {
 			p msg
 			# server connection confirmation
 			if msg.split[0] == 'PING'
-				@@irc.pong "#{msg.split[1]}"
+				server = msg.split[1]
+				@@irc.pong "#{server}"
 				@@ikagent_stable.wakeup
+
 				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
 				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
 				if @@channel != nil
@@ -94,8 +96,15 @@ Signal.trap(:INT) {
 
 			# server flooding channel information store for hash table
 			when '322'
-				@@channel_hash.store("#{msg.split[3]}", "#{msg.split[4]}")
-			
+				# setting
+				l_cha  = msg.split[3]
+				l_join = msg.split[4]
+ 				#####################
+
+				# channel hash store
+				@@channel_hash.store("#{l_cha}", "#{l_join}")
+				#############################################
+
 			####################################################
 
 			# channel hash table output
@@ -160,14 +169,13 @@ Signal.trap(:INT) {
 			# extraction username for user information store 
 			# hash table
 			when '338'
+				# setting
+				ikagent_nick = msg.split[3]
+				ikagent_ip   = msg.split[4]
+				###########################
+
 				# ikagent information (nick, ip) store
-				@@hash.store("#{msg.split[3]}", "#{msg.split[4]}")
-				# when own ikagent, database update & own_ip store
-				if msg.split[3] == @@nick
-					@@ip = "#{msg.split[4]}"
-					@@db.execute("update Ikagent_List set ikagent_addr = ? where ikagent_nick = ?", @@ip, @@nick)
-				end
-				################################################
+				@@hash.store("#{ikagent_nick}", "#{ikagent_ip}")
 
 			################################################
 
@@ -225,7 +233,12 @@ Signal.trap(:INT) {
 			# if new channel send  process
 			################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
-				@@channel_hash.store("#{msg.split[5]}", "#{msg.split[6]}") # own channel hash table store other ikagent of information 
+				# setting
+				n_cha  = msg.split[5]
+				n_join = msg.split[6]
+				#####################
+
+				@@channel_hash.store("#{n_cha}", "#{n_join}") # own channel hash table store other ikagent of information 
 				@@channel_hash.each_key do |key|
 					@@irc.privmsg "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}" # other ikagent private message about own information (UPDATE)
 				end
@@ -236,10 +249,30 @@ Signal.trap(:INT) {
 			# if upd channel send process
 			########################################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-CHANNEL'
-				@@channel_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
+				# setting
+				u_cha  = msg.split[5]
+				u_join = msg.split[6]
+				##################### 
+				@@channel_hash.store("#{u_cha}", "#{u_join}")
 				p "upd channel store!"
 			end
 			########################################################
+
+			# if disconnect ikagent server session process
+			########################################################
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
+				# setting
+				d_cha  = msg.split[5]
+				d_nick = msg.split[6] 
+				#####################
+
+				@@channel_hash.delete("#{d_cha}") # channel table disconnect ikagent delete
+
+				@@hash.delete("#{d_nick}") # hash table disconnect ikagent delete
+				# such table output
+				p "delete complete"
+			end
+ 			###############################################
 
 			# if new ikagent mesage process
 			###############################################
@@ -254,209 +287,27 @@ Signal.trap(:INT) {
 			# if update ikagent message process
 			###############################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-IKAGENT'
-				tmp_hash = {} # templary hash table
-				tmp_hash.store("#{msg.split[5]}", "#{msg.split[6]}")
+				# setting
+				tmp_hash  = {} # templary hash table
+				u_ikagent = msg.split[5]
+				u_ip      = msg,split[6]
+				tmp_hash.store("#{u_ikagent}", "#{u_ip}")
 				@@hash.update(tmp_hash) # stable hash table update
 				p "update paramater!"
 			end
 			###############################################
 
-			# if NEW-TAKO-APP information send
-			if msg.split[1] == 'PRIVMSG' &&  msg.split[4] == 'NEW-TAKO' 
-				@@mutex.lock
-
-				#setting 
-				msg_tmp  = msg.split(/\|\|/)
-				nick     = msg.split[5]
-				ip       = msg.split[6]
-				tako_id_tmp  = msg_tmp[0].split[7] << "||"
-				tako_mac_tmp = msg_tmp[1] << "||"
-				tako_app_tmp = msg_tmp[2] << "||"
-				count = 0
-				#########################################
-				
-				# store loop
-				while true
-					@@db.execute("#{@@sql_select}") do |row|
-						# if present in the database already
-						# updating process
-						if nick == row[0]
-							# setting
-							tako_id  = ""
-							tako_mac = ""
-							tako_app = ""
-							############
-							
-							tako_id  = row[2] 
-							tako_mac = row[3] 
-							tako_app = row[4] 
-							######################
-							
-							# tako information store
-							tako_id  << tako_id_tmp
-							tako_mac << tako_mac_tmp
-							tako_app << tako_app_tmp
-							######################
-
-							# database update
-							@@db.execute("#{@@sql_update} set ikagent_addr = ?, tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick  = ? ", ip, tako_id, tako_mac, tako_app, nick)
-							count = 1
-							break
-							#######################
-						end
-						###############################
-					end
-					#######################################
-
-					# when nothing database in data
-					if count == 0
-						@@db.execute("#{@@sql_insert}", nick, ip, tako_id_tmp, tako_mac_tmp, tako_app_tmp, 0) # insert
-						break
-					#######################################
-
-					# else break
-					elsif count == 1
-						break
-					end
-					#######################################
-				end
-				##############################################
-
-				# complete data privmsg other ikagent
-				@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
-					next if row[2].empty? == true
-					@@irc.privmsg "#{nick}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
-				end
-				################################################
-				@@mutex.unlock
-				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
-				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
-			end
-			########################################################
-
-			# other tako information update process
-			#######################################################
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-TAKO'
-				@@mutex.lock
-				# setting
-				nick     = msg.split[5]
-				ip       = msg.split[6]
-				tako_id  = msg.split[7]
-				tako_mac = msg.split[8]
-				tako_app = msg.split[9]
-				count    = 0
-				#######################
-
-				# update loop process
-				while true
-					@@db.execute("#{@@sql_select}") do |row|
-						# if present in the database already
-						if nick == row[0]
-							@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick  = ? ", tako_id, tako_mac, tako_app, nick)
-						# data update
-							count = 1
-							break
-						end
-						##############################
-					end
-					# if nothing data in database
-					if count == 0
-						@@db.execute("#{@@sql_insert}", nick, ip, tako_id, tako_mac, tako_app, 0) 
-						break
-					########################################
-					else
-						break
-					end
-					########################################
-				end
-				################################################
-				@@mutex.unlock
-				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
-				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
-			end
-			########################################################
-
 			# other ikagent dell process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
 				d_nick = msg.split[5]
 				@@hash.delete("#{d_nick}")
-				@@db.execute("#{@@sql_delete} where ikagent_nick = ?", d_nick)
 				p "delete ikagent complete!"
 			end
 			########################################################
 					
-			# other tako_app delete process
-			#########################################################
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-TAKO'
-				@@mutex.lock
-				# setting
-				d_nick = msg.split[5]
-				d_tako_id = msg.split[6]
-				del_id  = ""
-				del_id_tmp = ""
-				del_mac = ""
-				del_mac_tmp = ""
-				del_app = ""
-				del_app_tmp = ""
-				################################################
-
-				# delete decide tako information store
-				@@db.execute("#{@@sql_select}") do |row|
-					if d_nick != row[0]
-						next
-					elsif d_nick == row[0]
-						del_id_tmp   = row[2].split(/\|\|/)
-						if del_id_tmp == d_tako_id
-							break
-						end	
-						del_mac_tmp  = row[3].split(/\|\|/)
-						del_app_tmp  = row[4].split(/\|\|/)
-						i = 0
-				################################################
-
-				# delete process
-					while del_id_tmp[i] != nil
-						# if delete tako information reach
-						if del_id_tmp[i] == d_tako_id
-							i += 1 # no store
-							next
-						end
-						################################
-
-						# other tako information store
-						del_id  << del_id_tmp[i]  << "||"
-						del_mac << del_mac_tmp[i] << "||"
-						del_app << del_app_tmp[i] << "||"
-						i += 1
-						################################
-					end
-					########################################
-					break
-					end
-				end
-				################################################
-				# update
-				@@db.execute("#{@@sql_update} set tako_id = ?, tako_mac = ?, tako_app = ? where ikagent_nick = ?", del_id, del_mac, del_app, d_nick)
-				@@mutex.unlock
-			end
 			########################################################
 			########################################################
 	
-			# if disconnect ikagent server session process
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
-				# setting
-				d_cha  = msg.split[5]
-				d_nick = msg.split[6] 
-				#####################
-
-				@@channel_hash.delete("#{d_cha}") # channel table disconnect ikagent delete
-
-				@@hash.delete("#{d_nick}") # hash table disconnect ikagent delete
-				@@db.execute("#{@@sql_delete} where ikagent_nick = ?", d_nick)
-				# such table output
-				p "delete complete"
-			end
- 			###############################################
 
 			###############################################
 			###############################################
@@ -500,13 +351,16 @@ Signal.trap(:INT) {
 					###############################
 					p "#{@@sql_column}"
 					p "#{@@sql_output}"
-					# such channel NEW data send
+
+					# result output
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
-					#for key in @@channel_stable do
-					#	@@irc.privmsg "#{key}", " NEW-TAKO #{@@nick} #{@@ip} #{tako_id_tmp}#{tako_mac_tmp}#{tako_app_tmp}"
-					#end
+					
+					# such channel send of infomation using of ikagent choose algorithm 
+					for key in @@channel_stable do
+						@@irc.privmsg "#{key}", " QUERY RANDOM_TAKO #{@@nick}" if @@algo == "1"
+					end
 					################################
 				########################################
 		
