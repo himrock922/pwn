@@ -171,11 +171,11 @@ Signal.trap(:INT) {
 			when '338'
 				# setting
 				ikagent_nick = msg.split[3]
-				ikagent_ip   = msg.split[4]
+				@@ip = msg.split[4]
 				###########################
 
 				# ikagent information (nick, ip) store
-				@@hash.store("#{ikagent_nick}", "#{ikagent_ip}")
+				@@hash.store("#{ikagent_nick}", "#{@@ip}")
 
 			################################################
 
