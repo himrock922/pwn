@@ -157,7 +157,7 @@ Signal.trap(:INT) {
 				# when no operator process
 				elsif mj_user[0] == @@nick
 					@@channel_stable.push("#{mj_cha}")
-					@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{mj_user[0]}"
+					@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{@@nick} #{@@ip}"
 					next
 				elsif mj_user[0] != @@nick
 					next
@@ -278,7 +278,8 @@ Signal.trap(:INT) {
 			###############################################
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
 				n_ikagent = msg.split[5]
-				@@irc.whois "#{n_ikagent}"
+				n_ip      = msg.split[6]
+				@@hash.store("#{n_ikagent}", "#{n_ip}")
 				@@irc.privmsg "#{n_ikagent}", " UPD-IKAGENT #{@@nick} #{@@ip}"
 				p "new ikagent store!"
 			end
