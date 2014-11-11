@@ -345,22 +345,22 @@ Signal.trap(:INT) {
 				case poxpr_ex.split[0]
 				# when poxpr output 'NEW'
 				when 'NEW'
-					tako_id  = ''
-					tako_mac = ''
-					tako_app = ''
+					tako_id  = ""
+					tako_mac = ""
+					tako_app = ""
 					
-					select_tako = ''
-					select_app  = ''
+					select_tako = ""
+					select_app  = ""
 					
-					tako_id  = "\'#{poxpr_ex.split[1]}\'" # tako_id store
+					tako_id  = "#{poxpr_ex.split[1]}" # tako_id store
 					p tako_id
-					tako_mac = "\'#{poxpr_ex.split[2]}\'" # tako_mac store
+					tako_mac = "#{poxpr_ex.split[2]}" # tako_mac store
 					i = 3 
 					
 					@@db.execute(@@tako_insert, tako_id, tako_mac) # tako_list database insert
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
-						tako_app = "\'#{poxpr_ex.split[i]}'" # tako_app store
+						tako_app = "#{poxpr_ex.split[i]}" # tako_app store
 						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
 					end
@@ -419,8 +419,8 @@ Signal.trap(:INT) {
 	
 				when 'DEL'
 					# setting
-					tako_id = ''
-					tako_id = "\"#{poxpr_ex.split[1]}\'" # delete tako_id store
+					tako_id = ""
+					tako_id = "#{poxpr_ex.split[1]}" # delete tako_id store
 					####################################
 					@@db.execute("#{@@tako_delete} where tako_id = ?", tako_id)
 					@@db.execute("#{@@app_delete}  where tako_id  = ?", tako_id)
