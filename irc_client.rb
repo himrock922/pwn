@@ -313,6 +313,7 @@ Signal.trap(:INT) {
 				when 'RANDOM_TAKO'
 					s_nick = msg.split[6]
 					s_app  = "#{msg.split[7]}"
+					s_app.encode!("UTF-8") 
 					IRC::random_tako(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app, algo)  
 				end
 			end
@@ -382,6 +383,7 @@ Signal.trap(:INT) {
 						select_app =  row[1]
 						break
 					end
+					p select_app.encoding
 					# such channel send of infomation using of ikagent choose algorithm 
 					for key in @@channel_stable do
 						msg = " QUERY RANDOM_TAKO #{@@nick} #{select_app}" if @@algo == "1"

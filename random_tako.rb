@@ -10,12 +10,9 @@ module RandomTako
 		####################################
 
 		# selection tako for query qpp
-		db.execute("#{app_select} order by random()") do |row|
-			if row[1] == s_app
-				select_id  = row[0]
-				select_app = row[1]
-				break
-			end
+		db.execute("#{app_select} where tako_app = ? order by random()", s_app) do |row|
+			select_id  = row[0]
+			select_app = row[1]
 		end
 		if select_id.empty? == true
 			return
@@ -23,11 +20,9 @@ module RandomTako
 		##################################################
 
 		# replay of selected tako information
-		db.execute(tako_select) do |row|
-			if row[0] == select_id
-				select_mac = row[1]
-				break
-			end
+		db.execute("#{tako_select} where tako_id = ?", select_id) do |row|
+			select_mac = row[1]
+			break
 		end
 
 		irc.privmsg "#{s_nick}", " REPLAY RANDOM_TAKO #{nick} #{select_id} #{select_mac} #{select_app}"
