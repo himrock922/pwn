@@ -334,7 +334,6 @@ Signal.trap(:INT) {
 	#########################################	
 	@@pwn_poxpr = Thread::fork do
 		Thread::stop
-			poxpr_output = ''
 			poxpr_input, poxpr_output = Open3.popen3('sh dummytako.sh') if @@dummy == "1"
 			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X') if @@dummy == "0"
 			# Collaboration with communication between nodes program
@@ -385,7 +384,7 @@ Signal.trap(:INT) {
 					end
 					# such channel send of infomation using of ikagent choose algorithm 
 					for key in @@channel_stable do
-						msg = %( QUERY RANDOM_TAKO #{@@nick} "#{select_app}") if @@algo == "1"
+						msg = " QUERY RANDOM_TAKO #{@@nick} #{select_app}" if @@algo == "1"
 						@@irc.privmsg "#{key}", "#{msg}" 
 					end
 					################################
