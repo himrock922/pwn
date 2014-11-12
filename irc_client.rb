@@ -311,9 +311,9 @@ Signal.trap(:INT) {
 				algo = msg.split[5]
 				case algo
 				when 'RANDOM_TAKO'
-					p msg.split[7]
 					s_nick = msg.split[6]
-					s_app  = msg.split(/\\/)
+					s_app_tmp  = msg.split[7]
+					s_app = s_app_tmp.split(/\\/)
 					p s_app
 				@@db.execute("#{@@app_select} where tako_app = ?", s_app) do |row|
 					p row
@@ -388,12 +388,13 @@ Signal.trap(:INT) {
 
 					@@db.execute("#{@@app_select} where tako_id = ? order by random()", select_tako)  do |row|
 						select_app =  row[1]
+						p select_app.size
+						p select_app.length
 						break
 					end
 					# such channel send of infomation using of ikagent choose algorithm 
 					for key in @@channel_stable do
-						msg = %Q( QUERY RANDOM_TAKO #{@@nick} "#{select_app}") if @@algo == "1"
-						tmp = select_app.split(/\\/)
+						msg = " QUERY RANDOM_TAKO #{@@nick} #{select_app}" if @@algo == "1"
 						@@irc.privmsg "#{key}", "#{msg}" if @@algo == "1"
 					end
 					################################
