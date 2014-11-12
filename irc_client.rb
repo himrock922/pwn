@@ -312,7 +312,7 @@ Signal.trap(:INT) {
 				case algo
 				when 'RANDOM_TAKO'
 					s_nick = msg.split[6]
-					s_app  = msg.split[7]
+					s_app  = "#{msg.split[7]}"
 					IRC::random_tako(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app, algo)  
 				end
 			end

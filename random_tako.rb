@@ -17,6 +17,9 @@ module RandomTako
 				break
 			end
 		end
+		if s_app.empty? == true
+			next
+		end
 		##################################################
 
 		# replay of selected tako information
