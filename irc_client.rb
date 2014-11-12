@@ -312,7 +312,7 @@ Signal.trap(:INT) {
 				case algo
 				when 'RANDOM_TAKO'
 					s_nick = msg.split[6]
-					s_app_tmp  = msg.split[7]
+					s_app  = msg.split[7]
 					p s_app.size
 					p s_app.length
 				@@db.execute("#{@@app_select} where tako_app = ?", s_app) do |row|
