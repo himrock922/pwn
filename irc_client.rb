@@ -17,7 +17,8 @@ require 'sqlite3'
 require_relative 'create_takoble'
 require_relative 'create_appble'
 require_relative 'join_table'
-require_relative 'random_tako'
+require_relative 'random_tako_query'
+require_relative 'random_tako_replay'
 require_relative 'common_app_ikagent'
 
 #default irc server setup
@@ -34,7 +35,8 @@ class IRC
 	include CreateTakoble
 	include CreateAppble
 	include JoinTable
-	extend  RandomTako
+	extend  RandomTakoQuery
+	extend  RandomTakoReplay
 	extend  CommonAppIkagent
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
@@ -314,7 +316,7 @@ Signal.trap(:INT) {
 					s_nick = msg.split[6]
 					s_app  = "#{msg.split[7]}"
 					s_app.encode!("UTF-8") 
-					IRC::random_tako(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app, algo)  
+					IRC::random_tako_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app)  
 				end
 			end
 					
@@ -373,22 +375,9 @@ Signal.trap(:INT) {
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
-					
-					@@db.execute("#{@@tako_select} order by random()") do |row|
-						select_tako = row[0]
-						break
-					end
 
-					@@db.execute("#{@@app_select} where tako_id = ? order by random()", select_tako)  do |row|
-						select_app =  row[1]
-						break
-					end
-					p select_app.encoding
-					# such channel send of infomation using of ikagent choose algorithm 
-					for key in @@channel_stable do
-						msg = " QUERY RANDOM_TAKO #{@@nick} #{select_app}" if @@algo == "1"
-						@@irc.privmsg "#{key}", "#{msg}" 
-					end
+					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
+					
 					################################
 				########################################
 		
