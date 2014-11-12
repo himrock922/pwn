@@ -311,6 +311,7 @@ Signal.trap(:INT) {
 				algo = msg.split[5]
 				case algo
 				when 'RANDOM_TAKO'
+					p msg.split[7]
 					s_nick = msg.split[6]
 					s_app  = msg.split[7]
 					p s_app
@@ -392,8 +393,8 @@ Signal.trap(:INT) {
 					p %Q!#{select_app}!
 					# such channel send of infomation using of ikagent choose algorithm 
 					for key in @@channel_stable do
-						msg = %(QUERY RANDOM_TAKO #{@@nick} "#{select_app}") if @@algo == "1"
-						@@irc.privmsg "#{key}", msg if @@algo == "1"
+						msg = %Q(QUERY RANDOM_TAKO #{@@nick} "#{select_app}") if @@algo == "1"
+						@@irc.privmsg "#{key}", "#{msg}" if @@algo == "1"
 					end
 					################################
 				########################################
