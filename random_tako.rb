@@ -17,7 +17,7 @@ module RandomTako
 				break
 			end
 		end
-		if s_app.empty? == true
+		if select_id.empty? == true
 			next
 		end
 		##################################################
