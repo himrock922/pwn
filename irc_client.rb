@@ -314,6 +314,8 @@ Signal.trap(:INT) {
 					s_nick = msg.split[6]
 					s_app  = msg.split[7]
 				@@db.execute("#{@@app_select} where tako_app = ?", s_app) do |row|
+					p row
+				end
 					IRC::random_tako(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app, algo) if @@algo == "1" 
 				end
 			end
