@@ -313,6 +313,7 @@ Signal.trap(:INT) {
 				when 'RANDOM_TAKO'
 					s_nick = msg.split[6]
 					s_app  = msg.split[7]
+				@@db.execute("#{@@app_select} where tako_app = ?", s_app) do |row|
 					IRC::random_tako(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app, algo) if @@algo == "1" 
 				end
 			end
@@ -348,6 +349,7 @@ Signal.trap(:INT) {
 					tako_id  = ""
 					tako_mac = ""
 					tako_app = ""
+					select_tmp = Array.new
 					
 					select_tako = ""
 					select_app  = ""
@@ -375,10 +377,12 @@ Signal.trap(:INT) {
 					
 					@@db.execute("#{@@tako_select} order by random()") do |row|
 						select_tako = row[0]
+						break
 					end
 
-					@@db.execute("#{@@app_select} where tako_id = ? order by random()", select_tako) do |row|
+					@@db.execute("#{@@app_select} where tako_id = ? order by random()", select_tako)  do |row|
 						select_app =  row[1]
+						break
 					end
 					# such channel send of infomation using of ikagent choose algorithm 
 					for key in @@channel_stable do
