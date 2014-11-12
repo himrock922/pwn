@@ -313,10 +313,11 @@ Signal.trap(:INT) {
 				when 'RANDOM_TAKO'
 					s_nick = msg.split[6]
 					s_app  = msg.split[7]
+					p s_app
 				@@db.execute("#{@@app_select} where tako_app = ?", s_app) do |row|
 					p row
 				end
-					IRC::random_tako(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app, algo) if @@algo == "1" 
+				#	IRC::random_tako(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app, algo) if @@algo == "1" 
 				end
 			end
 					
@@ -337,6 +338,7 @@ Signal.trap(:INT) {
 	#########################################	
 	@@pwn_poxpr = Thread::fork do
 		Thread::stop
+			poxpr_output = ''
 			poxpr_input, poxpr_output = Open3.popen3('sh dummytako.sh') if @@dummy == "1"
 			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X') if @@dummy == "0"
 			# Collaboration with communication between nodes program
@@ -356,6 +358,7 @@ Signal.trap(:INT) {
 					select_tako = ""
 					select_app  = ""
 					
+					p poxpr_ex.split[1]
 					tako_id  = "#{poxpr_ex.split[1]}" # tako_id store
 					p tako_id
 					tako_mac = "#{poxpr_ex.split[2]}" # tako_mac store
@@ -386,9 +389,10 @@ Signal.trap(:INT) {
 						select_app =  row[1]
 						break
 					end
+					p select_app
 					# such channel send of infomation using of ikagent choose algorithm 
 					for key in @@channel_stable do
-						@@irc.privmsg "#{key}", " QUERY RANDOM_TAKO #{@@nick} #{select_app}" if @@algo == "1"
+						@@irc.privmsg "#{key}", " QUERY RANDOM_TAKO #{@@nick} \"#{select_app}\"" if @@algo == "1"
 					end
 					################################
 				########################################
