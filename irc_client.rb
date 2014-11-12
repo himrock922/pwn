@@ -392,7 +392,7 @@ Signal.trap(:INT) {
 					p %Q!#{select_app}!
 					# such channel send of infomation using of ikagent choose algorithm 
 					for key in @@channel_stable do
-						msg = " QUERY RANDOM_TAKO #{@@nick} %Q!#{select_app}!" if @@algo == "1"
+						msg = %(QUERY RANDOM_TAKO #{@@nick} "#{select_app}") if @@algo == "1"
 						@@irc.privmsg "#{key}", msg if @@algo == "1"
 					end
 					################################
