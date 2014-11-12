@@ -10,7 +10,7 @@ module RandomTako
 		####################################
 
 		# selection tako for query qpp
-		db.execute(app_select) do |row|
+		db.execute("#{app_select} order by random()") do |row|
 			if row[1] == s_app
 				select_id  = row[0]
 				select_app = row[1]
@@ -18,7 +18,7 @@ module RandomTako
 			end
 		end
 		if select_id.empty? == true
-			next
+			return
 		end
 		##################################################
 
