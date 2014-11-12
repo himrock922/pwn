@@ -9,21 +9,23 @@ module RandomTako
 		select_app = ""
 		####################################
 
+		p s_app
 		# selection tako for query qpp
-		db.execute("#{app_select} where tako_app = ? order by random()", s_app) do |row|
-			if row == nil
-				break
-			else
-			select_tako = row[0]
-			select_app  = row[1]
+		db.execute(app_select) do |row|
+			if row[1] == s_app
+				select_id  = row[0]
+				select_app = row[1]
 				break
 			end
 		end
 		##################################################
 
 		# replay of selected tako information
-		db.execute("#{tako_select} whete tako_id = ?", select_tako) do |row|
-			select_mac = row[1]
+		db.execute(tako_select) do |row|
+			if row[0] == select_id
+				select_mac = row[1]
+				break
+			end
 		end
 
 		irc.privmsg "#{s_nick}", " REPLAY RANDOM_TAKO #{nick} #{select_tako} #{select_app}"
