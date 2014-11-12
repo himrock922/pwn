@@ -9,7 +9,6 @@ module RandomTako
 		select_app = ""
 		####################################
 
-		p s_app
 		# selection tako for query qpp
 		db.execute(app_select) do |row|
 			if row[1] == s_app
@@ -28,6 +27,6 @@ module RandomTako
 			end
 		end
 
-		irc.privmsg "#{s_nick}", " REPLAY RANDOM_TAKO #{nick} #{select_tako} #{select_app}"
+		irc.privmsg "#{s_nick}", " REPLAY RANDOM_TAKO #{nick} #{select_id} #{select_mac} #{select_app}"
 	end
 end
