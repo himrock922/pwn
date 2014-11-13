@@ -2,7 +2,7 @@
 RandomTako module
 =end
 module RandomTakoReplay 
-	def random_tako_replay(irc, db, app_select, tako_select, nick, s_nick, s_app)
+	def random_tako_replay(irc, db, app_select, tako_select, nick, ip, s_nick, s_app)
 		# setting
 		select_id  = ""
 		select_mac = ""
