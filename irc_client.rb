@@ -160,7 +160,6 @@ Signal.trap(:INT) {
 				# when no operator process
 				elsif mj_user[0] == @@nick
 					@@channel_stable.push("#{mj_cha}")
-					@@irc.privmsg "#{mj_cha}", " NEW-IKAGENT #{@@nick} #{@@ip}"
 					next
 				elsif mj_user[0] != @@nick
 					next
@@ -277,38 +276,6 @@ Signal.trap(:INT) {
 			end
  			###############################################
 
-			# if new ikagent mesage process
-			###############################################
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
-				n_ikagent = msg.split[5]
-				n_ip      = msg.split[6]
-				@@hash.store("#{n_ikagent}", "#{n_ip}")
-				@@irc.privmsg "#{n_ikagent}", " UPD-IKAGENT #{@@nick} #{@@ip}"
-				p "new ikagent store!"
-			end
-			########################################################
-
-			# if update ikagent message process
-			###############################################
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-IKAGENT'
-				# setting
-				tmp_hash  = {} # templary hash table
-				u_ikagent = msg.split[5]
-				u_ip      = msg.split[6]
-				tmp_hash.store("#{u_ikagent}", "#{u_ip}")
-				@@hash.update(tmp_hash) # stable hash table update
-				p "update paramater!"
-			end
-			###############################################
-
-			# other ikagent dell process
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-IKAGENT'
-				d_nick = msg.split[5]
-				@@hash.delete("#{d_nick}")
-				p "delete ikagent complete!"
-			end
-			########################################################
-			
 			# query of choose algorithm process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'QUERY'
 				algo = msg.split[5]
@@ -393,7 +360,7 @@ Signal.trap(:INT) {
 					end
 
 					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
-					
+					IRC
 					################################
 				########################################
 		
@@ -419,6 +386,7 @@ Signal.trap(:INT) {
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
+					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
 					
 				###############################################	
 				when 'DEL'
