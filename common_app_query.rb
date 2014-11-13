@@ -3,11 +3,12 @@ module CommonAppQuery module
 =end
 
 module CommonAppQuery
-	def common_app_auery(irc, db, app_select, tako_select, nick, channel_stable)
+	def common_app_query(irc, db, app_select, tako_select, nick, channel_stable)
 		select_tako = ""
 		select_app  = Array.new
 		join_tako   = ""
 		i = 0
+		p "test"
 		db.execute(tako_select) do |row|
 			select_tako = row[0]
 			db.execute("#{app_select} where tako_id = ?", select_tako) do |row2|
