@@ -316,7 +316,7 @@ Signal.trap(:INT) {
 					s_nick = msg.split[6]
 					s_app  = "#{msg.split[7]}"
 					s_app.encode!("UTF-8") 
-					IRC::random_tako_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, s_nick, s_app)  
+					IRC::random_tako_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
 				end
 			end
 					
