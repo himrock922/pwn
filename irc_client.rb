@@ -297,11 +297,20 @@ Signal.trap(:INT) {
 				when 'RANDOM_TAKO'
 					ikagent = msg.split[6]
 					ip      = msg.split[7]
-					print "\r\n"
+					print EOF
 					p "*****************"
 					p "party tako fixed!"
 					p "*****************"
 					p "#{ikagent} #{ip}"
+				when 'COMMON_APP'
+					ikagent = msg.split[6]
+					ip      = msg.split[7]
+					value   = msg.split[8]
+					print EOF
+					p "*************************"
+					p "****party tako fixed!****"
+					p "*************************"
+					p "#{ikagent} #{ip} #{value}"
 				end
 			end
 			########################################################			
