@@ -72,7 +72,8 @@ Signal.trap(:INT) {
 				@@irc.pong "#{server}"
 				@@ikagent_stable.wakeup
 
-				IRC::random_tako(@@nick, @@db, @@hash) if @@algo == "1"
+				IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
+
 				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
@@ -131,7 +132,7 @@ Signal.trap(:INT) {
 			# join command for usrname extraction	
 			when 'JOIN'
 				# join channel store
-				mj_cha  = msg.split[2]
+				mj_cha = msg.split[2]
 				mj_cha.slice!(0)
 				######################
 				
@@ -314,12 +315,28 @@ Signal.trap(:INT) {
 				case algo
 				when 'RANDOM_TAKO'
 					s_nick = msg.split[6]
-					s_app  = "#{msg.split[7]}"
+					s_app  = msg.split[7]
 					s_app.encode!("UTF-8") 
 					IRC::random_tako_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
 				end
 			end
-					
+			########################################################
+
+			# update of select algorithm process
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'REPLAY'
+				algo = msg.split[5]
+				case algo
+				when 'RANDOM_TAKO'
+					ikagent = msg.split[6]
+					ip      = msg.split[7]
+					print "\r\n"
+					p "*****************"
+					p "party tako fixed!"
+					p "*****************"
+					p "#{ikagent} #{ip}"
+				end
+			end
+			########################################################			
 			########################################################
 			########################################################
 	
@@ -351,19 +368,18 @@ Signal.trap(:INT) {
 					tako_id  = ""
 					tako_mac = ""
 					tako_app = ""
-					select_tmp = Array.new
 					
 					select_tako = ""
 					select_app  = ""
 					
-					tako_id  = "#{poxpr_ex.split[1]}" # tako_id store
-					tako_mac = "#{poxpr_ex.split[2]}" # tako_mac store
+					tako_id  = poxpr_ex.split[1] # tako_id store
+					tako_mac = poxpr_ex.split[2] # tako_mac store
 					i = 3 
 					
 					@@db.execute(@@tako_insert, tako_id, tako_mac) # tako_list database insert
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
-						tako_app = "#{poxpr_ex.split[i]}" # tako_app store
+						tako_app = poxpr_ex.split[i] # tako_app store
 						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
 					end
@@ -387,12 +403,12 @@ Signal.trap(:INT) {
 					tako_mac = ""
 					tako_app = ""
 
-					tako_id  =  "#{poxpr_ex.split[1]}"   # update subject tako_id store
-					tako_mac = "#{poxpr_ex.split[2]}" # tako_mac store
+					tako_id  = poxpr_ex.split[1] # update subject tako_id store
+					tako_mac = poxpr_ex.split[2] # tako_mac store
 					i = 3 
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
-						tako_app_tmp = "#{poxpr_ex.split[i]}" # tako_app store
+						tako_app = poxpr_ex.split[i] # tako_app store
 						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
 					end
@@ -404,17 +420,11 @@ Signal.trap(:INT) {
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
 					
-				#@@db.execute("#{@@sql_select} where ikagent_nick = ?", @@nick) do |row|
-				#	for key in @@channel_stable do
-				#		@@irc.privmsg "#{key}", " UPD-TAKO #{@@nick} #{@@ip} #{row[2]} #{row[3]} #{row[4]}"
-				#	end
-				#end
-				##########################################################################################
-	
+				###############################################	
 				when 'DEL'
 					# setting
 					tako_id = ""
-					tako_id = "#{poxpr_ex.split[1]}" # delete tako_id store
+					tako_id = poxpr_ex.split[1] # delete tako_id store
 					####################################
 					@@db.execute("#{@@tako_delete} where tako_id = ?", tako_id)
 					@@db.execute("#{@@app_delete}  where tako_id  = ?", tako_id)
@@ -425,25 +435,16 @@ Signal.trap(:INT) {
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
-					
-					#del_msg = ""
-					#del_msg = delete_poxpr
-					# such channel del tako_id send
-					#for key in @@channel_stable do
-					#	@@irc.privmsg "#{key}", " DEL-TAKO #{@@nick} #{del_msg}"
-					#end
 					########################################
 			end
+			########################################################
 		end
-		#########################################
-		
-		#########################################
-		#########################################
+		################################################################
 	end
-	##################################################
+	########################################################################
 			
 	# thread write process
-	#################################################
+	########################################################################
 	@@writen = Thread::fork do
 		Thread::stop
 		while input = gets.chomp # wait stdin
