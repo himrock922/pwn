@@ -25,6 +25,6 @@ module RandomTakoReplay
 			break
 		end
 
-		irc.privmsg "#{s_nick}", " REPLAY RANDOM_TAKO #{nick} #{select_id} #{select_mac} #{select_app}"
+		irc.privmsg "#{s_nick}", " REPLAY RANDOM_TAKO #{nick} #{ip} #{select_id} #{select_mac} #{select_app}"
 	end
 end
