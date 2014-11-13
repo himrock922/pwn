@@ -52,7 +52,6 @@ Signal.trap(:INT) {
 	exit
 }
 @@channel_stable = Array.new
-@@hash = {}
 @@channel_hash = {}
 @@tako_id  = ""
 @@tako_mac = ""
@@ -74,7 +73,6 @@ Signal.trap(:INT) {
 
 				IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
 
-				IRC::common_app_ikagent(@@nick, @@db, @@hash) if @@algo == "2"
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
 						next if @@channel == key
@@ -169,15 +167,11 @@ Signal.trap(:INT) {
 			################################################
 
 			# extraction username for user information store 
-			# hash table
 			when '338'
 				# setting
 				ikagent_nick = msg.split[3]
 				@@ip = msg.split[4]
 				###########################
-
-				# ikagent information (nick, ip) store
-				@@hash.store("#{ikagent_nick}", "#{@@ip}")
 
 			################################################
 
@@ -206,7 +200,6 @@ Signal.trap(:INT) {
 					else
 						# channel hash update
 						@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
-						@@hash.delete("#{mp_user[0]}") #ikagent information delete
 					end
 					########################################
 					@@ikagent_stable.wakeup # debug message output
@@ -217,8 +210,6 @@ Signal.trap(:INT) {
 				# no operator process
 				if @@nick == mp_user[0]
 					@@channel_stable.delete("#{mp_cha}") # when own part, channel_stable hash delete
-				else
-					@@hash.delete("#{mp_user[0]}") # other ikagent information delete
 				end
 				@@ikagent_stable.wakeup # debug message
 				################################################
@@ -269,8 +260,6 @@ Signal.trap(:INT) {
 				#####################
 
 				@@channel_hash.delete("#{d_cha}") # channel table disconnect ikagent delete
-
-				@@hash.delete("#{d_nick}") # hash table disconnect ikagent delete
 				# such table output
 				p "delete complete"
 			end
@@ -501,11 +490,7 @@ Signal.trap(:INT) {
 				@@channel_hash.each_key do |key|
 					p "#{key}"
 				end
-				print EOF
-				p "hash table"
-				@@hash.each do |key, val|
-					p "#{key} #{val}"
-				end
+
 				print EOF
 				p "#{@@sql_column}"
 				p "#{@@sql_output}"
