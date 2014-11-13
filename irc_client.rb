@@ -19,7 +19,7 @@ require_relative 'create_appble'
 require_relative 'join_table'
 require_relative 'random_tako_query'
 require_relative 'random_tako_replay'
-require_relative 'common_app_ikagent'
+require_relative 'common_app_query'
 
 #default irc server setup
 SERVER = "bsd-himrock922.jaist.ac.jp"
@@ -37,7 +37,7 @@ class IRC
 	include JoinTable
 	extend  RandomTakoQuery
 	extend  RandomTakoReplay
-	extend  CommonAppIkagent
+	extend  CommonAppQuery
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
 		if @@channel == nil
@@ -349,7 +349,7 @@ Signal.trap(:INT) {
 					end
 
 					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
-					IRC
+					IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "2"
 					################################
 				########################################
 		
