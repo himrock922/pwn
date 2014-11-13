@@ -20,6 +20,7 @@ require_relative 'join_table'
 require_relative 'random_tako_query'
 require_relative 'random_tako_replay'
 require_relative 'common_app_query'
+require_relative 'common_app_replay'
 
 #default irc server setup
 SERVER = "bsd-himrock922.jaist.ac.jp"
@@ -38,6 +39,7 @@ class IRC
 	extend  RandomTakoQuery
 	extend  RandomTakoReplay
 	extend  CommonAppQuery
+	extend  CommonAppReplay
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
 		if @@channel == nil
@@ -267,13 +269,23 @@ Signal.trap(:INT) {
 
 			# query of choose algorithm process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'QUERY'
-				algo = msg.split[5]
+				s_app  = ""
+				algo   = msg.split[5]
+				s_nick = msg.split[6]
 				case algo
 				when 'RANDOM_TAKO'
-					s_nick = msg.split[6]
 					s_app  = msg.split[7]
 					s_app.encode!("UTF-8") 
 					IRC::random_tako_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
+				when 'COMMON_APP'
+					s_app_tmp = msg 
+					i = 7
+					while s_app_tmp.split[i] != nil
+						s_app += "#{s_app_tmp.split[i]} "
+						i += 1
+					end
+					s_app.encode!("UTF-8")
+					IRC::common_app_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				end
 			end
 			########################################################
