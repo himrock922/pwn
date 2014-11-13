@@ -11,8 +11,8 @@ module CommonAppReplay
 		i = 0
 		value = 0
 		#######################
-		while s_app[i] != nil
-			db.execute("#{app_select} where tako_app = ?", s_app[i]) do |row|
+		while s_app.split[i] != nil
+			db.execute("#{app_select} where tako_app = ?", s_app.split[i]) do |row|
 				value += 1
 			end
 			i += 1
