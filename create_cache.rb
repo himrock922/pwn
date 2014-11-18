@@ -11,7 +11,7 @@ module CreateCache
 
 	# table data insert process
 	def insert_cache
-		sql = "insert into Cache values (?, ?, ?, ?)"
+		sql = "insert into Cache values (?, ?)"
 		return sql
 	end
 	######################
