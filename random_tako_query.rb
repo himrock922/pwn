@@ -6,6 +6,7 @@ module RandomTakoQuery
 		select_tako = ""
 		select_app  = Array.new
 		join_app    = ""
+		msg = ""
 		db.execute("#{tako_select} order by random()") do |row|
 			select_tako = row[0]
 			break
@@ -24,7 +25,7 @@ module RandomTakoQuery
 		end
 			
 		# such channel send of infomation using of ikagent choose algorithm 
-		msg = " QUERY RANDOM_TAKO #{nick} #{join_tako}" 
+		msg = " QUERY RANDOM_TAKO #{nick} #{join_app}" 
 		for key in channel_stable do
 			irc.privmsg "#{key}", "#{msg}" 
 		end
