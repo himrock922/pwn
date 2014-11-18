@@ -304,7 +304,7 @@ Signal.trap(:INT) {
 					print EOF
 					p "party tako fixed!"
 					p "*****************"
-					@@db.execute(@@cac_insert, ikagent, ip, (datetime('now', 'localtime'), datetime('now', 'localtime'))
+					@@db.execute(@@cac_insert, ikagent, ip, datetime('now', 'localtime'), datetime('now', 'localtime'))
 					@@db.execute(@@cac_select) do |row|
 						p row
 					end
