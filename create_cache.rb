@@ -4,7 +4,7 @@ SQL Table Create Module
 module CreateCache
 	# table create process
 	def create_cache
-		sql = "create table Cache (ikagent_id text, ikagent_ip text, create_at datetime, update_at datetime)"
+		sql = "create table Cache (ikagent_id text, ikagent_ip text, created_at datetime, updated_at datetime)"
 		return sql
 	end
 	######################

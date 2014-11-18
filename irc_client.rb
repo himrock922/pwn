@@ -304,6 +304,10 @@ Signal.trap(:INT) {
 					print EOF
 					p "party tako fixed!"
 					p "*****************"
+					@@db.execute("#{@@cac_insert}", ikagent, ip)
+					@@db.execute("#{@@cac_select}") do |row|
+						p row
+					end
 					p "#{ikagent} #{ip} #{tako_id} #{app}"
 				when 'COMMON_APP'
 					ikagent = msg.split[6]
