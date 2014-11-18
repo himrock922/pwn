@@ -4,14 +4,14 @@ SQL Table Create Module
 module CreateCache
 	# table create process
 	def create_cache
-		sql = "create table Cache (ikagent_id text, ikagent_ip text, created_at datetime, updated_at datetime)"
+		sql = "create table Cache (ikagent_id text, ikagent_ip text, created_at default CURRENT_TIMESTAMP, updated_at datetime)"
 		return sql
 	end
 	######################
 
 	# table data insert process
 	def insert_cache
-		sql = "insert into Cache values (?, ?)"
+		sql = "insert into Cache values (?, ?, ?, ?)"
 		return sql
 	end
 	######################
