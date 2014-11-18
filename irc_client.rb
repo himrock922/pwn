@@ -295,11 +295,21 @@ Signal.trap(:INT) {
 				algo = msg.split[5]
 				case algo
 				when 'RANDOM_TAKO'
+					ikagent  = msg.split[6]
+					ip       = msg.split[7]
+					tako_id  = msg.split[8]
+					app_tmp  = msg
+					join_app = ""
+					i = 9
+					while app_tmp.split[i] != nil
+						join_app += "#{app_tmp} "
+						i += 1
+					end
 					print EOF
 					p "*****************"
 					p "party tako fixed!"
 					p "*****************"
-					p "#{ikagent} #{ip}"
+					p "#{ikagent} #{ip} #{tako_id} #{join_app}"
 				when 'COMMON_APP'
 					ikagent = msg.split[6]
 					ip      = msg.split[7]

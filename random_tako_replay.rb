@@ -30,7 +30,7 @@ module RandomTakoReplay
 			join_app += "#{select_app[i]} "
 			i += 1
 		end
-		msg = "REPLAY RANDOM_TAKO #{nick} #{ip} #{select_id} #{join_app}"
+		msg = " REPLAY RANDOM_TAKO #{nick} #{ip} #{select_id} #{join_app}"
 		irc.privmsg "#{s_nick}", "#{msg}"
 	end
 end
