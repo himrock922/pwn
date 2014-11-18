@@ -302,7 +302,7 @@ Signal.trap(:INT) {
 					join_app = ""
 					i = 9
 					while app_tmp.split[i] != nil
-						join_app += "#{app_tmp} "
+						join_app += "#{app_tmp.split[i]} "
 						i += 1
 					end
 					print EOF
