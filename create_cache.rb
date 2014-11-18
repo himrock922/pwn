@@ -24,14 +24,14 @@ module CreateCache
 	######################
 
 	# table data update process
-	def update_appble
+	def update_cache
 		sql = "update Cache"
 		return sql
 	end
 	######################
 	
 	# table select process
-	def select_appble
+	def select_cache
 		sql = "select * from Cache"
 		return sql
 	end
