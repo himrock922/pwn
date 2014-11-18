@@ -295,8 +295,6 @@ Signal.trap(:INT) {
 				algo = msg.split[5]
 				case algo
 				when 'RANDOM_TAKO'
-					ikagent = msg.split[6]
-					ip      = msg.split[7]
 					print EOF
 					p "*****************"
 					p "party tako fixed!"
