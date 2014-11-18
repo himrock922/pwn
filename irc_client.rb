@@ -16,6 +16,7 @@ require 'open3'
 require 'sqlite3'
 require_relative 'create_takoble'
 require_relative 'create_appble'
+require_relative 'create_cache'
 require_relative 'join_table'
 require_relative 'random_tako_query'
 require_relative 'random_tako_replay'
@@ -36,6 +37,7 @@ class IRC
 	include CreateTakoble
 	include CreateAppble
 	include JoinTable
+	include CreateCache
 	extend  RandomTakoQuery
 	extend  RandomTakoReplay
 	extend  CommonAppQuery
@@ -585,7 +587,7 @@ Signal.trap(:INT) {
 		if OPTS[:s] then @server = OPTS[:s] else @server = SERVER end
 		if OPTS[:p] then @port = OPTS[:p] else @port = PORT end
 		if OPTS[:n] then @@nick = OPTS[:n] else @@nick = NICK end
-		if OPTS[:t] then @topic = OPTS[:u] else @topic = nil end
+		if OPTS[:t] then @topic = OPTS[:t] else @topic = nil end
 		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = nil end
 		if OPTS[:a] then @@algo = OPTS[:a] else @@algo = ALGO end
 		if OPTS[:d] then @@dummy = "1" else @@dummy = "0" end
@@ -600,7 +602,11 @@ Signal.trap(:INT) {
 		if table[0] == nil
 			@@db.execute(create_takoble)
 			@@db.execute(create_appble)
+			@@db.execute(create_cache)
 		end
+
+		if @@algo == "1"
+			
 
 		sql_command # sql_coomand summary method
 		##################################
@@ -664,6 +670,11 @@ Signal.trap(:INT) {
 			@@app_delete  = delete_appble
 			@@app_update  = update_appble
 			@@app_select  = select_appble
+
+			@@cac_insert  = insert_cache
+			@@cac_delete  = delete_cache
+			@@cac_update  = update_cache
+			@@cac_select  = select_cache
 
 			@@sql_join    = join_table
 
