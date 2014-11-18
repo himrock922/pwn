@@ -301,14 +301,20 @@ Signal.trap(:INT) {
 					ip       = msg.split[7]
 					tako_id  = msg.split[8]
 					app      = msg.split[9]
+					ikagent.encode!("UTF-8")
+					ip.encode!("UTF-8")
+					row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+					if row.empty? != true
+						@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+					else
+						@@db.execute(@@cac_insert, ikagent, ip)
+					end
 					print EOF
 					p "party tako fixed!"
 					p "*****************"
-					@@db.execute(@@cac_insert, ikagent, ip, datetime('now', 'localtime'), datetime('now', 'localtime'))
 					@@db.execute(@@cac_select) do |row|
 						p row
 					end
-					p "#{ikagent} #{ip} #{tako_id} #{app}"
 				when 'COMMON_APP'
 					ikagent = msg.split[6]
 					ip      = msg.split[7]
@@ -376,7 +382,7 @@ Signal.trap(:INT) {
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
 
-					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
+					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@cac_select, @@nick, @@channel_stable) if @@algo == "1"  
 					IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "2"
 					################################
 				########################################
@@ -393,7 +399,7 @@ Signal.trap(:INT) {
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
 						tako_app = poxpr_ex.split[i] # tako_app store
-						@@db.execute(@@app_insert, tako_id, tako_app)
+						@@db.execute("#{app_delete} where tako_id = ? and tako_app = ?", tako_id, tako_app)
 						i += 1
 					end
 					###############################
@@ -403,7 +409,6 @@ Signal.trap(:INT) {
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
-					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
 					
 				###############################################	
 				when 'DEL'
