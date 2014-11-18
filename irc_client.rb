@@ -300,18 +300,11 @@ Signal.trap(:INT) {
 					ikagent  = msg.split[6]
 					ip       = msg.split[7]
 					tako_id  = msg.split[8]
-					app_tmp  = msg
-					join_app = ""
-					i = 9
-					while app_tmp.split[i] != nil
-						join_app += "#{app_tmp.split[i]} "
-						i += 1
-					end
+					app      = msg.split[9]
 					print EOF
-					p "*****************"
 					p "party tako fixed!"
 					p "*****************"
-					p "#{ikagent} #{ip} #{tako_id} #{join_app}"
+					p "#{ikagent} #{ip} #{tako_id} #{app}"
 				when 'COMMON_APP'
 					ikagent = msg.split[6]
 					ip      = msg.split[7]
