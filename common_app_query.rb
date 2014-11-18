@@ -6,7 +6,8 @@ module CommonAppQuery
 	def common_app_query(irc, db, app_select, tako_select, nick, channel_stable)
 		select_tako = ""
 		select_app  = Array.new
-		join_tako   = ""
+		join_app    = ""
+		msg         = ""
 		i = 0
 		db.execute(tako_select) do |row|
 			select_tako = row[0]
@@ -18,12 +19,13 @@ module CommonAppQuery
 
 		i = 0
 		while select_app[i] != nil
-			join_tako += "#{select_app[i]} "
+			join_app += "#{select_app[i]} "
 			i += 1
 		end
+		
+		msg = " QUERY COMMON_APP #{nick} #{join_app}"
 
 		for key in channel_stable do
-			msg = " QUERY COMMON_APP #{nick} #{join_tako}"
 			irc.privmsg "#{key}", "#{msg}"
 		end		
 	end
