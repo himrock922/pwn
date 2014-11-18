@@ -20,7 +20,7 @@ module RandomTakoQuery
 
 		i = 0
 		while select_app[i] != nil
-			join_app += "#{select_app[i]}"
+			join_app += "#{select_app[i]} "
 			i += 1
 		end
 			
