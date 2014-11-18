@@ -605,9 +605,6 @@ Signal.trap(:INT) {
 			@@db.execute(create_cache)
 		end
 
-		if @@algo == "1"
-			
-
 		sql_command # sql_coomand summary method
 		##################################
 
