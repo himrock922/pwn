@@ -19,16 +19,13 @@ module RandomTakoReplay
 			break
 		end
 		##################################################
-		db.execute("#{app_select} where tako_id = ?", select_id) do |row|
-			join_app += "#{row[1]} "
-		end
 
 		# replay of selected tako information
 		db.execute("#{tako_select} where tako_id = ?", select_id) do |row|
 			select_mac = row[1]
 		end
 
-		msg = " REPLAY RANDOM_TAKO #{nick} #{ip} #{select_id} #{select_mac} #{join_app}"
+		msg = " REPLAY RANDOM_TAKO #{nick} #{ip} #{select_id} #{select_mac} #{s_app}"
 		irc.notice "#{s_nick}", "#{msg}"
 	end
 end
