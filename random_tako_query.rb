@@ -22,8 +22,14 @@ module RandomTakoQuery
 			if row.empty? == false
 				db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", row[0]) do |sow|
 					db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) do |tow|
+						print "\r\n"
+						p "*************************"
+						p "****party tako fixed!****"
+						p "*************************"
 						print "#{tow[0]}, #{tow[1]}, #{sow[1]} #{sow[2]} #{row[1]}\n"
+						break
 					end
+				break
 				end
 				return
 			end

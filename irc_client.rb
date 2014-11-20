@@ -337,8 +337,15 @@ Signal.trap(:INT) {
 					row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
 					if row.empty? != true
 						@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
-						@@db.execute(@@cso_insert, tako_id, tako_app)
-					else
+							@@db.execute("#{@@cat_select} where tako_id = ?", tako_id) do |sow|
+								if sow.empty? != true
+									@@db.execute(@@cso_insert, tako_id, tako_app)
+								else
+									@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+									@@db.execute(@@cso_insert, tako_id, tako_app)
+								end
+							end
+						else
 						@@db.execute(@@cac_insert, ikagent, ip)
 						@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
 						@@db.execute(@@cso_insert, tako_id, tako_app)
