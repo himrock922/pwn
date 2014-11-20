@@ -52,6 +52,7 @@ Signal.trap(:INT) {
 	end
 	@@db.execute(@@tako_delete)
 	@@db.execute(@@app_delete)
+	@@db.execute(@@cac_delete)
 	@@db.close
 	exit
 }
@@ -382,7 +383,7 @@ Signal.trap(:INT) {
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
 
-					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@cac_select, @@nick, @@channel_stable) if @@algo == "1"  
+					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@cac_select, @@cac_delete, @@nick, @@channel_stable) if @@algo == "1"  
 					IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "2"
 					################################
 				########################################
@@ -447,6 +448,7 @@ Signal.trap(:INT) {
 					end
 					@@db.execute(@@tako_delete) # data base delete 
 					@@db.execute(@@app_delete) # data base delete 
+					@@db.execute(@@cac_delete)
 					@@db.close # database close
 				end
 				exit
