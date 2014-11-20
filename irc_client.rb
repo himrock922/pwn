@@ -303,7 +303,7 @@ Signal.trap(:INT) {
 				s_nick = msg.split[6]
 				case algo
 				when 'RANDOM_TAKO'
-					s_app = msg.split[7]
+					s_app = msg.split[8]
 					s_app.encode!("UTF-8")
 					IRC::random_tako_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
 				when 'COMMON_APP'
