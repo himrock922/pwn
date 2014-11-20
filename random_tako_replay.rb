@@ -8,7 +8,7 @@ module RandomTakoReplay
 		select_mac = ""
 		join_app   = ""
 		msg        = ""
-		row        = ""
+		row        = Array.new
 		####################################
 
 		# selection tako for query qpp
