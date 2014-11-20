@@ -268,7 +268,7 @@ Signal.trap(:INT) {
 				@@channel_hash.delete("#{d_cha}") # channel table disconnect ikagent delete
 				d_nick.encode!("UTF-8")
 				d_ip.encode!("UTF-8")
-				@@db.execute("#{@@cac_delete} where ikagent_id = ? and ikagent_ip = ?". d_nick, d_ip)
+				@@db.execute("#{@@cac_delete} where ikagent_id = ? and ikagent_ip = ?", d_nick, d_ip)
 				# such table output
 				p "delete complete"
 			end
@@ -283,7 +283,7 @@ Signal.trap(:INT) {
 
 				d_nick.encode!("UTF-8")
 				d_ip.encode!("UTF-8")
-				@@db.execute("#{@@cac_delete} where ikagent_id = ? and ikagent_ip = ?". d_nick, d_ip)
+				@@db.execute("#{@@cac_delete} where ikagent_id = ? and ikagent_ip = ?", d_nick, d_ip)
 				# such table output
 				p "delete complete"
 			end
