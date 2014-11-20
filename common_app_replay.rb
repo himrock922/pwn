@@ -18,6 +18,6 @@ module CommonAppReplay
 			i += 1
 		end
 		msg = " REPLAY COMMON_APP #{nick} #{ip} #{value}"
-		irc.privmsg "#{s_nick}", "#{msg}"		
+		irc.notice "#{s_nick}", "#{msg}"		
 	end
 end				

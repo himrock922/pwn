@@ -28,6 +28,6 @@ module RandomTakoReplay
 		end
 
 		msg = " REPLAY RANDOM_TAKO #{nick} #{ip} #{select_id} #{select_mac} #{join_app}"
-		irc.privmsg "#{s_nick}", "#{msg}"
+		irc.notice "#{s_nick}", "#{msg}"
 	end
 end

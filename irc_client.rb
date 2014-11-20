@@ -45,9 +45,9 @@ class IRC
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
 		if @@channel == nil
-			@@irc.privmsg "#{key}", " DEL-IKAGENT #{@@nick}"
+			@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick}"
 		elsif @@channel != nil
-			@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
+			@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
 		end
 	end
 	@@db.execute(@@tako_delete)
@@ -81,7 +81,7 @@ Signal.trap(:INT) {
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
 						next if @@channel == key
-						@@irc.privmsg "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}"
+						@@irc.notice "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}"
 					end
 				end
 
@@ -195,7 +195,7 @@ Signal.trap(:INT) {
 					if @@channel_join == 0 # when zero process
 						@@channel_hash.delete("#{@@channel}") # channel delete
 						@@channel_hash.each_key do |key|
-							@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)	
+							@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)	
 						end
 					########################################
 
@@ -238,7 +238,7 @@ Signal.trap(:INT) {
 
 				@@channel_hash.store("#{n_cha}", "#{n_join}") # own channel hash table store other ikagent of information 
 				@@channel_hash.each_key do |key|
-					@@irc.privmsg "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}" # other ikagent private message about own information (UPDATE)
+					@@irc.notice "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}" # other ikagent private message about own information (UPDATE)
 				end
 				p "new channel store!"
 			end
@@ -246,7 +246,7 @@ Signal.trap(:INT) {
 
 			# if upd channel send process
 			########################################################
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'UPD-CHANNEL'
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-CHANNEL'
 				# setting
 				u_cha  = msg.split[5]
 				u_join = msg.split[6]
@@ -258,7 +258,7 @@ Signal.trap(:INT) {
 
 			# if disconnect ikagent server session process
 			########################################################
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'DEL-CHANNEL'
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'DEL-CHANNEL'
 				# setting
 				d_cha  = msg.split[5]
 				d_nick = msg.split[6] 
@@ -294,7 +294,7 @@ Signal.trap(:INT) {
 			########################################################
 
 			# update of select algorithm process
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'REPLAY'
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'REPLAY'
 				algo = msg.split[5]
 				case algo
 				when 'RANDOM_TAKO'
