@@ -45,9 +45,9 @@ class IRC
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
 		if @@channel == nil
-			@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick}"
+			@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick} #{@@ip}"
 		elsif @@channel != nil
-			@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
+			@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
 		end
 	end
 	@@db.execute(@@tako_delete)
@@ -261,14 +261,34 @@ Signal.trap(:INT) {
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'DEL-CHANNEL'
 				# setting
 				d_cha  = msg.split[5]
-				d_nick = msg.split[6] 
+				d_nick = msg.split[6]
+				d_ip   = msg.split[7] 
 				#####################
 
 				@@channel_hash.delete("#{d_cha}") # channel table disconnect ikagent delete
+				d_nick.encode!("UTF-8")
+				d_ip.encode!("UTF-8")
+				@@db.execute("#{cac_delete} where ikagent_id = ? and ikagent_ip = ?". d_nick, d_ip)
 				# such table output
 				p "delete complete"
 			end
  			###############################################
+
+			# if disconnect ikagent (no operator) session process
+			##########################################################
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'DEL-IKAGENT'
+				# setting
+				d_nick = msg.split[5]
+				d_ip   = msg.split[6]
+
+				d_nick.encode!("UTF-8")
+				d_ip.encode!("UTF-8")
+				@@db.execute("#{cac_delete} where ikagent_id = ? and ikagent_ip = ?". d_nick, d_ip)
+				# such table output
+				p "delete complete"
+			end
+ 			###############################################
+				
 
 			# query of choose algorithm process
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'QUERY'
@@ -442,9 +462,9 @@ Signal.trap(:INT) {
 			if /exit/i =~ input # program exit process
 				@@channel_hash.each_key do |key|
 					if @@channel == nil
-						@@irc.privmsg "#{key}", " DEL-IKAGENT #{@@nick}" 
+						@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick} #{@@ip}" 
 					elsif @@channel != nil
-						@@irc.privmsg "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)
+						@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
 					end
 					@@db.execute(@@tako_delete) # data base delete 
 					@@db.execute(@@app_delete) # data base delete 
