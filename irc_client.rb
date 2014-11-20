@@ -17,6 +17,8 @@ require 'sqlite3'
 require_relative 'create_takoble'
 require_relative 'create_appble'
 require_relative 'create_cache'
+require_relative 'cache_tako'
+require_relative 'cache_select_one'
 require_relative 'join_table'
 require_relative 'random_tako_query'
 require_relative 'random_tako_replay'
@@ -38,6 +40,8 @@ class IRC
 	include CreateAppble
 	include JoinTable
 	include CreateCache
+	include CacheTako
+	include CacheSelectOne
 	extend  RandomTakoQuery
 	extend  RandomTakoReplay
 	extend  CommonAppQuery
@@ -53,6 +57,8 @@ Signal.trap(:INT) {
 	@@db.execute(@@tako_delete)
 	@@db.execute(@@app_delete)
 	@@db.execute(@@cac_delete)
+	@@db.execute(@@cat_delete)
+	@@db.execute(@@cso_delete)
 	@@db.close
 	exit
 }
@@ -379,9 +385,10 @@ Signal.trap(:INT) {
 					tako_id  = ""
 					tako_mac = ""
 					tako_app = ""
-					
+					join_app = ""
 					select_tako = ""
 					select_app  = ""
+					
 					
 					tako_id  = poxpr_ex.split[1] # tako_id store
 					tako_mac = poxpr_ex.split[2] # tako_mac store
@@ -391,6 +398,7 @@ Signal.trap(:INT) {
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
 						tako_app = poxpr_ex.split[i] # tako_app store
+						join_app += "#{tako_app} "
 						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
 					end
@@ -402,9 +410,11 @@ Signal.trap(:INT) {
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
-
-					IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@cac_select, @@cac_delete, @@nick, @@channel_stable) if @@algo == "1"  
-					IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "2"
+					if @@algo == "1"
+						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@ip, @@channel_stable, @@app_select, @@tako_select, @@cso_select)
+					elsif @@algo == "2"					
+						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) 
+					end					
 					################################
 				########################################
 		
@@ -469,6 +479,8 @@ Signal.trap(:INT) {
 					@@db.execute(@@tako_delete) # data base delete 
 					@@db.execute(@@app_delete) # data base delete 
 					@@db.execute(@@cac_delete)
+					@@db.execute(@@cat_delete)
+					@@db.execute(@@cso_delete)
 					@@db.close # database close
 				end
 				exit
@@ -627,6 +639,8 @@ Signal.trap(:INT) {
 			@@db.execute(create_takoble)
 			@@db.execute(create_appble)
 			@@db.execute(create_cache)
+			@@db.execute(create_cako)
+			@@db.execute(create_csone)
 		end
 
 		sql_command # sql_coomand summary method
@@ -696,6 +710,16 @@ Signal.trap(:INT) {
 			@@cac_delete  = delete_cache
 			@@cac_update  = update_cache
 			@@cac_select  = select_cache
+
+			@@cat_insert  = insert_cako
+			@@cat_delete  = delete_cako
+			@@cat_update  = update_cako
+			@@cat_select  = select_cako
+
+			@@cso_insert  = insert_csone
+			@@cso_delete  = delete_csone
+			@@cso_update  = update_csone
+			@@cso_select  = select_csone
 
 			@@sql_join    = join_table
 
