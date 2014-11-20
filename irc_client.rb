@@ -327,14 +327,22 @@ Signal.trap(:INT) {
 					ikagent  = msg.split[6]
 					ip       = msg.split[7]
 					tako_id  = msg.split[8]
-					app      = msg.split[9]
+					tako_mac = msg.split[9]
+					tako_app = msg.split[10]
 					ikagent.encode!("UTF-8")
 					ip.encode!("UTF-8")
+					tako_id.encode!("UTF-8")
+					tako_mac.encode!("UTF-8")
+					tako_app.encode!("UTF-8")
 					row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
 					if row.empty? != true
 						@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+						@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+						@@db.execute(@@cso_insert, tako_id, tako_app)
 					else
 						@@db.execute(@@cac_insert, ikagent, ip)
+						@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+						@@db.execute(@@cso_insert, tako_id, tako_app)
 					end
 					print EOF
 					p "party tako fixed!"
