@@ -350,12 +350,26 @@ Signal.trap(:INT) {
 						@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
 						@@db.execute(@@cso_insert, tako_id, tako_app)
 					end
-					print EOF
-					p "party tako fixed!"
-					p "*****************"
-					@@db.execute(@@cac_select) do |row|
-						p row
-					end
+						@@input.puts "StreetPassOK?"
+						@@input.close_write
+						line =  @@output.read
+						if line == "StreetPassOK!"
+							@@db.execute("#{@@cso_select} where tako_app = ? order by random()", tako_app) do |row|
+								@@db.execute("#{@@cat_select} left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", row[0]) do |sow|
+									@@db.execute("#{@@cac_select} left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) do |tow|
+										#@@input.puts "#{tow[0]} #{tow[1]}#{sow[1]}#{sow[2]}#{row[1]}"
+										print EOF
+										p "party tako fixed!"
+										p "*****************"
+										@@input.puts "OK"
+										@@input.close_write
+										spw = @@output.read
+										p spw
+										end
+									end 
+								end
+							end
+
 				when 'COMMON_APP'
 					ikagent = msg.split[6]
 					ip      = msg.split[7]
@@ -380,7 +394,6 @@ Signal.trap(:INT) {
 	#########################################
 	#########################################
 	#########################################
-	
 	# Communication between nodes for process
 	#########################################	
 	@@pwn_poxpr = Thread::fork do
@@ -681,6 +694,7 @@ Signal.trap(:INT) {
 				end
 			end
 		end
+		@@input, @@output = Open3.popen3('ruby streetpass.rb')
 		@@irc.whois @@nick # store of own information
 		###################################################
 
