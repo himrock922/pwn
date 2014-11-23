@@ -344,7 +344,7 @@ Signal.trap(:INT) {
 						p "*************************" 
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
 						@@input.close
-						print "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
+						print "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}\n"
 					else
 						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
 						if row.empty? == false
