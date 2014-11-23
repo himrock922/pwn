@@ -9,8 +9,6 @@ require 'irc-socket'
 #ARGV loop require library
 require 'optparse'
 
-require 'systemu'
-
 # Popen library
 require 'open3'
 
