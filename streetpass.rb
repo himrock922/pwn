@@ -6,7 +6,8 @@ Signal.trap(:INT) {
 		print "StreetPassOK!"
 		while input = gets.chomp
 			print "#{input}"
-			sleep 20
+			random = Random.new
+			sleep random.rand(10..60)
 			print "Timeout!"
 		end
 	end

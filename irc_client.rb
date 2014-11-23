@@ -9,6 +9,8 @@ require 'irc-socket'
 #ARGV loop require library
 require 'optparse'
 
+require 'systemu'
+
 # Popen library
 require 'open3'
 
@@ -334,41 +336,28 @@ Signal.trap(:INT) {
 					tako_id.encode!("UTF-8")
 					tako_mac.encode!("UTF-8")
 					tako_app.encode!("UTF-8")
-					row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
-					if row.empty? != true
-						@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
-							@@db.execute("#{@@cat_select} where tako_id = ?", tako_id) do |sow|
-								if sow.empty? != true
-									@@db.execute(@@cso_insert, tako_id, tako_app)
-								else
-									@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
-									@@db.execute(@@cso_insert, tako_id, tako_app)
-								end
+					line =  @@output.read
+					if (line == "StreetPassOK!" || line == "Timeout!")
+						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
+						@@input.close
+					else
+						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+						if row.empty? != true
+							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
+							if sow.empty? != true
+								@@db.execute(@@cso_insert, tako_id, tako_app)
+							else
+								@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+								@@db.execute(@@cso_insert, tako_id, tako_app)
 							end
+
 						else
-						@@db.execute(@@cac_insert, ikagent, ip)
-						@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
-						@@db.execute(@@cso_insert, tako_id, tako_app)
+							@@db.execute(@@cac_insert, ikagent, ip)
+							@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+							@@db.execute(@@cso_insert, tako_id, tako_app)
+						end
 					end
-						@@input.puts "StreetPassOK?"
-						@@input.close_write
-						line =  @@output.read
-						if line == "StreetPassOK!"
-							@@db.execute("#{@@cso_select} where tako_app = ? order by random()", tako_app) do |row|
-								@@db.execute("#{@@cat_select} left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", row[0]) do |sow|
-									@@db.execute("#{@@cac_select} left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) do |tow|
-										#@@input.puts "#{tow[0]} #{tow[1]}#{sow[1]}#{sow[2]}#{row[1]}"
-										print EOF
-										p "party tako fixed!"
-										p "*****************"
-										@@input.puts "OK"
-										@@input.close_write
-										spw = @@output.read
-										p spw
-										end
-									end 
-								end
-							end
 
 				when 'COMMON_APP'
 					ikagent = msg.split[6]
