@@ -10,17 +10,21 @@ module RandomTakoReplay
 		####################################
 
 		# selection tako for query qpp
-		row = db.execute("#{app_select} where tako_app = ? order by random()", s_app)
-		if row.empty? == true
-			return
+		db.execute("#{app_select} where tako_app = ? order by random()", s_app) do |row|
+			if row.empty? == true
+				return
+			end
+			select_id = row[0]
+			break
 		end
-		select_id = row[0]
 		##################################################
 
 		# replay of selected tako information
 		
-		row = db.execute("#{tako_select} where tako_id = ?", select_id)
-		select_mac = row[1]
+		db.execute("#{tako_select} where tako_id = ?", select_id) do |row|
+			select_mac = row[1]
+			break
+		end
 
 		msg = " REPLAY RANDOM_TAKO #{nick} #{ip} #{select_id} #{select_mac} #{s_app}"
 		irc.notice "#{s_nick}", "#{msg}"
