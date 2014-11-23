@@ -334,12 +334,13 @@ Signal.trap(:INT) {
 					tako_id.encode!("UTF-8")
 					tako_mac.encode!("UTF-8")
 					tako_app.encode!("UTF-8")
-					line =  @@output.read
-					if (line == "StreetPassOK!" || line == "Timeout!")
+					if (@@start == 1 || @@output.read == "Timeout!")
+						@@start = 0
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
 						@@input.close
 					else
 						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+						p row
 						if row.empty? != true
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
@@ -399,7 +400,6 @@ Signal.trap(:INT) {
 					tako_id  = ""
 					tako_mac = ""
 					tako_app = ""
-					join_app = ""
 					select_tako = ""
 					select_app  = ""
 					
@@ -412,7 +412,6 @@ Signal.trap(:INT) {
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
 						tako_app = poxpr_ex.split[i] # tako_app store
-						join_app += "#{tako_app} "
 						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
 					end
@@ -682,6 +681,7 @@ Signal.trap(:INT) {
 			end
 		end
 		@@input, @@output = Open3.popen3('ruby streetpass.rb')
+		@@start = 1
 		@@irc.whois @@nick # store of own information
 		###################################################
 

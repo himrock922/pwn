@@ -4,6 +4,7 @@ Signal.trap(:INT) {
 }
 	@@streetpass = Thread::fork do
 		print "StreetPassOK!"
+		print "StreetPassOK!"
 		while input = gets.chomp
 			print "#{input}"
 			random = Random.new
