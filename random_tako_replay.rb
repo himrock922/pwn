@@ -11,11 +11,11 @@ module RandomTakoReplay
 
 		# selection tako for query qpp
 		db.execute("#{app_select} where tako_app = ? order by random()", s_app) do |row|
-			if row.empty? == true
-				return
-			end
 			select_id = row[0]
 			break
+		end
+		if select_id.empty? == true
+			return
 		end
 		##################################################
 
