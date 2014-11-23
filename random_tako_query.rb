@@ -8,10 +8,9 @@ module RandomTakoQuery
 		select_tako = ""
 		select_app  = ""
 
-		db.execute("select tako_id from TAKO_List order by random()") do |row|
+		row = db.execute("select tako_id from TAKO_List order by random()") 
 			select_tako = row[0]
-			break
-		end
+			p select_tako
 
 		db.execute("select tako_app from APP_List where tako_id = ? order by random()", select_tako) do |row|
 			select_app = row[0]
