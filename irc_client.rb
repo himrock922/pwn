@@ -82,7 +82,9 @@ Signal.trap(:INT) {
 				@@irc.pong "#{server}"
 				@@ikagent_stable.wakeup
 
-				IRC::random_tako_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) if @@algo == "1"  
+				if @@algo == "1"
+					IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@ip, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
+				end
 
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
@@ -336,12 +338,16 @@ Signal.trap(:INT) {
 					tako_app.encode!("UTF-8")
 					if (@@start == 1 || @@output.read == "Timeout!")
 						@@start = 0
+						print EOF
+						p "*************************"
+						p "****party tako fixed!****"
+						p "*************************" 
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
 						@@input.close
+						print "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
 					else
 						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
-						p row.empty?
-						if row.empty? != true
+						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
 							if sow.empty? != true
@@ -424,7 +430,7 @@ Signal.trap(:INT) {
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
 					if @@algo == "1"
-						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@ip, @@channel_stable, @@app_select, @@tako_select, @@cso_select)
+						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@ip, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
 					elsif @@algo == "2"					
 						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) 
 					end					

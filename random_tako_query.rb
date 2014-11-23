@@ -2,36 +2,35 @@
 RandomTako module
 =end
 module RandomTakoQuery
-	def random_tako_query(irc, db, cac_select, cat_select, nick, ip, channel_stable, app_select, tako_select, cso_select)
+	def random_tako_query(irc, db, cac_select, cat_select, nick, ip, channel_stable, app_select, tako_select, cso_select, input, output)
 		result      = ""
 		msg         = ""
 		select_tako = ""
 		select_app  = ""
 
 		row = db.execute("select tako_id from TAKO_List order by random()") 
-			select_tako = row[0]
-			p select_tako
+		select_tako = row[0]
 
-		db.execute("select tako_app from APP_List where tako_id = ? order by random()", select_tako) do |row|
-			select_app = row[0]
-			break
-		end
+		row = db.execute("select tako_app from APP_List where tako_id = ? order by random()", select_tako)			 select_app = row[0]
 
-		db.execute("#{cso_select} where tako_app = ? order by random()", select_app) do |row|
-			if row.empty? == false
-				db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", row[0]) do |sow|
-					db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) do |tow|
-						print "\r\n"
-						p "*************************"
-						p "****party tako fixed!****"
-						p "*************************"
-						print "#{tow[0]}, #{tow[1]}, #{sow[1]} #{sow[2]} #{row[1]}\n"
-						break
-					end
-				break
-				end
-				return
+		row = db.execute("#{cso_select} where tako_app = ? order by random()", select_app)
+		
+		if row.empty? == false
+			sow = db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", row[0])
+			tow = db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) 
+			if output.read == "Timeout!"
+				print "\r\n"
+				p "*************************"
+				p "****party tako fixed!****"
+				p "*************************"
+				input.puts "#{tow[0]}, #{tow[1]}, #{sow[1]} #{sow[2]} #{row[1]}"
+				input.close
+				print "#{tow[0]}, #{tow[1]}, #{sow[1]} #{sow[2]} #{row[1]}\n"
 			end
+			db.execute("delete from CacheSelectOne where tako_id = ?", row[0])
+			db.execute("delete from CacheTako where ikagent_ip = ?", sow[0])
+			db.execute("delete from Cache where ikagent_ip = ?", sow[0])
+			return
 		end
 
 		# such channel send of infomation using of ikagent choose algorithm 
