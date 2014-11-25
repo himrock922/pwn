@@ -80,7 +80,19 @@ Signal.trap(:INT) {
 			if msg.split[0] == 'PING'
 				server = msg.split[1]
 				@@irc.pong "#{server}"
-				@@ikagent_stable.wakeup
+				print EOF	
+				p "channel table"
+				@@channel_hash.each_key do |key|
+					p "#{key}"
+				end
+
+				print EOF
+				p "#{@@sql_column}"
+				p "#{@@sql_output}"
+				# such channel NEW data send
+				@@db.execute(@@sql_join) do |row|
+					print "#{row[0]}, #{row[1]}, #{row[3]}\n"
+				end
 
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
@@ -211,7 +223,6 @@ Signal.trap(:INT) {
 						@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 					end
 					########################################
-					@@ikagent_stable.wakeup # debug message output
 					next
 				end
 				################################################
@@ -220,7 +231,6 @@ Signal.trap(:INT) {
 				if @@nick == mp_user[0]
 					@@channel_stable.delete("#{mp_cha}") # when own part, channel_stable hash delete
 				end
-				@@ikagent_stable.wakeup # debug message
 				################################################
 
 			################################################
@@ -561,29 +571,6 @@ Signal.trap(:INT) {
 	end
 	##########################################################
 
-	# ikagent list store process
-	##########################################################
-	@@ikagent_stable = Thread::fork do
-		Thread::stop
-		while true
-			sleep # sleep until wakeup
-				print EOF	
-				p "channel table"
-				@@channel_hash.each_key do |key|
-					p "#{key}"
-				end
-
-				print EOF
-				p "#{@@sql_column}"
-				p "#{@@sql_output}"
-				# such channel NEW data send
-				@@db.execute(@@sql_join) do |row|
-					print "#{row[0]}, #{row[1]}, #{row[3]}\n"
-				end
-			end		
-		end
-	##########################################################
-
 	# start
 	##########################################################
 	def initialize
@@ -695,7 +682,6 @@ Signal.trap(:INT) {
 		@@ping_pong.run # server message read process
 		@@writen.run # ikagent message write process
 		@@pwn_poxpr.run # poxpr process
-		@@ikagent_stable.run # ikagent_stable process
 		#######################
 		
 		# such thread join
@@ -703,7 +689,6 @@ Signal.trap(:INT) {
 		@@writen.join
 		@@ping_pong.join
 		@@pwn_poxpr.join
-		@@ikagent_stable.join
 		########################
 		
 		########################
