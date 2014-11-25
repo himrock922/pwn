@@ -82,10 +82,6 @@ Signal.trap(:INT) {
 				@@irc.pong "#{server}"
 				@@ikagent_stable.wakeup
 
-				if @@algo == "1"
-					IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@ip, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
-				end
-
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
 						next if @@channel == key
