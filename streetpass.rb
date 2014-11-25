@@ -3,11 +3,12 @@ Signal.trap(:INT) {
 		exit
 }
 	@@streetpass = Thread::fork do
+		p "Timeout!"
 		while input = gets.chomp
 			print "#{input}"
 			random = Random.new
 			sleep random.rand(10..60)
-			print "Timeout!"
+			p "Timeout!"
 		end
 	end
 

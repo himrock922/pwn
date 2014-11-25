@@ -342,8 +342,8 @@ Signal.trap(:INT) {
 					tako_id.encode!("UTF-8")
 					tako_mac.encode!("UTF-8")
 					tako_app.encode!("UTF-8")
-					if (@@start == 1 || @@output.read == "Timeout!")
-						@@start = 0
+					
+					if (@@output.gets.chomp == "\"Timeout!\"")
 						print EOF
 						p "*************************"
 						p "****party tako fixed!****"
@@ -369,7 +369,6 @@ Signal.trap(:INT) {
 							@@db.execute(@@cso_insert, tako_id, tako_app)
 						end
 					end
-
 				when 'COMMON_APP'
 					ikagent = msg.split[6]
 					ip      = msg.split[7]
@@ -670,7 +669,6 @@ Signal.trap(:INT) {
 			end
 		end
 		@@input, @@output = Open3.popen3('ruby streetpass.rb')
-		@@start = 1
 		@@irc.whois @@nick # store of own information
 		###################################################
 
