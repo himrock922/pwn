@@ -342,8 +342,8 @@ Signal.trap(:INT) {
 					tako_id.encode!("UTF-8")
 					tako_mac.encode!("UTF-8")
 					tako_app.encode!("UTF-8")
-					
-					if (@@output.gets.chomp == "\"Timeout!\"")
+					line = @@output.gets.chomp
+					if (line == "\"Timeout!\"")
 						print EOF
 						p "*************************"
 						p "****party tako fixed!****"
