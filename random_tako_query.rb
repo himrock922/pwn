@@ -19,7 +19,8 @@ module RandomTakoQuery
 		if row.empty? == false
 			sow = db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", row[0])
 			tow = db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) 
-			if output.read == "Timeout!"
+			line = output.gets.chomp
+			if line == "\"Timeout!\""
 				print "\r\n"
 				p "*************************"
 				p "****party tako fixed!****"
