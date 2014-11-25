@@ -79,7 +79,7 @@ Signal.trap(:INT) {
 			# server connection confirmation
 			if msg.split[0] == 'PING'
 				server = msg.split[1]
-				@@irc.pong "#{server}"
+				@@irc.pong "#{@@server}"
 				print EOF	
 				p "channel table"
 				@@channel_hash.each_key do |key|
@@ -622,7 +622,7 @@ Signal.trap(:INT) {
 			end
 	
 		#Each option store
-		if OPTS[:s] then @server = OPTS[:s] else @server = SERVER end
+		if OPTS[:s] then @@server = OPTS[:s] else @@server = SERVER end
 		if OPTS[:p] then @port = OPTS[:p] else @port = PORT end
 		if OPTS[:n] then @@nick = OPTS[:n] else @@nick = NICK end
 		if OPTS[:t] then @topic = OPTS[:t] else @topic = nil end
@@ -649,11 +649,11 @@ Signal.trap(:INT) {
 		##################################
 
 		# such paramater output
-		puts @server, @port,  @@nick
+		puts @@server, @port,  @@nick
 		puts @@channel if @@channel != nil
 		
 		# irc socket create
-		@@irc = IRCSocket.new(@server, @port)
+		@@irc = IRCSocket.new(@@server, @port)
 		# irc server connect
 		@@irc.connect
 
