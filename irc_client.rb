@@ -398,11 +398,9 @@ Signal.trap(:INT) {
 	#########################################	
 	@@pwn_poxpr = Thread::fork do
 		Thread::stop
-			poxpr_input, poxpr_output = Open3.popen3('sh dummytako.sh') if @@dummy == "1"
-			poxpr_input, poxpr_output = Open3.popen3('./poxpr -c 1 -X') if @@dummy == "0"
 			# Collaboration with communication between nodes program
 			# Collaboration program stdout
-			poxpr_output.each do | core_output |
+			@@poxpr_output.each do | core_output |
 				p core_output
 				poxpr_ex =  core_output.chomp
 				## NEW or DEL or UPD process
@@ -670,6 +668,8 @@ Signal.trap(:INT) {
 			end
 		end
 		@@input, @@output = Open3.popen3('ruby streetpass.rb')
+		@@poxpr_input, @@poxpr_output = Open3.popen3('sh dummytako.sh') if @@dummy == "1"
+		@@poxpr_input, @@poxpr_output = Open3.popen3('./poxpr -c 1 -X') if @@dummy == "0"
 		@@irc.whois @@nick # store of own information
 		###################################################
 
