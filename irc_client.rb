@@ -312,6 +312,7 @@ Signal.trap(:INT) {
 				s_app  = ""
 				algo   = msg.split[5]
 				s_nick = msg.split[6]
+				@@mutex.lock
 				case algo
 				when 'RANDOM_TAKO'
 					s_app = msg.split[8]
@@ -327,6 +328,7 @@ Signal.trap(:INT) {
 					s_app.encode!("UTF-8")
 					IRC::common_app_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				end
+				@@mutex.unlock
 			end
 			########################################################
 
@@ -404,6 +406,7 @@ Signal.trap(:INT) {
 			# Collaboration with communication between nodes program
 			# Collaboration program stdout
 			@@poxpr_output.each do | core_output |
+				@@mutex.lock
 				p core_output
 				poxpr_ex =  core_output.chomp
 				## NEW or DEL or UPD process
@@ -485,6 +488,7 @@ Signal.trap(:INT) {
 					########################################
 			end
 			########################################################
+			@@mutex.unlock
 		end
 		################################################################
 	end
