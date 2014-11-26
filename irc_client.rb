@@ -362,7 +362,7 @@ Signal.trap(:INT) {
 								@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
 								@@db.execute(@@cso_insert, tako_id, tako_app)
 							end
-
+							p "update complete!"
 						else
 							@@db.execute(@@cac_insert, ikagent, ip)
 							@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
