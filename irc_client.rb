@@ -334,6 +334,7 @@ Signal.trap(:INT) {
 
 			# update of select algorithm process
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'REPLAY'
+				@@mutex.lock
 				algo = msg.split[5]
 				case algo
 				when 'RANDOM_TAKO'
@@ -385,6 +386,7 @@ Signal.trap(:INT) {
 					p "*************************"
 					p "#{ikagent} #{ip} #{value}"
 				end
+				@@mutex.unlock
 			end
 			########################################################			
 			########################################################
