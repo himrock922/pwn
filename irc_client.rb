@@ -375,6 +375,7 @@ Signal.trap(:INT) {
 							@@db.execute(@@cso_insert, tako_id, tako_app)
 							p "insert complete!"
 						end
+						@@mutex.unlock
 					end
 				when 'COMMON_APP'
 					ikagent = msg.split[6]
