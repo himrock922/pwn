@@ -5,7 +5,7 @@ Signal.trap(:INT) {
 	@@streetpass = Thread::fork do
 		p "Timeout!"
 		while input = gets.chomp
-			print "#{input}"
+			p "#{input}"
 			random = Random.new
 			sleep random.rand(10..60)
 			p "Timeout!"
