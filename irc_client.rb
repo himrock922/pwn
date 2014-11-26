@@ -80,7 +80,7 @@ Signal.trap(:INT) {
 			# server connection confirmation
 			if msg.split[0] == 'PING'
 				server = msg.split[1]
-				@@irc.pong "#{@@server}"
+				@@irc.pong "#{server}"
 				print EOF	
 				p "channel table"
 				@@channel_hash.each_key do |key|
@@ -97,7 +97,9 @@ Signal.trap(:INT) {
 
 				if @@channel != nil
 					@@channel_hash.each_key do |key|
-						next if @@channel == key
+						if @@channel == key
+							next
+						end
 						@@irc.notice "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}"
 					end
 				end
@@ -356,6 +358,7 @@ Signal.trap(:INT) {
 						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
+							p sow
 							if sow.empty? != true
 								@@db.execute(@@cso_insert, tako_id, tako_app)
 							else
