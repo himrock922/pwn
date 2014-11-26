@@ -26,7 +26,6 @@ module RandomTakoQuery
 				p "****party tako fixed!****"
 				p "*************************"
 				input.puts "#{tow[0]}, #{tow[1]}, #{sow[1]} #{sow[2]} #{row[1]}"
-				input.close
 				print "#{tow[0]}, #{tow[1]}, #{sow[1]} #{sow[2]} #{row[1]}\n"
 				db.execute("delete from CacheSelectOne where tako_id = ?", row[0])
 				db.execute("delete from CacheTako where ikagent_ip = ?", sow[0])
