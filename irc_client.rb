@@ -60,6 +60,7 @@ Signal.trap(:INT) {
 	@@db.execute(@@cat_delete)
 	@@db.execute(@@cso_delete)
 	@@db.close
+	@@input.close
 	exit
 }
 @@channel_stable = Array.new
@@ -349,7 +350,6 @@ Signal.trap(:INT) {
 						p "****party tako fixed!****"
 						p "*************************" 
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
-						@@input.close
 						print "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}\n"
 					else
 						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
