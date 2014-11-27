@@ -448,7 +448,7 @@ Signal.trap(:INT) {
 					elsif @@algo == "2"			
 						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) 
 					elsif @@algo == "3"
-						IRC::best_match_query(@@irc, @@db, @@app_select, @@nick, @@ip, tako_id)
+						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, @@ip, tako_id)
 					end					
 					################################
 				########################################
