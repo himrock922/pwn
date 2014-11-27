@@ -2,7 +2,7 @@
 RandomTako module
 =end
 module BestMatchQuery
-	def best_match_query(irc, db, app_select, nick, ip, tako_id)
+	def best_match_query(irc, db, channel_stable, app_select, nick, ip, tako_id)
 		
 		select_app = Array.new
 		join_app   = ""
