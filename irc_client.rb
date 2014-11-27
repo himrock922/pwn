@@ -23,6 +23,7 @@ require_relative 'join_table'
 require_relative 'random_tako_query'
 require_relative 'random_tako_replay'
 require_relative 'best_match_query'
+require_relative 'best_match_replay'
 require_relative 'common_app_query'
 require_relative 'common_app_replay'
 
@@ -46,6 +47,7 @@ class IRC
 	extend  RandomTakoQuery
 	extend  RandomTakoReplay
 	extend  BestMatchQuery
+	extend  BestMatchReplay
 	extend  CommonAppQuery
 	extend  CommonAppReplay
 Signal.trap(:INT) {
@@ -329,6 +331,14 @@ Signal.trap(:INT) {
 					end
 					s_app.encode!("UTF-8")
 					IRC::common_app_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
+				when 'BEST_MATCH'
+					i = 8
+					while msg.split[i] != nil
+						s_app += "#{msg.split[i]} "
+						i += 1
+					end
+					join_app.encode!("UTF-8")
+					IRC::best_match_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				end
 				@@mutex.unlock
 			end
