@@ -22,6 +22,7 @@ require_relative 'cache_select_one'
 require_relative 'join_table'
 require_relative 'random_tako_query'
 require_relative 'random_tako_replay'
+require_relative 'best_match_query'
 require_relative 'common_app_query'
 require_relative 'common_app_replay'
 
@@ -44,6 +45,7 @@ class IRC
 	include CacheSelectOne
 	extend  RandomTakoQuery
 	extend  RandomTakoReplay
+	extend  BestMatchQuery
 	extend  CommonAppQuery
 	extend  CommonAppReplay
 Signal.trap(:INT) {
