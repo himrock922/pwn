@@ -17,6 +17,7 @@ require 'sqlite3'
 require_relative 'create_takoble'
 require_relative 'create_appble'
 require_relative 'create_cache'
+require_relative 'create_appnum'
 require_relative 'cache_tako'
 require_relative 'cache_select_one'
 require_relative 'join_table'
@@ -40,6 +41,7 @@ OPTS = {}
 class IRC
 	include CreateTakoble
 	include CreateAppble
+	include CreateAppNum
 	include JoinTable
 	include CreateCache
 	include CacheTako
@@ -63,6 +65,7 @@ Signal.trap(:INT) {
 	@@db.execute(@@cac_delete)
 	@@db.execute(@@cat_delete)
 	@@db.execute(@@cso_delete)
+	@@db.execute("vacuum")
 	@@db.close
 	@@input.close
 	exit
@@ -330,15 +333,15 @@ Signal.trap(:INT) {
 						i += 1
 					end
 					s_app.encode!("UTF-8")
-					IRC::common_app_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
+					IRC::common_app_replay(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				when 'BEST_MATCH'
 					i = 8
 					while msg.split[i] != nil
 						s_app += "#{msg.split[i]} "
 						i += 1
 					end
-					join_app.encode!("UTF-8")
-					IRC::best_match_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
+					s_app.encode!("UTF-8")
+					IRC::best_match_replay(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				end
 				@@mutex.unlock
 			end
@@ -397,6 +400,9 @@ Signal.trap(:INT) {
 					p "****party tako fixed!****"
 					p "*************************"
 					p "#{ikagent} #{ip} #{value}"
+
+				when 'BEST_MATCH'
+					
 				end
 				@@mutex.unlock
 			end
@@ -429,7 +435,7 @@ Signal.trap(:INT) {
 				when 'NEW'
 					tako_id  = ""
 					tako_mac = ""
-					tako_app = ""
+					tako_app = Array.new
 					select_tako = ""
 					select_app  = ""
 					
@@ -437,18 +443,20 @@ Signal.trap(:INT) {
 					tako_id  = poxpr_ex.split[1] # tako_id store
 					tako_mac = poxpr_ex.split[2] # tako_mac store
 					i = 3 
-					
+					count = 0
 					@@db.execute(@@tako_insert, tako_id, tako_mac) # tako_list database insert
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
 						tako_app = poxpr_ex.split[i] # tako_app store
 						@@db.execute(@@app_insert, tako_id, tako_app)
 						i += 1
+						count += 1
 					end
 					###############################
 					p "#{@@sql_column}"
 					p "#{@@sql_output}"
 
+					@@db.execute(@@apn_insert, tako_id, count)
 					# result output
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
@@ -472,12 +480,17 @@ Signal.trap(:INT) {
 					tako_id  = poxpr_ex.split[1] # update subject tako_id store
 					tako_mac = poxpr_ex.split[2] # tako_mac store
 					i = 3 
+					count = 0
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
 						tako_app = poxpr_ex.split[i] # tako_app store
-						@@db.execute("#{app_delete} where tako_id = ? and tako_app = ?", tako_id, tako_app)
+						@@db.execute("#{@@app_delete} where tako_id = ? and tako_app = ?", tako_id, tako_app)
 						i += 1
+						count += 1
 					end
+					@@db.execute("#{@@apn_update} set app_num -= ? where tako_id = ?", count, tako_id)
+					@@db.execute("vacuum")
+					
 					###############################
 					p "#{@@sql_column}"
 					p "#{@@sql_output}"
@@ -494,6 +507,8 @@ Signal.trap(:INT) {
 					####################################
 					@@db.execute("#{@@tako_delete} where tako_id = ?", tako_id)
 					@@db.execute("#{@@app_delete}  where tako_id  = ?", tako_id)
+					@@db.execute("#{@@apn_delete}  where tako_id  = ?", tako_id)
+					@@db.execute("vacuum")
 
 					p "#{@@sql_column}"
 					p "#{@@sql_output}"
@@ -527,6 +542,7 @@ Signal.trap(:INT) {
 					@@db.execute(@@cac_delete)
 					@@db.execute(@@cat_delete)
 					@@db.execute(@@cso_delete)
+					@@db.execute("vacuum")
 					@@db.close # database close
 				end
 				exit
@@ -664,6 +680,7 @@ Signal.trap(:INT) {
 			@@db.execute(create_cache)
 			@@db.execute(create_cako)
 			@@db.execute(create_csone)
+			@@db.execute(create_appnum)
 		end
 
 		sql_command # sql_coomand summary method
@@ -744,6 +761,11 @@ Signal.trap(:INT) {
 			@@cso_delete  = delete_csone
 			@@cso_update  = update_csone
 			@@cso_select  = select_csone
+
+			@@apn_insert  = insert_appnum
+			@@apn_delete  = delete_appnum
+			@@apn_update  = update_appnum
+			@@apn_select  = select_appnum
 
 			@@sql_join    = join_table
 
