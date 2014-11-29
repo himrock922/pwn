@@ -497,7 +497,7 @@ Signal.trap(:INT) {
 					if @@algo == "1"
 						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@ip, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
 					elsif @@algo == "2"			
-						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) 
+						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, @@channel_stable) 
 					elsif @@algo == "3"
 						@@tako_id = tako_id
 						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, @@ip, tako_id)
