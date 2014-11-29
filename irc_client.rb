@@ -351,15 +351,15 @@ Signal.trap(:INT) {
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'REPLAY'
 				@@mutex.lock
 				algo = msg.split[5]
+				ikagent = msg.split[6]
+				ikagent.encode!("UTF-8")
+				ip = msg.split[7]
+				ip.encode!("UTF-8")
 				case algo
 				when 'RANDOM_TAKO'
-					ikagent  = msg.split[6]
-					ip       = msg.split[7]
 					tako_id  = msg.split[8]
 					tako_mac = msg.split[9]
 					tako_app = msg.split[10]
-					ikagent.encode!("UTF-8")
-					ip.encode!("UTF-8")
 					tako_id.encode!("UTF-8")
 					tako_mac.encode!("UTF-8")
 					tako_app.encode!("UTF-8")
@@ -401,8 +401,41 @@ Signal.trap(:INT) {
 					p "*************************"
 					p "#{ikagent} #{ip} #{value}"
 
-				when 'BEST_MATCH'
-					
+				when 'BEST_MATCH'				
+					tako_id  = msg.split[8]
+					tako_mac = msg.split[9] 
+					own_tako = @@tako_id
+					tako_id.encode!("UTF-8")
+					tako_mac.encode!("UTF-8")
+					own_tako.encode!("UTF-8")
+					line = @@output.gets.chomp
+					if (line == "\"Timeout!\"")
+						print EOF
+						p "*************************"
+						p "****party tako fixed!****"
+						p "*************************" 
+						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac}"
+						print "#{ikagent} #{ip} #{tako_id} #{tako_mac}\n"
+					else
+						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+						if row.empty? == false
+							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
+							p sow
+							if sow.empty? != true
+								@@db.execute(@@cso_insert, tako_id, own_tako)
+							else
+								@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+								@@db.execute(@@cso_insert, tako_id, own_tako)
+							end
+							p "update complete!"
+						else
+							@@db.execute(@@cac_insert, ikagent, ip)
+							@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+							@@db.execute(@@cso_insert, tako_id, own_tako)
+							p "insert complete!"
+						end
+					end
 				end
 				@@mutex.unlock
 			end
@@ -466,6 +499,7 @@ Signal.trap(:INT) {
 					elsif @@algo == "2"			
 						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) 
 					elsif @@algo == "3"
+						@@tako_id = tako_id
 						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, @@ip, tako_id)
 					end					
 					################################
