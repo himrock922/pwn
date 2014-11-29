@@ -333,7 +333,7 @@ Signal.trap(:INT) {
 						i += 1
 					end
 					s_app.encode!("UTF-8")
-					IRC::common_app_replay(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
+					IRC::common_app_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				when 'BEST_MATCH'
 					i = 7
 					while msg.split[i] != nil
