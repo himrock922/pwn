@@ -3,7 +3,7 @@ module CommonAppQuery module
 =end
 
 module CommonAppQuery
-	def common_app_query(irc, db, app_select, tako_select, nick, ip, channel_stable)
+	def common_app_query(irc, db, app_select, tako_select, nick, channel_stable)
 		select_tako = ""
 		select_app  = Array.new
 		join_app    = ""

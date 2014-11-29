@@ -2,7 +2,7 @@
 RandomTako module
 =end
 module BestMatchQuery
-	def best_match_query(irc, db, channel_stable, app_select, nick, ip, tako_id)
+	def best_match_query(irc, db, channel_stable, app_select, nick, tako_id)
 		join_app   = ""
 		msg        = ""
 
@@ -11,7 +11,7 @@ module BestMatchQuery
 		end
 
 		# such channel send of infomation using of ikagent choose algorithm 
-			msg = " QUERY BEST_MATCH #{nick} #{ip} #{join_app}" 
+			msg = " QUERY BEST_MATCH #{nick} #{join_app}" 
 			for key in channel_stable do
 				irc.privmsg "#{key}", "#{msg}" 
 			end

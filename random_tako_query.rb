@@ -2,7 +2,7 @@
 RandomTako module
 =end
 module RandomTakoQuery
-	def random_tako_query(irc, db, cac_select, cat_select, nick, ip, channel_stable, app_select, tako_select, cso_select, input, output)
+	def random_tako_query(irc, db, cac_select, cat_select, nick, channel_stable, app_select, tako_select, cso_select, input, output)
 		result      = ""
 		msg         = ""
 		select_tako = ""
@@ -40,7 +40,7 @@ module RandomTakoQuery
 			end
 		end
 		# such channel send of infomation using of ikagent choose algorithm 
-			msg = " QUERY RANDOM_TAKO #{nick} #{ip} #{select_app[0]}" 
+			msg = " QUERY RANDOM_TAKO #{nick} #{select_app[0]}" 
 			for key in channel_stable do
 				irc.privmsg "#{key}", "#{msg}" 
 			end

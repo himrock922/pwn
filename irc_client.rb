@@ -322,7 +322,7 @@ Signal.trap(:INT) {
 				@@mutex.lock
 				case algo
 				when 'RANDOM_TAKO'
-					s_app = msg.split[8]
+					s_app = msg.split[7]
 					s_app.encode!("UTF-8")
 					IRC::random_tako_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
 				when 'COMMON_APP'
@@ -335,7 +335,7 @@ Signal.trap(:INT) {
 					s_app.encode!("UTF-8")
 					IRC::common_app_replay(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				when 'BEST_MATCH'
-					i = 8
+					i = 7
 					while msg.split[i] != nil
 						s_app += "#{msg.split[i]} "
 						i += 1
@@ -495,12 +495,12 @@ Signal.trap(:INT) {
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
 					if @@algo == "1"
-						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@ip, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
+						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
 					elsif @@algo == "2"			
-						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, @@channel_stable) 
+						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable) 
 					elsif @@algo == "3"
 						@@tako_id = tako_id
-						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, @@ip, tako_id)
+						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, tako_id)
 					end					
 					################################
 				########################################
