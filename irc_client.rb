@@ -18,6 +18,7 @@ require_relative 'create_takoble'
 require_relative 'create_appble'
 require_relative 'create_cache'
 require_relative 'create_appnum'
+require_relative 'create_comnum'
 require_relative 'cache_tako'
 require_relative 'cache_select_one'
 require_relative 'join_table'
@@ -42,6 +43,7 @@ class IRC
 	include CreateTakoble
 	include CreateAppble
 	include CreateAppNum
+	include CreateComNum
 	include JoinTable
 	include CreateCache
 	include CacheTako
@@ -65,6 +67,7 @@ Signal.trap(:INT) {
 	@@db.execute(@@cac_delete)
 	@@db.execute(@@cat_delete)
 	@@db.execute(@@cso_delete)
+	@@db.execute(@@com_delete)
 	@@db.execute("vacuum")
 	@@db.close
 	@@input.close
@@ -392,14 +395,33 @@ Signal.trap(:INT) {
 						end
 					end
 				when 'COMMON_APP'
-					ikagent = msg.split[6]
-					ip      = msg.split[7]
-					value   = msg.split[8]
-					print EOF
-					p "*************************"
-					p "****party tako fixed!****"
-					p "*************************"
-					p "#{ikagent} #{ip} #{value}"
+					value = msg.split[8]
+					value.encode!("UTF-8")
+					line = @@output.gets.chomp
+					if (line == "\"Timeout!\"")
+						print EOF
+						p "*************************"
+						p "****party tako fixed!****"
+						p "*************************" 
+						@@input.puts "#{ikagent} #{ip}"
+						print "#{ikagent} #{ip} #{value}\n"
+					else
+						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+						if row.empty? == false
+							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+							sow = @@db.execute("#{@@com_select} where ikagent_ip = ?", ip)
+							if sow.empty? != true
+								@@db.execute("#{@@com_update} set app_num = ?, where ikagent_ip = ?", value, ip)
+							else
+								@@db.execute(@@com_insert, ip, value)
+							end
+							p "update complete!"
+						else
+							@@db.execute(@@cac_insert, ikagent, ip)
+							@@db.execute(@@com_insert, ip, value)
+							p "insert complete!"
+						end
+					end
 
 				when 'BEST_MATCH'				
 					tako_id  = msg.split[8]
@@ -715,6 +737,7 @@ Signal.trap(:INT) {
 			@@db.execute(create_cako)
 			@@db.execute(create_csone)
 			@@db.execute(create_appnum)
+			@@db.execute(create_comnum)
 		end
 
 		sql_command # sql_coomand summary method
@@ -800,6 +823,11 @@ Signal.trap(:INT) {
 			@@apn_delete  = delete_appnum
 			@@apn_update  = update_appnum
 			@@apn_select  = select_appnum
+
+			@@com_insert  = insert_comnum
+			@@com_delete  = delete_comnum
+			@@com_update  = update_comnum
+			@@com_select  = select_comnum
 
 			@@sql_join    = join_table
 
