@@ -12,11 +12,12 @@ module CommonAppQuery
 		line = output.gets.chomp
 
 		if line == "\"Timeout!\""
-			print "\r\n"
-			p "************************"
-			p "****party tako fixed ***"
-			p "************************"
 			db.execute("#{cac_select} left outer join Comnum on Cache.ikagent_ip = Comnum.ikagent_ip order by Comnum.app_num asc") do |row|
+				next if row.empty? == true
+				print "\r\n"
+				p "****party tako fixed ***"
+				p "************************"
+				p "************************"
 				input.puts "#{row[0]}, #{row[1]} #{row[3]}"
 				print "#{row[0]}, #{row[1]} #{row[3]}\n"
 				return
