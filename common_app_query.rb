@@ -9,20 +9,21 @@ module CommonAppQuery
 		join_app    = ""
 		msg         = ""
 
-		line = output.gets.chomp
-
-		if line == "\"Timeout!\""
-			db.execute("#{cac_select} left outer join Comnum on Cache.ikagent_ip = Comnum.ikagent_ip order by Comnum.app_num asc") do |row|
+		db.execute("#{cac_select} left outer join Comnum on Cache.ikagent_ip = Comnum.ikagent_ip order by Comnum.app_num asc") do |row|
 				next if row.empty? == true
-				print "\r\n"
-				p "****party tako fixed ***"
-				p "************************"
-				p "************************"
-				input.puts "#{row[0]}, #{row[1]} #{row[3]}"
-				print "#{row[0]}, #{row[1]} #{row[3]}\n"
-				return
+				line = output.gets.chomp
+				if line == "\"Timeout!\""
+					print "\r\n"
+					p "****party tako fixed ***"
+					p "************************"
+					p "************************"
+					input.puts "#{row[0]}, #{row[1]} #{row[3]}"
+					print "#{row[0]}, #{row[1]} #{row[3]}\n"
+					return
+				else
+					return
+				end
 			end
-		end
 	
 		i = 0
 		db.execute(tako_select) do |row|
