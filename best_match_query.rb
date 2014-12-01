@@ -321,13 +321,13 @@ module BestMatchQuery
 					end
 				end
 			end
-		end
 		
 		else
 			select_tako = row[0]
 		end
-		break if select_tako.empty? == true			
-			db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", row[0]) do |sow|
+	end
+		 if select_tako.empty? == false			
+			db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", select_tako) do |sow|
 				db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) do |tow|
 					line = output.gets.chomp
 					if line == "\"Timeout!\""
@@ -346,6 +346,7 @@ module BestMatchQuery
 				end
 			end
 		end
+	end
 
 		# such channel send of infomation using of ikagent choose algorithm 
 			msg = " QUERY BEST_MATCH #{nick} #{join_app}" 
