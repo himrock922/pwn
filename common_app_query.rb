@@ -3,11 +3,26 @@ module CommonAppQuery module
 =end
 
 module CommonAppQuery
-	def common_app_query(irc, db, app_select, tako_select, nick, channel_stable)
+	def common_app_query(irc, db, app_select, tako_select, nick, channel_stable, cac_select, com_select, input, output)
 		select_tako = ""
 		select_app  = Array.new
 		join_app    = ""
 		msg         = ""
+
+		line = output.gets.chomp
+
+		if line == "\"Timeout!\""
+			print "\r\n"
+			p "************************"
+			p "****party tako fixed ***"
+			p "************************"
+			db.execute("#{cac_select} left outer join Comnum on Cache.ikagent_ip = Comnum.ikagent_ip order by Comnum.app_num asc") do |row|
+				input.puts "#{row[0]}, #{row[1]} #{row[3]}"
+				print "#{row[0]}, #{row[1]} #{row[3]}\n"
+				return
+			end
+		end
+	
 		i = 0
 		db.execute(tako_select) do |row|
 			select_tako = row[0]
