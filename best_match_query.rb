@@ -7,7 +7,7 @@ module BestMatchQuery
 		msg        = ""
 		s_app = Array.new
 		i = 0
-		select_tako   = ""
+		@@select_tako   = ""
 		db.execute("#{app_select} where tako_id = ?", tako_id) do |row|
 			join_app += "#{row[1]} "
 			s_app[i] = row[1]
@@ -15,7 +15,7 @@ module BestMatchQuery
 		end
 
 		db.execute("#{cso_select} where tako_app = ?", tako_id) do |row|
-		
+			
 			if row.empty? == true
 				case i
 				when 1
@@ -27,7 +27,7 @@ module BestMatchQuery
 						if sow.empty? == true
 							next
 						else
-							select_tako = row[0]
+							@@select_tako = row[0]
 							break
 						end	
 					end
@@ -44,7 +44,7 @@ module BestMatchQuery
 					if tow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -63,7 +63,7 @@ module BestMatchQuery
 					if uow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -84,7 +84,7 @@ module BestMatchQuery
 					if vow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -106,7 +106,7 @@ module BestMatchQuery
 					if wow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -130,7 +130,7 @@ module BestMatchQuery
 					if xow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -156,7 +156,7 @@ module BestMatchQuery
 					if yow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -184,7 +184,7 @@ module BestMatchQuery
 					if zow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -214,7 +214,7 @@ module BestMatchQuery
 					if aow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -246,7 +246,7 @@ module BestMatchQuery
 					if bow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -280,7 +280,7 @@ module BestMatchQuery
 					if cow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
@@ -316,18 +316,19 @@ module BestMatchQuery
 					if dow.empty? == true
 						next
 					else
-						select_tako = row[0]
+						@@select_tako = row[0]
 						break
 					end
 				end
 			end
-		
-		else
-			select_tako = row[0]
 		end
-	end
-		 if select_tako.empty? == false			
-			db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", select_tako) do |sow|
+	
+		else
+			@@select_tako = row[0]
+		end
+
+		 if @@select_tako.empty? == false			
+			db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", @@select_tako) do |sow|
 				db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) do |tow|
 					line = output.gets.chomp
 					if line == "\"Timeout!\""
