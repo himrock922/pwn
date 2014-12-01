@@ -522,7 +522,7 @@ Signal.trap(:INT) {
 						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable, @@cac_select, @@com_select, @@input, @@output) 
 					elsif @@algo == "3"
 						@@tako_id = tako_id
-						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, tako_id)
+						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
 					end					
 					################################
 				########################################
