@@ -493,6 +493,7 @@ Signal.trap(:INT) {
 					tako_app = Array.new
 					select_tako = ""
 					select_app  = ""
+					join_app = ""
 					
 					
 					tako_id  = poxpr_ex.split[1] # tako_id store
@@ -504,6 +505,7 @@ Signal.trap(:INT) {
 					while poxpr_ex.split[i] != nil
 						tako_app = poxpr_ex.split[i] # tako_app store
 						@@db.execute(@@app_insert, tako_id, tako_app)
+						join_app += "#{tako_app} "
 						i += 1
 						count += 1
 					end
@@ -516,11 +518,18 @@ Signal.trap(:INT) {
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
-					if @@algo == "1"
+					
+					if @@smode == "1"
+						msg = " NEW-TAKO #{@@ikagent} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
+						for key in @@channel_stable do
+							@@irc.privmsg "#{key}", "#{msg}"
+						end
+					end
+					if @@algo == "1" && @@smode == "0"
 						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
-					elsif @@algo == "2"			
+					elsif @@algo == "2" && @@smode == "0"			
 						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable, @@cac_select, @@com_select, @@input, @@output) 
-					elsif @@algo == "3"
+					elsif @@algo == "3" && @@smode == "0"
 						@@tako_id = tako_id
 						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
 					end					
@@ -694,6 +703,7 @@ Signal.trap(:INT) {
 				opt.on('-a ALGO', '--algo', 'algo')          {|v| OPTS[:a] = v}
 				opt.on('-t TOPIC', '--topic', 'topic')	     {|v| OPTS[:t] = v}
 				opt.on('-d', '--dummy', 'dummy')	     {|v| OPTS[:d] = v}
+				opt.on('-m', '--smode', 'smode')	     {|v| OPTS[:m] = v}
 				############################################
 			
 				# Options Usage output
@@ -722,6 +732,7 @@ Signal.trap(:INT) {
 		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = nil end
 		if OPTS[:a] then @@algo = OPTS[:a] else @@algo = ALGO end
 		if OPTS[:d] then @@dummy = "1" else @@dummy = "0" end
+		if OPTS[:m] then @@smode = "1" else @@smode = "0" end
 		################################################################
 
 		# SQLite3 process
