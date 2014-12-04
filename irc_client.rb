@@ -520,7 +520,7 @@ Signal.trap(:INT) {
 					end
 					
 					if @@smode == "1"
-						msg = " NEW-TAKO #{@@ikagent} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
+						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
 						for key in @@channel_stable do
 							@@irc.privmsg "#{key}", "#{msg}"
 						end
