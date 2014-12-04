@@ -461,7 +461,7 @@ Signal.trap(:INT) {
 				@@mutex.unlock
 			end
 			########################################################			
-			if msg.split[1] == 'NOTICE' && msg.split[4] == 'NEW-TAKO'
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-TAKO'
 				@@mutex.lock
 				ikagent  = msg.split[5]
 				ip       = msg.split[6]
@@ -505,9 +505,59 @@ Signal.trap(:INT) {
 				@@mutex.unlock
 			end
 			########################################################
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-TAKO'
+				@@mutx.lock
+				ikagent  = msg.split[5]
+				ip       = msg.split[6]
+				tako_id  = msg.split[7]
+				tako_mac = msg.split[8]
+				ikagent.encode!("UTF-8")
+				ip.encode!("UTF-8")
+				tako_id.encode!("UTF-8")
+				tako_mac.encode!("UTF-8")
+
+				row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+				if row.empty? == false
+					@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+				else
+					@@db.execute(@@cac_insert, ikagent, ip)
+				end	
+			
+				row = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
+				@@db.execute(@@cat_insert, ip, tako_id, tako_mac) if row.empty? == true
+				i = 9
+				while msg.split[i] != nil
+					tako_app = msg.split[i]
+						if row.empty? == false
+							@@db.execute("#{@@cac_delete} where tako_id =? and tako_app = ?", tako_id, tako_app)
+							@@db.execute("vacuum")
+						else
+						@@db.execute(@@cso_insert, tako_id, tako_app)
+						end
+					i += 1
+				end
+				@@mutex.unlock
+			end	
 			########################################################
 	
-
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'DEL-TAKO'
+				@@mutex.lock
+				ikagent = msg.split[5]
+				ip      = msg.split[6]
+				tako_id = msg.split[7]
+				
+				ikagent.encode!("UTF-8")
+				ip.encode!("UTF-8")
+				tako_id.encode!("UTF-8")
+				
+				@@db.execute("#{@@cso_delete} where tako_id = ?", tako_id)
+				@@db.execute("#{@@cat_delete} where tako_id = ?". tako_id)
+				row = @@db.execute("#{@@cat_select} where ikagent_ip = ?", ip)
+				if row.empty? == true
+					@@db.execute("#{@@cac_delete} where ikagent_ip = ?", ip)
+				end
+				@@mutex.unlock
+			end
 			###############################################
 			###############################################
 
@@ -595,7 +645,7 @@ Signal.trap(:INT) {
 						i += 1
 						count += 1
 					end
-					@@db.execute("#{@@apn_update} set app_num -= ? where tako_id = ?", count, tako_id)
+					@@db.execute("#{@@apn_update} set app_num = app_num - ? where tako_id = ?", count, tako_id)
 					@@db.execute("vacuum")
 					
 					###############################
@@ -604,6 +654,12 @@ Signal.trap(:INT) {
 					# such channel NEW data send
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
+					end
+					if @@smode == "1"
+						msg = " UPD-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{tako_app}"
+						for key in @@channel_stable do
+							@@irc.notice "#{key}", "#{msg}"
+						end
 					end
 					
 				###############################################	
@@ -622,6 +678,12 @@ Signal.trap(:INT) {
 					# such channel NEW data send
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
+					end
+					if @@smode == "1"
+						msg = " DEL-TAKO #{@@nick} #{@@ip} #{tako_id}"
+						for key in @@channel_stable do
+							@@irc.notice "#{key}", "#{msg}"
+						end
 					end
 					########################################
 			end
