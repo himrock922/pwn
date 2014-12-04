@@ -556,6 +556,7 @@ Signal.trap(:INT) {
 				if row.empty? == true
 					@@db.execute("#{@@cac_delete} where ikagent_ip = ?", ip)
 				end
+				@@db.execute("vacuum")
 				@@mutex.unlock
 			end
 			###############################################
