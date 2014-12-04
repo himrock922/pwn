@@ -379,7 +379,6 @@ Signal.trap(:INT) {
 						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
-							p sow
 							if sow.empty? != true
 								@@db.execute(@@cso_insert, tako_id, tako_app)
 							else
@@ -462,6 +461,48 @@ Signal.trap(:INT) {
 				@@mutex.unlock
 			end
 			########################################################			
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'NEW-TAKO'
+				@@mutex.lock
+				ikagent  = msg.split[5]
+				ip       = msg.split[6]
+				tako_id  = msg.split[7]
+				tako_mac = msg.split[8]
+				ikagent.encode!("UTF-8")
+				ip.encode!("UTF-8")
+				tako_id.encode!("UTF-8")
+				tako_mac.encode!("UTF-8")
+
+				row = @@db.execute("#{@@cac_select} where ikagent_ip =?", ip)
+				if row.empty? == false
+					@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+				else
+					@@db.execute(@@cac_insert, ikagent, ip)
+				end
+
+				@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+				i = 9
+				while msg.split[i] != nil
+					tako_app = msg.split[i]
+					tako_app.encode!("UTF-8")	
+					@@db.execute(@@cso_insert, tako_id, tako_app)
+					i += 1
+				end
+				own_tako = ""
+				own_mac  = ""
+				own_app = ""
+				@@db.execute(@@tako_select) do |row|
+					break if row.empty? == true
+					@@db.execute(@@sql_join) do |dow|
+						own_tako = dow[0]
+						own_mac  = dow[1]
+						own_app += "#{dow[3]} "
+					end	
+					msg = " UPD-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
+					for key in @@channel_stable do
+						@@irc.notice "#{key}", "#{msg}"
+					end
+				end
+			end
 			########################################################
 			########################################################
 	
