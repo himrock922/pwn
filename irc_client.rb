@@ -530,7 +530,7 @@ Signal.trap(:INT) {
 				else
 					p "test"
 					@@db.execute("#{@@cac_delete} where tako_id = ?", tako_id)
-					@@db.execute("vaccum")
+					@@db.execute("vacuum")
 				end
 				i = 9
 				p "test"
