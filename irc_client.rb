@@ -535,7 +535,6 @@ Signal.trap(:INT) {
 					tako_app = msg.split[i]
 					tako_app.encode!("UTF-8")
 					@@db.execute(@@cso_insert, tako_id, tako_app)
-					end
 					i += 1
 				end
 				@@mutex.unlock
