@@ -506,7 +506,7 @@ Signal.trap(:INT) {
 			end
 			########################################################
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-TAKO'
-				@@mutx.lock
+				@@mutex.lock
 				ikagent  = msg.split[5]
 				ip       = msg.split[6]
 				tako_id  = msg.split[7]
