@@ -524,16 +524,18 @@ Signal.trap(:INT) {
 				end	
 			
 				row = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
-				@@db.execute(@@cat_insert, ip, tako_id, tako_mac) if row.empty? == true
+				if row.empty? == true
+					@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+				else
+					@@db.execute("#{@@cac_delete} where tako_id = ?", tako_id)
+					@@db.execute("voccum")
+				end
 				i = 9
 				while msg.split[i] != nil
 					tako_app = msg.split[i]
-						if row.empty? == false
-							@@db.execute("#{@@cac_delete} where tako_id =? and tako_app = ?", tako_id, tako_app)
-							@@db.execute("vacuum")
-						else
-						@@db.execute(@@cso_insert, tako_id, tako_app)
-						end
+					tako_app.encode!("UTF-8")
+					@@db.execute(@@cso_insert, tako_id, tako_app)
+					end
 					i += 1
 				end
 				@@mutex.unlock
@@ -655,6 +657,7 @@ Signal.trap(:INT) {
 					# such channel NEW data send
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
+						tako_app += "#{row[3]} "
 					end
 					if @@smode == "1"
 						msg = " UPD-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{tako_app}"
