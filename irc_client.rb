@@ -524,13 +524,16 @@ Signal.trap(:INT) {
 				end	
 			
 				row = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
+				p "test"
 				if row.empty? == true
 					@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
 				else
+					p "test"
 					@@db.execute("#{@@cac_delete} where tako_id = ?", tako_id)
-					@@db.execute("voccum")
+					@@db.execute("vaccum")
 				end
 				i = 9
+				p "test"
 				while msg.split[i] != nil
 					tako_app = msg.split[i]
 					tako_app.encode!("UTF-8")
