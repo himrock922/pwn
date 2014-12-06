@@ -1,38 +1,38 @@
 =begin
 SQL Table Create Module
 =end
-module CreateComNum
+module CreateValue
 	# table create process
-	def create_comnum
-		sql = "create table ComNum (ikagent_ip text, app_num integer)"
+	def create_value
+		sql = "create table Value (ikagent_ip text, value integer)"
 		return sql
 	end
 	######################
 
 	# table data insert process
-	def insert_comnum
-		sql = "insert into ComNum values (?, ?)"
+	def insert_value
+		sql = "insert into Value values (?, ?)"
 		return sql
 	end
 	######################
 	
 	# table delete process
-	def delete_comnum
-		sql = "delete from ComNum"
+	def delete_value
+		sql = "delete from Value"
 		return sql
 	end
 	######################
 
 	# table data update process
-	def update_comnum
-		sql = "update ComNum"
+	def update_value
+		sql = "update Value"
 		return sql
 	end
 	######################
 	
 	# table select process
-	def select_comnum
-		sql = "select * from ComNum"
+	def select_value
+		sql = "select * from Value"
 		return sql
 	end
 	######################

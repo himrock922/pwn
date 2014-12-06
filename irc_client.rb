@@ -19,13 +19,18 @@ require_relative 'create_appble'
 require_relative 'create_cache'
 require_relative 'create_appnum'
 require_relative 'create_comnum'
+require_relative 'create_value'
+require_relative 'create_number'
 require_relative 'cache_tako'
 require_relative 'cache_select_one'
 require_relative 'join_table'
+require_relative 'random_tako'
 require_relative 'random_tako_query'
 require_relative 'random_tako_replay'
+require_relative 'extact_match'
 require_relative 'best_match_query'
 require_relative 'best_match_replay'
+require_relative 'common_app'
 require_relative 'common_app_query'
 require_relative 'common_app_replay'
 
@@ -44,14 +49,19 @@ class IRC
 	include CreateAppble
 	include CreateAppNum
 	include CreateComNum
+	include CreateValue
+	include CreateNumber
 	include JoinTable
 	include CreateCache
 	include CacheTako
 	include CacheSelectOne
+	extend  RandomTako
 	extend  RandomTakoQuery
 	extend  RandomTakoReplay
+	extend  ExtactMatch
 	extend  BestMatchQuery
 	extend  BestMatchReplay
+	extend  CommonApp
 	extend  CommonAppQuery
 	extend  CommonAppReplay
 Signal.trap(:INT) {
@@ -68,6 +78,7 @@ Signal.trap(:INT) {
 	@@db.execute(@@cat_delete)
 	@@db.execute(@@cso_delete)
 	@@db.execute(@@com_delete)
+	@@db.execute(@@val_delete)
 	@@db.execute("vacuum")
 	@@db.close
 	@@input.close
@@ -394,8 +405,7 @@ Signal.trap(:INT) {
 						end
 					end
 				when 'COMMON_APP'
-					value = msg.split[8]
-					value.encode!("UTF-8")
+					value = msg.split[8].to_i
 					line = @@output.gets.chomp
 					if (line == "\"Timeout!\"")
 						print EOF
@@ -531,11 +541,21 @@ Signal.trap(:INT) {
 					@@db.execute("vacuum")
 				end
 				i = 9
+				count = 0
 				while msg.split[i] != nil
 					tako_app = msg.split[i]
 					tako_app.encode!("UTF-8")
 					@@db.execute(@@cso_insert, tako_id, tako_app)
 					i += 1
+					count += 1
+				end
+				if @@algo == "1" && @@smode == "1"
+					IRC::random_tako(@@db, @@input, @@output, @@cso_select)
+				elsif @@algo == "2" && @@smode == "1"
+					IRC::common_app(@@db, @@cac_select, @@cat_select, @@app_select, @@cso_select, @@val_insert, @@val_update, @@val_select)
+				elsif @@algo == "3" && @@smode == "1"
+					@@db.execute(@@num_insert, tako_id, count)
+					IRC::extact_match(@@db, @@tako_id, @@app_select, @@num_select, @@cso_select)
 				end
 				@@mutex.unlock
 			end	
@@ -613,6 +633,8 @@ Signal.trap(:INT) {
 						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
 					end
 					
+					@@tako_id = tako_id
+
 					if @@smode == "1"
 						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
 						for key in @@channel_stable do
@@ -624,7 +646,6 @@ Signal.trap(:INT) {
 					elsif @@algo == "2" && @@smode == "0"			
 						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable, @@cac_select, @@com_select, @@input, @@output) 
 					elsif @@algo == "3" && @@smode == "0"
-						@@tako_id = tako_id
 						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
 					end					
 					################################
@@ -856,6 +877,8 @@ Signal.trap(:INT) {
 			@@db.execute(create_csone)
 			@@db.execute(create_appnum)
 			@@db.execute(create_comnum)
+			@@db.execute(create_value)
+			@@db.execute(create_number)
 		end
 
 		sql_command # sql_coomand summary method
@@ -946,6 +969,16 @@ Signal.trap(:INT) {
 			@@com_delete  = delete_comnum
 			@@com_update  = update_comnum
 			@@com_select  = select_comnum
+			
+			@@val_insert  = insert_value
+			@@val_delete  = delete_value
+			@@val_update  = update_value
+			@@val_select  = select_value
+
+			@@num_insert  = insert_number
+			@@num_delete  = delete_number
+			@@num_update  = update_number
+			@@num_select  = select_number
 
 			@@sql_join    = join_table
 
