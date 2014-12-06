@@ -9,7 +9,7 @@ module CommonAppQuery
 		join_app    = ""
 		msg         = ""
 
-		db.execute("#{cac_select} left outer join Comnum on Cache.ikagent_ip = Comnum.ikagent_ip order by Comnum.app_num asc") do |row|
+		db.execute("#{cac_select} left outer join ComNum on Cache.ikagent_ip = ComNum.ikagent_ip order by ComNum.app_num asc") do |row|
 				next if row.empty? == true
 				line = output.gets.chomp
 				if line == "\"Timeout!\""
