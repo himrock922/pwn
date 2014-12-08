@@ -1,8 +1,8 @@
 =begin
 RandomTako module
 =end
-module RandomTakoReplay 
-	def random_tako_replay(irc, db, app_select, tako_select, nick, ip, s_nick, s_app)
+module RandomTakoReply 
+	def random_tako_reply(irc, db, app_select, tako_select, nick, ip, s_nick, s_app)
 		# setting
 		select_id  = ""
 		select_mac = ""
@@ -26,7 +26,7 @@ module RandomTakoReplay
 			break
 		end
 
-		msg = " REPLAY RANDOM_TAKO #{nick} #{ip} #{select_id} #{select_mac} #{s_app}"
+		msg = " REPLY RANDOM_TAKO #{nick} #{ip} #{select_id} #{select_mac} #{s_app}"
 		irc.notice "#{s_nick}", "#{msg}"
 	end
 end

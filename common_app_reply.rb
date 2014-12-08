@@ -2,8 +2,8 @@
 module CommonAppQuery module
 =end
 
-module CommonAppReplay
-	def common_app_replay(irc, db, app_select, tako_select, nick, ip, s_nick, s_app)
+module CommonAppReply
+	def common_app_reply(irc, db, app_select, tako_select, nick, ip, s_nick, s_app)
 		# setting
 		select_tako = ""
 		join_tako   = ""
@@ -17,7 +17,7 @@ module CommonAppReplay
 			end
 			i += 1
 		end
-		msg = " REPLAY COMMON_APP #{nick} #{ip} #{value}"
+		msg = " REPLY COMMON_APP #{nick} #{ip} #{value}"
 		irc.notice "#{s_nick}", "#{msg}"		
 	end
 end				

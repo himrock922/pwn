@@ -14,6 +14,9 @@ require 'open3'
 
 # sqlite library
 require 'sqlite3'
+
+require 'timeout'
+
 require_relative 'create_takoble'
 require_relative 'create_appble'
 require_relative 'create_cache'
@@ -26,13 +29,13 @@ require_relative 'cache_select_one'
 require_relative 'join_table'
 require_relative 'random_tako'
 require_relative 'random_tako_query'
-require_relative 'random_tako_replay'
+require_relative 'random_tako_reply'
 require_relative 'extact_match'
-require_relative 'best_match_query'
-require_relative 'best_match_replay'
+require_relative 'extact_match_query'
+require_relative 'extact_match_reply'
 require_relative 'common_app'
 require_relative 'common_app_query'
-require_relative 'common_app_replay'
+require_relative 'common_app_reply'
 
 #default irc server setup
 SERVER = "bsd-himrock922.jaist.ac.jp"
@@ -57,13 +60,13 @@ class IRC
 	include CacheSelectOne
 	extend  RandomTako
 	extend  RandomTakoQuery
-	extend  RandomTakoReplay
+	extend  RandomTakoReply
 	extend  ExtactMatch
-	extend  BestMatchQuery
-	extend  BestMatchReplay
+	extend  ExtactMatchQuery
+	extend  ExtactMatchReply
 	extend  CommonApp
 	extend  CommonAppQuery
-	extend  CommonAppReplay
+	extend  CommonAppReply
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
 		if @@channel == nil
@@ -90,12 +93,14 @@ Signal.trap(:INT) {
 @@tako_mac = ""
 @@tako_app = ""
 @@channel_join = 0
+@@time = 0
 @@mutex = Mutex::new
 
 	# while ping_pong and hash table process
 
 	@@ping_pong = Thread::fork do
 		Thread::stop
+			
 		while msg = @@irc.read
 			p msg
 			# server connection confirmation
@@ -338,7 +343,7 @@ Signal.trap(:INT) {
 				when 'RANDOM_TAKO'
 					s_app = msg.split[7]
 					s_app.encode!("UTF-8")
-					IRC::random_tako_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
+					IRC::random_tako_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
 				when 'COMMON_APP'
 					s_app_tmp = msg 
 					i = 7
@@ -347,7 +352,7 @@ Signal.trap(:INT) {
 						i += 1
 					end
 					s_app.encode!("UTF-8")
-					IRC::common_app_replay(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
+					IRC::common_app_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				when 'BEST_MATCH'
 					i = 7
 					while msg.split[i] != nil
@@ -355,14 +360,14 @@ Signal.trap(:INT) {
 						i += 1
 					end
 					s_app.encode!("UTF-8")
-					IRC::best_match_replay(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
+					IRC::extact_match_reply(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				end
 				@@mutex.unlock
 			end
 			########################################################
 
 			# update of select algorithm process
-			if msg.split[1] == 'NOTICE' && msg.split[4] == 'REPLAY'
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'REPLY'
 				@@mutex.lock
 				algo = msg.split[5]
 				ikagent = msg.split[6]
@@ -386,9 +391,9 @@ Signal.trap(:INT) {
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
 						print "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}\n"
 					else
-						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+						row = @@db.execute("#{@@cac_select} where ikagent_id or ikagent_ip = ?", ip)
 						if row.empty? == false
-							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ? ", ikagent, ip, ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
 							if sow.empty? != true
 								@@db.execute(@@cso_insert, tako_id, tako_app)
@@ -415,9 +420,9 @@ Signal.trap(:INT) {
 						@@input.puts "#{ikagent} #{ip}"
 						print "#{ikagent} #{ip} #{value}\n"
 					else
-						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+						row = @@db.execute("#{@@cac_select} where ikanget_id = ? or ikagent_ip = ?", ip)
 						if row.empty? == false
-							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
 							sow = @@db.execute("#{@@com_select} where ikagent_ip = ?", ip)
 							if sow.empty? != true
 								@@db.execute("#{@@com_update} set app_num = ?, where ikagent_ip = ?", value, ip)
@@ -448,9 +453,9 @@ Signal.trap(:INT) {
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac}"
 						print "#{ikagent} #{ip} #{tako_id} #{tako_mac}\n"
 					else
-						row = @@db.execute("#{@@cac_select} where ikagent_ip = ?", ip)
+						row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 						if row.empty? == false
-							@@db.execute("#{@@cac_update} set ikagent_id = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip)
+							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip, ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
 							p sow
 							if sow.empty? != true
@@ -637,6 +642,7 @@ Signal.trap(:INT) {
 
 					if @@smode == "1"
 						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
+						@@time = 1
 						for key in @@channel_stable do
 							@@irc.privmsg "#{key}", "#{msg}"
 						end
@@ -646,7 +652,7 @@ Signal.trap(:INT) {
 					elsif @@algo == "2" && @@smode == "0"			
 						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable, @@cac_select, @@com_select, @@input, @@output) 
 					elsif @@algo == "3" && @@smode == "0"
-						IRC::best_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
+						IRC::extact_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
 					end					
 					################################
 				########################################

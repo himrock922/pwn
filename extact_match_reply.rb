@@ -2,8 +2,8 @@
 module CommonAppQuery module
 =end
 
-module BestMatchReplay
-	def best_match_replay(irc, db, app_select, apn_select, tako_select, nick, ip, s_nick, s_app)
+module ExtactMatchReply
+	def extact_match_reply(irc, db, app_select, apn_select, tako_select, nick, ip, s_nick, s_app)
 		#######################
 		i = 0
 		select_tako = ""
@@ -324,7 +324,7 @@ module BestMatchReplay
 			break
 		end
 
-		msg = " REPLAY BEST_MATCH #{nick} #{ip} #{select_tako} #{select_mac}"
+		msg = " REPLY BEST_MATCH #{nick} #{ip} #{select_tako} #{select_mac}"
 		irc.notice "#{s_nick}", "#{msg}"
 	end
 end				

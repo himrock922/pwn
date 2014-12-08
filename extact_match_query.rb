@@ -1,8 +1,8 @@
 =begin
 RandomTako module
 =end
-module BestMatchQuery
-	def best_match_query(irc, db, channel_stable, app_select, nick, tako_id, cso_select, apn_select)
+module ExtactMatchQuery
+	def extact_match_query(irc, db, channel_stable, app_select, nick, tako_id, cso_select, apn_select)
 		join_app   = ""
 		msg        = ""
 		s_app = Array.new
