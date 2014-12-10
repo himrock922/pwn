@@ -641,20 +641,30 @@ Signal.trap(:INT) {
 					
 					@@tako_id = tako_id
 
-					if @@smode == "1"
+					case @@smode
+					when "0"
+						msg = ""
+						case @@algo
+						when "1"
+							msg = IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
+						when "2"
+							msg = IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@cac_select, @@com_select, @@input, @@output) 
+						when "3"
+							msg = IRC::extact_match_query(@@irc, @@db, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
+						end
+
+						next if msg.empty? == true
+						for key in @@channel_stable do
+							@@irc.privmsg "#{key}", "#{msg}"
+						end
+						@@timeout.wakeup
+					when "1"
 						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
 						for key in @@channel_stable do
 							@@irc.privmsg "#{key}", "#{msg}"
 						end
 						@@timeout.wakeup
 					end
-					if @@algo == "1" && @@smode == "0"
-						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
-					elsif @@algo == "2" && @@smode == "0"			
-						IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@channel_stable, @@cac_select, @@com_select, @@input, @@output) 
-					elsif @@algo == "3" && @@smode == "0"
-						IRC::extact_match_query(@@irc, @@db, @@channel_stable, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
-					end					
 					################################
 				########################################
 		

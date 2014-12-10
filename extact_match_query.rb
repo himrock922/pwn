@@ -2,7 +2,7 @@
 RandomTako module
 =end
 module ExtactMatchQuery
-	def extact_match_query(irc, db, channel_stable, app_select, nick, tako_id, cso_select, apn_select)
+	def extact_match_query(irc, db, app_select, nick, tako_id, cso_select, apn_select)
 		join_app   = ""
 		msg        = ""
 		s_app = Array.new
@@ -351,8 +351,6 @@ module ExtactMatchQuery
 
 		# such channel send of infomation using of ikagent choose algorithm 
 			msg = " QUERY BEST_MATCH #{nick} #{join_app}" 
-			for key in channel_stable do
-				irc.privmsg "#{key}", "#{msg}" 
-			end
+			return msg
 	end
 end

@@ -3,7 +3,7 @@ module CommonAppQuery module
 =end
 
 module CommonAppQuery
-	def common_app_query(irc, db, app_select, tako_select, nick, channel_stable, cac_select, com_select, input, output)
+	def common_app_query(irc, db, app_select, tako_select, nick, cac_select, com_select, input, output)
 		select_tako = ""
 		select_app  = Array.new
 		join_app    = ""
@@ -42,9 +42,6 @@ module CommonAppQuery
 		end
 		
 		msg = " QUERY COMMON_APP #{nick} #{join_app}"
-
-		for key in channel_stable do
-			irc.privmsg "#{key}", "#{msg}"
-		end		
+		return msg
 	end
 end				
