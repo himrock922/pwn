@@ -93,14 +93,12 @@ Signal.trap(:INT) {
 @@tako_mac = ""
 @@tako_app = ""
 @@channel_join = 0
-@@time = 0
 @@mutex = Mutex::new
 
 	# while ping_pong and hash table process
 
 	@@ping_pong = Thread::fork do
 		Thread::stop
-			
 		while msg = @@irc.read
 			p msg
 			# server connection confirmation
@@ -368,6 +366,7 @@ Signal.trap(:INT) {
 
 			# update of select algorithm process
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'REPLY'
+				@@timeout.wakeup
 				@@mutex.lock
 				algo = msg.split[5]
 				ikagent = msg.split[6]
@@ -474,6 +473,7 @@ Signal.trap(:INT) {
 					end
 				end
 				@@mutex.unlock
+				@@timeout.wakeup
 			end
 			########################################################			
 			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-TAKO'
@@ -521,6 +521,7 @@ Signal.trap(:INT) {
 			end
 			########################################################
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-TAKO'
+				@@timeout.wakeup
 				@@mutex.lock
 				ikagent  = msg.split[5]
 				ip       = msg.split[6]
@@ -563,6 +564,7 @@ Signal.trap(:INT) {
 					IRC::extact_match(@@db, @@tako_id, @@app_select, @@num_select, @@cso_select)
 				end
 				@@mutex.unlock
+				@@timeout.wakeup
 			end	
 			########################################################
 	
@@ -587,7 +589,6 @@ Signal.trap(:INT) {
 			end
 			###############################################
 			###############################################
-
 		end
 	end
 	#########################################
@@ -642,10 +643,10 @@ Signal.trap(:INT) {
 
 					if @@smode == "1"
 						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
-						@@time = 1
 						for key in @@channel_stable do
 							@@irc.privmsg "#{key}", "#{msg}"
 						end
+						@@timeout.wakeup
 					end
 					if @@algo == "1" && @@smode == "0"
 						IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@channel_stable, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
@@ -807,6 +808,23 @@ Signal.trap(:INT) {
 	end
 	##########################################################
 
+	@@timeout = Thread::fork do
+		Thread::stop
+		while true
+			sleep
+			begin
+				timeout(10) {
+					while true
+						sleep 
+					end
+				}
+			rescue Timeout::Error
+				p "Timeout!"
+			end
+		end
+	end
+			
+				
 	# start
 	##########################################################
 	def initialize
@@ -893,7 +911,6 @@ Signal.trap(:INT) {
 		# such paramater output
 		puts @@server, @port,  @@nick
 		puts @@channel if @@channel != nil
-		
 		# irc socket create
 		@@irc = IRCSocket.new(@@server, @port)
 		# irc server connect
@@ -925,6 +942,7 @@ Signal.trap(:INT) {
 		@@ping_pong.run # server message read process
 		@@writen.run # ikagent message write process
 		@@pwn_poxpr.run # poxpr process
+		@@timeout.run
 		#######################
 		
 		# such thread join
@@ -932,6 +950,7 @@ Signal.trap(:INT) {
 		@@writen.join
 		@@ping_pong.join
 		@@pwn_poxpr.join
+		@@timeout.join
 		########################
 		
 		########################
