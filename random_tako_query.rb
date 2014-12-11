@@ -17,7 +17,7 @@ module RandomTakoQuery
 		db.execute("#{cso_select} where tako_app = ? order by random()", select_app[0])	do |row|	
 			if row.empty? == false
 				db.execute("select * from CacheTako left outer join CacheSelectOne on CacheTako.tako_id = CacheSelectOne.tako_id where CacheSelectOne.tako_id = ?", row[0]) do |sow|
-					db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_ip = ?", sow[0]) do |tow|
+					db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip = CacheTako.ikagent_ip where CacheTako.ikagent_id = ?", sow[0]) do |tow|
 						line = output.gets.chomp
 						if line == "\"Timeout!\""
 							print "\r\n"
@@ -27,8 +27,8 @@ module RandomTakoQuery
 							input.puts "#{tow[0]}, #{tow[1]}, #{sow[1]} #{sow[2]} #{row[1]}"
 							print "#{tow[0]}, #{tow[1]}, #{sow[1]} #{sow[2]} #{row[1]}\n"
 							db.execute("delete from CacheSelectOne where tako_id = ?", row[0])
-							db.execute("delete from CacheTako where ikagent_ip = ?", sow[0])
-							db.execute("delete from Cache where ikagent_ip = ?", sow[0])
+							db.execute("delete from CacheTako where ikagent_id = ?", sow[0])
+							db.execute("delete from Cache where ikagent_id = ?", sow[0])
 							return
 						else
 							return
