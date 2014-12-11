@@ -116,7 +116,7 @@ Signal.trap(:INT) {
 				p "#{@@sql_output}"
 				# such channel NEW data send
 				@@db.execute(@@sql_join) do |row|
-					print "#{row[0]}, #{row[1]}, #{row[3]}\n"
+					print "#{row[0]}, #{row[1]}, #{row[2]}\n"
 				end
 
 				if @@channel != nil
@@ -493,7 +493,7 @@ Signal.trap(:INT) {
 					@@db.execute(@@cac_insert, ikagent, ip)
 				end
 
-				@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+				@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 				i = 9
 				while msg.split[i] != nil
 					tako_app = msg.split[i]
@@ -540,7 +540,7 @@ Signal.trap(:INT) {
 			
 				row = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
 				if row.empty? == true
-					@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+					@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 				else
 					@@db.execute("#{@@cso_delete} where tako_id = ?", tako_id)
 					@@db.execute("vacuum")
@@ -635,7 +635,7 @@ Signal.trap(:INT) {
 					@@db.execute(@@apn_insert, tako_id, count)
 					# result output
 					@@db.execute(@@sql_join) do |row|
-						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
+						print "#{row[0]}, #{row[1]}, #{row[2]}\n"
 					end
 					
 					@@tako_id = tako_id
@@ -692,8 +692,8 @@ Signal.trap(:INT) {
 					p "#{@@sql_output}"
 					# such channel NEW data send
 					@@db.execute(@@sql_join) do |row|
-						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
-						tako_app += "#{row[3]} "
+						print "#{row[0]}, #{row[1]}, #{row[2]}\n"
+						tako_app += "#{row[2]} "
 					end
 					if @@smode == "1"
 						msg = " UPD-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{tako_app}"
@@ -717,7 +717,7 @@ Signal.trap(:INT) {
 					p "#{@@sql_output}"
 					# such channel NEW data send
 					@@db.execute(@@sql_join) do |row|
-						print "#{row[0]}, #{row[1]}, #{row[3]}\n"
+						print "#{row[0]}, #{row[1]}, #{row[2]}\n"
 					end
 					if @@smode == "1"
 						msg = " DEL-TAKO #{@@nick} #{@@ip} #{tako_id}"

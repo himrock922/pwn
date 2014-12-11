@@ -8,8 +8,8 @@ module ExtactMatch
 		i = 0
 		s_app = Array.new
 		select_tako = ""
-		db.execute("#{app_select} where tako_id = ?", tako_id) do |row|
-			s_app[i] = row[1]
+		db.execute("select tako_app from APP_List where tako_id = ?", tako_id) do |row|
+			s_app[i] = row[0]
 			i += 1
 		end
 		case i
@@ -318,12 +318,12 @@ module ExtactMatch
 		end
 
 		return if select_tako.empty? == true
-		db.execute("select * from Cache left outer join CacheTako on Cache.ikagent_ip == CacheTako.ikagent_ip where CacheTako.tako_id = ?", select_tako) do |row|
+		db.execute("select Cache.ikagent_id, Cache.ikagent_ip, CacheTako.tako_id, CacheTako.tako_mac from Cache left outer join CacheTako on Cache.ikagent_id == CacheTako.ikagent_id where CacheTako.tako_id = ?", select_tako) do |row|
 			print "\r\n"
 			p "*************************"
 			p "****party tako fixed!****"
 			p "*************************"
-			print "#{row[0]} #{row[1]} #{row[5]} #{row[6]}\n"
+			print "#{row[0]} #{row[1]} #{row[2]} #{row[3]}\n"
 		end
 	end
 end				

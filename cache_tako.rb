@@ -4,7 +4,7 @@ SQL Table Create Module
 module CacheTako
 	# table create process 
 	def create_cako
-		sql = "create table CacheTako (ikagent_ip text, tako_id text, tako_mac text)"
+		sql = "create table CacheTako (ikagent_id text, tako_id text, tako_mac text)"
 		return sql
 	end
 	######################
