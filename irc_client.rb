@@ -397,13 +397,13 @@ Signal.trap(:INT) {
 							if sow.empty? != true
 								@@db.execute(@@cso_insert, tako_id, tako_app)
 							else
-								@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+								@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 								@@db.execute(@@cso_insert, tako_id, tako_app)
 							end
 							p "update complete!"
 						else
 							@@db.execute(@@cac_insert, ikagent, ip)
-							@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+							@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 							@@db.execute(@@cso_insert, tako_id, tako_app)
 							p "insert complete!"
 						end
@@ -422,16 +422,16 @@ Signal.trap(:INT) {
 						row = @@db.execute("#{@@cac_select} where ikanget_id = ? or ikagent_ip = ?", ikagent, ip)
 						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
-							sow = @@db.execute("#{@@com_select} where ikagent_ip = ?", ip)
+							sow = @@db.execute("#{@@com_select} where ikagent_id = ?", ikagent)
 							if sow.empty? != true
-								@@db.execute("#{@@com_update} set app_num = ?, where ikagent_ip = ?", value, ip)
+								@@db.execute("#{@@com_update} set app_num = ?, where ikagent_id = ?", value, ikagent)
 							else
-								@@db.execute(@@com_insert, ip, value)
+								@@db.execute(@@com_insert, ikagent, value)
 							end
 							p "update complete!"
 						else
 							@@db.execute(@@cac_insert, ikagent, ip)
-							@@db.execute(@@com_insert, ip, value)
+							@@db.execute(@@com_insert, ikagent, value)
 							p "insert complete!"
 						end
 					end
@@ -459,13 +459,13 @@ Signal.trap(:INT) {
 							if sow.empty? != true
 								@@db.execute(@@cso_insert, tako_id, own_tako)
 							else
-								@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+								@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 								@@db.execute(@@cso_insert, tako_id, own_tako)
 							end
 							p "update complete!"
 						else
 							@@db.execute(@@cac_insert, ikagent, ip)
-							@@db.execute(@@cat_insert, ip, tako_id, tako_mac)
+							@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 							@@db.execute(@@cso_insert, tako_id, own_tako)
 							p "insert complete!"
 						end
