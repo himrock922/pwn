@@ -509,7 +509,6 @@ Signal.trap(:INT) {
 					own_mac  = row[1]
 					break if row.empty? == true
 					@@db.execute("select tako_app from APP_List where tako_id = ?", own_tako) do |dow|
-						p dow[0]
 						own_app += "#{dow[0]} "
 					end	
 					msg = " UPD-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
