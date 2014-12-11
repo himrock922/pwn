@@ -486,7 +486,6 @@ Signal.trap(:INT) {
 				tako_id.encode!("UTF-8")
 				tako_mac.encode!("UTF-8")
 
-				p ikagent
 				row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip =?", ikagent, ip)
 				if row.empty? == false
 					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
@@ -505,9 +504,9 @@ Signal.trap(:INT) {
 				own_tako = ""
 				own_mac  = ""
 				own_app = ""
-				@@db.execute(@@tako_select) do |row|
+				@@db.execute("select tako_id from TAKO_List") do |row|
 					break if row.empty? == true
-					@@db.execute(@@sql_join) do |dow|
+					@@db.execute("#{@@sql_join} where TAKO_List.tako_id = ?", row[0]) do |dow|
 						own_tako = dow[0]
 						own_mac  = dow[1]
 						own_app += "#{dow[3]} "
@@ -532,7 +531,7 @@ Signal.trap(:INT) {
 				tako_id.encode!("UTF-8")
 				tako_mac.encode!("UTF-8")
 
-				row = @@db.execute("#{@@cac_select} where ikagent_id or ikagent_ip = ?", ikagent, ip)
+				row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 				if row.empty? == false
 					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
 				else
@@ -580,7 +579,7 @@ Signal.trap(:INT) {
 				
 				@@db.execute("#{@@cso_delete} where tako_id = ?", tako_id)
 				@@db.execute("#{@@cat_delete} where tako_id = ?", tako_id)
-				row = @@db.execute("#{@@cat_select} where ikagent_id or ikagent_ip = ?", ikagent, ip)
+				row = @@db.execute("#{@@cat_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 				if row.empty? == true
 					@@db.execute("#{@@cac_delete} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 				end
