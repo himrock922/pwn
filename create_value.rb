@@ -4,7 +4,7 @@ SQL Table Create Module
 module CreateValue
 	# table create process
 	def create_value
-		sql = "create table Value (ikagent_ip text, value integer)"
+		sql = "create table Value (ikagent_id text, value integer)"
 		return sql
 	end
 	######################
