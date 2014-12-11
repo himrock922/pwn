@@ -504,12 +504,13 @@ Signal.trap(:INT) {
 				own_tako = ""
 				own_mac  = ""
 				own_app = ""
-				@@db.execute("select tako_id from TAKO_List") do |row|
+				@@db.execute(@@tako_select) do |row|
+					own_tako = row[0]
+					own_mac  = row[1]
 					break if row.empty? == true
-					@@db.execute("#{@@sql_join} where TAKO_List.tako_id = ?", row[0]) do |dow|
-						own_tako = dow[0]
-						own_mac  = dow[1]
-						own_app += "#{dow[3]} "
+					@@db.execute("select tako_app from APP_List where tako_id = ?", own_tako) do |dow|
+						p dow[0]
+						own_app += "#{dow[0]} "
 					end	
 					msg = " UPD-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
 					for key in @@channel_stable do
