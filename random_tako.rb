@@ -19,7 +19,7 @@ module RandomTako
 				return
 			else
 			db.execute("select * from CacheTako where tako_id = ?", row[0]) do |sow|
-				db.execute("select * from Cache where ikagent_ip = ?", sow[0]) do |tow|
+				db.execute("select * from Cache where ikagent_id = ?", sow[0]) do |tow|
 					print "\r\n"
 					p "*************************"
 					p "****party tako fixed!****"
