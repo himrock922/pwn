@@ -5,19 +5,19 @@ module CommonAppQuery module
 module CommonApp
 	def common_app(db, cac_select, cat_select, app_select, cso_select, val_insert, val_update, val_select)
 		# setting
-		select_tako = ""
-		join_tako   = ""
 		ikagent     = ""
-		select_app  = Array.new
+		tako_id     = ""
+		tako_app    = ""
 		i = 0
-		value = 0
 		#######################
 		db.execute("select ikagent_id from Cache") do |sow|
 			ikagent = sow[0]
 			i = 0
-			db.execute("#{cat_select} where ikagent_id = ?", ikagent) do |tow|
-				db.execute(app_select) do |row|
-					db.execute("#{cso_select} where tako_id = ? and tako_app = ?", tow[1], row[1]) do |pow|
+			db.execute("select tako_id from CacheTako where ikagent_id = ?", ikagent) do |tow|
+				tako_id = tow[0]
+				db.execute("select tako_app from APP_List") do |row|
+				tako_app = row[0]
+					db.execute("#{cso_select} where tako_id = ? and tako_app = ?", tako_id, tako_app) do |pow|
 						i += 1
 					end
 				end
