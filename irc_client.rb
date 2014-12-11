@@ -486,7 +486,8 @@ Signal.trap(:INT) {
 				tako_id.encode!("UTF-8")
 				tako_mac.encode!("UTF-8")
 
-				row = @@db.execute("#{@@cac_select} where ikagent_id or ikagent_ip =?", ikagent, ip)
+				p ikagent
+				row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip =?", ikagent, ip)
 				if row.empty? == false
 					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
 				else
