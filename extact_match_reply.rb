@@ -319,12 +319,10 @@ module ExtactMatchReply
 		end
 
 		return if select_tako.empty? == true
-		db.execute("#{tako_select} where tako_id = ?", select_tako) do |result|
-			select_mac = result[1]
-			break
-		end
+		row = db.execute("select tako_mac from TAKO_List where tako_id = ?", select_tako)
+		select_mac = row[0]
 
-		msg = " REPLY BEST_MATCH #{nick} #{ip} #{select_tako} #{select_mac}"
+		msg = " REPLY BEST_MATCH #{nick} #{ip} #{select_tako} #{select_mac[0]}"
 		irc.notice "#{s_nick}", "#{msg}"
 	end
 end				
