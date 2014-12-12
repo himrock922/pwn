@@ -4,7 +4,7 @@ SQL Table Create Module
 module CreateComNum
 	# table create process
 	def create_comnum
-		sql = "create table ComNum (ikagent_ip text, app_num integer)"
+		sql = "create table ComNum (ikagent_id text, app_num integer)"
 		return sql
 	end
 	######################
