@@ -92,6 +92,7 @@ Signal.trap(:INT) {
 @@tako_id  = ""
 @@tako_mac = ""
 @@tako_app = ""
+@@start = 0
 @@channel_join = 0
 @@mutex = Mutex::new
 
@@ -505,16 +506,14 @@ Signal.trap(:INT) {
 				own_mac  = ""
 				own_app = ""
 				@@db.execute(@@tako_select) do |row|
+					break if row.empty? == true
 					own_tako = row[0]
 					own_mac  = row[1]
-					break if row.empty? == true
 					@@db.execute("select tako_app from APP_List where tako_id = ?", own_tako) do |dow|
 						own_app += "#{dow[0]} "
 					end	
 					msg = " UPD-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
-					for key in @@channel_stable do
-						@@irc.notice "#{key}", "#{msg}"
-					end
+					@@irc.notice "#{ikagent}", "#{msg}"
 				end
 				@@mutex.unlock
 			end
@@ -658,10 +657,22 @@ Signal.trap(:INT) {
 						end
 						@@timeout.wakeup
 					when "1"
-						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
-						for key in @@channel_stable do
-							@@irc.privmsg "#{key}", "#{msg}"
+						msg = ""
+						if @@start == 0
+							msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
+							for key in @@channel_stable do 
+								@@irc.privmsg "#{key}", "#{msg}"
+							end
+
+						else @@start == 1
+							msg = " UPD-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
+							
+							for key in @@channel_stable do
+								@@irc.notice "#{key}", "#{msg}"
+							end
 						end
+
+						@@start = 1
 						@@timeout.wakeup
 					end
 					################################
