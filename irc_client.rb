@@ -578,7 +578,7 @@ Signal.trap(:INT) {
 				
 				@@db.execute("#{@@cso_delete} where tako_id = ?", tako_id)
 				@@db.execute("#{@@cat_delete} where tako_id = ?", tako_id)
-				row = @@db.execute("#{@@cat_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
+				row = @@db.execute("#{@@cat_select} where ikagent_id = ?", ikagent)
 				if row.empty? == true
 					@@db.execute("#{@@cac_delete} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 				end
