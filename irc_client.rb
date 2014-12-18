@@ -660,7 +660,6 @@ Signal.trap(:INT) {
 						@@irc.notice "#{key}", "#{msg}"
 					end
 
-					@@timeout.wakeup
 					end
 					################################
 				########################################
@@ -698,7 +697,6 @@ Signal.trap(:INT) {
 						for key in @@channel_stable do
 							@@irc.notice "#{key}", "#{msg}"
 						end
-						@@timeout.wakeup
 					end
 					
 				###############################################	
