@@ -364,7 +364,15 @@ Signal.trap(:INT) {
 
 				d_nick.encode!("UTF-8")
 				d_ip.encode!("UTF-8")
-				@@db.execute("#{@@cac_delete} where ikagent_id = ? and ikagent_ip = ?", d_nick, d_ip)
+				@@db.execute("#{@@cac_delete} where ikagent_id = ? or ikagent_ip = ?", d_nick, d_ip)
+				@@db.execute("#{@@cat_select} where ikagent_id = ? or ikagent_ip = ?", d_nick, d_ip) do |row|
+					next if row.empty? == true
+					@@db.execute("#{@@cso_delete} where tako_id = ?", row[0])
+				end
+				@@db.execute("#{@@cat_delete} where ikagent_id = ? or ikagent_ip = ?", d_nick, d_ip)
+				@@db.execute("#{@@com_delete} where ikagent_id = ?", d_nick)
+				@@db.execute("#{@@val_delete} where ikagent_id = ?", d_nick)
+				@@db.execute("vacuum")
 				# such table output
 				p "delete complete"
 			end
