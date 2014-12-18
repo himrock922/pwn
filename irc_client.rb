@@ -351,7 +351,6 @@ Signal.trap(:INT) {
 					msg = " NEW-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
 					@@irc.notice "#{ikagent}", "#{msg}"
 				end
-				@@timeout.wakeup
 				@@mutex.unlock
 			end
 				
