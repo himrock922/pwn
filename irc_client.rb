@@ -338,6 +338,9 @@ Signal.trap(:INT) {
 					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ? ", ikagent, ip, ikagent, ip)
 				end
 
+				own_tako = ""
+				own_mac  = ""
+				own_app  = ""
 				@@db.execute(@@tako_select) do |row|
 					break if row.empty? == true
 					own_tako = row[0]
