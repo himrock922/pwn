@@ -516,49 +516,8 @@ Signal.trap(:INT) {
 				@@timeout.wakeup
 			end
 			########################################################			
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-TAKO'
-				@@mutex.lock
-				ikagent  = msg.split[5]
-				ip       = msg.split[6]
-				tako_id  = msg.split[7]
-				tako_mac = msg.split[8]
-				ikagent.encode!("UTF-8")
-				ip.encode!("UTF-8")
-				tako_id.encode!("UTF-8")
-				tako_mac.encode!("UTF-8")
-
-				row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip =?", ikagent, ip)
-				if row.empty? == false
-					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
-				else
-					@@db.execute(@@cac_insert, ikagent, ip)
-				end
-
-				@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
-				i = 9
-				while msg.split[i] != nil
-					tako_app = msg.split[i]
-					tako_app.encode!("UTF-8")	
-					@@db.execute(@@cso_insert, tako_id, tako_app)
-					i += 1
-				end
-				own_tako = ""
-				own_mac  = ""
-				own_app = ""
-				@@db.execute(@@tako_select) do |row|
-					break if row.empty? == true
-					own_tako = row[0]
-					own_mac  = row[1]
-					@@db.execute("select tako_app from APP_List where tako_id = ?", own_tako) do |dow|
-						own_app += "#{dow[0]} "
-					end	
-					msg = " UPD-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
-					@@irc.notice "#{ikagent}", "#{msg}"
-				end
-				@@mutex.unlock
-			end
 			########################################################
-			if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-TAKO'
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'NEW-TAKO'
 				@@timeout.wakeup
 				@@mutex.lock
 				ikagent  = msg.split[5]
@@ -695,25 +654,13 @@ Signal.trap(:INT) {
 						for key in @@channel_stable do
 							@@irc.privmsg "#{key}", "#{msg}"
 						end
-						@@timeout.wakeup
 					when "1"
-						msg = ""
-						if @@start == 0
-							msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
-							for key in @@channel_stable do 
-								@@irc.privmsg "#{key}", "#{msg}"
-							end
+					msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
+					for key in @@channel_stable do 
+						@@irc.notice "#{key}", "#{msg}"
+					end
 
-						else @@start == 1
-							msg = " UPD-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
-							
-							for key in @@channel_stable do
-								@@irc.notice "#{key}", "#{msg}"
-							end
-						end
-
-						@@start = 1
-						@@timeout.wakeup
+					@@timeout.wakeup
 					end
 					################################
 				########################################
@@ -747,10 +694,11 @@ Signal.trap(:INT) {
 						tako_app += "#{row[2]} "
 					end
 					if @@smode == "1"
-						msg = " UPD-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{tako_app}"
+						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{tako_app}"
 						for key in @@channel_stable do
 							@@irc.notice "#{key}", "#{msg}"
 						end
+						@@timeout.wakeup
 					end
 					
 				###############################################	
