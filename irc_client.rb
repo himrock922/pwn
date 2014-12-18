@@ -825,14 +825,6 @@ Signal.trap(:INT) {
 				}
 			rescue Timeout::Error
 				p "Timeout!"
-				case @@smode 
-				when "0"
-				when "1"
-					case @@algo
-					when "1"
-						IRC::random_tako(@@db, @@input, @@output, @@cso_select)
-					end
-				end
 			end
 		end
 	end
