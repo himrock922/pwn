@@ -9,6 +9,7 @@ module RandomTako
 
 		row = db.execute("select tako_id from TAKO_List order by random()") 
 		
+		return if row.empty? == true
 		select_tako = row[0]
 
 		row = db.execute("select tako_app from APP_List where tako_id = ? order by random()", select_tako[0])
