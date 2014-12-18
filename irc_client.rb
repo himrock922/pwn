@@ -207,6 +207,11 @@ Signal.trap(:INT) {
 				# when no operator process
 				elsif mj_user[0] == @@nick
 					@@channel_stable.push("#{mj_cha}")
+					msg = " NEW-IKAGENT #{@@nick} #{@@ip}"
+					for key in @@channel_stable do
+						@@irc.privmsg "#{key}", "#{msg}"
+					end
+					@@timeout.wakeup
 					next
 				elsif mj_user[0] != @@nick
 					next
@@ -316,6 +321,38 @@ Signal.trap(:INT) {
 			end
  			###############################################
 
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
+				@@mutex.lock
+				# setting
+				ikagent = msg.split[5]
+				ip   = msg.split[6]
+				
+				ikagent.encode!("UTF-8")
+				ip.encode!("UTF-8")
+				
+				row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
+
+				if row.empty? == true
+					@@db.execute(@@cac_insert, ikagent, ip)
+				else
+					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ? ", ikagent, ip, ikagent, ip)
+				end
+
+				@@db.execute(@@tako_select) do |row|
+					break if row.empty? == true
+					own_tako = row[0]
+					own_mac  = row[1]
+					@@db.execute("select tako_app from APP_List where tako_id = ?", own_tako) do |sow|
+						own_app += "#{sow[0]} "
+					end
+					msg = " NEW-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
+					@@irc.notice "#{ikagent}", "#{msg}"
+				end
+				@@timeout.wakeup
+				@@mutex.unlock
+			end
+				
+				
 			# if disconnect ikagent (no operator) session process
 			##########################################################
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'DEL-IKAGENT'
