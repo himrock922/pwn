@@ -75,6 +75,7 @@ Signal.trap(:INT) {
 			@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
 		end
 	end
+        @@db.transaction
 	@@db.execute(@@tako_delete)
 	@@db.execute(@@app_delete)
 	@@db.execute(@@cac_delete)
@@ -82,6 +83,7 @@ Signal.trap(:INT) {
 	@@db.execute(@@cso_delete)
 	@@db.execute(@@com_delete)
 	@@db.execute(@@val_delete)
+	@@db.commit
 	@@db.execute("vacuum")
 	@@db.close
 	@@input.close
@@ -624,6 +626,7 @@ Signal.trap(:INT) {
 					tako_mac = poxpr_ex.split[2] # tako_mac store
 					i = 3 
 					count = 0
+					@@db.transaction
 					@@db.execute(@@tako_insert, tako_id, tako_mac) # tako_list database insert
 					# tako_app ptocess
 					while poxpr_ex.split[i] != nil
@@ -634,15 +637,18 @@ Signal.trap(:INT) {
 						count += 1
 					end
 					###############################
+					@@db.execute(@@apn_insert, tako_id, count)
 					p "#{@@sql_column}"
 					p "#{@@sql_output}"
 
-					@@db.execute(@@apn_insert, tako_id, count)
+
 					# result output
+				
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[2]}\n"
 					end
 					
+					@@db.commit
 					@@tako_id = tako_id
 
 					case @@smode
@@ -712,10 +718,10 @@ Signal.trap(:INT) {
 					tako_id = ""
 					tako_id = poxpr_ex.split[1] # delete tako_id store
 					####################################
+					@@db.transaction
 					@@db.execute("#{@@tako_delete} where tako_id = ?", tako_id)
 					@@db.execute("#{@@app_delete}  where tako_id  = ?", tako_id)
 					@@db.execute("#{@@apn_delete}  where tako_id  = ?", tako_id)
-					@@db.execute("vacuum")
 
 					p "#{@@sql_column}"
 					p "#{@@sql_output}"
@@ -723,6 +729,8 @@ Signal.trap(:INT) {
 					@@db.execute(@@sql_join) do |row|
 						print "#{row[0]}, #{row[1]}, #{row[2]}\n"
 					end
+					@@db.commit
+					@@db.execute("vacuum")
 					if @@smode == "1"
 						msg = " DEL-TAKO #{@@nick} #{@@ip} #{tako_id}"
 						for key in @@channel_stable do
@@ -750,11 +758,13 @@ Signal.trap(:INT) {
 					elsif @@channel != nil
 						@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
 					end
+					@@db.transaction
 					@@db.execute(@@tako_delete) # data base delete 
 					@@db.execute(@@app_delete) # data base delete 
 					@@db.execute(@@cac_delete)
 					@@db.execute(@@cat_delete)
 					@@db.execute(@@cso_delete)
+					@@db.commit
 					@@db.execute("vacuum")
 					@@db.close # database close
 				end
