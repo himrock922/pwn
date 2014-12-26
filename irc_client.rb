@@ -573,6 +573,11 @@ Signal.trap(:INT) {
 				@@timeout.wakeup
 			end	
 			########################################################
+
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-TAKO'
+				@@mutex.lock
+				@@mutex.unlock
+			end
 	
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'DEL-TAKO'
 				@@mutex.lock
@@ -688,6 +693,7 @@ Signal.trap(:INT) {
 					i = 3 
 					count = 0
 					# tako_app ptocess
+					@@db.transaction
 					while poxpr_ex.split[i] != nil
 						tako_app = poxpr_ex.split[i] # tako_app store
 						@@db.execute("#{@@app_delete} where tako_id = ? and tako_app = ?", tako_id, tako_app)
@@ -695,7 +701,6 @@ Signal.trap(:INT) {
 						count += 1
 					end
 					@@db.execute("#{@@apn_update} set app_num = app_num - ? where tako_id = ?", count, tako_id)
-					@@db.execute("vacuum")
 					
 					###############################
 					p "#{@@sql_column}"
@@ -705,6 +710,10 @@ Signal.trap(:INT) {
 						print "#{row[0]}, #{row[1]}, #{row[2]}\n"
 						tako_app += "#{row[2]} "
 					end
+					
+					@@db.commit
+					@@db.execute("vacuum")
+
 					if @@smode == "1"
 						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{tako_app}"
 						for key in @@channel_stable do
@@ -731,6 +740,7 @@ Signal.trap(:INT) {
 					end
 					@@db.commit
 					@@db.execute("vacuum")
+
 					if @@smode == "1"
 						msg = " DEL-TAKO #{@@nick} #{@@ip} #{tako_id}"
 						for key in @@channel_stable do
