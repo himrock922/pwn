@@ -19,11 +19,11 @@ require 'timeout'
 
 require_relative 'create_takoble'
 require_relative 'create_appble'
-require_relative 'create_cache'
 require_relative 'create_appnum'
 require_relative 'create_comnum'
 require_relative 'create_value'
 require_relative 'create_number'
+require_relative 'cache_ikagent'
 require_relative 'cache_tako'
 require_relative 'cache_select_one'
 require_relative 'join_table'
@@ -55,7 +55,7 @@ class IRC
 	include CreateValue
 	include CreateNumber
 	include JoinTable
-	include CreateCache
+	include CacheIkagent
 	include CacheTako
 	include CacheSelectOne
 	extend  RandomTako
@@ -366,14 +366,13 @@ Signal.trap(:INT) {
 
 				d_nick.encode!("UTF-8")
 				d_ip.encode!("UTF-8")
+				@@db.transaction
 				@@db.execute("#{@@cac_delete} where ikagent_id = ? or ikagent_ip = ?", d_nick, d_ip)
-				@@db.execute("#{@@cat_select} where ikagent_id = ? or ikagent_ip = ?", d_nick, d_ip) do |row|
-					next if row.empty? == true
-					@@db.execute("#{@@cso_delete} where tako_id = ?", row[0])
-				end
-				@@db.execute("#{@@cat_delete} where ikagent_id = ? or ikagent_ip = ?", d_nick, d_ip)
+				@@db.execute("#{@@cso_delete} where ikagent_id = ?", d_nick)
+				@@db.execute("#{@@cat_delete} where ikagent_id = ?", d_nick)
 				@@db.execute("#{@@com_delete} where ikagent_id = ?", d_nick)
 				@@db.execute("#{@@val_delete} where ikagent_id = ?", d_nick)
+				@@db.commit 
 				@@db.execute("vacuum")
 				# such table output
 				p "delete complete"
