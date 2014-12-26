@@ -1,7 +1,7 @@
 =begin
 SQL Table Create Module
 =end
-module CreateCache
+module CacheIkagent
 	# table create process
 	def create_cache
 		sql = "create table Cache (ikagent_id text, ikagent_ip text, creat_date timestamp, update_date timestamp)"

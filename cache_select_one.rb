@@ -4,14 +4,14 @@ SQL Table Create Module
 module CacheSelectOne
 	# table create process
 	def create_csone
-		sql = "create table CacheSelectOne (tako_id text, tako_app text)"
+		sql = "create table CacheSelectOne (ikagent_id text, tako_id text, tako_app text)"
 		return sql
 	end
 	######################
 
 	# table data insert process
 	def insert_csone
-		sql = "insert into CacheSelectOne values (?, ?)"
+		sql = "insert into CacheSelectOne values (?, ?, ?)"
 		return sql
 	end
 	######################
