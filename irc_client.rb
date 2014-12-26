@@ -556,7 +556,7 @@ Signal.trap(:INT) {
 				while msg.split[i] != nil
 					tako_app = msg.split[i]
 					tako_app.encode!("UTF-8")
-					@@db.execute(@@cso_insert, tako_id, tako_app)
+					@@db.execute(@@cso_insert, ikagent, tako_id, tako_app)
 					i += 1
 					count += 1
 				end
