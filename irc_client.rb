@@ -537,20 +537,15 @@ Signal.trap(:INT) {
 				tako_id.encode!("UTF-8")
 				tako_mac.encode!("UTF-8")
 
+				@@db.transaction
 				row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
-				if row.empty? == false
-					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ?", ikagent, ip, ikagent, ip)
-				else
-					@@db.execute(@@cac_insert, ikagent, ip)
-				end	
-			
-				row = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
 				if row.empty? == true
-					@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
+					@@db.execute(@@cac_insert, ikagent, ip)
 				else
-					@@db.execute("#{@@cso_delete} where tako_id = ?", tako_id)
-					@@db.execute("vacuum")
-				end
+					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ?", ikagent, ip, ikagent, ip)
+				end	
+
+				@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 				i = 9
 				count = 0
 				while msg.split[i] != nil
@@ -560,6 +555,8 @@ Signal.trap(:INT) {
 					i += 1
 					count += 1
 				end
+				@@db.commit
+
 				if @@algo == "1" && @@smode == "1"
 					IRC::random_tako(@@db, @@input, @@output, @@cso_select)
 				elsif @@algo == "2" && @@smode == "1"
@@ -575,9 +572,47 @@ Signal.trap(:INT) {
 
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-TAKO'
 				@@mutex.lock
+				ikagent  = msg.split[5]
+				ip       = msg.split[6]
+				tako_id  = msg.split[7]
+				tako_mac = msg.split[8]
+				ikagent.encode!("UTF-8")
+				ip.encode!("UTF-8")
+				tako_id.encode!("UTF-8")
+				tako_mac.encode!("UTF-8")
+
+				@@db.transaction
+				row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
+				if row.empty? == false
+					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ?", ikagent, ip, ikagent, ip)
+				else
+					@@db.execute(@@cac_insert, ikagent, ip)
+				end	
+			
+				row = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
+				if row.empty? == true
+					@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
+				else
+					@@db.execute("#{@@cso_delete} where tako_id = ?", tako_id)
+				end
+
+				i = 9
+				count = 0
+				while msg.split[i] != nil
+					tako_app = msg.split[i]
+					tako_app.encode!("UTF-8")
+					@@db.execute(@@cso_insert, ikagent, tako_id, tako_app)
+					i += 1
+					count += 1
+				end
+				if @@algo == "3" && @@smode == "1"
+					@@db.execute(@@num_insert, tako_id, count)
+				end
+				@@db.commit
+				@@db.execute("vacuum")
 				@@mutex.unlock
-			end
-	
+			end	
+
 			if msg.split[1] == 'NOTICE' && msg.split[4] == 'DEL-TAKO'
 				@@mutex.lock
 				ikagent = msg.split[5]
@@ -587,13 +622,14 @@ Signal.trap(:INT) {
 				ikagent.encode!("UTF-8")
 				ip.encode!("UTF-8")
 				tako_id.encode!("UTF-8")
-				
+				@@db.transaction
 				@@db.execute("#{@@cso_delete} where tako_id = ?", tako_id)
 				@@db.execute("#{@@cat_delete} where tako_id = ?", tako_id)
 				row = @@db.execute("#{@@cat_select} where ikagent_id = ?", ikagent)
 				if row.empty? == true
 					@@db.execute("#{@@cac_delete} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 				end
+				@@db.commit
 				@@db.execute("vacuum")
 				@@mutex.unlock
 			end
@@ -714,7 +750,7 @@ Signal.trap(:INT) {
 					@@db.execute("vacuum")
 
 					if @@smode == "1"
-						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{tako_app}"
+						msg = " UPD-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{tako_app}"
 						for key in @@channel_stable do
 							@@irc.notice "#{key}", "#{msg}"
 						end
