@@ -156,6 +156,8 @@ Signal.trap(:INT) {
 				if @@channel_hash.include?("#{@@channel}") == true
 					@@channel = "" # @@channel = nothing
 				end
+
+				@@channel_hash.sort {|(k1, v1), (k2, v2) | v2 <=> v1}
 				################################################
 
 				# when no operator ikagent, already channel join process
