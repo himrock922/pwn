@@ -2,16 +2,18 @@
 module CommonAppQuery module
 =end
 
-module ExtactMatch
-	def extact_match(db, tako_id, app_select, num_select, cso_select)
+module ExactMatch
+	def exact_match(db, tako_id, app_select, num_select, cso_select)
 		#######################
 		i = 0
 		s_app = Array.new
 		select_tako = ""
-		db.execute("select tako_app from APP_List where tako_id = ?", tako_id) do |row|
-			s_app[i] = row[0]
+		row = db.execute("select tako_app from APP_List where tako_id = ?", tako_id) 	
+		row.each do |result|
+			s_app += result[0]
 			i += 1
 		end
+
 		case i
 		when 1
 			db.execute("#{num_select} where app_num = ? order by random()", 1) do |row|

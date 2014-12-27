@@ -30,7 +30,7 @@ require_relative 'join_table'
 require_relative 'random_tako'
 require_relative 'random_tako_query'
 require_relative 'random_tako_reply'
-require_relative 'extact_match'
+require_relative 'exact_match'
 require_relative 'extact_match_query'
 require_relative 'extact_match_reply'
 require_relative 'common_app'
@@ -61,7 +61,7 @@ class IRC
 	extend  RandomTako
 	extend  RandomTakoQuery
 	extend  RandomTakoReply
-	extend  ExtactMatch
+	extend  ExactMatch
 	extend  ExtactMatchQuery
 	extend  ExtactMatchReply
 	extend  CommonApp
@@ -563,7 +563,7 @@ Signal.trap(:INT) {
 					IRC::common_app(@@db, @@cac_select, @@cat_select, @@app_select, @@cso_select, @@val_insert, @@val_update, @@val_select)
 				elsif @@algo == "3" && @@smode == "1"
 					@@db.execute(@@num_insert, tako_id, count)
-					IRC::extact_match(@@db, @@tako_id, @@app_select, @@num_select, @@cso_select)
+					IRC::exact_match(@@db, @@tako_id, @@app_select, @@num_select, @@cso_select)
 				end
 				@@mutex.unlock
 				@@timeout.wakeup
