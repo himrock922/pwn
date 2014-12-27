@@ -7,325 +7,255 @@ module ExactMatch
 		#######################
 		i = 0
 		s_app = Array.new
-		select_tako = ""
+		select_tako = Array.new
 		row = db.execute("select tako_app from APP_List where tako_id = ?", tako_id) 	
+		
+		p row
 		row.each do |result|
-			s_app += result[0]
+			p result[0]
+			s_app.push("#{result[0]}")
 			i += 1
+			p s_app
 		end
 
 		case i
 		when 1
-			db.execute("#{num_select} where app_num = ? order by random()", 1) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					if sow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end	
-				end
-			end
-		
-		when 2
-			db.execute("#{num_select} where app_num = ? order by random()", 2) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					if tow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 3 
-			db.execute("#{num_select} where app_num = ? order by random()", 3) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					if uow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 4 
-			db.execute("#{num_select} where app_num = ? order by random()", 4) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					
-					if vow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 5 
-			db.execute("#{num_select} where app_num = ? order by random()", 5) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					next if vow.empty? == true
-					wow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[4])
-					if wow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 6 
-			db.execute("#{num_select} where app_num = ? order by random()", 6) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					next if vow.empty? == true
-					wow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[4])
-					next if wow.empty? == true
-					xow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[5])
-					if xow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 7 
-			db.execute("#{num_select} where app_num = ? order by random()", 7) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					next if vow.empty? == true
-					wow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[4])
-					next if wow.empty? == true
-					xow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[5])
-					next if xow.empty? == true
-					yow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[6])
-					if yow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 8 
-			db.execute("#{num_select} where app_num = ? order by random()", 8) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					next if vow.empty? == true
-					wow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[4])
-					next if wow.empty? == true
-					xow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[5])
-					next if xow.empty? == true
-					yow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[6])
-					next if yow.empty? == true
-					zow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[7])
-					if zow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 9 
-			db.execute("#{num_select} where app_num = ? order by random()", 9) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					next if vow.empty? == true
-					wow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[4])
-					next if wow.empty? == true
-					xow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[5])
-					next if xow.empty? == true
-					yow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[6])
-					next if yow.empty? == true
-					zow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[7])
-					next if zow.empty? == true
-					aow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[8])
-					if aow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 10 
-			db.execute("#{num_select} where app_num = ? order by random()", 10) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					next if vow.empty? == true
-					wow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[4])
-					next if wow.empty? == true
-					xow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[5])
-					next if xow.empty? == true
-					yow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[6])
-					next if yow.empty? == true
-					zow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[7])
-					next if zow.empty? == true
-					aow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[8])
-					next if aow.empty? == true
-					bow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[9])
-					if bow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 11 
-			db.execute("#{num_select} where app_num = ? order by random()", 11) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					next if vow.empty? == true
-					wow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[4])
-					next if wow.empty? == true
-					xow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[5])
-					next if xow.empty? == true
-					yow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[6])
-					next if yow.empty? == true
-					zow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[7])
-					next if zow.empty? == true
-					aow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[8])
-					next if aow.empty? == true
-					bow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[9])
-					next if bow.empty? == true
-					cow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[10])
-					if cow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		when 12 
-			db.execute("#{num_select} where app_num = ? order by random()", 12) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[0])
-					next if sow.empty? == true
-					tow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[1])
-					next if tow.empty? == true
-					uow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[2])
-					next if uow.empty? == true
-					vow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[3])
-					next if vow.empty? == true
-					wow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[4])
-					next if wow.empty? == true
-					xow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[5])
-					next if xow.empty? == true
-					yow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[6])
-					next if yow.empty? == true
-					zow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[7])
-					next if zow.empty? == true
-					aow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[8])
-					next if aow.empty? == true
-					bow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[9])
-					next if bow.empty? == true
-					cow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[10])
-					next if cow.empty? == true
-					dow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", row[0], s_app[11])
-					if dow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end
-				end
-			end
-		end
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 1) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
 
-		return if select_tako.empty? == true
-		db.execute("select Cache.ikagent_id, Cache.ikagent_ip, CacheTako.tako_id, CacheTako.tako_mac from Cache left outer join CacheTako on Cache.ikagent_id == CacheTako.ikagent_id where CacheTako.tako_id = ?", select_tako) do |row|
-			print "\r\n"
-			p "*************************"
-			p "****party tako fixed!****"
-			p "*************************"
-			print "#{row[0]} #{row[1]} #{row[2]} #{row[3]}\n"
+				row.each do |result|
+					sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[0])
+					next if sow.empty? == true
+					select_tako.push ("#{result[0]}")
+				end
+			end
+			db.commit
+		when 2
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 2) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 2 
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 1
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 3 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 3) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i <3 
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 2
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 4 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 4) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 4
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 3
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 5 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 5) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 5
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 4
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 6 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 6) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 6
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 5
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 7 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 7) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 7
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 6
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 8 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 8) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 8
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 7
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 9 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 9) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 9
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 8
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 10 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 10) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 10
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 9
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 11 
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 11) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 11
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 10
+						i += 1
+					end
+				end
+			end
+			db.commit
+		when 12
+			db.transaction 
+			row = db.execute("select distinct tako_id from Number where app_num = ? order by random()", 12) 	
+			if row.empty? == true
+				db.commit
+				return
+			else
+
+				row.each do |result|
+					i = 0
+					while i < 12
+						sow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
+						break if sow.empty? == true
+						select_tako.push ("#{result[0]}") if i == 11
+						i += 1
+					end
+				end
+			end
+			db.commit
 		end
+		return if select_tako.empty? == true
+		db.transaction
+		print "\r\n"
+		p "*************************"
+		p "****party tako fixed!****"
+		p "*************************"
+		select_tako.each do |result|
+			row = db.get_first_row("select ikagent_id from CacheSelectOne where tako_id = ?", result)
+			sow = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result)
+			tow = db.get_first_row("select ikagent_ip from Cache where ikagent_id = ?", row[0])
+			print "#{row[0]} #{tow[0]} #{result} #{sow[0]}\n"
+		end
+		db.commit
 	end
 end				
