@@ -91,10 +91,12 @@ Signal.trap(:INT) {
 }
 @@channel_stable = Array.new
 @@channel_hash = {}
+@@share_hash = {}
 @@tako_id  = ""
 @@tako_mac = ""
 @@tako_app = ""
 @@start = 0
+@@share = 1
 @@channel_join = 0
 @@mutex = Mutex::new
 
@@ -163,7 +165,8 @@ Signal.trap(:INT) {
 				# when no operator ikagent, already channel join process
 				if @@channel.empty? == true
 					@@channel_hash.each do |key, value|
-						p key + "=>" + value
+						print key + "=>" , value
+						print EOF
 						@@irc.join "#{key}"
 					end
 				elsif @@channel.empty? == false
@@ -688,6 +691,11 @@ Signal.trap(:INT) {
 					@@db.commit
 					@@tako_id = tako_id
 
+					if @@share == 1
+						@@share = 0
+						@@sha_timeout.wakeup
+					end
+
 					case @@smode
 					when "0"
 						msg = ""
@@ -896,7 +904,42 @@ Signal.trap(:INT) {
 			end
 		end
 	end
-			
+	
+	@@sha_timeout = Thread::fork do
+		Thread::stop
+		while true
+			sleep
+			begin
+				timeout(5) {
+					while true
+						sleep
+					end
+				}
+			rescue Timeout::Error
+				@@share = 1
+				p "Timeout!"
+				sow = @@db.execute("select tako_app from APP_List")
+				sow.each do |result|
+					if @@share_hash.include?("#{result[0]}") == true
+						@@share_hash["#{result[0]}"] += 1
+					else
+						@@share_hash.store("#{result[0]}", 1)
+					end
+				end
+				@@share_hash.sort {|(k1, v1), (k2, v2) | v2 <=> v1}
+				i = 0
+				join_app = ""
+				@@share_hash.each do |key, value|
+					break if i == 11
+					join_app += "#{key} "
+					print key + "=>" , value
+					print EOF
+					i = 1
+				end
+				@@share_hash.clear	
+			end
+		end
+	end		
 				
 	# start
 	##########################################################
@@ -1010,6 +1053,7 @@ Signal.trap(:INT) {
 		@@writen.run # ikagent message write process
 		@@pwn_poxpr.run # poxpr process
 		@@timeout.run
+		@@sha_timeout.run
 		#######################
 		
 		# such thread join
@@ -1018,6 +1062,7 @@ Signal.trap(:INT) {
 		@@ping_pong.join
 		@@pwn_poxpr.join
 		@@timeout.join
+		@@sha_timeout.join
 		########################
 		
 		########################
