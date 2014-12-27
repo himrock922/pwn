@@ -155,13 +155,19 @@ Signal.trap(:INT) {
 				# when already operator being process
 				if @@channel_hash.include?("#{@@channel}") == true
 					@@channel = "" # @@channel = nothing
-					next			
+				end
 				################################################
 
 				# when no operator ikagent, already channel join process
-				elsif @@channel.empty? == true
-					@@channel_hash.each_key do |key|
+				if @@channel.empty? == true
+					@@channel_hash.each do |key, value|
+						print key + "=>", value
 						@@irc.join "#{key}"
+					end
+				elsif @@channel.empty? == false
+					@@irc.join "#{@@channel}"
+					if @@topic.empty? == false
+						@@irc.topic "#{@@channel}", "#{@@topic}"
 					end
 				end
 				################################################
@@ -945,7 +951,7 @@ Signal.trap(:INT) {
 		if OPTS[:s] then @@server = OPTS[:s] else @@server = SERVER end
 		if OPTS[:p] then @port = OPTS[:p] else @port = PORT end
 		if OPTS[:n] then @@nick = OPTS[:n] else @@nick = NICK end
-		if OPTS[:t] then @topic = OPTS[:t] else @topic = "" end
+		if OPTS[:t] then @@topic = OPTS[:t] else @@topic = "" end
 		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = "" end
 		if OPTS[:a] then @@algo = OPTS[:a] else @@algo = ALGO end
 		if OPTS[:d] then @@dummy = "1" else @@dummy = "0" end
@@ -986,12 +992,6 @@ Signal.trap(:INT) {
 			@@irc.nick "#{@@nick}" # nickname decide
 			@@irc.user "#{@@nick}", 0, "*", "I am #{@@nick}" # user name decide
 			@@irc.list # channel list store
-			if @@channel.empty? == false
-				@@irc.join "#{@@channel}" # channel name decide
-				if @topic.empty? == false
-					@@irc.topic "#{@@channel}", "#{@topic}" # own channel changes of topic
-				end
-			end
 		end
 		@@input, @@output = Open3.popen3('ruby streetpass.rb')
 		@@poxpr_input, @@poxpr_output = Open3.popen3('sh dummytako.sh') if @@dummy == "1"
