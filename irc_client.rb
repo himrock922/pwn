@@ -69,9 +69,9 @@ class IRC
 	extend  CommonAppReply
 Signal.trap(:INT) {
 	@@channel_hash.each_key do |key|
-		if @@channel == nil
+		if @@channel.empty? == true
 			@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick} #{@@ip}"
-		elsif @@channel != nil
+		else
 			@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
 		end
 	end
@@ -122,15 +122,6 @@ Signal.trap(:INT) {
 					print "#{row[0]}, #{row[1]}, #{row[2]}\n"
 				end
 
-				if @@channel != nil
-					@@channel_hash.each_key do |key|
-						if @@channel == key
-							next
-						end
-						@@irc.notice "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}"
-					end
-				end
-
 			end
 			################################
 
@@ -163,12 +154,12 @@ Signal.trap(:INT) {
 			when '323'
 				# when already operator being process
 				if @@channel_hash.include?("#{@@channel}") == true
-					@@channel = nil # @@channel = nothing
-				end				
+					@@channel = "" # @@channel = nothing
+					next			
 				################################################
 
 				# when no operator ikagent, already channel join process
-				if @@channel == nil
+				elsif @@channel.empty? == true
 					@@channel_hash.each_key do |key|
 						@@irc.join "#{key}"
 					end
@@ -191,7 +182,7 @@ Signal.trap(:INT) {
 				###########################
 
 				# when operator, process
-				if mj_cha == @@channel && mj_user[0] == @@nick
+				if @@channel.empty? == false && mj_user[0] == @@nick
 					@@channel_join += 1
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 					@@channel_stable.push("#{@@channel}")
@@ -200,22 +191,20 @@ Signal.trap(:INT) {
 					end
 					next
 
-				elsif mj_cha == @@channel && mj_user[0] != @@nick
+				elsif @@channel.empty? == false && mj_user[0] != @@nick
 					@@channel_join += 1
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 					next
 				################################################
 
 				# when no operator process
-				elsif mj_user[0] == @@nick
+				elsif @@channel.empty? == true
 					@@channel_stable.push("#{mj_cha}")
 					msg = " NEW-IKAGENT #{@@nick} #{@@ip}"
 					for key in @@channel_stable do
 						@@irc.privmsg "#{key}", "#{msg}"
 					end
 					@@timeout.wakeup
-					next
-				elsif mj_user[0] != @@nick
 					next
 				end
 				#############################################
@@ -251,7 +240,7 @@ Signal.trap(:INT) {
 					########################################
 
 						@@channel_stable.delete("#{@@channel}") # message send hash delete 
-						@@channel = nil # channel var delete
+						@@channel = "" # channel var delete
 					########################################
 					else
 						# channel hash update
@@ -798,9 +787,9 @@ Signal.trap(:INT) {
 		while input = gets.chomp # wait stdin
 			if /exit/i =~ input # program exit process
 				@@channel_hash.each_key do |key|
-					if @@channel == nil
+					if @@channel.empty? == true
 						@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick} #{@@ip}" 
-					elsif @@channel != nil
+					else
 						@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
 					end
 					@@db.transaction
@@ -817,7 +806,7 @@ Signal.trap(:INT) {
 			elsif /join/i =~ input
 				str = input.split
 				# process own channel opretor
-				if @@channel_hash.include?(str[1]) == false && @@channel == nil
+				if @@channel_hash.include?(str[1]) == false && @@channel.empty? == true
 					@@channel = str[1]
 
 				end
@@ -829,10 +818,10 @@ Signal.trap(:INT) {
 			#############################################
 
 			# process only operator 
-			elsif /topic/i =~ input && @@channel != nil
+			elsif /topic/i =~ input && @@channel.empty? == false
 				str = input.split
 				@@irc.topic "#{@@channel}", "#{str[1]}" # channel topic changes
-			elsif /mode/i =~ input && @@channel != nil
+			elsif /mode/i =~ input && @@channel.empty? == false
 				str = input.split
 				@@irc.mode "#{@@channel}", "#{str[1]}" # channel mode changes
 			########################################################
@@ -844,6 +833,14 @@ Signal.trap(:INT) {
 					@@irc.list 
 				elsif str[1] != nil
 					@@irc.list "#{str[1]}" 
+				end
+
+			elsif /names/i =~ input
+				str = input.split
+				if str[1] == nil
+					@@irc.names
+				elsif str[1] != nil
+					@@irc.names "#{str[1]}" 
 				end
 
 			elsif /algo/i =~ input
@@ -948,8 +945,8 @@ Signal.trap(:INT) {
 		if OPTS[:s] then @@server = OPTS[:s] else @@server = SERVER end
 		if OPTS[:p] then @port = OPTS[:p] else @port = PORT end
 		if OPTS[:n] then @@nick = OPTS[:n] else @@nick = NICK end
-		if OPTS[:t] then @topic = OPTS[:t] else @topic = nil end
-		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = nil end
+		if OPTS[:t] then @topic = OPTS[:t] else @topic = "" end
+		if OPTS[:c] then @@channel = "#" + OPTS[:c] else @@channel = "" end
 		if OPTS[:a] then @@algo = OPTS[:a] else @@algo = ALGO end
 		if OPTS[:d] then @@dummy = "1" else @@dummy = "0" end
 		if OPTS[:m] then @@smode = "1" else @@smode = "0" end
@@ -978,7 +975,7 @@ Signal.trap(:INT) {
 
 		# such paramater output
 		puts @@server, @port,  @@nick
-		puts @@channel if @@channel != nil
+		puts @@channel if @@channel.empty? == false
 		# irc socket create
 		@@irc = IRCSocket.new(@@server, @port)
 		# irc server connect
@@ -989,9 +986,9 @@ Signal.trap(:INT) {
 			@@irc.nick "#{@@nick}" # nickname decide
 			@@irc.user "#{@@nick}", 0, "*", "I am #{@@nick}" # user name decide
 			@@irc.list # channel list store
-			if @@channel != nil
+			if @@channel.empty? == false
 				@@irc.join "#{@@channel}" # channel name decide
-				if @topic != nil
+				if @topic.empty? == false
 					@@irc.topic "#{@@channel}", "#{@topic}" # own channel changes of topic
 				end
 			end
