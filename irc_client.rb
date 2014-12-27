@@ -161,7 +161,7 @@ Signal.trap(:INT) {
 				# when no operator ikagent, already channel join process
 				if @@channel.empty? == true
 					@@channel_hash.each do |key, value|
-						print key + "=>", value
+						p key + "=>", value
 						@@irc.join "#{key}"
 					end
 				elsif @@channel.empty? == false
