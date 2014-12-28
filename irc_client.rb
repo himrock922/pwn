@@ -659,7 +659,8 @@ Signal.trap(:INT) {
 					end
 					i += 1
 				end
-				@@db.commit 
+				@@db.commit
+				next if value < 4
 				msg = " KEY-REPLY #{value}"
 				@@irc.notice "#{ikagent}", "#{msg}"
 			end
