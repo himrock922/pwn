@@ -1017,6 +1017,7 @@ Signal.trap(:INT) {
 				o = [('a' .. 'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a}.flatten
 				channel = "#" + (0..10).map { o[rand(o.length)]}.join
 				@@irc.join "#{channel}"
+				@@channel = channel
 				@@key_ikagent.each do |result|
 					@@irc.invite "#{result}", "#{channel}"
 				end
