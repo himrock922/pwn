@@ -649,6 +649,8 @@ Signal.trap(:INT) {
 				
 				i = 0
 				value = 0
+				p query_app
+				p query_app[0]
 				query_app.encode!("UTF-8")
 				while query_app.split[i] != nil
 					p query_app.split[i]
