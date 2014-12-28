@@ -242,7 +242,7 @@ Signal.trap(:INT) {
 			when 'INVITE'
 				channel = msg.split[3]
 				channel.slice!(0)
-				@@channel_stable.each_key do |key|
+				@@channel_stable.each do |key|
 					if @@channel == key
 						@@irc.mode "#{@@channel}", "+o test"
 					end
