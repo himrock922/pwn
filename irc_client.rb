@@ -96,6 +96,7 @@ Signal.trap(:INT) {
 @@tako_id  = ""
 @@tako_mac = ""
 @@tako_app = ""
+@@n_operator = ""
 @@start = 0
 @@share = 1
 @@channel_join = 0
@@ -211,6 +212,7 @@ Signal.trap(:INT) {
 
 				elsif @@channel.empty? == false && mj_user[0] != @@nick
 					@@channel_join += 1
+					@@n_operator = mj_user[0]
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 					next
 				################################################
@@ -244,7 +246,7 @@ Signal.trap(:INT) {
 				channel.slice!(0)
 				@@channel_stable.each do |key|
 					if @@channel == key
-						@@irc.mode "#{@@channel}", "+o test"
+						@@irc.mode "#{@@channel}", "+o #{@@n_operator}"
 					end
 					@@irc.part "#{key}"
 				end
