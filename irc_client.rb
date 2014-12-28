@@ -90,6 +90,7 @@ Signal.trap(:INT) {
 	exit
 }
 @@channel_stable = Array.new
+@@key_ikagent = Array.new
 @@channel_hash = {}
 @@share_hash = {}
 @@tako_id  = ""
@@ -661,9 +662,16 @@ Signal.trap(:INT) {
 				end
 				@@db.commit
 				next if value < 4
-				msg = " KEY-REPLY #{value}"
+				msg = " KEY-REPLY #{@@nick} #{value}"
 				@@irc.notice "#{ikagent}", "#{msg}"
 			end
+
+			if msg.split[1] == 'NOTICE' && msg.split[4] == 'KEY-REPLY'
+				ikagent = msg.split[5]
+				@@key_ikagent.push("#{ikagent}")
+				@@key_timeout.wakeup
+			end
+				
 		end
 	end
 	#########################################
@@ -966,14 +974,38 @@ Signal.trap(:INT) {
 					i += 1
 				end
 				msg = " QUERY-KEY #{@@nick} #{join_app}"
-				@@channel_hash.each_key do |key|
+				@@channel_stable.each do |key|
 					@@irc.privmsg "#{key}", "#{msg}"
 				end
+				@@key_timeout.wakeup
 				@@share_hash.clear	
 			end
 		end
 	end		
 				
+	@@key_timeout = Thread::fork do
+		Thread::stop
+		while true
+			sleep
+			begin
+				timeout(10) {
+					while true
+						sleep 
+					end
+				}
+			rescue Timeout::Error
+				o = [('a' .. 'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a}.flatten
+				channel = "#" + (0..10).map { o[rand(o.length)]}.join
+				@@irc.join "#{channel}"
+				@@key_ikagent.each do |result|
+					@@irc.invite "#{result}", "#{channel}"
+				end
+				@@key_ikagent.clear
+				p "Timeout!"
+			end
+		end
+	end
+
 	# start
 	##########################################################
 	def initialize
@@ -1087,6 +1119,7 @@ Signal.trap(:INT) {
 		@@pwn_poxpr.run # poxpr process
 		@@timeout.run
 		@@sha_timeout.run
+		@@key_timeout.run
 		#######################
 		
 		# such thread join
@@ -1096,6 +1129,7 @@ Signal.trap(:INT) {
 		@@pwn_poxpr.join
 		@@timeout.join
 		@@sha_timeout.join
+		@@key_timeout.join
 		########################
 		
 		########################
