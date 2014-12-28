@@ -164,9 +164,12 @@ Signal.trap(:INT) {
 
 				# when no operator ikagent, already channel join process
 				if @@channel.empty? == true
+					i = 0
 					@@channel_hash.each do |key, value|
 						print key + "=>" , value
 						print EOF
+						i += 1
+						next if i > 2
 						@@irc.join "#{key}"
 					end
 				elsif @@channel.empty? == false
@@ -635,6 +638,26 @@ Signal.trap(:INT) {
 			end
 			###############################################
 			###############################################
+
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'QUERY-KEY'
+				ikagent = msg.split[5]
+				query_app = ""
+				i = 6
+				while msg.split[i] != nil
+					query_app += "#{msg.split[i]} "
+				end
+				i = 0
+				value = 0
+				while query_app.split[i] != nil
+					row = @@db.execute("select tako_app from APP_List where tako_app = ?", query_app.aplit[i])
+					row.each do |result|
+						value += 1
+					end
+					i += 1
+				end
+				msg = "KEY-REPLY #{value}"
+				@@irc.notice "#{ikagent}", "#{msg}"
+			end
 		end
 	end
 	#########################################
@@ -930,11 +953,15 @@ Signal.trap(:INT) {
 				i = 0
 				join_app = ""
 				@@share_hash.each do |key, value|
-					break if i == 11
+					break if i == 6
 					join_app += "#{key} "
 					print key + "=>" , value
 					print EOF
-					i = 1
+					i += 1
+				end
+				msg = " QUERY-KEY #{@@nick} #{join_app}"
+				@@channel_hash.each_key do |key|
+					@@irc.privmsg "#{key}", "#{msg}"
 				end
 				@@share_hash.clear	
 			end
