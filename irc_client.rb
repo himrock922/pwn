@@ -651,6 +651,8 @@ Signal.trap(:INT) {
 				value = 0
 				query_app.encode!("UTF-8")
 				while query_app.split[i] != nil
+					p query_app.split[i]
+					p query_app[i]
 					row = @@db.execute("select tako_app from APP_List where tako_app = ?", query_app.split[i])
 					row.each do |result|
 						value += 1
