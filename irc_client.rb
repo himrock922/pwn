@@ -242,7 +242,12 @@ Signal.trap(:INT) {
 			when 'INVITE'
 				channel = msg.split[3]
 				channel.slice!(0)
-				@@irc.part 
+				@@channel_stable.each_key do |key|
+					if @@channel == key
+						@@irc.mode "#{@@channel}", "+o test"
+					end
+					@@irc.part "#{key}"
+				end
 				@@irc.join "#{channel}"
 				
 			# my channel part user delete for hash table
