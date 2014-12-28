@@ -157,15 +157,18 @@ Signal.trap(:INT) {
 			when '323'
 				# when already operator being process
 				if @@channel_hash.include?("#{@@channel}") == true
+					channel = @@channel
 					@@channel = "" # @@channel = nothing
+					@@irc.join "#{channel}"
+					next
 				end
 
-				@@channel_hash.sort {|(k1, v1), (k2, v2) | v2 <=> v1}
 				################################################
 
 				# when no operator ikagent, already channel join process
 				if @@channel.empty? == true
 					i = 0
+					@@channel_hash.sort {|(k1, v1), (k2, v2) | v2 <=> v1}
 					@@channel_hash.each do |key, value|
 						print key + "=>" , value
 						print EOF
@@ -239,6 +242,7 @@ Signal.trap(:INT) {
 			when 'INVITE'
 				channel = msg.split[3]
 				channel.slice!(0)
+				@@irc.part 
 				@@irc.join "#{channel}"
 				
 			# my channel part user delete for hash table
@@ -667,6 +671,7 @@ Signal.trap(:INT) {
 					i += 1
 				end
 				@@db.commit
+				
 				next if value < 4
 				msg = " KEY-REPLY #{@@nick} #{value}"
 				@@irc.notice "#{ikagent}", "#{msg}"
@@ -1131,8 +1136,8 @@ Signal.trap(:INT) {
 		
 		# such thread join
 		########################
-		@@writen.join
 		@@ping_pong.join
+		@@writen.join
 		@@pwn_poxpr.join
 		@@timeout.join
 		@@sha_timeout.join
