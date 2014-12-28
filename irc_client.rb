@@ -239,7 +239,7 @@ Signal.trap(:INT) {
 			when 'INVITE'
 				channel = msg.split[3]
 				channel.slice!(0)
-				p channel
+				@@irc.join "#{channel}"
 				
 			# my channel part user delete for hash table
 			when 'PART'
@@ -1000,6 +1000,7 @@ Signal.trap(:INT) {
 					end
 				}
 			rescue Timeout::Error
+				next if @@key_ikagent.empty? == true
 				o = [('a' .. 'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a}.flatten
 				channel = "#" + (0..10).map { o[rand(o.length)]}.join
 				@@irc.join "#{channel}"
