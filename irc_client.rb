@@ -650,19 +650,17 @@ Signal.trap(:INT) {
 				
 				i = 0
 				value = 0
-				p query_app
-				p query_app[0]
 				query_app.encode!("UTF-8")
+				@@db.transaction
 				while query_app.split[i] != nil
-					p query_app.split[i]
-					p query_app[i]
 					row = @@db.execute("select tako_app from APP_List where tako_app = ?", query_app.split[i])
 					row.each do |result|
 						value += 1
 					end
 					i += 1
 				end
-				msg = "KEY-REPLY #{value}"
+				@@db.commit 
+				msg = " KEY-REPLY #{value}"
 				@@irc.notice "#{ikagent}", "#{msg}"
 			end
 		end
