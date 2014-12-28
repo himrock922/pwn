@@ -235,6 +235,12 @@ Signal.trap(:INT) {
 
 			################################################
 
+			# invite channel process
+			when 'INVITE'
+				channel = msg.split[3]
+				channel.slice!(0)
+				p channel
+				
 			# my channel part user delete for hash table
 			when 'PART'
 				# part user store
