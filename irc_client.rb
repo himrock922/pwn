@@ -645,6 +645,7 @@ Signal.trap(:INT) {
 				i = 6
 				while msg.split[i] != nil
 					query_app += "#{msg.split[i]} "
+					i += 1
 				end
 				
 				i = 0
