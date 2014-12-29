@@ -1,8 +1,8 @@
 =begin
 RandomTako module
 =end
-module RandomTako
-	def random_tako(db, input, output, cso_select)
+module RandomApp
+	def random_app(db, input, output, cso_select)
 		select_tako = ""
 		select_app  = ""
 		

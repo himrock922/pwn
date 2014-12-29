@@ -1,8 +1,8 @@
 =begin
 RandomTako module
 =end
-module RandomTakoQuery
-	def random_tako_query(irc, db, cac_select, cat_select, nick, app_select, tako_select, cso_select, input, output)
+module RandomAppQuery
+	def random_app_query(irc, db, cac_select, cat_select, nick, app_select, tako_select, cso_select, input, output)
 		result      = ""
 		msg         = ""
 		select_tako = ""

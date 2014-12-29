@@ -27,12 +27,12 @@ require_relative 'cache_ikagent'
 require_relative 'cache_tako'
 require_relative 'cache_select_one'
 require_relative 'join_table'
-require_relative 'random_tako'
-require_relative 'random_tako_query'
-require_relative 'random_tako_reply'
+require_relative 'random_app'
+require_relative 'random_app_query'
+require_relative 'random_app_reply'
 require_relative 'exact_match'
-require_relative 'extact_match_query'
-require_relative 'extact_match_reply'
+require_relative 'exact_match_query'
+require_relative 'exact_match_reply'
 require_relative 'common_app'
 require_relative 'common_app_query'
 require_relative 'common_app_reply'
@@ -58,12 +58,12 @@ class IRC
 	include CacheIkagent
 	include CacheTako
 	include CacheSelectOne
-	extend  RandomTako
-	extend  RandomTakoQuery
-	extend  RandomTakoReply
+	extend  RandomApp
+	extend  RandomAppQuery
+	extend  RandomAppReply
 	extend  ExactMatch
-	extend  ExtactMatchQuery
-	extend  ExtactMatchReply
+	extend  ExactMatchQuery
+	extend  ExactMatchReply
 	extend  CommonApp
 	extend  CommonAppQuery
 	extend  CommonAppReply
@@ -412,7 +412,7 @@ Signal.trap(:INT) {
 				when 'RANDOM_TAKO'
 					s_app = msg.split[7]
 					s_app.encode!("UTF-8")
-					IRC::random_tako_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
+					IRC::random_app_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
 				when 'COMMON_APP'
 					s_app_tmp = msg 
 					i = 7
@@ -429,7 +429,7 @@ Signal.trap(:INT) {
 						i += 1
 					end
 					s_app.encode!("UTF-8")
-					IRC::extact_match_reply(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
+					IRC::exact_match_reply(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				end
 				@@mutex.unlock
 			end
@@ -580,7 +580,7 @@ Signal.trap(:INT) {
 				@@db.commit
 
 				if @@algo == "1" && @@smode == "1"
-					IRC::random_tako(@@db, @@input, @@output, @@cso_select)
+					IRC::random_app(@@db, @@input, @@output, @@cso_select)
 				elsif @@algo == "2" && @@smode == "1"
 					IRC::common_app(@@db, @@cac_select, @@cat_select, @@app_select, @@cso_select, @@val_insert, @@val_update, @@val_select)
 				elsif @@algo == "3" && @@smode == "1"
@@ -757,11 +757,11 @@ Signal.trap(:INT) {
 						msg = ""
 						case @@algo
 						when "1"
-							msg = IRC::random_tako_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
+							msg = IRC::random_app_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@app_select, @@tako_select, @@cso_select, @@input, @@output)
 						when "2"
 							msg = IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@cac_select, @@com_select, @@input, @@output) 
 						when "3"
-							msg = IRC::extact_match_query(@@irc, @@db, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
+							msg = IRC::exact_match_query(@@irc, @@db, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
 						end
 
 						next if msg.empty? == true

@@ -1,8 +1,8 @@
 =begin
 RandomTako module
 =end
-module RandomTakoReply 
-	def random_tako_reply(irc, db, app_select, tako_select, nick, ip, s_nick, s_app)
+module RandomAppReply 
+	def random_app_reply(irc, db, app_select, tako_select, nick, ip, s_nick, s_app)
 		# setting
 		select_id  = ""
 		select_mac = ""

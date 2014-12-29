@@ -2,8 +2,8 @@
 module CommonAppQuery module
 =end
 
-module ExtactMatchReply
-	def extact_match_reply(irc, db, app_select, apn_select, tako_select, nick, ip, s_nick, s_app)
+module ExactMatchReply
+	def exact_match_reply(irc, db, app_select, apn_select, tako_select, nick, ip, s_nick, s_app)
 		#######################
 		i = 0
 		select_tako = ""
