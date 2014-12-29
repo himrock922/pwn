@@ -495,6 +495,7 @@ Signal.trap(:INT) {
 						@@input.puts "#{ikagent} #{ip}"
 						print "#{ikagent} #{ip} #{value}\n"
 					else
+						@@db.transaction
 						row = @@db.execute("#{@@cac_select} where ikanget_id = ? or ikagent_ip = ?", ikagent, ip)
 						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
@@ -510,6 +511,7 @@ Signal.trap(:INT) {
 							@@db.execute(@@com_insert, ikagent, value)
 							p "insert complete!"
 						end
+						@@db.commit
 					end
 
 				when 'EXACT_MATCH'				
@@ -520,11 +522,11 @@ Signal.trap(:INT) {
 					tako_mac.encode!("UTF-8")
 					own_tako.encode!("UTF-8")
 					line = @@output.gets.chomp
-					print EOF
-					p "*************************"
-					p "****party tako fixed!****"
-					p "*************************" 
 					if (line == "\"Timeout!\"")
+						print EOF
+						p "*************************"
+						p "****party tako fixed!****"
+						p "*************************" 
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac}"
 						print "#{ikagent} #{ip} #{tako_id} #{tako_mac}\n"
 					else
