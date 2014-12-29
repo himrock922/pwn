@@ -6,7 +6,7 @@ module ExactMatchReply
 	def exact_match_reply(irc, db, app_select, apn_select, tako_select, nick, ip, s_nick, s_app)
 		#######################
 		i = 0
-		select_tako = ""
+		select_tako = Array.new
 		select_mac  = ""
 
 		while s_app.split[i] != nil
@@ -15,314 +15,227 @@ module ExactMatchReply
 
 		case i
 		when 1
-			db.execute("#{apn_select} where app_num = ? order by random()", 1) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					if sow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
-					end	
-				end
+			db.transaction
+			row = db.execute("select ditinct tako_id from AppNum where app_num = ? order by random()", 1) 
+			if row.empty? == true
+				db.commit
+				return
+			else
+				row.each do |result|
+					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[0])
+					next if  sow.empty? == true
+						select_tako.push ("#{result[0]}")
+				end	
 			end
-		
+			db.commit
 		when 2
-			db.execute("#{apn_select} where app_num = ? order by random()", 2) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					if tow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 2)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 2
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 1
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 3 
-			db.execute("#{apn_select} where app_num = ? order by random()", 3) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					if uow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 3)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 3
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 2
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 4 
-			db.execute("#{apn_select} where app_num = ? order by random()", 4) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					
-					if vow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 4)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 4
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 3
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 5 
-			db.execute("#{apn_select} where app_num = ? order by random()", 5) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					next if vow.empty? == true
-					wow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[4])
-					if wow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 5)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 5 
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 4
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 6 
-			db.execute("#{apn_select} where app_num = ? order by random()", 6) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					next if vow.empty? == true
-					wow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[4])
-					next if wow.empty? == true
-					xow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[5])
-					if xow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 6)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 6
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 5
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 7 
-			db.execute("#{apn_select} where app_num = ? order by random()", 7) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					next if vow.empty? == true
-					wow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[4])
-					next if wow.empty? == true
-					xow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[5])
-					next if xow.empty? == true
-					yow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[6])
-					if yow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 7)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 7
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 6
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 8 
-			db.execute("#{apn_select} where app_num = ? order by random()", 8) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					next if vow.empty? == true
-					wow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[4])
-					next if wow.empty? == true
-					xow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[5])
-					next if xow.empty? == true
-					yow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[6])
-					next if yow.empty? == true
-					zow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[7])
-					if zow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 8)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 8
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 7
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 9 
-			db.execute("#{apn_select} where app_num = ? order by random()", 9) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					next if vow.empty? == true
-					wow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[4])
-					next if wow.empty? == true
-					xow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[5])
-					next if xow.empty? == true
-					yow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[6])
-					next if yow.empty? == true
-					zow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[7])
-					next if zow.empty? == true
-					aow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[8])
-					if aow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 9)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 9
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 8
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 10 
-			db.execute("#{apn_select} where app_num = ? order by random()", 10) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					next if vow.empty? == true
-					wow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[4])
-					next if wow.empty? == true
-					xow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[5])
-					next if xow.empty? == true
-					yow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[6])
-					next if yow.empty? == true
-					zow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[7])
-					next if zow.empty? == true
-					aow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[8])
-					next if aow.empty? == true
-					bow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[9])
-					if bow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 10)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 10
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 9
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 11 
-			db.execute("#{apn_select} where app_num = ? order by random()", 11) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					next if vow.empty? == true
-					wow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[4])
-					next if wow.empty? == true
-					xow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[5])
-					next if xow.empty? == true
-					yow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[6])
-					next if yow.empty? == true
-					zow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[7])
-					next if zow.empty? == true
-					aow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[8])
-					next if aow.empty? == true
-					bow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[9])
-					next if bow.empty? == true
-					cow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[10])
-					if cow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 11)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 11
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 10
+						i += 1
 					end
 				end
 			end
+			db.commit
 		when 12 
-			db.execute("#{apn_select} where app_num = ? order by random()", 12) do |row|
-				if row.empty? == true
-					return
-				else
-					sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[0])
-					next if sow.empty? == true
-					tow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[1])
-					next if tow.empty? == true
-					uow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[2])
-					next if uow.empty? == true
-					vow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[3])
-					next if vow.empty? == true
-					wow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[4])
-					next if wow.empty? == true
-					xow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[5])
-					next if xow.empty? == true
-					yow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[6])
-					next if yow.empty? == true
-					zow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[7])
-					next if zow.empty? == true
-					aow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[8])
-					next if aow.empty? == true
-					bow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[9])
-					next if bow.empty? == true
-					cow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[10])
-					next if cow.empty? == true
-					dow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", row[0], s_app.split[11])
-					if dow.empty? == true
-						next
-					else
-						select_tako = row[0]
-						break
+			db.transaction
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 12)
+			if row.empty? == true
+				db.commit 
+				return
+			else
+				row.each do |result|
+					i = 0
+					while i < 12
+						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app.split[i])
+						break if sow.empty? == true
+						select_tako.push("#{result[0]}") if i == 11
+						i += 1
 					end
 				end
 			end
+			db.commit
 		end
 
 		return if select_tako.empty? == true
-		row = db.execute("select tako_mac from TAKO_List where tako_id = ?", select_tako)
-		select_mac = row[0]
+		db.transaction
+		select_tako.each do |result|
+			row = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result)
 
-		msg = " REPLY BEST_MATCH #{nick} #{ip} #{select_tako} #{select_mac[0]}"
-		irc.notice "#{s_nick}", "#{msg}"
+			msg = " REPLY EXACT_MATCH #{nick} #{ip} #{result} #{row[0]}"
+			irc.notice "#{s_nick}", "#{msg}"
+		end
+		db.commit 
 	end
 end				

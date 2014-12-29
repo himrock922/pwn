@@ -409,7 +409,7 @@ Signal.trap(:INT) {
 				s_nick = msg.split[6]
 				@@mutex.lock
 				case algo
-				when 'RANDOM_TAKO'
+				when 'RANDOM_APP'
 					s_app = msg.split[7]
 					s_app.encode!("UTF-8")
 					IRC::random_app_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
@@ -422,7 +422,7 @@ Signal.trap(:INT) {
 					end
 					s_app.encode!("UTF-8")
 					IRC::common_app_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
-				when 'BEST_MATCH'
+				when 'EXACT_MATCH'
 					i = 7
 					while msg.split[i] != nil
 						s_app += "#{msg.split[i]} "
@@ -445,7 +445,7 @@ Signal.trap(:INT) {
 				ip = msg.split[7]
 				ip.encode!("UTF-8")
 				case algo
-				when 'RANDOM_TAKO'
+				when 'RANDOM_APP'
 					tako_id  = msg.split[8]
 					tako_mac = msg.split[9]
 					tako_app = msg.split[10]
@@ -461,23 +461,25 @@ Signal.trap(:INT) {
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}"
 						print "#{ikagent} #{ip} #{tako_id} #{tako_mac} #{tako_app}\n"
 					else
+						@@db.transaction
 						row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ? ", ikagent, ip, ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
-							if sow.empty? != true
-								@@db.execute(@@cso_insert, tako_id, tako_app)
+							if sow.empty? == false
+								@@db.execute(@@cso_insert, ikagent, tako_id, tako_app)
 							else
 								@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
-								@@db.execute(@@cso_insert, tako_id, tako_app)
+								@@db.execute(@@cso_insert, ikagent, tako_id, tako_app)
 							end
 							p "update complete!"
 						else
 							@@db.execute(@@cac_insert, ikagent, ip)
 							@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
-							@@db.execute(@@cso_insert, tako_id, tako_app)
+							@@db.execute(@@cso_insert, ikagent, tako_id, tako_app)
 							p "insert complete!"
 						end
+						@@db.commit
 					end
 				when 'COMMON_APP'
 					value = msg.split[8].to_i
@@ -507,7 +509,7 @@ Signal.trap(:INT) {
 						end
 					end
 
-				when 'BEST_MATCH'				
+				when 'EXACT_MATCH'				
 					tako_id  = msg.split[8]
 					tako_mac = msg.split[9] 
 					own_tako = @@tako_id
