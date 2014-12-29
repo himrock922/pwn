@@ -9,31 +9,37 @@ module CommonAppQuery
 		join_app    = ""
 		msg         = ""
 
-		db.execute("#{cac_select} left outer join ComNum on Cache.ikagent_ip = ComNum.ikagent_ip order by ComNum.app_num asc") do |row|
-				next if row.empty? == true
-				line = output.gets.chomp
-				if line == "\"Timeout!\""
-					print "\r\n"
-					p "****party tako fixed ***"
-					p "************************"
-					p "************************"
-					input.puts "#{row[0]}, #{row[1]} #{row[3]}"
-					print "#{row[0]}, #{row[1]} #{row[3]}\n"
-					return
-				else
-					return
-				end
+		db.transaction
+		row = db.execute("#{com_select} order by app_num asc") 
+		next if row.empty? == true
+		row.each do |result|
+			sow = db.get_first_row("select ikagent_ip from Cache where ikagent_id =?", result[0])		
+			line = output.gets.chomp
+			print "\r\n"
+			p "************************"
+			p "****party tako fixed ***"
+			p "************************"
+			if line == "\"Timeout!\""
+				input.puts "#{result[0]}, #{sow[0]} #{result[1]}"
+				print "#{result[0]}, #{sow[0]} #{result[1]}\n"
+				return
+			else
+				print "#{result[0]}, #{sow[0]} #{result[1]}\n"
+				return
 			end
+		end
 	
 		i = 0
-		db.execute(tako_select) do |row|
-			select_tako = row[0]
-			db.execute("#{app_select} where tako_id = ?", select_tako) do |row2|
-				
-				select_app[i] = row2[1]
+		row = db.execute(tako_select)
+		row.each do |result|
+			select_tako = result[0]
+			sow = db.execute("#{app_select} where tako_id = ?", select_tako)
+			sow.each do |result2|
+				select_app[i] = result2[1]
 				i += 1
 			end
 		end
+		db.commit
 		select_app.uniq!
 		i = 0
 		while select_app[i] != nil

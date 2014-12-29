@@ -1,7 +1,7 @@
 =begin
 SQL Table Create Module
 =end
-module CreateComNum
+module CacheComNum
 	# table create process
 	def create_comnum
 		sql = "create table ComNum (ikagent_id text, app_num integer)"
