@@ -10,7 +10,6 @@ module ExactMatch
 		select_tako = Array.new
 		row = db.execute("select tako_app from APP_List where tako_id = ?", tako_id) 	
 		
-		p row
 		row.each do |result|
 			p result[0]
 			s_app.push("#{result[0]}")

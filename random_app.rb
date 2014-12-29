@@ -26,15 +26,14 @@ module RandomApp
 			db.commit
 			return
 		end
-		
+		print "\r\n"
+		p "*************************"
+		p "****party tako fixed!****"
+		p "*************************"
 		row.each do |result|
 			
 			sow = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result[1])
 			tow = db.get_first_row("select ikagent_ip from Cache where ikagent_id = ?", result[0])
-			print "\r\n"
-			p "*************************"
-			p "****party tako fixed!****"
-			p "*************************"
 			print "#{result[0]}, #{tow[0]}, #{result[1]} #{sow[0]} #{result[2]}\n"
 		end
 		db.commit

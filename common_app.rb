@@ -10,18 +10,24 @@ module CommonApp
 		tako_app    = ""
 		i = 0
 		#######################
-		db.execute("select ikagent_id from Cache") do |sow|
-			ikagent = sow[0]
+		db.transaction
+		row = db.execute("select ikagent_id from Cache")
+		row.each do |result|
+			ikagent = result[0]
 			i = 0
-			db.execute("select tako_id from CacheTako where ikagent_id = ?", ikagent) do |tow|
-				tako_id = tow[0]
-				db.execute("select tako_app from APP_List") do |row|
-				tako_app = row[0]
-					db.execute("#{cso_select} where tako_id = ? and tako_app = ?", tako_id, tako_app) do |pow|
+			sow = db.execute("select tako_id from CacheTako where ikagent_id = ?", ikagent) 	
+			sow.each do |result2|
+				tako_id = result2[0]
+				tow = db.execute("select tako_app from APP_List")
+				tow.each do |result3|
+					tako_app = result3[0]
+					pow = db.execute("#{cso_select} where tako_id = ? and tako_app = ?", tako_id, tako_app)
+					pow.each do |result4|
 						i += 1
 					end
 				end
 			end
+
 			tmp = db.execute("#{val_select} where ikagent_id = ?", ikagent)
 			if tmp.empty? == true
 				db.execute(val_insert, ikagent, i)
@@ -33,8 +39,11 @@ module CommonApp
 		p "*************************"
 		p "****party tako fixed!****"
 		p "*************************"
-		db.execute("select Cache.ikagent_id, ikagent_ip, value from Cache left outer join Value on Cache.ikagent_id = Value.ikagent_id") do |row|
-			print "#{row[0]} #{row[1]} #{row[2]}\n"
+		
+		row = db.execute("select * from Value order by value desc")
+		row.each do |result|
+			sow = db.get_first_row("select ikagent_ip from Cache where ikagent_id = ?", result[0])
+			print "#{result[0]} #{sow[0]} #{result[1]}\n"
 		end
 	end
 end				
