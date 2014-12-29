@@ -22,10 +22,11 @@ require_relative 'create_appble'
 require_relative 'create_appnum'
 require_relative 'create_comnum'
 require_relative 'create_value'
-require_relative 'create_number'
 require_relative 'cache_ikagent'
 require_relative 'cache_tako'
 require_relative 'cache_select_one'
+require_relative 'cache_exact'
+require_relative 'cache_number'
 require_relative 'join_table'
 require_relative 'random_app'
 require_relative 'random_app_query'
@@ -53,11 +54,12 @@ class IRC
 	include CreateAppNum
 	include CreateComNum
 	include CreateValue
-	include CreateNumber
 	include JoinTable
 	include CacheIkagent
 	include CacheTako
 	include CacheSelectOne
+	include CacheExact
+	include CacheNumber
 	extend  RandomApp
 	extend  RandomAppQuery
 	extend  RandomAppReply
@@ -423,13 +425,14 @@ Signal.trap(:INT) {
 					s_app.encode!("UTF-8")
 					IRC::common_app_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
 				when 'EXACT_MATCH'
-					i = 7
+					tako_id = msg.split[7]
+					i = 8
 					while msg.split[i] != nil
 						s_app += "#{msg.split[i]} "
 						i += 1
 					end
 					s_app.encode!("UTF-8")
-					IRC::exact_match_reply(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app)
+					IRC::exact_match_reply(@@irc, @@db, @@app_select, @@apn_select, @@tako_select, @@nick, @@ip, s_nick, s_app, tako_id)
 				end
 				@@mutex.unlock
 			end
@@ -512,40 +515,42 @@ Signal.trap(:INT) {
 				when 'EXACT_MATCH'				
 					tako_id  = msg.split[8]
 					tako_mac = msg.split[9] 
-					own_tako = @@tako_id
+					own_tako = msg.split[10]
 					tako_id.encode!("UTF-8")
 					tako_mac.encode!("UTF-8")
 					own_tako.encode!("UTF-8")
 					line = @@output.gets.chomp
+					print EOF
+					p "*************************"
+					p "****party tako fixed!****"
+					p "*************************" 
 					if (line == "\"Timeout!\"")
-						print EOF
-						p "*************************"
-						p "****party tako fixed!****"
-						p "*************************" 
 						@@input.puts "#{ikagent} #{ip} #{tako_id} #{tako_mac}"
 						print "#{ikagent} #{ip} #{tako_id} #{tako_mac}\n"
 					else
+						@@db.transaction
 						row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip, ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
-							if sow.empty? != true
-								@@db.execute(@@cso_insert, tako_id, own_tako)
-							else
+							if sow.empty? == true
 								@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
-								@@db.execute(@@cso_insert, tako_id, own_tako)
+								@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
+							else
+								@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
 							end
 							p "update complete!"
 						else
 							@@db.execute(@@cac_insert, ikagent, ip)
 							@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
-							@@db.execute(@@cso_insert, tako_id, own_tako)
+							@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
 							p "insert complete!"
 						end
+						@@db.commit
 					end
-				end
 				@@mutex.unlock
 				@@timeout.wakeup
+				end
 			end
 			########################################################			
 			########################################################
@@ -1107,6 +1112,7 @@ Signal.trap(:INT) {
 			@@db.execute(create_comnum)
 			@@db.execute(create_value)
 			@@db.execute(create_number)
+			@@db.execute(create_exact)
 		end
 
 		sql_command # sql_coomand summary method
@@ -1206,6 +1212,11 @@ Signal.trap(:INT) {
 			@@num_delete  = delete_number
 			@@num_update  = update_number
 			@@num_select  = select_number
+
+			@@exa_insert  = insert_exact
+			@@exa_delete  = delete_exact
+			@@exa_update  = update_exact
+			@@exa_select  = select_exact
 
 			@@sql_join    = join_table
 

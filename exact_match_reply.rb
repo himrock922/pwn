@@ -3,7 +3,7 @@ module CommonAppQuery module
 =end
 
 module ExactMatchReply
-	def exact_match_reply(irc, db, app_select, apn_select, tako_select, nick, ip, s_nick, s_app)
+	def exact_match_reply(irc, db, app_select, apn_select, tako_select, nick, ip, s_nick, s_app, tako_id)
 		#######################
 		i = 0
 		select_tako = Array.new
@@ -233,7 +233,7 @@ module ExactMatchReply
 		select_tako.each do |result|
 			row = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result)
 
-			msg = " REPLY EXACT_MATCH #{nick} #{ip} #{result} #{row[0]}"
+			msg = " REPLY EXACT_MATCH #{nick} #{ip} #{result} #{row[0]} #{tako_id}"
 			irc.notice "#{s_nick}", "#{msg}"
 		end
 		db.commit 
