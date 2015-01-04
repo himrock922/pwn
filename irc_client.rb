@@ -92,6 +92,7 @@ Signal.trap(:INT) {
 	exit
 }
 @@channel_stable = Array.new
+@@channel_top = Array.new
 @@key_ikagent = Array.new
 @@channel_hash = {}
 @@share_hash = {}
@@ -116,6 +117,7 @@ Signal.trap(:INT) {
 				@@irc.pong "#{server}"
 				print EOF	
 				p "channel table"
+				@@channel_top.each_key do |
 				@@channel_hash.each_key do |key|
 					p "#{key}"
 				end
@@ -157,7 +159,7 @@ Signal.trap(:INT) {
 			####################################################
 
 			# channel hash table output
-			when '323'
+			when '323' 
 				# when already operator being process
 				if @@channel_hash.include?("#{@@channel}") == true
 					channel = @@channel
@@ -206,6 +208,7 @@ Signal.trap(:INT) {
 				if @@channel.empty? == false && mj_user[0] == @@nick
 					@@channel_join += 1
 					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+						
 					@@channel_stable.push("#{@@channel}")
 					@@channel_hash.each_key do |key|
 						@@irc.privmsg "#{key}", "NEW-CHANNEL #{@@channel} #{@@channel_join}"
@@ -222,12 +225,12 @@ Signal.trap(:INT) {
 				# when no operator process
 				elsif @@channel.empty? == true
 					@@channel_stable.push("#{mj_cha}")
-					#msg = " NEW-IKAGENT #{@@nick} #{@@ip}"
-					#for key in @@channel_stable do
-					#	@@irc.privmsg "#{key}", "#{msg}"
-					#end
-					#@@timeout.wakeup
-					#next
+					msg = " NEW-IKAGENT #{@@nick} #{@@ip}"
+					for key in @@channel_stable do
+						@@irc.privmsg "#{key}", "#{msg}"
+					end
+					@@timeout.wakeup
+					next
 				end
 				#############################################
 
@@ -246,13 +249,6 @@ Signal.trap(:INT) {
 			when 'INVITE'
 				channel = msg.split[3]
 				channel.slice!(0)
-				@@channel_stable.each do |key|
-					if @@channel == key
-						@@irc.mode "#{@@channel}", "+o #{@@n_operator}"
-						@@channel = ""
-					end
-					@@irc.part "#{key}"
-				end
 				@@irc.join "#{channel}"
 				
 			# my channel part user delete for hash table
@@ -347,38 +343,41 @@ Signal.trap(:INT) {
 			end
  			###############################################
 
-			#if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
-			#	@@mutex.lock
+			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-IKAGENT'
+				@@mutex.lock
 				# setting
-			#	ikagent = msg.split[5]
-			#	ip   = msg.split[6]
+				ikagent = msg.split[5]
+				ip   = msg.split[6]
 				
-			#	ikagent.encode!("UTF-8")
-			#	ip.encode!("UTF-8")
-				
-			#	row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
+				ikagent.encode!("UTF-8")
+				ip.encode!("UTF-8")
+				@@db.transaction	
+				row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 
-			#	if row.empty? == true
-			#		@@db.execute(@@cac_insert, ikagent, ip)
-			#	else
-			#		@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ? ", ikagent, ip, ikagent, ip)
-			#	end
+				if row.empty? == true
+					@@db.execute(@@cac_insert, ikagent, ip)
+				else
+					@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id = ? or ikagent_ip = ? ", ikagent, ip, ikagent, ip)
+				end
 
-			#	own_tako = ""
-			#	own_mac  = ""
-			#	own_app  = ""
-			#	@@db.execute(@@tako_select) do |row|
-			#		break if row.empty? == true
-			#		own_tako = row[0]
-			#		own_mac  = row[1]
-			#		@@db.execute("select tako_app from APP_List where tako_id = ?", own_tako) do |sow|
-			#			own_app += "#{sow[0]} "
-			#		end
-			#		msg = " NEW-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
-			#		@@irc.notice "#{ikagent}", "#{msg}"
-			#	end
-			#	@@mutex.unlock
-			#end
+				own_tako = ""
+				own_mac  = ""
+				own_app  = ""
+				row = @@db.execute(@@tako_select) 
+				next if row.empty? == true
+				row.each do |result|
+					own_tako = result[0]
+					own_mac  = result[1]
+				sow = @@db.execute("select tako_app from APP_List where tako_id = ?", own_tako) 	
+				sow.each do |result2|
+					own_app += "#{result2[0]} "
+				end
+				msg = " NEW-TAKO #{@@nick} #{@@ip} #{own_tako} #{own_mac} #{own_app}"
+					@@irc.notice "#{ikagent}", "#{msg}"
+				end
+				@@db.commit 
+				@@mutex.unlock
+			end
 				
 				
 			# if disconnect ikagent (no operator) session process
@@ -995,7 +994,7 @@ Signal.trap(:INT) {
 				i = 0
 				join_app = ""
 				@@share_hash.each do |key, value|
-					break if i == 6
+					break if i == 12
 					join_app += "#{key} "
 					print key + "=>" , value
 					print EOF
@@ -1067,6 +1066,7 @@ Signal.trap(:INT) {
 				opt.on('-t TOPIC', '--topic', 'topic')	     {|v| OPTS[:t] = v}
 				opt.on('-d', '--dummy', 'dummy')	     {|v| OPTS[:d] = v}
 				opt.on('-m', '--smode', 'smode')	     {|v| OPTS[:m] = v}
+				opt.on('-l', '--layer', 'layer')	     {|v| OPTS[:l] = v}
 				############################################
 			
 				# Options Usage output
@@ -1096,6 +1096,7 @@ Signal.trap(:INT) {
 		if OPTS[:a] then @@algo = OPTS[:a] else @@algo = ALGO end
 		if OPTS[:d] then @@dummy = "1" else @@dummy = "0" end
 		if OPTS[:m] then @@smode = "1" else @@smode = "0" end
+		if OPTS[:l] then @@layer = "1" else @@layer = "0" end
 		################################################################
 
 		# SQLite3 process
