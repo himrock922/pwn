@@ -20,13 +20,13 @@ require 'timeout'
 require_relative 'create_takoble'
 require_relative 'create_appble'
 require_relative 'create_appnum'
-require_relative 'create_comnum'
 require_relative 'create_value'
 require_relative 'cache_ikagent'
 require_relative 'cache_tako'
 require_relative 'cache_select_one'
 require_relative 'cache_exact'
 require_relative 'cache_number'
+require_relative 'cache_comnum'
 require_relative 'join_table'
 require_relative 'random_app'
 require_relative 'random_app_query'
@@ -52,7 +52,7 @@ class IRC
 	include CreateTakoble
 	include CreateAppble
 	include CreateAppNum
-	include CreateComNum
+	include CacheComNum
 	include CreateValue
 	include JoinTable
 	include CacheIkagent
@@ -117,7 +117,9 @@ Signal.trap(:INT) {
 				@@irc.pong "#{server}"
 				print EOF	
 				p "channel table"
-				@@channel_top.each_key do |
+				@@channel_top.each_key do |key|
+					p "#{key}"
+				end
 				@@channel_hash.each_key do |key|
 					p "#{key}"
 				end

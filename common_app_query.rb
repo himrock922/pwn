@@ -11,7 +11,7 @@ module CommonAppQuery
 
 		db.transaction
 		row = db.execute("#{com_select} order by app_num asc") 
-		next if row.empty? == true
+		return if row.empty? == true
 		row.each do |result|
 			sow = db.get_first_row("select ikagent_ip from Cache where ikagent_id =?", result[0])		
 			line = output.gets.chomp
