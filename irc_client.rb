@@ -757,8 +757,8 @@ Signal.trap(:INT) {
 					@@db.commit
 					@@tako_id = tako_id
 
-					if @@share == 1
-						@@share = 0
+					if @@layer == 1
+						@@layer = 0
 						@@sha_timeout.wakeup
 					end
 
@@ -982,7 +982,7 @@ Signal.trap(:INT) {
 					end
 				}
 			rescue Timeout::Error
-				@@share = 1
+				@@layer = 1
 				p "Timeout!"
 				sow = @@db.execute("select tako_app from APP_List")
 				sow.each do |result|
