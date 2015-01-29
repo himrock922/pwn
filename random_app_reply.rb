@@ -12,13 +12,12 @@ module RandomAppReply
 		# selection tako for query qpp
 		db.transaction
 		row = db.get_first_row("select tako_id from APP_List where tako_app = ? order by random()", s_app) 
-		p row
-		select_id = row
-		p select_id.empty?
-		if select_id.empty? == true
+		if row.nil? == true
 			db.commit
 			return
 		end
+
+		select_id = row
 		##################################################
 
 		# replay of selected tako information
