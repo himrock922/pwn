@@ -41,7 +41,7 @@ module RandomAppQuery
 		db.commit
 		db.execute("vacuum")
 
-		msg = " QUERY RANDOM_APP #{nick} #{select_app[0]}" 
+		msg = " QUERY RANDOM_APP #{nick} #{select_app}" 
 		return msg
 	end
 end
