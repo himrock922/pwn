@@ -2,7 +2,7 @@
 RandomTako module
 =end
 module RandomAppQuery
-	def random_app_query(irc, db, cac_select, cat_select, nick, app_select, tako_select, cso_select, input, output, tako_id)
+	def random_app_query(irc, db, cac_select, cat_select, nick, app_select, tako_select, cso_select, input, output, tako_id, tako_mac)
 		result      = ""
 		msg         = ""
 		select_tako = ""
@@ -41,7 +41,7 @@ module RandomAppQuery
 		db.commit
 		db.execute("vacuum")
 
-		msg = " QUERY RANDOM_APP #{nick} #{select_app}" 
+		msg = " QUERY RANDOM_APP #{nick} #{tako_id} #{tako_mac} #{select_app}" 
 		return msg
 	end
 end

@@ -768,7 +768,7 @@ Signal.trap(:INT) {
 						msg = ""
 						case @@algo
 						when "1"
-							msg = IRC::random_app_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@app_select, @@tako_select, @@cso_select, @@input, @@output, tako_id)
+							msg = IRC::random_app_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@app_select, @@tako_select, @@cso_select, @@input, @@output, tako_id, tako_mac)
 						when "2"
 							msg = IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@cac_select, @@com_select, @@input, @@output) 
 						when "3"
