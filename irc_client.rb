@@ -117,7 +117,8 @@ Signal.trap(:INT) {
 				@@irc.pong "#{server}"
 				print EOF	
 				p "channel table"
-				@@channel_top.each_key do |key|
+				@if
+				@@channel_top.each do |key|
 					p "#{key}"
 				end
 				@@channel_hash.each_key do |key|
