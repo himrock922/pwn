@@ -228,11 +228,11 @@ Signal.trap(:INT) {
 				# when no operator process
 				elsif @@channel.empty? == true
 					@@channel_stable.push("#{mj_cha}")
-					msg = " NEW-IKAGENT #{@@nick} #{@@ip}"
-					for key in @@channel_stable do
-						@@irc.privmsg "#{key}", "#{msg}"
-					end
-					@@timeout.wakeup
+					#msg = " NEW-IKAGENT #{@@nick} #{@@ip}"
+					#for key in @@channel_stable do
+					#	@@irc.privmsg "#{key}", "#{msg}"
+					#end
+					#@@timeout.wakeup
 					next
 				end
 				#############################################
