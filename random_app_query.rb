@@ -10,8 +10,9 @@ module RandomAppQuery
 
 		db.transaction
 		row = db.get_first_row("select tako_app from APP_List where tako_id = ? order by random()", tako_id)
-
-		pow = db.execute("#{cso_select} where tako_app = ? order by random()", row[0])
+		select_app = row[0]
+		p select_app
+		pow = db.execute("#{cso_select} where tako_app = ? order by random()", pow)
 		if pow.empty? == false
 			pow.each do |result|
 			sow = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result[1])
