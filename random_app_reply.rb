@@ -28,7 +28,8 @@ module RandomAppReply
 
 		db.commit 
 
-		msg = " REPLY RANDOM_APP #{nick} #{ip} #{select_id} #{select_mac} #{s_app}"
+		msg = " REPLY RANDOM_APP #{nick} #{ip} #{select_id[0]} #{select_mac[0]} #{s_app}"
+		p msg
 		irc.notice "#{s_nick}", "#{msg}"
 	end
 end
