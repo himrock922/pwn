@@ -414,7 +414,7 @@ Signal.trap(:INT) {
 				@@mutex.lock
 				case algo
 				when 'RANDOM_APP'
-					s_app = msg.split[7]
+					s_app = msg.split[9]
 					s_app.encode!("UTF-8")
 					IRC::random_app_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
 				when 'COMMON_APP'
