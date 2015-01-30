@@ -772,7 +772,7 @@ Signal.trap(:INT) {
 						when "2"
 							msg = IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@cac_select, @@com_select, @@input, @@output) 
 						when "3"
-							msg = IRC::exact_match_query(@@irc, @@db, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
+							msg = IRC::exact_match_query(@@irc, @@db, @@app_select, @@nick, tako_id, @@exa_select, @@apn_select)
 						end
 
 						next if msg.empty? == true
