@@ -8,6 +8,7 @@ module ExactMatchQuery
 		s_app = Array.new
 		i = 0
 		@@select_tako   = ""
+
 		row = db.execute("#{app_select} where tako_id = ?", tako_id)
 		row.each do |result|
 			join_app += "#{result[1]} "
@@ -16,6 +17,7 @@ module ExactMatchQuery
 		end
 
 		row = db.execute("#{exa_select} where p_tako_id = ?", tako_id) 		
+		
 		if row.empty? == false
 			row.each do |result|
 				sow = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result[1])
@@ -35,7 +37,6 @@ module ExactMatchQuery
 					if uow.empty? == true
 						db.execute("delete from Cache where ikagent_id = ?", result[0])
 					end
-
 					return
 				else
 					print "#{result[0]}, #{tow[0]}, #{result[1]} #{sow[0]}\n"
@@ -88,7 +89,7 @@ module ExactMatchQuery
 
 				row.each do |result|
 					i = 0
-					while i <3 
+					while i < 3 
 						sow = db.execute("#{app_select} where tako_id = ? and tako_app = ?", result[0], s_app[i])
 						break if sow.empty? == true
 						select_tako.push ("#{result[0]}") if i == 2
