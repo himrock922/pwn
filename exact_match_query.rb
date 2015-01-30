@@ -15,10 +15,9 @@ module ExactMatchQuery
 			s_app.push("#{result[1]}")
 			i += 1
 		end
-
 		row = db.execute("#{exa_select} where p_tako_id = ?", tako_id) 		
 		
-		if row.empty? == false
+		if row.nill? == false
 			row.each do |result|
 				sow = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result[1])
 				tow = db.get_first_row("select ikagent_ip from Cache where ikagent_id = ?", result[0])	
