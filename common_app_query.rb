@@ -30,6 +30,8 @@ module CommonAppQuery
 					return
 				end
 			end
+		end
+
 		i = 0
 		row = db.execute(tako_select)
 		row.each do |result|
