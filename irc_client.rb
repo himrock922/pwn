@@ -498,7 +498,7 @@ Signal.trap(:INT) {
 						print "#{ikagent} #{ip} #{value}\n"
 					else
 						@@db.transaction
-						row = @@db.execute("#{@@cac_select} where ikanget_id = ? or ikagent_ip = ?", ikagent, ip)
+						row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
 							sow = @@db.execute("#{@@com_select} where ikagent_id = ?", ikagent)
