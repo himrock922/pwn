@@ -541,7 +541,9 @@ Signal.trap(:INT) {
 								@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 								@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
 							else
-								@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
+								tow = @@db.execute("#{@@exa_select} where p_tako_id = ? and d_tako_id = ?", tako_id, own_tako)
+								if tow.empty? == true	
+									@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
 							end
 							p "update complete!"
 						else
