@@ -16,8 +16,7 @@ module ExactMatchQuery
 			i += 1
 		end
 		row = db.execute("#{exa_select} where p_tako_id = ?", tako_id) 		
-		
-		if row.nill? == false
+		if row.empty? == false
 			row.each do |result|
 				sow = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result[1])
 				tow = db.get_first_row("select ikagent_ip from Cache where ikagent_id = ?", result[0])	
@@ -43,6 +42,7 @@ module ExactMatchQuery
 				end
 			end
 		end
+		p "test"
 
 		# such channel send of infomation using of ikagent choose algorithm 
 		msg = " QUERY EXACT_MATCH #{nick} #{tako_id} #{join_app}" 
