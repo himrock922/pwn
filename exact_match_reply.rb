@@ -232,6 +232,12 @@ module ExactMatchReply
 		db.transaction
 		select_tako.each do |result|
 			row = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result)
+			p nick
+			p ip
+			p result
+			p row
+			p row[0]
+			p tako_id
 
 			msg = " REPLY EXACT_MATCH #{nick} #{ip} #{result} #{row[0]} #{tako_id}"
 			irc.notice "#{s_nick}", "#{msg}"
