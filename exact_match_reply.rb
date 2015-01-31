@@ -16,7 +16,7 @@ module ExactMatchReply
 		case i
 		when 1
 			db.transaction
-			row = db.execute("select ditinct tako_id from AppNum where app_num = ? order by random()", 1) 
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 1) 
 			if row.empty? == true
 				db.commit
 				return
