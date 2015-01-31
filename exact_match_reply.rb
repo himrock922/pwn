@@ -231,7 +231,7 @@ module ExactMatchReply
 		return if select_tako.empty? == true
 		db.transaction
 		select_tako.each do |result|
-			row = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result)
+			row = db.get_first_row("select tako_mac from TAKO_List where tako_id = ?", result)
 			p nick
 			p ip
 			p result
