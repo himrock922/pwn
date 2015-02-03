@@ -42,7 +42,6 @@ module ExactMatchQuery
 				end
 			end
 		end
-		p "test"
 
 		# such channel send of infomation using of ikagent choose algorithm 
 		msg = " QUERY EXACT_MATCH #{nick} #{tako_id} #{join_app}" 

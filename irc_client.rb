@@ -535,7 +535,7 @@ Signal.trap(:INT) {
 						@@db.transaction
 						row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 						if row.empty? == false
-							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_ip = ?", ikagent, ip, ikagent, ip)
+							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ?, update_date = (datetime('now', 'localtime')) where ikagent_id and ikagent_ip = ?", ikagent, ip, ikagent, ip)
 							sow = @@db.execute("#{@@cat_select} where tako_id = ?", tako_id)
 							if sow.empty? == true
 								@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
@@ -544,6 +544,7 @@ Signal.trap(:INT) {
 								tow = @@db.execute("#{@@exa_select} where p_tako_id = ? and d_tako_id = ?", tako_id, own_tako)
 								if tow.empty? == true	
 									@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
+								end
 							end
 							p "update complete!"
 						else
