@@ -11,24 +11,27 @@ module CommonAppQuery
 
 		db.transaction
 		row = db.execute("#{com_select} order by app_num asc") 
-		return if row.empty? == true
-		row.each do |result|
-			sow = db.get_first_row("select ikagent_ip from Cache where ikagent_id =?", result[0])		
-			line = output.gets.chomp
-			print "\r\n"
-			p "************************"
-			p "****party tako fixed ***"
-			p "************************"
-			if line == "\"Timeout!\""
-				input.puts "#{result[0]}, #{sow[0]} #{result[1]}"
-				print "#{result[0]}, #{sow[0]} #{result[1]}\n"
-				return
-			else
-				print "#{result[0]}, #{sow[0]} #{result[1]}\n"
-				return
+		if row.empty? == false
+			row.each do |result|
+				sow = db.get_first_row("select ikagent_ip from Cache where ikagent_id =?", result[0])		
+				line = output.gets.chomp
+				print "\r\n"
+				p "************************"
+				p "****party tako fixed ***"
+				p "************************"
+				if line == "\"Timeout!\""
+					input.puts "#{result[0]}, #{sow[0]} #{result[1]}"
+					print "#{result[0]}, #{sow[0]} #{result[1]}\n"
+					db.commit
+					return
+				else
+					print "#{result[0]}, #{sow[0]} #{result[1]}\n"
+					db.commit
+					return
+				end
 			end
 		end
-	
+
 		i = 0
 		row = db.execute(tako_select)
 		row.each do |result|

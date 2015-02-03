@@ -414,7 +414,7 @@ Signal.trap(:INT) {
 				@@mutex.lock
 				case algo
 				when 'RANDOM_APP'
-					s_app = msg.split[7]
+					s_app = msg.split[9]
 					s_app.encode!("UTF-8")
 					IRC::random_app_reply(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@ip, s_nick, s_app)  
 				when 'COMMON_APP'
@@ -498,7 +498,7 @@ Signal.trap(:INT) {
 						print "#{ikagent} #{ip} #{value}\n"
 					else
 						@@db.transaction
-						row = @@db.execute("#{@@cac_select} where ikanget_id = ? or ikagent_ip = ?", ikagent, ip)
+						row = @@db.execute("#{@@cac_select} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
 						if row.empty? == false
 							@@db.execute("#{@@cac_update} set ikagent_id = ?, ikagent_ip = ? , update_date = (datetime('now', 'localtime')) where ikagent_id or ikagent_ip = ?", ikagent, ip, ikagent, ip)
 							sow = @@db.execute("#{@@com_select} where ikagent_id = ?", ikagent)
@@ -541,7 +541,9 @@ Signal.trap(:INT) {
 								@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 								@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
 							else
-								@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
+								tow = @@db.execute("#{@@exa_select} where p_tako_id = ? and d_tako_id = ?", tako_id, own_tako)
+								if tow.empty? == true	
+									@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
 							end
 							p "update complete!"
 						else
@@ -552,9 +554,9 @@ Signal.trap(:INT) {
 						end
 						@@db.commit
 					end
+				end
 				@@mutex.unlock
 				@@timeout.wakeup
-				end
 			end
 			########################################################			
 			########################################################
@@ -768,11 +770,11 @@ Signal.trap(:INT) {
 						msg = ""
 						case @@algo
 						when "1"
-							msg = IRC::random_app_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@app_select, @@tako_select, @@cso_select, @@input, @@output, tako_id)
+							msg = IRC::random_app_query(@@irc, @@db, @@cac_select, @@cat_select, @@nick, @@app_select, @@tako_select, @@cso_select, @@input, @@output, tako_id, tako_mac)
 						when "2"
 							msg = IRC::common_app_query(@@irc, @@db, @@app_select, @@tako_select, @@nick, @@cac_select, @@com_select, @@input, @@output) 
 						when "3"
-							msg = IRC::exact_match_query(@@irc, @@db, @@app_select, @@nick, tako_id, @@cso_select, @@apn_select)
+							msg = IRC::exact_match_query(@@irc, @@db, @@app_select, @@nick, tako_id, @@exa_select, @@apn_select)
 						end
 
 						next if msg.empty? == true

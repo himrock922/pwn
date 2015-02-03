@@ -16,7 +16,7 @@ module ExactMatchReply
 		case i
 		when 1
 			db.transaction
-			row = db.execute("select ditinct tako_id from AppNum where app_num = ? order by random()", 1) 
+			row = db.execute("select distinct tako_id from AppNum where app_num = ? order by random()", 1) 
 			if row.empty? == true
 				db.commit
 				return
@@ -231,7 +231,13 @@ module ExactMatchReply
 		return if select_tako.empty? == true
 		db.transaction
 		select_tako.each do |result|
-			row = db.get_first_row("select tako_mac from CacheTako where tako_id = ?", result)
+			row = db.get_first_row("select tako_mac from TAKO_List where tako_id = ?", result)
+			p nick
+			p ip
+			p result
+			p row
+			p row[0]
+			p tako_id
 
 			msg = " REPLY EXACT_MATCH #{nick} #{ip} #{result} #{row[0]} #{tako_id}"
 			irc.notice "#{s_nick}", "#{msg}"

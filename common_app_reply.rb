@@ -20,6 +20,7 @@ module CommonAppReply
 			i += 1
 		end
 		db.commit
+		return if i == 0
 		msg = " REPLY COMMON_APP #{nick} #{ip} #{value}"
 		irc.notice "#{s_nick}", "#{msg}"		
 	end
