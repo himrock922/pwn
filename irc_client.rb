@@ -799,8 +799,8 @@ Signal.trap(:INT) {
 					@@db.commit
 					@@tako_id = tako_id
 
-					if @@layer == 1
-						@@layer = 0
+					if @@layer == "1"
+						@@layer = "0"
 						@@sha_timeout.wakeup
 						next
 					end
@@ -1052,7 +1052,7 @@ Signal.trap(:INT) {
 					end
 				}
 			rescue Timeout::Error
-				p "Timeout!"
+				p "Share Timeout!"
 				sow = @@db.execute("select tako_app from APP_List")
 				sow.each do |result|
 					if @@share_hash.include?("#{result[0]}") == true
@@ -1096,7 +1096,7 @@ Signal.trap(:INT) {
 
 				# No Query key message process
 				if @@key_ikagent.empty? == true
-					@@layer = 1
+					@@layer = "1"
 					next
 				end
 				##############################
@@ -1157,7 +1157,7 @@ Signal.trap(:INT) {
 				}
 			rescue Timeout::Error
 				" Key Interval Timeout!"
-				@@layer = 1
+				@@layer = "1"
 			end
 		end
 	end
