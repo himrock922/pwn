@@ -188,11 +188,10 @@ Signal.trap(:INT) {
 			when '323' 
 				# when already operator being process
 				if @@channel_hash.include?("#{@@channel}") == true
-					channel = @@channel
+					@@irc.join "#{@@channel}"
+					@@channel_stable.push("#{@@channel}")
+					@@channel_key.push("#{@@channel}")
 					@@channel = "" # @@channel = nothing
-					@@irc.join "#{channel}"
-					@@channel_stable.push("#{channel}")
-					@@channel_key.push("#{channel}")
 					next
 				end
 
