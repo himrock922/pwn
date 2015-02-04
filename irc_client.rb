@@ -212,6 +212,7 @@ Signal.trap(:INT) {
 
 				elsif @@channel.empty? == false
 					@@irc.join "#{@@channel}"
+					@@channel_hash.store("#{@@channel}", 1)
 					@@channel_stable.push("#{@@channel}")
 					@@channel_key.push("#{@@channel}")
 					if @@topic.empty? == false
