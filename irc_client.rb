@@ -975,8 +975,8 @@ Signal.trap(:INT) {
 				str = input.split
 				@@irc.topic "#{@@channel}", "#{str[1]}" # channel topic changes
 			elsif /mode/i =~ input 
-				str = input.split
-				@@irc.mode "#{str[0]}", "#{str[1]} #{str[2]}" # channel mode changes
+				str = input.split	
+				@@irc.mode "#{str[1]}", "#{str[2]} #{str[3]}" # channel mode changes
 			########################################################
 
 			# list process
