@@ -70,6 +70,14 @@ class IRC
 	extend  CommonAppQuery
 	extend  CommonAppReply
 Signal.trap(:INT) {
+	@@channel_stable.each do |key|
+		if @@channel.empty? == true
+			@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick} #{@@ip}"
+		else
+			@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
+		end
+	end
+	
 	@@channel_hash.each_key do |key|
 		if @@channel.empty? == true
 			@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick} #{@@ip}"
@@ -77,6 +85,15 @@ Signal.trap(:INT) {
 			@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
 		end
 	end
+
+	@@channel_key.each do |key|
+		if @@channel.empty? == true
+			@@irc.notice "#{key}", " DEL-IKAGENT #{@@nick} #{@@ip}"
+		else
+			@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick} #{@@ip}" # send DEL-CHANNEL message (hash table for value delete)
+		end
+	end
+
         @@db.transaction
 	@@db.execute(@@tako_delete)
 	@@db.execute(@@app_delete)
@@ -92,7 +109,7 @@ Signal.trap(:INT) {
 	exit
 }
 @@channel_stable = Array.new
-@@channel_top = Array.new
+@@channel_key = Array.new
 @@key_ikagent = Array.new
 @@channel_hash = {}
 @@share_hash = {}
@@ -100,8 +117,8 @@ Signal.trap(:INT) {
 @@tako_mac = ""
 @@tako_app = ""
 @@n_operator = ""
-@@start = 0
-@@share = 1
+@@p_operator = ""
+@@interval = 0
 @@channel_join = 0
 @@mutex = Mutex::new
 
@@ -114,24 +131,30 @@ Signal.trap(:INT) {
 			# server connection confirmation
 			if msg.split[0] == 'PING'
 				server = msg.split[1]
-				@@irc.pong "#{server}"
+				@@irc.pong "#{server}" # server connection state
+
+				# such channel output
 				print EOF	
 				p "channel table"
-				@if
-				@@channel_top.each do |key|
-					p "#{key}"
-				end
 				@@channel_hash.each_key do |key|
 					p "#{key}"
 				end
-
+				@@channel_stable.each do |key|
+					p "#{key}"
+				end
+				@@channel_key.each do |key|
+					p "#{key}"
+				end
 				print EOF
+				###############################
+
+				# sql data output
 				p "#{@@sql_column}"
 				p "#{@@sql_output}"
-				# such channel NEW data send
 				@@db.execute(@@sql_join) do |row|
 					print "#{row[0]}, #{row[1]}, #{row[2]}\n"
 				end
+				################################################
 
 			end
 			################################
@@ -168,6 +191,8 @@ Signal.trap(:INT) {
 					channel = @@channel
 					@@channel = "" # @@channel = nothing
 					@@irc.join "#{channel}"
+					@@channel_stable.push("#{channel}")
+					@@channel_key.push("#{channel}")
 					next
 				end
 
@@ -183,9 +208,13 @@ Signal.trap(:INT) {
 						i += 1
 						next if i > 2
 						@@irc.join "#{key}"
+						@@channel_stable.push("#{key}")
 					end
+
 				elsif @@channel.empty? == false
 					@@irc.join "#{@@channel}"
+					@@channel_stable.push("#{@@channel}")
+					@@channel_key.push("#{@@channel}")
 					if @@topic.empty? == false
 						@@irc.topic "#{@@channel}", "#{@@topic}"
 					end
@@ -207,34 +236,39 @@ Signal.trap(:INT) {
 				mj_user[0].slice!(0)
 				###########################
 
+				if @@n_operator == mj_user
+					@@irc.mode "#{mj_cha}", "+o #{mj_user}"
+					@@n_operator = ""
+					@@irc.mode "#{mj_cha}", "-o #{@@nick}"
+				end 
 				# when operator, process
-				if @@channel.empty? == false && mj_user[0] == @@nick
-					@@channel_join += 1
-					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+				#if @@channel.empty? == false && mj_user[0] == @@nick
+				#	@@channel_join += 1
+				#	@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
 						
-					@@channel_stable.push("#{@@channel}")
-					@@channel_hash.each_key do |key|
-						@@irc.privmsg "#{key}", "NEW-CHANNEL #{@@channel} #{@@channel_join}"
-					end
-					next
+				#	@@channel_stable.push("#{@@channel}")
+				#	@@channel_hash.each_key do |key|
+				#		@@irc.privmsg "#{key}", "NEW-CHANNEL #{@@channel} #{@@channel_join}"
+				#	end
+				#	next
 
-				elsif @@channel.empty? == false && mj_user[0] != @@nick
-					@@channel_join += 1
-					@@n_operator = mj_user[0]
-					@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
-					next
+				#elsif @@channel.empty? == false && mj_user[0] != @@nick
+				#	@@channel_join += 1
+				#	@@n_operator = mj_user[0]
+				#	@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+				#	next
 				################################################
 
 				# when no operator process
-				elsif @@channel.empty? == true
-					@@channel_stable.push("#{mj_cha}")
+				#elsif @@channel.empty? == true
+				#	@@channel_stable.push("#{mj_cha}")
 					#msg = " NEW-IKAGENT #{@@nick} #{@@ip}"
 					#for key in @@channel_stable do
 					#	@@irc.privmsg "#{key}", "#{msg}"
 					#end
 					#@@timeout.wakeup
-					next
-				end
+				#	next
+				#end
 				#############################################
 
 			################################################
@@ -253,6 +287,7 @@ Signal.trap(:INT) {
 				channel = msg.split[3]
 				channel.slice!(0)
 				@@irc.join "#{channel}"
+				@@channel_key.push("#{channel}")
 				
 			# my channel part user delete for hash table
 			when 'PART'
@@ -265,21 +300,22 @@ Signal.trap(:INT) {
 
 				# only operator process				
 				if @@channel == mp_cha
-					@@channel_join -= 1 # channel join number reduce
-					if @@channel_join == 0 # when zero process
+					#@@channel_join -= 1 # channel join number reduce
+					#if @@channel_join == 0 # when zero process
 						@@channel_hash.delete("#{@@channel}") # channel delete
-						@@channel_hash.each_key do |key|
-							@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)	
-						end
+						#@@channel_hash.each_key do |key|
+						#	@@irc.notice "#{key}", " DEL-CHANNEL #{@@channel} #{@@nick}" # send DEL-CHANNEL message (hash table for value delete)	
+						#end
 					########################################
 
 						@@channel_stable.delete("#{@@channel}") # message send hash delete 
+						@@channel_key.delete("#{@@channel}")
 						@@channel = "" # channel var delete
 					########################################
-					else
+					#else
 						# channel hash update
-						@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
-					end
+						#@@channel_hash.store("#{@@channel}", "#{@@channel_join}")
+					#end
 					########################################
 					next
 				end
@@ -288,6 +324,7 @@ Signal.trap(:INT) {
 				# no operator process
 				if @@nick == mp_user[0]
 					@@channel_stable.delete("#{mp_cha}") # when own part, channel_stable hash delete
+					@@channel_key.delete("#{mp_cha}") # when own part, channel_stable hash delete
 				end
 				################################################
 
@@ -302,30 +339,30 @@ Signal.trap(:INT) {
 			
 			# if new channel send  process
 			################################################
-			if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
+			#if msg.split[1] == 'PRIVMSG' && msg.split[4] == 'NEW-CHANNEL'
 				# setting
-				n_cha  = msg.split[5]
-				n_join = msg.split[6]
+			#	n_cha  = msg.split[5]
+			#	n_join = msg.split[6]
 				#####################
 
-				@@channel_hash.store("#{n_cha}", "#{n_join}") # own channel hash table store other ikagent of information 
-				@@channel_hash.each_key do |key|
-					@@irc.notice "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}" # other ikagent private message about own information (UPDATE)
-				end
-				p "new channel store!"
-			end
+			#	@@channel_hash.store("#{n_cha}", "#{n_join}") # own channel hash table store other ikagent of information 
+			#	@@channel_hash.each_key do |key|
+			#		@@irc.notice "#{key}", " UPD-CHANNEL #{@@channel} #{@@channel_join}" # other ikagent private message about own information (UPDATE)
+			#	end
+			#	p "new channel store!"
+			#end
 			###############################################
 
 			# if upd channel send process
 			########################################################
-			if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-CHANNEL'
+			#if msg.split[1] == 'NOTICE' && msg.split[4] == 'UPD-CHANNEL'
 				# setting
-				u_cha  = msg.split[5]
-				u_join = msg.split[6]
+			#	u_cha  = msg.split[5]
+			#	u_join = msg.split[6]
 				##################### 
-				@@channel_hash.store("#{u_cha}", "#{u_join}")
-				p "upd channel store!"
-			end
+			#	@@channel_hash.store("#{u_cha}", "#{u_join}")
+			#	p "upd channel store!"
+			#end
 			########################################################
 
 			# if disconnect ikagent server session process
@@ -338,6 +375,8 @@ Signal.trap(:INT) {
 				#####################
 
 				@@channel_hash.delete("#{d_cha}") # channel table disconnect ikagent delete
+				@@channel_stable.delete("#{d_cha}") # channel table disconnect ikagent delete
+				@@channel_key.delete("#{d_cha}") # channel table disconnect ikagent delete
 				d_nick.encode!("UTF-8")
 				d_ip.encode!("UTF-8")
 				@@db.execute("#{@@cac_delete} where ikagent_id = ? and ikagent_ip = ?", d_nick, d_ip)
@@ -694,7 +733,7 @@ Signal.trap(:INT) {
 				end
 				@@db.commit
 				
-				next if value < 4
+				next if value < 1
 				msg = " KEY-REPLY #{@@nick} #{value}"
 				@@irc.notice "#{ikagent}", "#{msg}"
 			end
@@ -764,6 +803,7 @@ Signal.trap(:INT) {
 					if @@layer == 1
 						@@layer = 0
 						@@sha_timeout.wakeup
+						next
 					end
 
 					case @@smode
@@ -779,15 +819,34 @@ Signal.trap(:INT) {
 						end
 
 						next if msg.empty? == true
-						for key in @@channel_stable do
-							@@irc.privmsg "#{key}", "#{msg}"
+						
+						if @@layer == "none"
+							for key in @@channel_stable do
+								@@irc.privmsg "#{key}", "#{msg}"
+							end
+						elsif @@channel_key.empty? == true
+							next
+						else
+							for key in @@channel_key do
+								@@irc.privmsg "#{key}", "#{msg}"
+							end
 						end
-					when "1"
-					msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
-					for key in @@channel_stable do 
-						@@irc.notice "#{key}", "#{msg}"
-					end
 
+					when "1"
+
+						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
+						if @@layer == "none"
+							for key in @@channel_stable do 
+								@@irc.notice "#{key}", "#{msg}"
+							end
+
+						elsif @@channel_key.empty? == true
+							next
+						else
+							for key in @@channel_key do
+								@@irc.notice "#{key}", "#{msg}"
+							end
+						end
 					end
 					################################
 				########################################
@@ -853,8 +912,16 @@ Signal.trap(:INT) {
 
 					if @@smode == "1"
 						msg = " DEL-TAKO #{@@nick} #{@@ip} #{tako_id}"
-						for key in @@channel_stable do
-							@@irc.notice "#{key}", "#{msg}"
+						if @@layer == "none"
+							for key in @@channel_stable do
+								@@irc.notice "#{key}", "#{msg}"
+							end
+						elsif @@channel_key.empty? == true
+							next
+						else
+							for key in @@channel_key do
+								@@irc.notice "#{key}", "#{msg}"
+							end
 						end
 					end
 					########################################
@@ -907,9 +974,9 @@ Signal.trap(:INT) {
 			elsif /topic/i =~ input && @@channel.empty? == false
 				str = input.split
 				@@irc.topic "#{@@channel}", "#{str[1]}" # channel topic changes
-			elsif /mode/i =~ input && @@channel.empty? == false
+			elsif /mode/i =~ input 
 				str = input.split
-				@@irc.mode "#{@@channel}", "#{str[1]}" # channel mode changes
+				@@irc.mode "#{str[0]}", "#{str[1]} #{str[2]}" # channel mode changes
 			########################################################
 
 			# list process
@@ -964,7 +1031,7 @@ Signal.trap(:INT) {
 		while true
 			sleep
 			begin
-				timeout(10) {
+				timeout(30) {
 					while true
 						sleep 
 					end
@@ -980,13 +1047,12 @@ Signal.trap(:INT) {
 		while true
 			sleep
 			begin
-				timeout(5) {
+				timeout(30) {
 					while true
 						sleep
 					end
 				}
 			rescue Timeout::Error
-				@@layer = 1
 				p "Timeout!"
 				sow = @@db.execute("select tako_app from APP_List")
 				sow.each do |result|
@@ -1007,7 +1073,7 @@ Signal.trap(:INT) {
 					i += 1
 				end
 				msg = " QUERY-KEY #{@@nick} #{join_app}"
-				@@channel_stable.each do |key|
+				@@channel_hash.each_key do |key|
 					@@irc.privmsg "#{key}", "#{msg}"
 				end
 				@@key_timeout.wakeup
@@ -1021,22 +1087,78 @@ Signal.trap(:INT) {
 		while true
 			sleep
 			begin
-				timeout(10) {
+				timeout(30) {
 					while true
 						sleep 
 					end
 				}
 			rescue Timeout::Error
-				next if @@key_ikagent.empty? == true
+				p "QUERY-KEY : Timeout!" # debug
+
+				# No Query key message process
+				if @@key_ikagent.empty? == true
+					@@layer = 1
+					next
+				end
+				##############################
+
+				# random channel create
 				o = [('a' .. 'z'), ('A'..'Z'), ('0'..'9')].map { |i| i.to_a}.flatten
 				channel = "#" + (0..10).map { o[rand(o.length)]}.join
+				################################################
+
+				# if channel_key == 6 process
+				p_cha = ""
+				if @@channel_key.count == 6
+					if @@channel.empty? == true
+						p_cha = @@channel_key.sample
+						@@irc.part("#{p_cha}")
+						@@channel_key.delete("#{p_cha}")
+						next
+					end
+					p_cha = @@channel
+					while p_cha != @@channel
+						p_cha = @@channel_key.sample
+					end
+					@@irc.part("#{p_cha}")
+					@@channel_key.delete("#{p_cha}")
+				end
+				################################################
+
+				@@channel = channel if @@channel.empty? == true
+
 				@@irc.join "#{channel}"
-				@@channel = channel
+
+								
+				@@key_ikagent.sort {|(k1, v1), (k2, v2) | v2 <=> v1}
+				i = 0
 				@@key_ikagent.each do |result|
 					@@irc.invite "#{result}", "#{channel}"
+					@@n_operator = result if i == 0
+					i += 1
 				end
-				@@key_ikagent.clear
-				p "Timeout!"
+
+				@@key_ikagent.clear # query key clear
+				@@interval = i * 60
+				@@key_stop.wakeup
+			end
+		end
+	end
+
+	@@key_stop = Thread::fork do
+		Thread::stop
+		while true
+			
+			sleep
+			begin
+				timeout(@@interval) {
+					while true
+						sleep 
+					end
+				}
+			rescue Timeout::Error
+				" Key Interval Timeout!"
+				@@layer = 1
 			end
 		end
 	end
@@ -1102,7 +1224,7 @@ Signal.trap(:INT) {
 		if OPTS[:a] then @@algo = OPTS[:a] else @@algo = ALGO end
 		if OPTS[:d] then @@dummy = "1" else @@dummy = "0" end
 		if OPTS[:m] then @@smode = "1" else @@smode = "0" end
-		if OPTS[:l] then @@layer = "1" else @@layer = "0" end
+		if OPTS[:l] then @@layer = "1" else @@layer = "none" end
 		################################################################
 
 		# SQLite3 process
@@ -1158,6 +1280,7 @@ Signal.trap(:INT) {
 		@@timeout.run
 		@@sha_timeout.run
 		@@key_timeout.run
+		@@key_stop.run
 		#######################
 		
 		# such thread join
@@ -1168,6 +1291,7 @@ Signal.trap(:INT) {
 		@@timeout.join
 		@@sha_timeout.join
 		@@key_timeout.join
+		@@key_stop.join
 		########################
 		
 		########################
