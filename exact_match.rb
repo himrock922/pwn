@@ -11,10 +11,8 @@ module ExactMatch
 		row = db.execute("select tako_app from APP_List where tako_id = ?", tako_id) 	
 		
 		row.each do |result|
-			p result[0]
 			s_app.push("#{result[0]}")
 			i += 1
-			p s_app
 		end
 
 		case i
