@@ -236,8 +236,8 @@ Signal.trap(:INT) {
 				mj_user[0].slice!(0)
 				###########################
 
-				if @@n_operator == mj_user
-					@@irc.mode "#{mj_cha}", "+o #{mj_user}"
+				if @@n_operator == mj_user[0]
+					@@irc.mode "#{mj_cha}", "+o #{mj_user[0]}"
 					@@n_operator = ""
 					@@irc.mode "#{mj_cha}", "-o #{@@nick}"
 				end 
