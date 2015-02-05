@@ -207,7 +207,7 @@ Signal.trap(:INT) {
 						i += 1
 						next if i > 2
 						@@irc.join "#{key}"
-						@@channel_stable.push("#{key}")
+						@@channel_stable.push("#{key}") if @@layer == "none"
 					end
 
 				elsif @@channel.empty? == false
