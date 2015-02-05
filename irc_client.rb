@@ -803,6 +803,7 @@ Signal.trap(:INT) {
 					if @@layer == "1"
 						@@layer = "0"
 						@@sha_timeout.wakeup
+						@@mutex.unlock
 						next
 					end
 
@@ -818,13 +819,17 @@ Signal.trap(:INT) {
 							msg = IRC::exact_match_query(@@irc, @@db, @@app_select, @@nick, tako_id, @@exa_select, @@apn_select)
 						end
 
-						next if msg.empty? == true
+						if msg.empty? == true
+							@@mutex.unlock
+							next
+						end
 						
 						if @@layer == "none"
 							for key in @@channel_stable do
 								@@irc.privmsg "#{key}", "#{msg}"
 							end
 						elsif @@channel_key.empty? == true
+							@@mutex.unlock
 							next
 						else
 							for key in @@channel_key do
@@ -841,6 +846,7 @@ Signal.trap(:INT) {
 							end
 
 						elsif @@channel_key.empty? == true
+							@@mutex.unlock
 							next
 						else
 							for key in @@channel_key do
@@ -917,6 +923,7 @@ Signal.trap(:INT) {
 								@@irc.notice "#{key}", "#{msg}"
 							end
 						elsif @@channel_key.empty? == true
+							@@mutex.unlock
 							next
 						else
 							for key in @@channel_key do
@@ -1048,9 +1055,7 @@ Signal.trap(:INT) {
 			sleep
 			begin
 				timeout(30) {
-					while true
-						sleep
-					end
+					sleep
 				}
 			rescue Timeout::Error
 				p "Share Timeout!"
@@ -1088,9 +1093,7 @@ Signal.trap(:INT) {
 			sleep
 			begin
 				timeout(30) {
-					while true
-						sleep 
-					end
+					sleep 
 				}
 			rescue Timeout::Error
 				p "QUERY-KEY : Timeout!" # debug
@@ -1128,7 +1131,7 @@ Signal.trap(:INT) {
 				@@channel = channel if @@channel.empty? == true
 
 				@@irc.join "#{channel}"
-
+				@@channel_key.push("#{channel}")
 								
 				@@key_ikagent.sort {|(k1, v1), (k2, v2) | v2 <=> v1}
 				i = 0
@@ -1140,7 +1143,7 @@ Signal.trap(:INT) {
 
 				@@key_ikagent.clear # query key clear
 				@@interval = i * 60
-				@@key_stop.wakeup
+				#@@key_stop.wakeup
 			end
 		end
 	end
@@ -1148,13 +1151,10 @@ Signal.trap(:INT) {
 	@@key_stop = Thread::fork do
 		Thread::stop
 		while true
-			
 			sleep
 			begin
 				timeout(@@interval) {
-					while true
-						sleep 
-					end
+					sleep 
 				}
 			rescue Timeout::Error
 				" Key Interval Timeout!"
