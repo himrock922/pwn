@@ -436,7 +436,7 @@ Signal.trap(:INT) {
 				@@db.execute("#{@@cso_delete} where ikagent_id = ?", d_nick)
 				@@db.execute("#{@@cat_delete} where ikagent_id = ?", d_nick)
 				@@db.execute("#{@@com_delete} where ikagent_id = ?", d_nick)
-				@@db.execute("#{@@val_delete} where ikagent_id = ?", d_nick)
+				@@db.execute("#{@@exa_delete} where ikagent_id = ?", d_nick)
 				@@db.commit 
 				@@db.execute("vacuum")
 				# such table output
@@ -580,7 +580,7 @@ Signal.trap(:INT) {
 								@@db.execute(@@cat_insert, ikagent, tako_id, tako_mac)
 								@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
 							else
-								tow = @@db.execute("#{@@exa_select} where p_tako_id = ? and d_tako_id = ?", tako_id, own_tako)
+								tow = @@db.execute("#{@@exa_select} where p_tako_id = ? and o_tako_id = ?", tako_id, own_tako)
 								if tow.empty? == true	
 									@@db.execute(@@exa_insert, ikagent, tako_id, own_tako)
 								end
