@@ -29,7 +29,7 @@ module CommonApp
 			end
 
 			tmp = db.execute("#{val_select} where ikagent_id = ?", ikagent)
-			if tmp.nil? == true
+			if tmp.empty? == true
 				db.execute(val_insert, ikagent, i)
 			else
 				db.execute("#{val_update} set value = ? where ikagent_id = ?", i, ikagent)
