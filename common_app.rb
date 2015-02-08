@@ -41,6 +41,11 @@ module CommonApp
 		p "*************************"
 		
 		row = db.execute("select * from Value order by value desc")
+		if row.nil? == true
+			db.commit
+			return
+		end
+		
 		row.each do |result|
 			sow = db.get_first_row("select ikagent_ip from Cache where ikagent_id = ?", result[0])
 			print "#{result[0]} #{sow[0]} #{result[1]}\n"
