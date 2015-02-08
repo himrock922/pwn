@@ -703,6 +703,9 @@ Signal.trap(:INT) {
 				row = @@db.execute("#{@@cat_select} where ikagent_id = ?", ikagent)
 				if row.empty? == true
 					@@db.execute("#{@@cac_delete} where ikagent_id = ? or ikagent_ip = ?", ikagent, ip)
+					@@db.execute("#{@@cso_delete} where ikagent_id = ?", ikagent)
+					@@db.execute("#{@@cat_delete} where ikagent_id = ?", ikagent)
+					@@db.execute("#{@@val_delete} where ikagent_id = ?", ikagent)
 				end
 				@@db.commit
 				@@db.execute("vacuum")
