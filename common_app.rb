@@ -41,7 +41,7 @@ module CommonApp
 		p "*************************"
 		
 		row = db.execute("select * from Value order by value desc")
-		if row.nil? == true
+		if row.empty? == true
 			db.commit
 			return
 		end
