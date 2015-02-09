@@ -17,7 +17,7 @@ ikagent1
 ":dp117-044.jaist.ac.jp 255 ikagent1 :I have 5 clients and 0 servers"
 ":dp117-044.jaist.ac.jp 265 ikagent1 :Current local users: 5  Max: 5"
 ":dp117-044.jaist.ac.jp 266 ikagent1 :Current global users: 5  Max: 5"
-":dp117-044.jaist.ac.jp 250 ikagent1 :Highest connection count: 5 (5 clients) (460 connections received)"
+":dp117-044.jaist.ac.jp 250 ikagent1 :Highest connection count: 5 (5 clients) (476 connections received)"
 ":dp117-044.jaist.ac.jp 375 ikagent1 :- dp117-044.jaist.ac.jp Message of the Day - "
 ":dp117-044.jaist.ac.jp 372 ikagent1 :-         _,met$$$$$gg.       ircd-hybrid 7.2.2"
 ":dp117-044.jaist.ac.jp 372 ikagent1 :-      ,g$$$$$$$$$$$$$$$P.    -----------------"
@@ -55,47 +55,28 @@ ikagent1
 ":dp117-044.jaist.ac.jp 311 ikagent1 ikagent1 ~ikagent1 dp117-032.jaist.ac.jp * :I am ikagent1"
 ":dp117-044.jaist.ac.jp 312 ikagent1 ikagent1 dp117-044.jaist.ac.jp :IRC Server"
 ":dp117-044.jaist.ac.jp 338 ikagent1 ikagent1 150.65.117.32 :actually using host"
-":dp117-044.jaist.ac.jp 317 ikagent1 ikagent1 0 1423442882 :seconds idle, signon time"
+":dp117-044.jaist.ac.jp 317 ikagent1 ikagent1 0 1423447379 :seconds idle, signon time"
 ":dp117-044.jaist.ac.jp 318 ikagent1 ikagent1 :End of /WHOIS list."
 ":ikagent1!~ikagent1@dp117-032.jaist.ac.jp JOIN :#ikachang"
 ":dp117-044.jaist.ac.jp 353 ikagent1 = #ikachang :ikagent1 ikagent5 ikagent4 ikagent3 @ikagent2"
 ":dp117-044.jaist.ac.jp 366 ikagent1 #ikachang :End of /NAMES list."
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 0004810020 0004b50030 0011d70030 0005410020 00065e0030 0004b50020 000cf50030 0002080000 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 ae6e-c2d2-c960-f633 28:4b:5c:d6:f5:34 00065e0030 000cf50030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 0004b50030 000cf50030 0011d70030 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 ee9f-b7c7-a709-1c07 83:91:b9:8a:9d:04 000cf50030 0004b50020 0011d70030 0002080000 0004810020 0005410020 00065e0030 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030 "
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0005410020"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e89e-6ca9-991c-01d5 82:5d:35:88:4f:ca 000cf50030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 d696-45a3-9809-2087 32:09:24:08:37:05 0002080000"
 "NEW 2866-c183-6ea8-f4e4 67:72:64:d6:96:1a 0004b50020 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
 2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
 2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 0011d70030 0002080000 000cf50030 0004b50030 0004b50020 0005410020 0004810020 00065e0030 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 000cf50030 0004b50020 "
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 000cf50030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 2866-c183-6ea8-f4e4"
 
 "*************************"
 "****party tako fixed!****"
 "*************************"
 ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 0005410020 0011d70030 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 0004810020 000cf50030 0004b50020 0002080000 00065e0030 0004b50030 0005410020 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
-"Timeout!"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 000cf50030 0011d70030 0005410020 0004810020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 0004b50020"
 "NEW 44b2-dfc7-c00c-ae46 c4:da:76:3e:e6:98 0004b50020 0004810020 0002080000 0005410020 00065e0030 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -107,11 +88,11 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 1b83-e57c-5930-4f60"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 195b-8cf0-5930-326e 45:a4:77:1a:73:68 0002080000 0004810020 000cf50030 00065e0030 0011d70030 0004b50020 0004b50030 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0004810020 0004b50020 00065e0030 0004b50030 0011d70030 0002080000 0005410020 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0004b50020 0011d70030 0002080000 00065e0030 0005410020 000cf50030 0004b50030 "
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 0004b50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 000cf50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 195b-8cf0-5930-326e 45:a4:77:1a:73:68 000cf50030"
+"Timeout!"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0004b50020"
 "NEW 9125-99de-b9ea-5fb4 11:6e:92:17:25:71 0004b50030 0004810020 00065e0030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -126,7 +107,11 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
-"Timeout!"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0002080000"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 0005410020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 000cf50030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 0002080000"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030"
 "NEW 5ab2-01bb-f4b4-a238 b4:78:72:6c:29:81 0004b50030 0004b50020 0005410020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -144,17 +129,6 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0002080000 0004810020 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 8c90-11f3-d7e8-c9a2"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 0002080000 0005410020 00065e0030 0011d70030 0004b50030 000cf50030 0004810020 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0005410020 0004b50030 0011d70030 "
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 0005410020 0004810020 0004b50030 0004b50020 000cf50030 0002080000 00065e0030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0011d70030 0004810020 0002080000 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 00065e0030 000cf50030 0004b50030 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4540-48b5-9224-692f"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 7683-79f3-6ca8-6c7d"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 00065e0030 000cf50030 "
 "NEW 069b-b1df-12ce-4454 7d:1a:df:9f:b7:ec 0004810020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -173,14 +147,8 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
 069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
-"Timeout!"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 ad68-921a-6ba9-f722"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 66e9-7ffd-6304-50ef"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 e31e-efc0-af5a-9d5d"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 2e33-c5bf-e25b-6cbb"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 4a5e-7232-1136-9a1b"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 1688-6db0-b0fe-3ca9"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0011d70030 0005410020 0004b50030 0004b50020 0004810020 00065e0030 0002080000 "
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0002080000"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0011d70030"
 "NEW 20ce-565f-72cf-1f74 5b:0b:cd:12:a8:3d 000cf50030 0005410020 00065e0030 0011d70030 0002080000 0004b50020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -205,12 +173,6 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4c53-e39a-19ae-bf64"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 00065e0030 0002080000 0004b50030 000cf50030 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 b46b-db79-599a-7293"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 e89e-6ca9-991c-01d5"
-"Timeout!"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 dafb-e1cd-ad9c-781e"
 "NEW 937b-9814-b036-09de 87:eb:f5:f3:25:e6 0002080000 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -237,12 +199,7 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
 937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
 937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 689c-aa79-87c3-08ab"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 130f-8cdf-63f1-baf7"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 2b7b-6317-42f6-9f3b"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 ee9f-b7c7-a709-1c07"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 d696-45a3-9809-2087"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 ae6e-c2d2-c960-f633"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 00065e0030"
 "NEW 4dc6-ca0e-0353-90ff fd:65:c3:e5:f5:2d 0004b50030 0004810020 0002080000\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -272,15 +229,6 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 195b-8cf0-5930-326e"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 485a-eeaa-7936-bba8"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 dc35-c3ca-66bc-bf53"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 d4f4-4503-d426-1f8c"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 1b83-e57c-5930-4f60 a5:c0:3b:7e:7a:3e 0005410020 0004b50020 0002080000 0004810020 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 5eb1-083a-c3a6-feb6"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4aa3-f086-ab81-463a"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 358e-26bc-8e09-3762"
 "NEW ef5c-ce67-b448-4935 15:18:0a:0d:61:e3 0002080000 0011d70030 0005410020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -313,8 +261,6 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 cb56-cd0a-ad03-e722"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 8c90-11f3-d7e8-c9a2 41:ff:c4:13:0e:bc 0004b50030 0011d70030 0004810020 0002080000 0005410020 00065e0030 "
 "NEW cc90-d6aa-a948-af16 64:b0:b0:20:8c:0d 0004b50030 000cf50030 0005410020 0011d70030 0004810020 00065e0030 0002080000 0004b50020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -355,14 +301,8 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 04f6-a8d6-3685-5d5b"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 6c80-4e9b-ee86-37e7"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 0004b50020 00065e0030 0004b50030 0011d70030 0002080000 0005410020 0004810020 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 cc90-d6aa-a948-af16"
+"insert complete!"
 "DEL 2866-c183-6ea8-f4e4\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -401,8 +341,7 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-"Timeout!"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 e924-3023-bf7d-dcde"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 00065e0030"
 "DEL 44b2-dfc7-c00c-ae46\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -435,7 +374,7 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 a59e-c6df-46b7-a9f8"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0002080000"
 "DEL 9125-99de-b9ea-5fb4\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -465,22 +404,6 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 56bd-fd1e-1e0f-4697"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 61ce-45be-b507-5824"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 7683-79f3-6ca8-6c7d 8c:bd:4b:0f:3e:70 00065e0030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 fd4a-4ecf-e4e3-e844"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4540-48b5-9224-692f d3:a2:a3:58:ad:e1 0005410020 0004b50030 0004b50020 0002080000 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 1c0b-9d3a-c8fe-b95f"
 "DEL 5ab2-01bb-f4b4-a238\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -507,38 +430,7 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 ad68-921a-6ba9-f722 27:8f:03:99:3f:96 0011d70030 0004b50020 000cf50030 0005410020 0004810020 00065e0030 0004b50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 2e33-c5bf-e25b-6cbb 9d:98:a3:59:4a:f0 00065e0030 0005410020 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 "Timeout!"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 66e9-7ffd-6304-50ef f6:79:81:55:39:04 0004810020 0004b50030 000cf50030 0011d70030 00065e0030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 75bc-7805-8365-ab73"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 4a5e-7232-1136-9a1b 52:ea:e5:06:88:ae 0004b50020 0011d70030 0004b50030 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 e31e-efc0-af5a-9d5d 31:fc:35:a6:4b:bf 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 "DEL 069b-b1df-12ce-4454\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -564,31 +456,6 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 53e8-2d9b-e0e9-fab2"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 b46b-db79-599a-7293 25:e5:73:5e:3c:5f 0011d70030 0004810020 0004b50020 000cf50030 0004b50030 0002080000 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 1688-6db0-b0fe-3ca9 8f:48:b3:5c:82:da 00065e0030 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 e89e-6ca9-991c-01d5 82:5d:35:88:4f:ca 0004b50030 0004810020 0011d70030 00065e0030 000cf50030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 ee9f-b7c7-a709-1c07 83:91:b9:8a:9d:04 000cf50030 0004b50020 0011d70030 0002080000 0004810020 0005410020 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 "DEL 20ce-565f-72cf-1f74\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -608,61 +475,9 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4c53-e39a-19ae-bf64 03:14:10:a8:55:ee 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-"Timeout!"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0005410020 0004810020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 000cf50030 0004b50020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 0004810020 0004b50030 0011d70030 0005410020 00065e0030 0004b50020 000cf50030 0002080000 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 0004b50030 000cf50030 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 0005410020 0011d70030 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 195b-8cf0-5930-326e 45:a4:77:1a:73:68 0002080000 0004810020 000cf50030 00065e0030 0011d70030 0004b50020 0004b50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 0004810020 000cf50030 0004b50020 0002080000 00065e0030 0004b50030 0005410020 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0005410020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 0002080000"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 0004b50030"
 "DEL 937b-9814-b036-09de\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -680,55 +495,6 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 d696-45a3-9809-2087 32:09:24:08:37:05 0004b50020 0002080000 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0002080000 0004810020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 ae6e-c2d2-c960-f633 28:4b:5c:d6:f5:34 00065e0030 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-"Timeout!"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0005410020 0004b50030 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0011d70030 0004810020 0002080000 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
 "DEL 4dc6-ca0e-0353-90ff\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -743,40 +509,8 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0004810020 0004b50020 00065e0030 0004b50030 0011d70030 0002080000 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 1b83-e57c-5930-4f60"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 00065e0030 000cf50030 0004b50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 8c90-11f3-d7e8-c9a2"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 0004b50020 0002080000 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0004b50020 0011d70030 0002080000 00065e0030 0005410020 000cf50030 0004b50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 1b83-e57c-5930-4f60 a5:c0:3b:7e:7a:3e 0004810020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 8c90-11f3-d7e8-c9a2 41:ff:c4:13:0e:bc 0004810020"
 "DEL ef5c-ce67-b448-4935\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -788,35 +522,8 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-"Timeout!"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 ad68-921a-6ba9-f722"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 0002080000 0005410020 00065e0030 0011d70030 0004b50030 000cf50030 0004810020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 0011d70030 0002080000 000cf50030 0004b50030 0004b50020 0005410020 0004810020 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 000cf50030 0011d70030 0005410020 0004810020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 0005410020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 7683-79f3-6ca8-6c7d 8c:bd:4b:0f:3e:70 0005410020"
 "DEL cc90-d6aa-a948-af16\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -825,7 +532,9 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 "-------------------------------------------------"
 2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
 2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 e31e-efc0-af5a-9d5d"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 2e33-c5bf-e25b-6cbb 9d:98:a3:59:4a:f0 00065e0030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4540-48b5-9224-692f d3:a2:a3:58:ad:e1 000cf50030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 4a5e-7232-1136-9a1b 52:ea:e5:06:88:ae 0011d70030"
 "NEW 44b2-dfc7-c00c-ae46 c4:da:76:3e:e6:98 0004b50020 0004810020 0002080000 0005410020 00065e0030 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -837,7 +546,6 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4540-48b5-9224-692f"
 "NEW 9125-99de-b9ea-5fb4 11:6e:92:17:25:71 0004b50030 0004810020 00065e0030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -852,11 +560,8 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
-"Timeout!"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 e89e-6ca9-991c-01d5"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 66e9-7ffd-6304-50ef"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 130f-8cdf-63f1-baf7"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 66e9-7ffd-6304-50ef f6:79:81:55:39:04 0004810020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 1688-6db0-b0fe-3ca9 8f:48:b3:5c:82:da 00065e0030"
 "NEW 5ab2-01bb-f4b4-a238 b4:78:72:6c:29:81 0004b50030 0004b50020 0005410020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -874,10 +579,7 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 7683-79f3-6ca8-6c7d"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 0005410020 0004810020 0004b50030 0004b50020 000cf50030 0002080000 00065e0030 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 1688-6db0-b0fe-3ca9"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 2b7b-6317-42f6-9f3b"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 b46b-db79-599a-7293 25:e5:73:5e:3c:5f 0004b50020"
 "NEW 069b-b1df-12ce-4454 7d:1a:df:9f:b7:ec 0004810020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -896,7 +598,8 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
 069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 00065e0030 000cf50030 "
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4c53-e39a-19ae-bf64 03:14:10:a8:55:ee 0005410020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 0004b50030"
 "NEW 20ce-565f-72cf-1f74 5b:0b:cd:12:a8:3d 000cf50030 0005410020 00065e0030 0011d70030 0002080000 0004b50020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -921,14 +624,6 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
-"Timeout!"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 2e33-c5bf-e25b-6cbb"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4c53-e39a-19ae-bf64"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0011d70030 0005410020 0004b50030 0004b50020 0004810020 00065e0030 0002080000 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 4a5e-7232-1136-9a1b"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 195b-8cf0-5930-326e"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 b46b-db79-599a-7293"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 00065e0030 0002080000 0004b50030 000cf50030 "
 "NEW 937b-9814-b036-09de 87:eb:f5:f3:25:e6 0002080000 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -955,11 +650,7 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
 937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
 937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 ee9f-b7c7-a709-1c07"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 dafb-e1cd-ad9c-781e"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 689c-aa79-87c3-08ab"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 5eb1-083a-c3a6-feb6"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 ee9f-b7c7-a709-1c07 83:91:b9:8a:9d:04 0004810020"
 "NEW 4dc6-ca0e-0353-90ff fd:65:c3:e5:f5:2d 0004b50030 0004810020 0002080000\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -989,9 +680,7 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
-"Timeout!"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 d4f4-4503-d426-1f8c"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 6c80-4e9b-ee86-37e7"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 000cf50030"
 "NEW ef5c-ce67-b448-4935 15:18:0a:0d:61:e3 0002080000 0011d70030 0005410020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1024,14 +713,7 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 d696-45a3-9809-2087"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 ae6e-c2d2-c960-f633"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 485a-eeaa-7936-bba8"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 1b83-e57c-5930-4f60 a5:c0:3b:7e:7a:3e 0005410020 0004b50020 0002080000 0004810020 "
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 dc35-c3ca-66bc-bf53"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 a59e-c6df-46b7-a9f8"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 8c90-11f3-d7e8-c9a2 41:ff:c4:13:0e:bc 0004b50030 0011d70030 0004810020 0002080000 0005410020 00065e0030 "
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 358e-26bc-8e09-3762"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 0004810020"
 "NEW cc90-d6aa-a948-af16 64:b0:b0:20:8c:0d 0004b50030 000cf50030 0005410020 0011d70030 0004810020 00065e0030 0002080000 0004b50020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1072,6 +754,15 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 cc90-d6aa-a948-af16"
+
+"*************************"
+"****party tako fixed!****"
+"*************************"
+ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 cc90-d6aa-a948-af16"
+"update complete!"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 ae6e-c2d2-c960-f633 28:4b:5c:d6:f5:34 00065e0030"
 "DEL 2866-c183-6ea8-f4e4\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1110,22 +801,6 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4aa3-f086-ab81-463a"
-"Timeout!"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 56bd-fd1e-1e0f-4697"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 cb56-cd0a-ad03-e722"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 0004b50020 00065e0030 0004b50030 0011d70030 0002080000 0005410020 0004810020 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 ad68-921a-6ba9-f722 27:8f:03:99:3f:96 0011d70030 0004b50020 000cf50030 0005410020 0004810020 00065e0030 0004b50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 "DEL 44b2-dfc7-c00c-ae46\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1158,20 +833,11 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 e924-3023-bf7d-dcde"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 e31e-efc0-af5a-9d5d 31:fc:35:a6:4b:bf 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 7683-79f3-6ca8-6c7d 8c:bd:4b:0f:3e:70 00065e0030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 04f6-a8d6-3685-5d5b"
+"Timeout!"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0005410020"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 ad68-921a-6ba9-f722 27:8f:03:99:3f:96 0005410020"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e31e-efc0-af5a-9d5d 31:fc:35:a6:4b:bf 00065e0030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e89e-6ca9-991c-01d5 82:5d:35:88:4f:ca 000cf50030"
 "DEL 9125-99de-b9ea-5fb4\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1201,20 +867,8 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 fd4a-4ecf-e4e3-e844"
-"Timeout!"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 e89e-6ca9-991c-01d5 82:5d:35:88:4f:ca 0004b50030 0004810020 0011d70030 00065e0030 000cf50030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 2e33-c5bf-e25b-6cbb 9d:98:a3:59:4a:f0 00065e0030 0005410020 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0004810020"
 "DEL 5ab2-01bb-f4b4-a238\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1241,19 +895,8 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4540-48b5-9224-692f d3:a2:a3:58:ad:e1 0005410020 0004b50030 0004b50020 0002080000 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 61ce-45be-b507-5824"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 4a5e-7232-1136-9a1b 52:ea:e5:06:88:ae 0004b50020 0011d70030 0004b50030 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 d696-45a3-9809-2087 32:09:24:08:37:05 0002080000"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 0004b50020"
 "DEL 069b-b1df-12ce-4454\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1279,13 +922,9 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 b46b-db79-599a-7293 25:e5:73:5e:3c:5f 0011d70030 0004810020 0004b50020 000cf50030 0004b50030 0002080000 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 1c0b-9d3a-c8fe-b95f"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 000cf50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 0005410020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0002080000"
 "DEL 20ce-565f-72cf-1f74\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1305,33 +944,13 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 ee9f-b7c7-a709-1c07 83:91:b9:8a:9d:04 000cf50030 0004b50020 0011d70030 0002080000 0004810020 0005410020 00065e0030 "
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 0004b50030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 cc90-d6aa-a948-af16"
 
 "*************************"
 "****party tako fixed!****"
 "*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 75bc-7805-8365-ab73"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 0004b50030 000cf50030 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 66e9-7ffd-6304-50ef f6:79:81:55:39:04 0004810020 0004b50030 000cf50030 0011d70030 00065e0030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 000cf50030 0004b50020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-"Timeout!"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 53e8-2d9b-e0e9-fab2"
+ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
 "DEL 937b-9814-b036-09de\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1349,25 +968,17 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 0005410020 0011d70030 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 1688-6db0-b0fe-3ca9 8f:48:b3:5c:82:da 00065e0030 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 0004810020 000cf50030 0004b50020 0002080000 00065e0030 0004b50030 0005410020 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 0005410020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 0011d70030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 0004b50020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 00065e0030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0005410020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d cc90-d6aa-a948-af16"
+"insert complete!"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 195b-8cf0-5930-326e 45:a4:77:1a:73:68 00065e0030"
+"Timeout!"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 0002080000"
 "DEL 4dc6-ca0e-0353-90ff\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1382,43 +993,6 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0005410020 0004810020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 1b83-e57c-5930-4f60"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 195b-8cf0-5930-326e 45:a4:77:1a:73:68 0002080000 0004810020 000cf50030 00065e0030 0011d70030 0004b50020 0004b50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4c53-e39a-19ae-bf64 03:14:10:a8:55:ee 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-"Timeout!"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0002080000 0004810020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 d696-45a3-9809-2087 32:09:24:08:37:05 0004b50020 0002080000 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 "DEL ef5c-ce67-b448-4935\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1430,28 +1004,19 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 8c90-11f3-d7e8-c9a2"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 0004b50020 0002080000 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0002080000"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0005410020"
 "DEL cc90-d6aa-a948-af16\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 0011d70030 0002080000 000cf50030 0004b50030 0004b50020 0005410020 0004810020 00065e0030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0005410020 0004b50030 0011d70030 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 0004810020 0004b50030 0011d70030 0005410020 00065e0030 0004b50020 000cf50030 0002080000 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1"
-"Timeout!"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 7683-79f3-6ca8-6c7d"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0002080000"
 "NEW 2866-c183-6ea8-f4e4 67:72:64:d6:96:1a 0004b50020 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
 2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
 2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 00065e0030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 1b83-e57c-5930-4f60 a5:c0:3b:7e:7a:3e 0002080000"
 "NEW 44b2-dfc7-c00c-ae46 c4:da:76:3e:e6:98 0004b50020 0004810020 0002080000 0005410020 00065e0030 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1463,14 +1028,8 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 2e33-c5bf-e25b-6cbb"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 ae6e-c2d2-c960-f633 28:4b:5c:d6:f5:34 00065e0030 000cf50030 "
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 000cf50030 0011d70030 0005410020 0004810020 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0011d70030 0004810020 0002080000 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 4a5e-7232-1136-9a1b"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 00065e0030 000cf50030 0004b50030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 ad68-921a-6ba9-f722"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030 "
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 8c90-11f3-d7e8-c9a2 41:ff:c4:13:0e:bc 00065e0030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 00065e0030"
 "NEW 9125-99de-b9ea-5fb4 11:6e:92:17:25:71 0004b50030 0004810020 00065e0030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1485,8 +1044,6 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 e31e-efc0-af5a-9d5d"
 "NEW 5ab2-01bb-f4b4-a238 b4:78:72:6c:29:81 0004b50030 0004b50020 0005410020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1504,9 +1061,6 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
-"Timeout!"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 b46b-db79-599a-7293"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 0005410020 0004810020 0004b50030 0004b50020 000cf50030 0002080000 00065e0030 "
 "NEW 069b-b1df-12ce-4454 7d:1a:df:9f:b7:ec 0004810020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1525,6 +1079,8 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
 069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 7683-79f3-6ca8-6c7d 8c:bd:4b:0f:3e:70 0005410020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 2e33-c5bf-e25b-6cbb 9d:98:a3:59:4a:f0 0005410020"
 "NEW 20ce-565f-72cf-1f74 5b:0b:cd:12:a8:3d 000cf50030 0005410020 00065e0030 0011d70030 0002080000 0004b50020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1549,9 +1105,6 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 e89e-6ca9-991c-01d5"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0004810020 0004b50020 00065e0030 0004b50030 0011d70030 0002080000 0005410020 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0004b50020 0011d70030 0002080000 00065e0030 0005410020 000cf50030 0004b50030 "
 "NEW 937b-9814-b036-09de 87:eb:f5:f3:25:e6 0002080000 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1578,14 +1131,9 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
 937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
 937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 00065e0030 000cf50030 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 ee9f-b7c7-a709-1c07"
-"Timeout!"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 0002080000 0005410020 00065e0030 0011d70030 0004b50030 000cf50030 0004810020 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4540-48b5-9224-692f"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 130f-8cdf-63f1-baf7"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 66e9-7ffd-6304-50ef"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 4a5e-7232-1136-9a1b 52:ea:e5:06:88:ae 0004b50020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 b46b-db79-599a-7293 25:e5:73:5e:3c:5f 0002080000"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4540-48b5-9224-692f d3:a2:a3:58:ad:e1 0002080000"
 "NEW 4dc6-ca0e-0353-90ff fd:65:c3:e5:f5:2d 0004b50030 0004810020 0002080000\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1615,15 +1163,8 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0011d70030 0005410020 0004b50030 0004b50020 0004810020 00065e0030 0002080000 "
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 1688-6db0-b0fe-3ca9"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 00065e0030 0002080000 0004b50030 000cf50030 "
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 dafb-e1cd-ad9c-781e"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 d4f4-4503-d426-1f8c"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 1b83-e57c-5930-4f60 a5:c0:3b:7e:7a:3e 0005410020 0004b50020 0002080000 0004810020 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 8c90-11f3-d7e8-c9a2 41:ff:c4:13:0e:bc 0004b50030 0011d70030 0004810020 0002080000 0005410020 00065e0030 "
-"Timeout!"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 2b7b-6317-42f6-9f3b"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 ee9f-b7c7-a709-1c07 83:91:b9:8a:9d:04 0002080000"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 66e9-7ffd-6304-50ef f6:79:81:55:39:04 0004810020"
 "NEW ef5c-ce67-b448-4935 15:18:0a:0d:61:e3 0002080000 0011d70030 0005410020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1656,13 +1197,8 @@ ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 d696-45a3-9809-2087"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4c53-e39a-19ae-bf64"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 689c-aa79-87c3-08ab"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 ae6e-c2d2-c960-f633"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 dc35-c3ca-66bc-bf53"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 0004b50020 00065e0030 0004b50030 0011d70030 0002080000 0005410020 0004810020 000cf50030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 195b-8cf0-5930-326e"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 000cf50030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 0004b50020"
 "NEW cc90-d6aa-a948-af16 64:b0:b0:20:8c:0d 0004b50030 000cf50030 0005410020 0011d70030 0004810020 00065e0030 0002080000 0004b50020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1703,6 +1239,10 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 1688-6db0-b0fe-3ca9 8f:48:b3:5c:82:da 00065e0030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4c53-e39a-19ae-bf64 03:14:10:a8:55:ee 0005410020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 0011d70030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 ae6e-c2d2-c960-f633 28:4b:5c:d6:f5:34 00065e0030"
 "DEL 2866-c183-6ea8-f4e4\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1741,13 +1281,9 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 7683-79f3-6ca8-6c7d 8c:bd:4b:0f:3e:70 00065e0030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 ad68-921a-6ba9-f722 27:8f:03:99:3f:96 0004810020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0004b50030"
 "DEL 44b2-dfc7-c00c-ae46\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1809,21 +1345,12 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 2e33-c5bf-e25b-6cbb 9d:98:a3:59:4a:f0 00065e0030 0005410020 0011d70030 "
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 2866-c183-6ea8-f4e4"
 
 "*************************"
 "****party tako fixed!****"
 "*************************"
-ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 485a-eeaa-7936-bba8"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 358e-26bc-8e09-3762"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 5eb1-083a-c3a6-feb6"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 cb56-cd0a-ad03-e722"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 6c80-4e9b-ee86-37e7"
-"Timeout!"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4aa3-f086-ab81-463a"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 04f6-a8d6-3685-5d5b"
+ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 "DEL 5ab2-01bb-f4b4-a238\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1850,17 +1377,13 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 e924-3023-bf7d-dcde"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 fd4a-4ecf-e4e3-e844"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 a59e-c6df-46b7-a9f8"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 4a5e-7232-1136-9a1b 52:ea:e5:06:88:ae 0004b50020 0011d70030 0004b50030 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 61ce-45be-b507-5824"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 56bd-fd1e-1e0f-4697"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e31e-efc0-af5a-9d5d 31:fc:35:a6:4b:bf 00065e0030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e89e-6ca9-991c-01d5 82:5d:35:88:4f:ca 0004810020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0004b50030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 0011d70030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 000cf50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 0005410020"
+"Timeout!"
 "DEL 069b-b1df-12ce-4454\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1886,33 +1409,8 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4540-48b5-9224-692f d3:a2:a3:58:ad:e1 0005410020 0004b50030 0004b50020 0002080000 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 b46b-db79-599a-7293 25:e5:73:5e:3c:5f 0011d70030 0004810020 0004b50020 000cf50030 0004b50030 0002080000 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 1c0b-9d3a-c8fe-b95f"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 66e9-7ffd-6304-50ef f6:79:81:55:39:04 0004810020 0004b50030 000cf50030 0011d70030 00065e0030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 ee9f-b7c7-a709-1c07 83:91:b9:8a:9d:04 000cf50030 0004b50020 0011d70030 0002080000 0004810020 0005410020 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-"Timeout!"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 75bc-7805-8365-ab73"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0004810020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 d696-45a3-9809-2087 32:09:24:08:37:05 0002080000"
 "DEL 20ce-565f-72cf-1f74\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1932,25 +1430,7 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 53e8-2d9b-e0e9-fab2"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 ad68-921a-6ba9-f722 27:8f:03:99:3f:96 0011d70030 0004b50020 000cf50030 0005410020 0004810020 00065e0030 0004b50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 1688-6db0-b0fe-3ca9 8f:48:b3:5c:82:da 00065e0030 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 000cf50030 0004b50020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 195b-8cf0-5930-326e 45:a4:77:1a:73:68 0002080000"
 "DEL 937b-9814-b036-09de\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -1968,25 +1448,13 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 e31e-efc0-af5a-9d5d 31:fc:35:a6:4b:bf 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0005410020 0004810020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4c53-e39a-19ae-bf64 03:14:10:a8:55:ee 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-"Timeout!"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 00065e0030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 0011d70030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0004810020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 0004810020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 0004b50030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 000cf50030"
 "DEL 4dc6-ca0e-0353-90ff\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2012,75 +1480,19 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 0004810020 000cf50030 0004b50020 0002080000 00065e0030 0004b50030 0005410020 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 0004810020 0004b50030 0011d70030 0005410020 00065e0030 0004b50020 000cf50030 0002080000 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 e89e-6ca9-991c-01d5 82:5d:35:88:4f:ca 0004b50030 0004810020 0011d70030 00065e0030 000cf50030 0005410020 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 1b83-e57c-5930-4f60"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 ae6e-c2d2-c960-f633 28:4b:5c:d6:f5:34 00065e0030 000cf50030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 d696-45a3-9809-2087 32:09:24:08:37:05 0004b50020 0002080000 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
-ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86
-ikagent3 150.65.117.103 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0005410020"
 "DEL cc90-d6aa-a948-af16\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
-"Timeout!"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 0004b50020 0002080000 00065e0030 "
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0004b50030"
 "NEW 2866-c183-6ea8-f4e4 67:72:64:d6:96:1a 0004b50020 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
 2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
 2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 0004b50030 000cf50030 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 8c90-11f3-d7e8-c9a2"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 0011d70030 0002080000 000cf50030 0004b50030 0004b50020 0005410020 0004810020 00065e0030 "
-
-"*************************"
-"****party tako fixed!****"
-"*************************"
-ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 0002080000"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0011d70030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 000cf50030"
 "NEW 44b2-dfc7-c00c-ae46 c4:da:76:3e:e6:98 0004b50020 0004810020 0002080000 0005410020 00065e0030 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2092,10 +1504,6 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
 44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 000cf50030 0011d70030 0005410020 0004810020 "
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 0005410020 0011d70030 000cf50030 "
-"Timeout!"
 "NEW 9125-99de-b9ea-5fb4 11:6e:92:17:25:71 0004b50030 0004810020 00065e0030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2110,9 +1518,8 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
 9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0004810020 0004b50020 00065e0030 0004b50030 0011d70030 0002080000 0005410020 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 195b-8cf0-5930-326e 45:a4:77:1a:73:68 0002080000 0004810020 000cf50030 00065e0030 0011d70030 0004b50020 0004b50030 "
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 1b83-e57c-5930-4f60 a5:c0:3b:7e:7a:3e 0004810020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 8c90-11f3-d7e8-c9a2 41:ff:c4:13:0e:bc 0004b50030"
 "NEW 5ab2-01bb-f4b4-a238 b4:78:72:6c:29:81 0004b50030 0004b50020 0005410020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2130,9 +1537,6 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0002080000 0004810020 "
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 0005410020 0004810020 0004b50030 0004b50020 000cf50030 0002080000 00065e0030 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0005410020 0004b50030 0011d70030 "
 "NEW 069b-b1df-12ce-4454 7d:1a:df:9f:b7:ec 0004810020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2151,9 +1555,6 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
 5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
 069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 7683-79f3-6ca8-6c7d"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0004b50020 0011d70030 0002080000 00065e0030 0005410020 000cf50030 0004b50030 "
-"Timeout!"
 "NEW 20ce-565f-72cf-1f74 5b:0b:cd:12:a8:3d 000cf50030 0005410020 00065e0030 0011d70030 0002080000 0004b50020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2178,7 +1579,14 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 00065e0030 000cf50030 "
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0004810020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 d696-45a3-9809-2087 32:09:24:08:37:05 0002080000"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 0004810020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 cc90-d6aa-a948-af16"
+"update complete!"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 7683-79f3-6ca8-6c7d 8c:bd:4b:0f:3e:70 0005410020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 2e33-c5bf-e25b-6cbb 9d:98:a3:59:4a:f0 0011d70030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 4a5e-7232-1136-9a1b 52:ea:e5:06:88:ae 00065e0030"
 "NEW 937b-9814-b036-09de 87:eb:f5:f3:25:e6 0002080000 000cf50030\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2205,13 +1613,11 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
 937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
 937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0011d70030 0005410020 0004b50030 0004b50020 0004810020 00065e0030 0002080000 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0011d70030 0004810020 0002080000 "
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent5 150.65.117.101 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 00065e0030 0002080000 0004b50030 000cf50030 "
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 2e33-c5bf-e25b-6cbb"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent3 150.65.117.103 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 0002080000 0005410020 00065e0030 0011d70030 0004b50030 000cf50030 0004810020 "
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : NEW-TAKO ikagent4 150.65.117.31 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 00065e0030 000cf50030 0004b50030 "
-"Timeout!"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4540-48b5-9224-692f d3:a2:a3:58:ad:e1 000cf50030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 b46b-db79-599a-7293 25:e5:73:5e:3c:5f 0004b50020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 00065e0030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 00065e0030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 000cf50030"
 "NEW 4dc6-ca0e-0353-90ff fd:65:c3:e5:f5:2d 0004b50030 0004810020 0002080000\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2241,12 +1647,7 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
 4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 4a5e-7232-1136-9a1b"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 dafb-e1cd-ad9c-781e"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 4540-48b5-9224-692f"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 b46b-db79-599a-7293"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 d696-45a3-9809-2087"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 ad68-921a-6ba9-f722"
+"Timeout!"
 "NEW ef5c-ce67-b448-4935 15:18:0a:0d:61:e3 0002080000 0011d70030 0005410020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2279,12 +1680,10 @@ ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
 ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 e31e-efc0-af5a-9d5d"
-":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent5 150.65.117.101 dc35-c3ca-66bc-bf53"
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 66e9-7ffd-6304-50ef"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 ee9f-b7c7-a709-1c07"
-":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a"
-":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent4 150.65.117.31 e89e-6ca9-991c-01d5"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 66e9-7ffd-6304-50ef f6:79:81:55:39:04 0005410020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 1688-6db0-b0fe-3ca9 8f:48:b3:5c:82:da 00065e0030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 ee9f-b7c7-a709-1c07 83:91:b9:8a:9d:04 000cf50030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 0004b50020"
 "NEW cc90-d6aa-a948-af16 64:b0:b0:20:8c:0d 0004b50030 000cf50030 0005410020 0011d70030 0004810020 00065e0030 0002080000 0004b50020\n"
 "tako_id             tako_mac           tako_app"
 "-------------------------------------------------"
@@ -2325,4 +1724,933 @@ cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
 cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
-":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-TAKO ikagent3 150.65.117.103 1688-6db0-b0fe-3ca9"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 ad68-921a-6ba9-f722 27:8f:03:99:3f:96 000cf50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e31e-efc0-af5a-9d5d 31:fc:35:a6:4b:bf 00065e0030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e89e-6ca9-991c-01d5 82:5d:35:88:4f:ca 0004b50030"
+"DEL 2866-c183-6ea8-f4e4\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 0005410020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 0004b50030"
+"DEL 44b2-dfc7-c00c-ae46\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 0004b50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 0011d70030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4c53-e39a-19ae-bf64 03:14:10:a8:55:ee 0005410020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 0002080000"
+"DEL 9125-99de-b9ea-5fb4\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+"DEL 5ab2-01bb-f4b4-a238\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 000cf50030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0004b50020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 0004b50030"
+"DEL 069b-b1df-12ce-4454\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 2866-c183-6ea8-f4e4"
+
+"*************************"
+"****party tako fixed!****"
+"*************************"
+ikagent2 150.65.117.49 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 195b-8cf0-5930-326e 45:a4:77:1a:73:68 0004810020"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0002080000"
+"DEL 20ce-565f-72cf-1f74\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 ae6e-c2d2-c960-f633 28:4b:5c:d6:f5:34 000cf50030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0005410020"
+"Timeout!"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0002080000"
+"DEL 937b-9814-b036-09de\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 000cf50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0004b50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0004810020"
+"DEL 4dc6-ca0e-0353-90ff\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 00065e0030"
+"DEL ef5c-ce67-b448-4935\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+"DEL cc90-d6aa-a948-af16\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+"NEW 2866-c183-6ea8-f4e4 67:72:64:d6:96:1a 0004b50020 000cf50030\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0005410020"
+"NEW 44b2-dfc7-c00c-ae46 c4:da:76:3e:e6:98 0004b50020 0004810020 0002080000 0005410020 00065e0030 000cf50030\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+"NEW 9125-99de-b9ea-5fb4 11:6e:92:17:25:71 0004b50030 0004810020 00065e0030\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 d696-45a3-9809-2087 32:09:24:08:37:05 0002080000"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 0002080000"
+"NEW 5ab2-01bb-f4b4-a238 b4:78:72:6c:29:81 0004b50030 0004b50020 0005410020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+"NEW 069b-b1df-12ce-4454 7d:1a:df:9f:b7:ec 0004810020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+"NEW 20ce-565f-72cf-1f74 5b:0b:cd:12:a8:3d 000cf50030 0005410020 00065e0030 0011d70030 0002080000 0004b50020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d 000cf50030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 cb56-cd0a-ad03-e722 98:6a:e0:84:92:bb 0011d70030"
+"NEW 937b-9814-b036-09de 87:eb:f5:f3:25:e6 0002080000 000cf50030\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+"NEW 4dc6-ca0e-0353-90ff fd:65:c3:e5:f5:2d 0004b50030 0004810020 0002080000\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+"NEW ef5c-ce67-b448-4935 15:18:0a:0d:61:e3 0002080000 0011d70030 0005410020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 1b83-e57c-5930-4f60 a5:c0:3b:7e:7a:3e 0004b50020"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 ad68-921a-6ba9-f722 27:8f:03:99:3f:96 0005410020"
+"NEW cc90-d6aa-a948-af16 64:b0:b0:20:8c:0d 0004b50030 000cf50030 0005410020 0011d70030 0004810020 00065e0030 0002080000 0004b50020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 04f6-a8d6-3685-5d5b e9:a6:ea:90:4b:0c 000cf50030"
+"DEL 2866-c183-6ea8-f4e4\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e31e-efc0-af5a-9d5d 31:fc:35:a6:4b:bf 00065e0030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 e89e-6ca9-991c-01d5 82:5d:35:88:4f:ca 0011d70030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 130f-8cdf-63f1-baf7 91:de:bf:26:a6:9a 0011d70030"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 61ce-45be-b507-5824 97:70:8e:3c:0b:f1 0004810020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 1c0b-9d3a-c8fe-b95f f8:e1:f9:9d:2d:d7 000cf50030"
+"DEL 44b2-dfc7-c00c-ae46\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4540-48b5-9224-692f d3:a2:a3:58:ad:e1 0004b50030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 8c90-11f3-d7e8-c9a2 41:ff:c4:13:0e:bc 0005410020"
+"DEL 9125-99de-b9ea-5fb4\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+"DEL 5ab2-01bb-f4b4-a238\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 0004810020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 75bc-7805-8365-ab73 a6:b6:1a:b4:e4:d5 0004810020"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 53e8-2d9b-e0e9-fab2 a5:81:98:cd:24:68 000cf50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 2b7b-6317-42f6-9f3b 58:c6:e8:a2:11:59 0005410020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 66e9-7ffd-6304-50ef f6:79:81:55:39:04 0005410020"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 195b-8cf0-5930-326e 45:a4:77:1a:73:68 000cf50030"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 5eb1-083a-c3a6-feb6 a9:9d:c6:a0:8d:3b 0004810020"
+"DEL 069b-b1df-12ce-4454\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+"DEL 20ce-565f-72cf-1f74\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent5 150.65.117.101 358e-26bc-8e09-3762 f5:d9:01:bf:9e:8d cc90-d6aa-a948-af16"
+"update complete!"
+"DEL 937b-9814-b036-09de\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 1688-6db0-b0fe-3ca9 8f:48:b3:5c:82:da 00065e0030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4c53-e39a-19ae-bf64 03:14:10:a8:55:ee 0005410020"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 6c80-4e9b-ee86-37e7 85:22:17:58:fc:a1 0005410020"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 a59e-c6df-46b7-a9f8 5e:fd:3b:5b:00:7a 0004810020"
+"DEL 4dc6-ca0e-0353-90ff\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 7683-79f3-6ca8-6c7d 8c:bd:4b:0f:3e:70 0005410020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 2e33-c5bf-e25b-6cbb 9d:98:a3:59:4a:f0 0005410020"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 689c-aa79-87c3-08ab 9e:d0:36:0e:fb:38 00065e0030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 ae6e-c2d2-c960-f633 28:4b:5c:d6:f5:34 00065e0030"
+"Timeout!"
+"DEL ef5c-ce67-b448-4935\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0002080000
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004810020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0004b50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0005410020
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 00065e0030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 000cf50030
+cc90-d6aa-a948-af16, 64:b0:b0:20:8c:0d, 0011d70030
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent4 56bd-fd1e-1e0f-4697 41:1d:6f:34:ee:ea 0004b50030"
+"DEL cc90-d6aa-a948-af16\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 485a-eeaa-7936-bba8 e8:18:84:8d:1f:bd 0011d70030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 4aa3-f086-ab81-463a 22:34:e6:ec:95:f9 0011d70030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 4a5e-7232-1136-9a1b 52:ea:e5:06:88:ae 0011d70030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 e924-3023-bf7d-dcde 7b:98:a1:b7:5d:50 0004b50030"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent3 fd4a-4ecf-e4e3-e844 34:5c:06:69:f1:38 0011d70030"
+"NEW 2866-c183-6ea8-f4e4 67:72:64:d6:96:1a 0004b50020 000cf50030\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+"NEW 44b2-dfc7-c00c-ae46 c4:da:76:3e:e6:98 0004b50020 0004810020 0002080000 0005410020 00065e0030 000cf50030\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dafb-e1cd-ad9c-781e 56:67:42:47:46:9b 0005410020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 b46b-db79-599a-7293 25:e5:73:5e:3c:5f 000cf50030"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 ee9f-b7c7-a709-1c07 83:91:b9:8a:9d:04 0011d70030"
+"NEW 9125-99de-b9ea-5fb4 11:6e:92:17:25:71 0004b50030 0004810020 00065e0030\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 d696-45a3-9809-2087 32:09:24:08:37:05 0004b50020"
+"NEW 5ab2-01bb-f4b4-a238 b4:78:72:6c:29:81 0004b50030 0004b50020 0005410020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 bdb9-7e43-e61b-0b1a 71:9f:c2:3e:39:33 0004b50020"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent2 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 0004b50030"
+"NEW 069b-b1df-12ce-4454 7d:1a:df:9f:b7:ec 0004810020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp PRIVMSG #ikachang : QUERY RANDOM_APP ikagent5 dc35-c3ca-66bc-bf53 a4:82:96:41:ab:a5 0004b50020"
+"NEW 20ce-565f-72cf-1f74 5b:0b:cd:12:a8:3d 000cf50030 0005410020 00065e0030 0011d70030 0002080000 0004b50020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+"NEW 937b-9814-b036-09de 87:eb:f5:f3:25:e6 0002080000 000cf50030\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8 cc90-d6aa-a948-af16"
+
+"*************************"
+"****party tako fixed!****"
+"*************************"
+ikagent2 150.65.117.49 d4f4-4503-d426-1f8c 19:20:49:4b:aa:b8
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE ikagent1 : REPLY EXACT_MATCH ikagent2 150.65.117.49 85b3-fb1e-3b9e-b4d1 23:7a:19:9c:27:86 cc90-d6aa-a948-af16"
+"update complete!"
+"NEW 4dc6-ca0e-0353-90ff fd:65:c3:e5:f5:2d 0004b50030 0004810020 0002080000\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-IKAGENT ikagent4 150.65.117.31"
+"delete complete"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-IKAGENT ikagent4 150.65.117.31"
+"delete complete"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp NOTICE #ikachang : DEL-IKAGENT ikagent4 150.65.117.31"
+"delete complete"
+":ikagent4!~ikagent4@dp117-031.jaist.ac.jp QUIT :Read error: Connection reset by peer"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-IKAGENT ikagent5 150.65.117.101"
+"delete complete"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp NOTICE #ikachang : DEL-IKAGENT ikagent5 150.65.117.101"
+"delete complete"
+":ikagent5!~ikagent5@dp117-101.jaist.ac.jp QUIT :Read error: Connection reset by peer"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-IKAGENT ikagent3 150.65.117.103"
+"delete complete"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-IKAGENT ikagent3 150.65.117.103"
+"delete complete"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp NOTICE #ikachang : DEL-IKAGENT ikagent3 150.65.117.103"
+"delete complete"
+":ikagent3!~ikagent3@dp117-103.jaist.ac.jp QUIT :Read error: Connection reset by peer"
+"NEW ef5c-ce67-b448-4935 15:18:0a:0d:61:e3 0002080000 0011d70030 0005410020\n"
+"tako_id             tako_mac           tako_app"
+"-------------------------------------------------"
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 0004b50020
+2866-c183-6ea8-f4e4, 67:72:64:d6:96:1a, 000cf50030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0002080000
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004810020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0004b50020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 0005410020
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 00065e0030
+44b2-dfc7-c00c-ae46, c4:da:76:3e:e6:98, 000cf50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004810020
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 0004b50030
+9125-99de-b9ea-5fb4, 11:6e:92:17:25:71, 00065e0030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50020
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0004b50030
+5ab2-01bb-f4b4-a238, b4:78:72:6c:29:81, 0005410020
+069b-b1df-12ce-4454, 7d:1a:df:9f:b7:ec, 0004810020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0002080000
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0004b50020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0005410020
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 00065e0030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 000cf50030
+20ce-565f-72cf-1f74, 5b:0b:cd:12:a8:3d, 0011d70030
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 0002080000
+937b-9814-b036-09de, 87:eb:f5:f3:25:e6, 000cf50030
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0002080000
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004810020
+4dc6-ca0e-0353-90ff, fd:65:c3:e5:f5:2d, 0004b50030
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0002080000
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0005410020
+ef5c-ce67-b448-4935, 15:18:0a:0d:61:e3, 0011d70030
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-CHANNEL #ikachang ikagent2 150.65.117.49"
+"delete complete"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-CHANNEL #ikachang ikagent2 150.65.117.49"
+"delete complete"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp NOTICE #ikachang : DEL-CHANNEL #ikachang ikagent2 150.65.117.49"
+"delete complete"
+":ikagent2!~ikagent2@dhcp-is32e0-49.jaist.ac.jp QUIT :Read error: Connection reset by peer"
