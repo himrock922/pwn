@@ -632,13 +632,13 @@ Signal.trap(:INT) {
 				end
 				@@db.commit
 
-				if @@algo == "1" && @@smode == "1"
-					IRC::random_app(@@db, @@input, @@output, @@cso_select)
-				elsif @@algo == "2" && @@smode == "1"
-					IRC::common_app(@@db, @@cac_select, @@cat_select, @@app_select, @@cso_select, @@val_insert, @@val_update, @@val_select)
-				elsif @@algo == "3" && @@smode == "1"
+				#if @@algo == "1" && @@smode == "1"
+				#	IRC::random_app(@@db, @@input, @@output, @@cso_select)
+				#elsif @@algo == "2" && @@smode == "1"
+				#	IRC::common_app(@@db, @@cac_select, @@cat_select, @@app_select, @@cso_select, @@val_insert, @@val_update, @@val_select)
+				if @@algo == "3" && @@smode == "1"
 					@@db.execute(@@num_insert, tako_id, count)
-					IRC::exact_match(@@db, @@tako_id, @@app_select, @@num_select, @@cso_select)
+				#	IRC::exact_match(@@db, @@tako_id, @@app_select, @@num_select, @@cso_select)
 				end
 				@@mutex.unlock
 				@@timeout.wakeup
@@ -841,6 +841,13 @@ Signal.trap(:INT) {
 						end
 
 					when "1"
+						if @@algo == "1"
+							IRC::random_app(@@db, @@input, @@output, @@cso_select, tako_id)
+						elsif @@algo == "2" 
+							IRC::common_app(@@db, @@cac_select, @@cat_select, @@app_select, @@cso_select, @@val_insert, @@val_update, @@val_select)
+						elsif @@algo == "3"
+							IRC::exact_match(@@db, tako_id, @@app_select, @@num_select, @@cso_select)
+						end
 
 						msg = " NEW-TAKO #{@@nick} #{@@ip} #{tako_id} #{tako_mac} #{join_app}"
 						if @@layer == "none"

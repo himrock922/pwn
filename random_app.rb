@@ -2,30 +2,32 @@
 RandomTako module
 =end
 module RandomApp
-	def random_app(db, input, output, cso_select)
+	def random_app(db, input, output, cso_select, tako_id)
 		select_tako = ""
 		select_app  = ""
 		
 		db.transaction
-		row = db.execute("select tako_id from TAKO_List order by random()") 
+		#row = db.execute("select tako_id from TAKO_List order by random()") 
 		
-		if row.empty? == true
-			db.commit
-			return
-		end
+		#if row.empty? == true
+		#	db.commit
+		#	return
+		#end
 
-		select_tako = row[0]
+		select_tako = tako_id
 
-		row = db.execute("select tako_app from APP_List where tako_id = ? order by random()", select_tako[0])
+		row = db.execute("select tako_app from APP_List where tako_id = ? order by random()", select_tako)
 
 		select_app = row[0]
 
 
 		row = db.execute("#{cso_select} where tako_app = ? order by random()", select_app[0])	
+
 		if row.empty? == true
 			db.commit
 			return
 		end
+
 		print "\r\n"
 		p "*************************"
 		p "****party tako fixed!****"
